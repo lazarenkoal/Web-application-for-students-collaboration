@@ -81,9 +81,10 @@ namespace CocktionMVC.Controllers
 
             var db = new CocktionContext();
             Auction auction = db.Auctions.Find(auctionId);
-
             if (auction.WinnerChosen == false)
-            {
+            {//если человек не выбрал победителя
+
+                //рандомно выбираем победителя
                 if (User.Identity.IsAuthenticated)
                 {
                     if (userName == auction.OwnerName)

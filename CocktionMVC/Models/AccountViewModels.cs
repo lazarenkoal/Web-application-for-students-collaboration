@@ -21,23 +21,8 @@ namespace CocktionMVC.Models
         public string UserRealSurname { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "Название университета не должно превышать 100 символов")]
-        [Display(Name = "Ваш университет")]
-        public string University { get; set; }
+        public string PhoneNumber { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "Название факультета не должно превышать 100 символов")]
-        [Display(Name = "Ваш факультет")]
-        public string Faculty { get; set; }
-
-        [StringLength(100, ErrorMessage = "Слишком длинное название общежития")]
-        [Display(Name = "Адрес общежития")]
-        public string Dormitory { get; set; }
-
-        [Required]
-        [StringLength(100, ErrorMessage = "Адрес учебного корпуса слишком длинный!")]
-        [Display(Name = "Адрес учебного корпуса")]
-        public string StudyAdress { get; set; }
     }
 
     public class ExternalLoginListViewModel

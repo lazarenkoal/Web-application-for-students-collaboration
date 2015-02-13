@@ -184,6 +184,7 @@
     <Compile Include="Controllers\MobileController.cs" />
     <Compile Include="Functions\ThumbnailGenerator.cs" />
     <Compile Include="Functions\DbItemsAdder.cs" />
+    <Compile Include="Functions\WinnerGenerator.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

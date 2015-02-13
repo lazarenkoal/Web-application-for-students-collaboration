@@ -13,30 +13,36 @@ namespace CocktionMVC.Controllers
 {
     public class FileSaverController : Controller
     {
+        /// <summary>
+        /// Создает аукцион и записывает его в базу данных
+        /// </summary>
+        /// <returns></returns>
         [Authorize]
         [HttpPost]
         public JsonResult CreateAuction()
         {
-
+            //создаем продукт, получаем с клиента информацию о нем
             Product product = new Product();
             product.Name = Request.Form.GetValues("Name")[0];
             product.Description = Request.Form.GetValues("Description")[0];
             product.Category = Request.Form.GetValues("Category")[0];
 
+            //получаем данные с клиента о времени для окончания аукцйиона,
+            //обрабатываем их
+            //ТУДУ: добавить проверку значений времени
             string minutesString = Request.Form.GetValues("Minutes")[0];
             string hoursString = Request.Form.GetValues("Hours")[0];
-
             int minutes = int.Parse(minutesString);
             int hours = int.Parse(hoursString);
 
+            //получаем файл
             HttpPostedFileBase file = Request.Files[0];
 
-            //НАПИСАТЬ НОРМАЛЬНЫЙ МЕТОД ПЕРЕХОДА ПО ПОЯСАМ
-
-            //переменные для хранения сведений о пользователе
+            //получаем информацию о пользователе
             string userId = User.Identity.GetUserId();
             string userName = User.Identity.Name;
 
+            //подключаемся к базе данных
             CocktionContext db = new CocktionContext();
 
             //объявление свойств продукта
@@ -56,18 +62,14 @@ namespace CocktionMVC.Controllers
             auction.SellProduct = product;
             auction.WinnerChosen = false;
 
+            //задаем время окончания аукциона
             DateTime auctionsEndTime = DateTime.Now;
-
-            TimeZoneInfo tzi;
+            TimeZoneInfo tzi; //указываем временную зону
             tzi = TimeZoneInfo.FindSystemTimeZoneById("Russian Standard Time");
-
             auctionsEndTime = TimeZoneInfo.ConvertTime(auctionsEndTime, tzi);
             auctionsEndTime = auctionsEndTime.AddHours(hours);
             auctionsEndTime = auctionsEndTime.AddMinutes(minutes);
             auction.EndTime = auctionsEndTime;
-
-            //добавляю новый аукцион в базу
-
 
             //добавление фотографии для товара
             Photo photo = new Photo();
@@ -77,9 +79,7 @@ namespace CocktionMVC.Controllers
                 string pic = System.IO.Path.GetFileName(file.FileName); //имя файла
                 string path = System.IO.Path.Combine(
                     Server.MapPath("~/Images/Photos/"), pic); //директория, в которую его загрузят
-                // file is uploaded
                 file.SaveAs(path);
-
 
                 //получаем thumbnail
                 string thumbNailPath = Server.MapPath("~/Images/Thumbnails/"); //путь на сервере для сохранения
@@ -88,21 +88,30 @@ namespace CocktionMVC.Controllers
                 thumbNail.FileName = pic;
                 thumbNail.FilePath = thumbNailPath + pic;
 
+                //забиваем данные о фотке
                 photo.FileName = pic;
                 photo.FilePath = path;
                 photo.Product = product;
                 photo.ThumbnailSets.Add(thumbNail);
             }
+            
+            //сохраняем все изменения в базу
             db.Photos.Add(photo);
             db.Auctions.Add(auction);
             db.SaveChanges();
 
+            //апдейтим список
             AuctionListHub.UpdateList(product.Name, product.Description, product.Category, photo.FileName);
 
+            //возвращаем статус
             return Json("Успешно добавлено");
 
         }
 
+        /// <summary>
+        /// Метод для загрузки файла
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public async Task<JsonResult> UploadFile()
         {
@@ -146,7 +155,6 @@ namespace CocktionMVC.Controllers
             product.OwnerId = User.Identity.GetUserId();
             product.Photos.Add(photo);
             product.OwnerName = User.Identity.Name;
-            //product.Id = db.Products.Count() + 1;
             photo.Product = product;
             db.Auctions.Find(id).BidProducts.Add(product);
             await DbItemsAdder.AddProduct(db, product, photo);

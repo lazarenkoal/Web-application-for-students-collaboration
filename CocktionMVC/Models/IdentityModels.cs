@@ -15,8 +15,6 @@ namespace CocktionMVC.Models
         public string Faculty { get; set; }
         public string Dormitory { get; set; }
         public string StudyAdress { get; set; }
-
-        
      
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

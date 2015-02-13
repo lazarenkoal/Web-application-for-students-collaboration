@@ -381,10 +381,7 @@ namespace CocktionMVC.Controllers
                 {
                     UserName = model.Email,
                     Email = model.Email,
-                    University = model.University,
-                    Dormitory = model.Dormitory,
-                    Faculty = model.Faculty,
-                    StudyAdress = model.StudyAdress,
+                    PhoneNumber = model.PhoneNumber,
                     UserRealName = model.UserRealName,
                     UserRealSurname = model.UserRealSurname
                 };
