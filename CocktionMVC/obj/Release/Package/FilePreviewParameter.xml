@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="cocktion" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^\\\\psf\\Home\\Documents\\cocktion\.source\\Копия\ CocktionWorking\\CocktionMVC\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^\\\\psf\\Home\\Documents\\cocktion\.source\\Копия\ CocktionWorking\\CocktionMVC\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="Add write permission to App_Data Folder" description="Add write permission to App_Data folder" value="cocktion/App_Data" tags="Hidden">
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^\\\\psf\\Home\\Documents\\cocktion\.source\\Копия\ CocktionWorking\\CocktionMVC\\obj\\Release\\Package\\PackageTmp\\App_Data$" />
+  </parameter>
+  <parameter name="CocktionContext-Web.config Connection String" description="" value="Data Source=tcp:zxfbxvwzva.database.windows.net,1433;Initial Catalog=cocktiondb1;User ID=CocktionDb@zxfbxvwzva;Password=IloveLondon290996" tags="">
+    <parameterEntry kind="XmlFile" scope="\\\\psf\\Home\\Documents\\cocktion\.source\\Копия\ CocktionWorking\\CocktionMVC\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='CocktionContext']/@connectionString" />
+  </parameter>
+  <parameter name="DefaultConnection-Web.config Connection String" description="" value="Data Source=tcp:zxfbxvwzva.database.windows.net,1433;Initial Catalog=cocktiondb1;User ID=CocktionDb@zxfbxvwzva;Password=IloveLondon290996" tags="">
+    <parameterEntry kind="XmlFile" scope="\\\\psf\\Home\\Documents\\cocktion\.source\\Копия\ CocktionWorking\\CocktionMVC\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+</parameters>

@@ -1,0 +1,524 @@
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\CocktionMVC.dll.config
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\CocktionMVC.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\CocktionMVC.pdb
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Antlr3.Runtime.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\EntityFramework.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\EntityFramework.SqlServer.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Microsoft.AspNet.Identity.Core.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Microsoft.AspNet.Identity.Owin.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Host.SystemWeb.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Security.Cookies.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Security.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Security.Facebook.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Security.Google.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Security.OAuth.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Security.Twitter.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Microsoft.Web.Infrastructure.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Newtonsoft.Json.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Owin.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\System.Web.Helpers.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\System.Web.Mvc.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\System.Web.Optimization.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\System.Web.Razor.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\System.Web.WebPages.Deployment.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\System.Web.WebPages.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\System.Web.WebPages.Razor.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\WebGrease.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\System.Web.Helpers.xml
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\System.Web.Mvc.xml
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\System.Web.Optimization.xml
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\System.Web.Razor.xml
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\System.Web.WebPages.xml
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\System.Web.WebPages.Deployment.xml
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\System.Web.WebPages.Razor.xml
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Antlr3.Runtime.pdb
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Newtonsoft.Json.xml
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\EntityFramework.xml
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\EntityFramework.SqlServer.xml
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Microsoft.AspNet.Identity.Core.xml
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Microsoft.AspNet.Identity.Owin.xml
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.xml
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Host.SystemWeb.xml
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Security.xml
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Security.Facebook.xml
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Security.Cookies.xml
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Security.OAuth.xml
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Security.Google.xml
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Security.Twitter.xml
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.pdb
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.Migrations.InitialCreate.resources
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.csproj.GenerateResource.Cache
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.Migrations.surnameNameUniversityetc.resources
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.csprojResolveAssemblyReference.cache
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Duke.Owin.VkontakteMiddleware.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.Migrations.MigrationsTest.resources
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.Migrations.UpdatingIdentityUserSettings.resources
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.Migrations.test20.resources
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.Migrations.DeleteUser.resources
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.Migrations.AppUserProductAuctionTest2.resources
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.Migrations.UpdateBase.resources
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.Migrations.dsfd.resources
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.Migrations.d.resources
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.Migrations.aaa.resources
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.Migrations.PhotoAddedToProduct.resources
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Microsoft.AspNet.SignalR.Core.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Microsoft.AspNet.SignalR.Core.xml
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.Migrations.FileNameToPhoto.resources
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Backload.Contracts.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\Backload.dll
+\\psf\Home\Documents\cocktion.source\CocktionMVC\CocktionMVC\bin\WebActivatorEx.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\CocktionMVC.dll.config
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\CocktionMVC.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\CocktionMVC.pdb
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Antlr3.Runtime.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Backload.Contracts.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Backload.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Duke.Owin.VkontakteMiddleware.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\EntityFramework.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\EntityFramework.SqlServer.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Microsoft.AspNet.Identity.Core.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Microsoft.AspNet.Identity.Owin.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Microsoft.AspNet.SignalR.Core.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Host.SystemWeb.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Security.Cookies.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Security.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Security.Facebook.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Security.Google.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Security.OAuth.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Security.Twitter.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Microsoft.Web.Infrastructure.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Newtonsoft.Json.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Owin.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\System.Web.Helpers.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\System.Web.Mvc.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\System.Web.Optimization.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\System.Web.Razor.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\System.Web.WebPages.Deployment.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\System.Web.WebPages.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\System.Web.WebPages.Razor.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\WebActivatorEx.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\WebGrease.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\EntityFramework.xml
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\EntityFramework.SqlServer.xml
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Microsoft.AspNet.SignalR.Core.xml
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Newtonsoft.Json.xml
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\System.Web.Helpers.xml
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\System.Web.Mvc.xml
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\System.Web.Optimization.xml
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\System.Web.Razor.xml
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\System.Web.WebPages.xml
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\System.Web.WebPages.Deployment.xml
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\System.Web.WebPages.Razor.xml
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Antlr3.Runtime.pdb
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Microsoft.AspNet.Identity.Core.xml
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Microsoft.AspNet.Identity.Owin.xml
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.xml
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Host.SystemWeb.xml
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Security.xml
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Security.Facebook.xml
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Security.Cookies.xml
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Security.OAuth.xml
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Security.Google.xml
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Security.Twitter.xml
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.csprojResolveAssemblyReference.cache
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.Migrations.InitialCreate.resources
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.Migrations.surnameNameUniversityetc.resources
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.Migrations.MigrationsTest.resources
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.Migrations.UpdatingIdentityUserSettings.resources
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.Migrations.test20.resources
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.Migrations.DeleteUser.resources
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.Migrations.AppUserProductAuctionTest2.resources
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.Migrations.UpdateBase.resources
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.Migrations.dsfd.resources
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.Migrations.d.resources
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.Migrations.aaa.resources
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.Migrations.PhotoAddedToProduct.resources
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.Migrations.FileNameToPhoto.resources
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.csproj.GenerateResource.Cache
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.dll
+\\psf\Home\Documents\cocktion_shared\CocktionMVC\CocktionMVC\obj\Debug\CocktionMVC.pdb
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\CocktionMVC.dll.config
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\CocktionMVC.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\CocktionMVC.pdb
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Antlr3.Runtime.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Duke.Owin.VkontakteMiddleware.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\EntityFramework.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\EntityFramework.SqlServer.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Microsoft.AspNet.Identity.Core.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Microsoft.AspNet.Identity.Owin.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Microsoft.AspNet.SignalR.Core.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Microsoft.Owin.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Microsoft.Owin.Host.SystemWeb.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Microsoft.Owin.Security.Cookies.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Microsoft.Owin.Security.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Microsoft.Owin.Security.Facebook.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Microsoft.Owin.Security.Google.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Microsoft.Owin.Security.OAuth.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Microsoft.Owin.Security.Twitter.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Microsoft.Web.Infrastructure.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Newtonsoft.Json.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Owin.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\System.Web.Helpers.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\System.Web.Mvc.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\System.Web.Optimization.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\System.Web.Razor.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\System.Web.WebPages.Deployment.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\System.Web.WebPages.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\System.Web.WebPages.Razor.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\WebGrease.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\EntityFramework.xml
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\EntityFramework.SqlServer.xml
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Microsoft.AspNet.SignalR.Core.xml
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Newtonsoft.Json.xml
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\System.Web.Helpers.xml
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\System.Web.Mvc.xml
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\System.Web.Optimization.xml
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\System.Web.Razor.xml
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\System.Web.WebPages.xml
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\System.Web.WebPages.Deployment.xml
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\System.Web.WebPages.Razor.xml
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Antlr3.Runtime.pdb
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Microsoft.AspNet.Identity.Core.xml
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Microsoft.AspNet.Identity.Owin.xml
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Microsoft.Owin.xml
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Microsoft.Owin.Host.SystemWeb.xml
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Microsoft.Owin.Security.xml
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Microsoft.Owin.Security.Facebook.xml
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Microsoft.Owin.Security.Cookies.xml
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Microsoft.Owin.Security.OAuth.xml
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Microsoft.Owin.Security.Google.xml
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Microsoft.Owin.Security.Twitter.xml
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\obj\Debug\CocktionMVC.csprojResolveAssemblyReference.cache
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.InitialCreate.resources
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.surnameNameUniversityetc.resources
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.MigrationsTest.resources
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.UpdatingIdentityUserSettings.resources
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.test20.resources
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.DeleteUser.resources
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.AppUserProductAuctionTest2.resources
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.UpdateBase.resources
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.dsfd.resources
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.d.resources
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.aaa.resources
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.PhotoAddedToProduct.resources
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.FileNameToPhoto.resources
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\obj\Debug\CocktionMVC.csproj.GenerateResource.Cache
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\obj\Debug\CocktionMVC.dll
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\obj\Debug\CocktionMVC.pdb
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.ThumbnailAdded.resources
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.WinnerIdAdded.resources
+\\psf\Home\Documents\cocktion.source\Cocktion2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.s11.resources
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\CocktionMVC.dll.config
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\CocktionMVC.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\CocktionMVC.pdb
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Antlr3.Runtime.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Duke.Owin.VkontakteMiddleware.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\EntityFramework.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\EntityFramework.SqlServer.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Microsoft.AspNet.Identity.Core.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Microsoft.AspNet.Identity.Owin.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Microsoft.AspNet.SignalR.Core.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Microsoft.Owin.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Microsoft.Owin.Host.SystemWeb.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Microsoft.Owin.Security.Cookies.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Microsoft.Owin.Security.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Microsoft.Owin.Security.Facebook.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Microsoft.Owin.Security.Google.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Microsoft.Owin.Security.OAuth.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Microsoft.Owin.Security.Twitter.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Microsoft.Web.Infrastructure.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Newtonsoft.Json.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Owin.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\System.Web.Helpers.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\System.Web.Mvc.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\System.Web.Optimization.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\System.Web.Razor.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\System.Web.WebPages.Deployment.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\System.Web.WebPages.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\System.Web.WebPages.Razor.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\WebGrease.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Antlr3.Runtime.pdb
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\EntityFramework.xml
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\EntityFramework.SqlServer.xml
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Microsoft.AspNet.SignalR.Core.xml
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Newtonsoft.Json.xml
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\System.Web.Optimization.xml
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\System.Web.Helpers.xml
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\System.Web.Mvc.xml
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\System.Web.Razor.xml
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\System.Web.WebPages.xml
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\System.Web.WebPages.Deployment.xml
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\System.Web.WebPages.Razor.xml
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Microsoft.AspNet.Identity.Core.xml
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Microsoft.AspNet.Identity.Owin.xml
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Microsoft.Owin.xml
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Microsoft.Owin.Host.SystemWeb.xml
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Microsoft.Owin.Security.xml
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Microsoft.Owin.Security.Facebook.xml
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Microsoft.Owin.Security.Cookies.xml
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Microsoft.Owin.Security.OAuth.xml
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Microsoft.Owin.Security.Google.xml
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Microsoft.Owin.Security.Twitter.xml
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\obj\Debug\CocktionMVC.csprojResolveAssemblyReference.cache
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\obj\Debug\CocktionMVC.Migrations.InitialCreate.resources
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\obj\Debug\CocktionMVC.Migrations.surnameNameUniversityetc.resources
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\obj\Debug\CocktionMVC.Migrations.MigrationsTest.resources
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\obj\Debug\CocktionMVC.Migrations.UpdatingIdentityUserSettings.resources
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\obj\Debug\CocktionMVC.Migrations.test20.resources
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\obj\Debug\CocktionMVC.Migrations.DeleteUser.resources
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\obj\Debug\CocktionMVC.Migrations.AppUserProductAuctionTest2.resources
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\obj\Debug\CocktionMVC.Migrations.UpdateBase.resources
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\obj\Debug\CocktionMVC.Migrations.dsfd.resources
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\obj\Debug\CocktionMVC.Migrations.d.resources
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\obj\Debug\CocktionMVC.Migrations.aaa.resources
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\obj\Debug\CocktionMVC.Migrations.PhotoAddedToProduct.resources
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\obj\Debug\CocktionMVC.Migrations.FileNameToPhoto.resources
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\obj\Debug\CocktionMVC.Migrations.ThumbnailAdded.resources
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\obj\Debug\CocktionMVC.Migrations.WinnerIdAdded.resources
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\obj\Debug\CocktionMVC.Migrations.s11.resources
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\obj\Debug\CocktionMVC.csproj.GenerateResource.Cache
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\obj\Debug\CocktionMVC.dll
+\\psf\Home\Documents\cocktion.source\CocktionAzure\CocktionMVC\obj\Debug\CocktionMVC.pdb
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\CocktionMVC.dll.config
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\CocktionMVC.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\CocktionMVC.pdb
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Antlr3.Runtime.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Duke.Owin.VkontakteMiddleware.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\EntityFramework.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\EntityFramework.SqlServer.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Microsoft.AspNet.Identity.Core.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Microsoft.AspNet.Identity.Owin.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Microsoft.AspNet.SignalR.Core.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Microsoft.Owin.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Host.SystemWeb.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Security.Cookies.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Security.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Security.Facebook.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Security.Google.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Security.OAuth.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Security.Twitter.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Microsoft.Web.Infrastructure.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Newtonsoft.Json.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Owin.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\System.Web.Helpers.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\System.Web.Mvc.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\System.Web.Optimization.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\System.Web.Razor.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\System.Web.WebPages.Deployment.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\System.Web.WebPages.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\System.Web.WebPages.Razor.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\WebGrease.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Antlr3.Runtime.pdb
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\EntityFramework.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\EntityFramework.SqlServer.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Microsoft.AspNet.SignalR.Core.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Newtonsoft.Json.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\System.Web.Optimization.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\System.Web.Helpers.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\System.Web.Mvc.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\System.Web.Razor.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\System.Web.WebPages.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\System.Web.WebPages.Deployment.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\System.Web.WebPages.Razor.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Microsoft.AspNet.Identity.Core.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Microsoft.AspNet.Identity.Owin.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Microsoft.Owin.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Host.SystemWeb.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Security.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Security.Facebook.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Security.Cookies.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Security.OAuth.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Security.Google.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Security.Twitter.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.csprojResolveAssemblyReference.cache
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.Migrations.InitialCreate.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.Migrations.surnameNameUniversityetc.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.Migrations.MigrationsTest.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.Migrations.UpdatingIdentityUserSettings.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.Migrations.test20.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.Migrations.DeleteUser.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.Migrations.AppUserProductAuctionTest2.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.Migrations.UpdateBase.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.Migrations.dsfd.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.Migrations.d.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.Migrations.aaa.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.Migrations.PhotoAddedToProduct.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.Migrations.FileNameToPhoto.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.Migrations.ThumbnailAdded.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.Migrations.WinnerIdAdded.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.Migrations.s11.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.csproj.GenerateResource.Cache
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.pdb
+\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.Migrations.db_a.resources
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.Migrations.InitialCreate.resources
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.Migrations.surnameNameUniversityetc.resources
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.Migrations.MigrationsTest.resources
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.Migrations.UpdatingIdentityUserSettings.resources
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.Migrations.test20.resources
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.Migrations.DeleteUser.resources
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.Migrations.AppUserProductAuctionTest2.resources
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.Migrations.UpdateBase.resources
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.csproj.GenerateResource.Cache
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\obj\Debug\CocktionMVC.pdb
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\CocktionMVC.dll.config
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\CocktionMVC.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\CocktionMVC.pdb
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Antlr3.Runtime.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Duke.Owin.VkontakteMiddleware.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\EntityFramework.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\EntityFramework.SqlServer.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Microsoft.AspNet.Identity.Core.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Microsoft.AspNet.Identity.Owin.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Microsoft.AspNet.SignalR.Core.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Microsoft.Owin.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Host.SystemWeb.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Security.Cookies.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Security.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Security.Facebook.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Security.Google.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Security.OAuth.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Security.Twitter.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Microsoft.Web.Infrastructure.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Newtonsoft.Json.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Owin.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\System.Web.Helpers.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\System.Web.Mvc.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\System.Web.Optimization.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\System.Web.Razor.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\System.Web.WebPages.Deployment.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\System.Web.WebPages.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\System.Web.WebPages.Razor.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\WebGrease.dll
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Antlr3.Runtime.pdb
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\EntityFramework.xml
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\EntityFramework.SqlServer.xml
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Microsoft.AspNet.SignalR.Core.xml
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Newtonsoft.Json.xml
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\System.Web.Optimization.xml
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\System.Web.Helpers.xml
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\System.Web.Mvc.xml
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\System.Web.Razor.xml
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\System.Web.WebPages.xml
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\System.Web.WebPages.Deployment.xml
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\System.Web.WebPages.Razor.xml
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Microsoft.AspNet.Identity.Core.xml
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Microsoft.AspNet.Identity.Owin.xml
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Microsoft.Owin.xml
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Host.SystemWeb.xml
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Security.xml
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Security.Facebook.xml
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Security.Cookies.xml
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Security.OAuth.xml
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Security.Google.xml
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Security.Twitter.xml
+\\psf\Home\Documents\cocktion.source\Копия CocktionWorking\CocktionMVC\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\CocktionMVC.dll.config
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\CocktionMVC.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\CocktionMVC.pdb
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Antlr3.Runtime.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Duke.Owin.VkontakteMiddleware.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\EntityFramework.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\EntityFramework.SqlServer.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.AspNet.Identity.Core.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.AspNet.Identity.Owin.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.AspNet.SignalR.Core.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.Owin.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.Owin.Host.SystemWeb.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.Owin.Security.Cookies.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.Owin.Security.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.Owin.Security.Facebook.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.Owin.Security.Google.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.Owin.Security.OAuth.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.Owin.Security.Twitter.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.Web.Infrastructure.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Newtonsoft.Json.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Owin.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.Helpers.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.Mvc.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.Optimization.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.Razor.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.WebPages.Deployment.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.WebPages.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.WebPages.Razor.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\WebGrease.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Antlr3.Runtime.pdb
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\EntityFramework.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\EntityFramework.SqlServer.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.AspNet.SignalR.Core.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Newtonsoft.Json.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.Optimization.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.Helpers.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.Mvc.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.Razor.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.WebPages.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.WebPages.Deployment.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.WebPages.Razor.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.AspNet.Identity.Core.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.AspNet.Identity.Owin.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.Owin.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.Owin.Host.SystemWeb.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.Owin.Security.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.Owin.Security.Facebook.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.Owin.Security.Cookies.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.Owin.Security.OAuth.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.Owin.Security.Google.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.Owin.Security.Twitter.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.csprojResolveAssemblyReference.cache
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.pdb
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.ModelChainged.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.csproj.GenerateResource.Cache
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.asdasd.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.jkj.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.lk.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.asd.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.SeriousMigration.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.asda.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.fixevrth.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.aspn.resources

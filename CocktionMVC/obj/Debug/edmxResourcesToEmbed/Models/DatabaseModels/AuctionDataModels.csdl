@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="AuctionDataModels" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="AuctionDataModelsContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Auctions" EntityType="AuctionDataModels.Auction" />
+    <EntitySet Name="Products" EntityType="AuctionDataModels.Product" />
+    <AssociationSet Name="ProductAuction1" Association="AuctionDataModels.ProductAuction1">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Auction" EntitySet="Auctions" />
+    </AssociationSet>
+    <AssociationSet Name="AuctionProduct" Association="AuctionDataModels.AuctionProduct">
+      <End Role="Auction" EntitySet="Auctions" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="AuctionProduct2" Association="AuctionDataModels.AuctionProduct2">
+      <End Role="Auction" EntitySet="Auctions" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <EntitySet Name="Photos" EntityType="AuctionDataModels.Photo" />
+    <AssociationSet Name="PhotoProduct" Association="AuctionDataModels.PhotoProduct">
+      <End Role="Photo" EntitySet="Photos" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <EntitySet Name="ThumbnailSet" EntityType="AuctionDataModels.Thumbnail" />
+    <AssociationSet Name="ThumbnailPhoto" Association="AuctionDataModels.ThumbnailPhoto">
+      <End Role="Thumbnail" EntitySet="ThumbnailSet" />
+      <End Role="Photo" EntitySet="Photos" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Auction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OwnerId" Type="String" Nullable="false" />
+    <Property Name="EndTime" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="BidProducts" Relationship="AuctionDataModels.ProductAuction1" FromRole="Auction" ToRole="Product" />
+    <NavigationProperty Name="SellProduct" Relationship="AuctionDataModels.AuctionProduct" FromRole="Auction" ToRole="Product" />
+    <NavigationProperty Name="LidProducts" Relationship="AuctionDataModels.AuctionProduct2" FromRole="Auction" ToRole="Product" />
+    <Property Name="OwnerName" Type="String" Nullable="false" />
+    <Property Name="WinProductId" Type="String" Nullable="true" />
+    <Property Name="WinnerChosen" Type="Boolean" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" FixedLength="true" MaxLength="50" ConcurrencyMode="None" />
+    <Property Name="Description" Type="String" Nullable="false" FixedLength="true" MaxLength="350" />
+    <Property Name="Category" Type="String" Nullable="false" FixedLength="true" MaxLength="50" />
+    <Property Name="OwnerId" Type="String" Nullable="false" />
+    <Property Name="Rating" Type="Int32" Nullable="false" />
+    <Property Name="OnAuctionTime" Type="Int32" Nullable="false" />
+    <Property Name="IsOnAuctionAsALot" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="BidAuctions" Relationship="AuctionDataModels.ProductAuction1" FromRole="Product" ToRole="Auction" />
+    <NavigationProperty Name="SellAuction" Relationship="AuctionDataModels.AuctionProduct" FromRole="Product" ToRole="Auction" />
+    <NavigationProperty Name="LidAuctions" Relationship="AuctionDataModels.AuctionProduct2" FromRole="Product" ToRole="Auction" />
+    <Property Name="OwnerName" Type="String" Nullable="false" />
+    <NavigationProperty Name="Photo" Relationship="AuctionDataModels.PhotoProduct" FromRole="Product" ToRole="Photo" />
+  </EntityType>
+  <Association Name="ProductAuction1">
+    <End Type="AuctionDataModels.Product" Role="Product" Multiplicity="*" />
+    <End Type="AuctionDataModels.Auction" Role="Auction" Multiplicity="*" />
+  </Association>
+  <Association Name="AuctionProduct">
+    <End Type="AuctionDataModels.Auction" Role="Auction" Multiplicity="0..1" />
+    <End Type="AuctionDataModels.Product" Role="Product" Multiplicity="1" />
+  </Association>
+  <Association Name="AuctionProduct2">
+    <End Type="AuctionDataModels.Auction" Role="Auction" Multiplicity="*" />
+    <End Type="AuctionDataModels.Product" Role="Product" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Photo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FilePath" Type="String" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="AuctionDataModels.PhotoProduct" FromRole="Photo" ToRole="Product" />
+    <Property Name="FileName" Type="String" Nullable="false" />
+    <NavigationProperty Name="Thumbnail" Relationship="AuctionDataModels.ThumbnailPhoto" FromRole="Photo" ToRole="Thumbnail" />
+  </EntityType>
+  <Association Name="PhotoProduct">
+    <End Type="AuctionDataModels.Photo" Role="Photo" Multiplicity="*" />
+    <End Type="AuctionDataModels.Product" Role="Product" Multiplicity="1" />
+  </Association>
+  <EntityType Name="Thumbnail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FilePath" Type="String" Nullable="false" />
+    <Property Name="FileName" Type="String" Nullable="false" />
+    <NavigationProperty Name="Photo" Relationship="AuctionDataModels.ThumbnailPhoto" FromRole="Thumbnail" ToRole="Photo" />
+  </EntityType>
+  <Association Name="ThumbnailPhoto">
+    <End Type="AuctionDataModels.Thumbnail" Role="Thumbnail" Multiplicity="*" />
+    <End Type="AuctionDataModels.Photo" Role="Photo" Multiplicity="1" />
+  </Association>
+</Schema>

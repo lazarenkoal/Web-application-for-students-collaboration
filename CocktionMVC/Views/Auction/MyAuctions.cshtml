@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "MyAuctions";
+}
+@using CocktionMVC.Models.DAL
+@model List<Auction> 
+<h2>MyAuctions</h2>
+@using (Html.BeginForm())
+{
+    foreach (var i in Model)
+    {
+        <p>@i.SellProduct.Name</p>
+        <p>@i.SellProduct.Description</p>
+        <img src="@i.SellProduct.Photos.First().FilePath" width="60" height="40" />
+        <p></p>
+    }
+}

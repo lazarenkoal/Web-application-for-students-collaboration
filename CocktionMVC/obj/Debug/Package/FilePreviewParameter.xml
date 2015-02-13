@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="cocktion" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^\\\\psf\\Home\\Documents\\cocktion\.source\\CocktionWorking\\CocktionMVC\\obj\\Debug\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^\\\\psf\\Home\\Documents\\cocktion\.source\\CocktionWorking\\CocktionMVC\\obj\\Debug\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="Add write permission to App_Data Folder" description="Add write permission to App_Data folder" value="cocktion/App_Data" tags="Hidden">
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^\\\\psf\\Home\\Documents\\cocktion\.source\\CocktionWorking\\CocktionMVC\\obj\\Debug\\Package\\PackageTmp\\App_Data$" />
+  </parameter>
+  <parameter name="AuctionDataModelsContainer-Web.config Connection String" description="" value="metadata=res://*/Models.DatabaseModels.AuctionDataModels.csdl|res://*/Models.DatabaseModels.AuctionDataModels.ssdl|res://*/Models.DatabaseModels.AuctionDataModels.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=tcp:nvjfir7j91.database.windows.net,1433;AttachDbFilename=\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\App_Data\aspnet-CocktionMVC-20150103075509.mdf;Initial Catalog=cocktionDb;User ID=sanalazar@nvjfir7j91;Password=IloveLondon290996&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="\\\\psf\\Home\\Documents\\cocktion\.source\\CocktionWorking\\CocktionMVC\\obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='AuctionDataModelsContainer']/@connectionString" />
+  </parameter>
+  <parameter name="DefaultConnection-Web.config Connection String" description="" value="Data Source=tcp:nvjfir7j91.database.windows.net,1433;AttachDbFilename=\\psf\Home\Documents\cocktion.source\CocktionWorking\CocktionMVC\App_Data\aspnet-CocktionMVC-20150103075509.mdf;Initial Catalog=cocktionDb;User ID=sanalazar@nvjfir7j91;Password=IloveLondon290996" tags="">
+    <parameterEntry kind="XmlFile" scope="\\\\psf\\Home\\Documents\\cocktion\.source\\CocktionWorking\\CocktionMVC\\obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+</parameters>

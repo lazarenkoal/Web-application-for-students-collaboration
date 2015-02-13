@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Аукционы";
+}
+@using CocktionMVC.Models.DAL
+@model List<Auction>
+<h2>Аукционы</h2>
+
+<div class="AuctionContainer">
+@{
+    if (Model.Count != 0)
+    {
+        using (Html.BeginForm())
+        {
+            foreach (var i in Model)
+            {
+                <p>@i.SellProduct.Name</p>
+                <p>@i.SellProduct.Description</p>
+                <p>@i.EndTime</p>
+                <p>@Html.ActionLink("Хочу купить!", "CurrentAuction", "Auction", new { id = i.Id  }, null)</p>
+                <img src="http://cocktion.azurewebsites.net/Images/Photos/@i.SellProduct.Photos.First().FileName" height="150" width="150" />
+            }
+        }
+    }
+    else
+    {
+        <p>К сожалению, пока что никто ничего не продает :(</p>
+        Html.ActionLink("Начать продавать:)", "Create");
+    }
+}
+</div>
+
+@section scripts{
+    <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+
+    <script>
+        $(function () {
+            var adder = $.connection.auctionListHub;
+            adder.client.addAuctionToTheList = function (name, description, category, photoPath)
+            {
+                $('.AuctionContainer').prepend('<div>' + '<p>' + name + '</p>' + '<p>' + description + '</p>' + '<p>' + category + '</p>' +
+                    '<img src="' + 'http://cocktion.azurewebsites.net/Images/Photos/' + photoPath + '" width="150" height="150" />' + '</div>');
+            }
+            $.connection.hub.start().done(function () {
+            });
+        });
+    </script>
+}

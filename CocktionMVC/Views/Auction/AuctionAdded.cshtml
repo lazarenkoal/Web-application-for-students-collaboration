@@ -1,0 +1,17 @@
+﻿@model CocktionMVC.Models.AuctionViewModels
+
+@{
+    ViewBag.Title = "Мои аукционы";
+}
+
+<h3>Мои аукционы</h3>
+@using (Html.BeginForm())
+{
+    <p>Вы успешно добавили аукцион :)</p>
+    <p>@Model.Name</p>
+    <p>@Model.Description</p>
+    <p>@Model.EndTime</p>
+    <p>@Html.ActionLink("Посмотреть на торги", "Index", "Auction")</p>
+    <img src="http://cocktion.azurewebsites.net/Images/Photos/@Model.Image.FileName" height="250" width="250" />
+}
+

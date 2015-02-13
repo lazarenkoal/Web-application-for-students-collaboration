@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AuctionDataModels.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="AuctionDataModelsStoreContainer">
+    <EntitySet Name="Auctions" EntityType="AuctionDataModels.Store.Auctions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Products" EntityType="AuctionDataModels.Store.Products" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Photos" EntityType="AuctionDataModels.Store.Photos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ThumbnailSet" EntityType="AuctionDataModels.Store.ThumbnailSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProductAuction1" EntityType="AuctionDataModels.Store.ProductAuction1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AuctionProduct2" EntityType="AuctionDataModels.Store.AuctionProduct2" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_ProductAuction1_Product" Association="AuctionDataModels.Store.FK_ProductAuction1_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="ProductAuction1" EntitySet="ProductAuction1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductAuction1_Auction" Association="AuctionDataModels.Store.FK_ProductAuction1_Auction">
+      <End Role="Auction" EntitySet="Auctions" />
+      <End Role="ProductAuction1" EntitySet="ProductAuction1" />
+    </AssociationSet>
+    <AssociationSet Name="AuctionProduct" Association="AuctionDataModels.Store.AuctionProduct">
+      <End Role="Auction" EntitySet="Auctions" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AuctionProduct2_Auction" Association="AuctionDataModels.Store.FK_AuctionProduct2_Auction">
+      <End Role="Auction" EntitySet="Auctions" />
+      <End Role="AuctionProduct2" EntitySet="AuctionProduct2" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AuctionProduct2_Product" Association="AuctionDataModels.Store.FK_AuctionProduct2_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="AuctionProduct2" EntitySet="AuctionProduct2" />
+    </AssociationSet>
+    <AssociationSet Name="PhotoProduct" Association="AuctionDataModels.Store.PhotoProduct">
+      <End Role="Photo" EntitySet="Photos" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="ThumbnailPhoto" Association="AuctionDataModels.Store.ThumbnailPhoto">
+      <End Role="Thumbnail" EntitySet="ThumbnailSet" />
+      <End Role="Photo" EntitySet="Photos" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Auctions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OwnerId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EndTime" Type="datetime" Nullable="false" />
+    <Property Name="OwnerName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="WinProductId" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="WinnerChosen" Type="bit" Nullable="true" />
+    <Property Name="SellProduct_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nchar" Nullable="false" MaxLength="50" />
+    <Property Name="Description" Type="nchar" Nullable="false" MaxLength="350" />
+    <Property Name="Category" Type="nchar" Nullable="false" MaxLength="50" />
+    <Property Name="OwnerId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Rating" Type="int" Nullable="false" />
+    <Property Name="OnAuctionTime" Type="int" Nullable="false" />
+    <Property Name="IsOnAuctionAsALot" Type="bit" Nullable="false" />
+    <Property Name="OwnerName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Photos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FilePath" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FileName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Product_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ThumbnailSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FilePath" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FileName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Photo_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProductAuction1">
+    <Key>
+      <PropertyRef Name="BidProducts_Id" />
+      <PropertyRef Name="BidAuctions_Id" />
+    </Key>
+    <Property Name="BidProducts_Id" Type="int" Nullable="false" />
+    <Property Name="BidAuctions_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AuctionProduct2">
+    <Key>
+      <PropertyRef Name="LidAuctions_Id" />
+      <PropertyRef Name="LidProducts_Id" />
+    </Key>
+    <Property Name="LidAuctions_Id" Type="int" Nullable="false" />
+    <Property Name="LidProducts_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="AuctionProduct">
+    <End Role="Auction" Type="AuctionDataModels.Store.Auctions" Multiplicity="*" />
+    <End Role="Product" Type="AuctionDataModels.Store.Products" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Auction">
+        <PropertyRef Name="SellProduct_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PhotoProduct">
+    <End Role="Photo" Type="AuctionDataModels.Store.Photos" Multiplicity="*" />
+    <End Role="Product" Type="AuctionDataModels.Store.Products" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Photo">
+        <PropertyRef Name="Product_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ThumbnailPhoto">
+    <End Role="Thumbnail" Type="AuctionDataModels.Store.ThumbnailSet" Multiplicity="*" />
+    <End Role="Photo" Type="AuctionDataModels.Store.Photos" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Thumbnail">
+        <PropertyRef Name="Photo_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductAuction1_Product">
+    <End Role="Product" Type="AuctionDataModels.Store.Products" Multiplicity="1" />
+    <End Role="ProductAuction1" Type="AuctionDataModels.Store.ProductAuction1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProductAuction1">
+        <PropertyRef Name="BidProducts_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductAuction1_Auction">
+    <End Role="ProductAuction1" Type="AuctionDataModels.Store.ProductAuction1" Multiplicity="*" />
+    <End Role="Auction" Type="AuctionDataModels.Store.Auctions" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Auction">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProductAuction1">
+        <PropertyRef Name="BidAuctions_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AuctionProduct2_Auction">
+    <End Role="Auction" Type="AuctionDataModels.Store.Auctions" Multiplicity="1" />
+    <End Role="AuctionProduct2" Type="AuctionDataModels.Store.AuctionProduct2" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Auction">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AuctionProduct2">
+        <PropertyRef Name="LidAuctions_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AuctionProduct2_Product">
+    <End Role="AuctionProduct2" Type="AuctionDataModels.Store.AuctionProduct2" Multiplicity="*" />
+    <End Role="Product" Type="AuctionDataModels.Store.Products" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AuctionProduct2">
+        <PropertyRef Name="LidProducts_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

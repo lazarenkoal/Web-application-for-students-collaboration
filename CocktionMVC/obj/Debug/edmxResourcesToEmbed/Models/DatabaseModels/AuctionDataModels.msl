@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AuctionDataModelsStoreContainer" CdmEntityContainer="AuctionDataModelsContainer">
+    <EntitySetMapping Name="Auctions">
+      <EntityTypeMapping TypeName="IsTypeOf(AuctionDataModels.Auction)">
+        <MappingFragment StoreEntitySet="Auctions">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+          <ScalarProperty Name="WinProductId" ColumnName="WinProductId" />
+          <ScalarProperty Name="WinnerChosen" ColumnName="WinnerChosen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="IsTypeOf(AuctionDataModels.Product)">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="OnAuctionTime" ColumnName="OnAuctionTime" />
+          <ScalarProperty Name="IsOnAuctionAsALot" ColumnName="IsOnAuctionAsALot" />
+          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Photos">
+      <EntityTypeMapping TypeName="IsTypeOf(AuctionDataModels.Photo)">
+        <MappingFragment StoreEntitySet="Photos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ThumbnailSet">
+      <EntityTypeMapping TypeName="IsTypeOf(AuctionDataModels.Thumbnail)">
+        <MappingFragment StoreEntitySet="ThumbnailSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ProductAuction1" TypeName="AuctionDataModels.ProductAuction1" StoreEntitySet="ProductAuction1">
+      <EndProperty Name="Product">
+        <ScalarProperty Name="Id" ColumnName="BidProducts_Id" />
+      </EndProperty>
+      <EndProperty Name="Auction">
+        <ScalarProperty Name="Id" ColumnName="BidAuctions_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AuctionProduct" TypeName="AuctionDataModels.AuctionProduct" StoreEntitySet="Auctions">
+      <EndProperty Name="Product">
+        <ScalarProperty Name="Id" ColumnName="SellProduct_Id" />
+      </EndProperty>
+      <EndProperty Name="Auction">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AuctionProduct2" TypeName="AuctionDataModels.AuctionProduct2" StoreEntitySet="AuctionProduct2">
+      <EndProperty Name="Auction">
+        <ScalarProperty Name="Id" ColumnName="LidAuctions_Id" />
+      </EndProperty>
+      <EndProperty Name="Product">
+        <ScalarProperty Name="Id" ColumnName="LidProducts_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PhotoProduct" TypeName="AuctionDataModels.PhotoProduct" StoreEntitySet="Photos">
+      <EndProperty Name="Product">
+        <ScalarProperty Name="Id" ColumnName="Product_Id" />
+      </EndProperty>
+      <EndProperty Name="Photo">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ThumbnailPhoto" TypeName="AuctionDataModels.ThumbnailPhoto" StoreEntitySet="ThumbnailSet">
+      <EndProperty Name="Photo">
+        <ScalarProperty Name="Id" ColumnName="Photo_Id" />
+      </EndProperty>
+      <EndProperty Name="Thumbnail">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
