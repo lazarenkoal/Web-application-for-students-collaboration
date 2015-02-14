@@ -224,6 +224,10 @@
     <Compile Include="Migrations\201502111912555_aspn.Designer.cs">
       <DependentUpon>201502111912555_aspn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502142000113_ToteBoardAdded.cs" />
+    <Compile Include="Migrations\201502142000113_ToteBoardAdded.Designer.cs">
+      <DependentUpon>201502142000113_ToteBoardAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AuctionModels.cs" />
@@ -237,6 +241,7 @@
     <Compile Include="Models\DAL\Photo.cs" />
     <Compile Include="Models\DAL\Product.cs" />
     <Compile Include="Models\DAL\ThumbnailSet.cs" />
+    <Compile Include="Models\DAL\ToteBoard.cs" />
     <Compile Include="Models\JsonModels\BidSeller.cs" />
     <Compile Include="Models\JsonModels\ProductInfo.cs" />
     <Compile Include="Models\ViewModels\AuctionViewModels.cs" />
@@ -396,6 +401,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502111912555_aspn.resx">
       <DependentUpon>201502111912555_aspn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502142000113_ToteBoardAdded.resx">
+      <DependentUpon>201502142000113_ToteBoardAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

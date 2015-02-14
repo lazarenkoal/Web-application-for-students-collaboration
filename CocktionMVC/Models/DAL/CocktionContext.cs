@@ -13,7 +13,7 @@ namespace CocktionMVC.Models.DAL
             : base("name=DefaultConnection")
         {
         }
-
+        public virtual DbSet<ToteBoard> ToteBoards { get; set; }
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
@@ -68,6 +68,9 @@ namespace CocktionMVC.Models.DAL
             modelBuilder.Entity<Product>()
                 .Property(e => e.Category)
                 .IsFixedLength();
+
+            modelBuilder.Entity<Auction>()
+                .HasRequired(e => e.AuctionToteBoard);
 
             modelBuilder.Entity<Product>()
                 .HasMany(e => e.Auctions)

@@ -1,0 +1,6 @@
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\TryToUseDictionary\bin\Debug\TryToUseDictionary.exe.config
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\TryToUseDictionary\obj\Debug\TryToUseDictionary.csprojResolveAssemblyReference.cache
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\TryToUseDictionary\bin\Debug\TryToUseDictionary.exe
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\TryToUseDictionary\bin\Debug\TryToUseDictionary.pdb
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\TryToUseDictionary\obj\Debug\TryToUseDictionary.exe
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\TryToUseDictionary\obj\Debug\TryToUseDictionary.pdb

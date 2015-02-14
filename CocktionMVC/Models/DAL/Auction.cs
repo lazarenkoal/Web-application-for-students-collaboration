@@ -32,6 +32,8 @@ namespace CocktionMVC.Models.DAL
 
         public int SellProduct_Id { get; set; }
 
+        public virtual ToteBoard AuctionToteBoard { get; set; }
+
         public virtual Product SellProduct { get; set; }
 
         public virtual ICollection<Product> LidProducts { get; set; }
