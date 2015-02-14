@@ -28,6 +28,8 @@ namespace CocktionMVC.Models.DAL
 
         public string PhoneNumber { get; set; }
 
+        public int Eggs { get; set; }
+
         public bool PhoneNumberConfirmed { get; set; }
 
         public bool TwoFactorEnabled { get; set; }

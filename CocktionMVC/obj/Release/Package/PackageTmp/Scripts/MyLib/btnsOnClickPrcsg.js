@@ -22,3 +22,6 @@ $('#stopAuction').click(function () {
     sayThatFinished();
 });
 
+$('#addEggsBtn').click(function () {
+
+});

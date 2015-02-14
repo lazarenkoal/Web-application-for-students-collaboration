@@ -17,6 +17,20 @@ namespace CocktionMVC.Controllers
     public class AuctionRealTimeController : Controller
     {
         /// <summary>
+        /// Метод для добавления ставки в тотализаторе
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<JsonResult> AddRate()
+        {
+            //сделать всю логику тута
+            return Json("sdfs");
+        }
+
+
+
+
+        /// <summary>
         /// Записыват лидера в аукцион
         /// Добавляет эти данные в бд.
         /// </summary>

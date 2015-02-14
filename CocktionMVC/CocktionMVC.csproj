@@ -263,7 +263,6 @@
     <Content Include="bin\CocktionMVC.pdb" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\hiddenButtons.css" />
-    <Content Include="Content\jquery.fileupload-ui.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\vis.css" />
     <Content Include="Content\vis.min.css" />

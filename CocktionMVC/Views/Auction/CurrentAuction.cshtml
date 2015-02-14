@@ -80,7 +80,12 @@
             <button type="button" class="btn btn-success" id="chooseLeader">Выбрать этого?)</button>
             <button type="button" class=" btn btn-danger" id="stopAuction">Завершить аукцион</button>
             <button type="button" class="btn btn-info" id="scrollToChatBtn">К чату</button>
-        </div>
+            <div id="toteBoardContainer">
+                <p>Введите количество яиц</p>
+                <input type="text" id="eggsAmount" />
+                <button type="button" class="btn-info" id="addEggsBtn">Поставить ставку</button>
+            </div>
+          </div>
     </div>
 
     <div class="row">
@@ -93,6 +98,7 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="~/Scripts/MyLib/auctionActiveLogic.js"></script>
     <script type="text/javascript" src="~/Scripts/MyLib/checkers.js"></script>
     <script type="text/javascript" src="~/Scripts/MyLib/auctionEndLogic.js"></script>
     <script>
@@ -156,7 +162,6 @@
         };
 
     </script>
-    <script type="text/javascript" src="~/Scripts/MyLib/auctionActiveLogic.js"></script>
     <script type="text/javascript" src="~/Scripts/MyLib/scroller.js"></script>
     <script type="text/javascript" src="~/Scripts/MyLib/btnsOnClickPrcsg.js"></script>
     <script>

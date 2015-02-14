@@ -61,6 +61,7 @@ namespace CocktionMVC.Controllers
             auction.OwnerName = userName;
             auction.SellProduct = product;
             auction.WinnerChosen = false;
+            auction.AuctionToteBoard = new ToteBoard();
 
             //задаем время окончания аукциона
             DateTime auctionsEndTime = DateTime.Now;

@@ -29,6 +29,7 @@ function nodeSelected(properties) {
     if (nodeId != null) {
         getNodeInfo(nodeId);
         if (userStatus == 'True') {//если зарегистрирован
+            $('#toteBoardContainer').show();
             if (userName == ownerName) {
                 //проверяем выбрал ли или нет
                 if (isChoosed == false) {
@@ -50,8 +51,10 @@ function nodeSelected(properties) {
     }
     else {
         $('#nodeInfo').append('<p> Если вы хотите посмотреть информацию о товаре - кликнете на него;) </p>');
+        $('#toteBoardContainer').hide();
         $('#chooseLeader').hide();
     }
+
 };
 
 function showUploaderOrStopper(userStatus, userName) {
