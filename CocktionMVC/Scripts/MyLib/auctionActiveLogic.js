@@ -43,20 +43,3 @@ function addBid(auctionId) {
     }
 }
 
-function sendRate(auctionId, nodeId)
-{
-    var formData = new FormData();
-    var eggsAmnt = document.getElementById('eggsAmount');
-    formData.append('eggsAmount', eggsAmnt);
-    formData.append('auctionId', auctionId);
-    var req = new XMLHttpRequest();
-    req.open('POST', '/AuctionRealTime/AddRate');
-    req.send(formData);
-
-    req.onreadystatechange = function () {
-        if (req.readyState == 4 && req.status == 200) {
-            //добавить логику сюда
-        };
-    }
-
-}

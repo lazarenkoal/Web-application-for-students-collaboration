@@ -228,6 +228,14 @@
     <Compile Include="Migrations\201502142000113_ToteBoardAdded.Designer.cs">
       <DependentUpon>201502142000113_ToteBoardAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502151132036_lol.cs" />
+    <Compile Include="Migrations\201502151132036_lol.Designer.cs">
+      <DependentUpon>201502151132036_lol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502151151455_EggsAdded.cs" />
+    <Compile Include="Migrations\201502151151455_EggsAdded.Designer.cs">
+      <DependentUpon>201502151151455_EggsAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AuctionModels.cs" />
@@ -244,6 +252,7 @@
     <Compile Include="Models\DAL\ToteBoard.cs" />
     <Compile Include="Models\JsonModels\BidSeller.cs" />
     <Compile Include="Models\JsonModels\ProductInfo.cs" />
+    <Compile Include="Models\JsonModels\ToteEggsInfo.cs" />
     <Compile Include="Models\ViewModels\AuctionViewModels.cs" />
     <Compile Include="Models\Hubs\AuctionListHub.cs" />
     <Compile Include="Models\Hubs\AuctionHub.cs" />
@@ -403,6 +412,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502142000113_ToteBoardAdded.resx">
       <DependentUpon>201502142000113_ToteBoardAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502151132036_lol.resx">
+      <DependentUpon>201502151132036_lol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502151151455_EggsAdded.resx">
+      <DependentUpon>201502151151455_EggsAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

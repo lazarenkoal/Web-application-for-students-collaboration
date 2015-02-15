@@ -42,3 +42,4 @@ function addBid(auctionId) {
         return false;
     }
 }
+

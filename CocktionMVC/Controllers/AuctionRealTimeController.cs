@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-
+using Microsoft.AspNet.Identity;
 namespace CocktionMVC.Controllers
 {
     /// <summary>
@@ -23,8 +23,49 @@ namespace CocktionMVC.Controllers
         [HttpPost]
         public async Task<JsonResult> AddRate()
         {
-            //сделать всю логику тута
-            return Json("sdfs");
+            //Получить с сервера информацию об айди
+            //аукциона, айди товара, на который
+            //поставлена ставка, количество яиц
+            int auctionId, productId, eggsAmount;
+            string auctionIdStr, productIdStr, eggsAmountStr;
+            auctionIdStr = Request.Form.GetValues("auctionId")[0];
+            productIdStr = Request.Form.GetValues("productId")[0];
+            eggsAmountStr = Request.Form.GetValues("eggsAmount")[0];
+            auctionId = int.Parse(auctionIdStr);
+            productId = int.Parse(productIdStr);
+            eggsAmount = int.Parse(eggsAmountStr);
+            
+            //получить информацию о том, кто есть
+            //пользователь
+            string userId = User.Identity.GetUserId();
+
+            //Подключиться к базе данных
+            CocktionContext db = new CocktionContext();
+
+            //Найти в базе нужный аукцион
+            Auction auction = db.Auctions.Find(auctionId);
+            auction.AuctionToteBoard.IsActive = true;
+
+            //проверить, достаточно ли яиц на счете
+            //у этого человека
+            //произвести все расчеты, связанные 
+            //тотализатором
+            //добавить все эти данные в словари 
+            //вернуть статус добавления
+            bool x; 
+            x = await auction.AuctionToteBoard.SetRateForUser(userId, eggsAmount, productId, db);
+            int amount = db.AspNetUsers.Find(userId).Eggs;
+
+            ToteEggsInfo info = new ToteEggsInfo
+            {
+                Status = x.ToString(),
+                UsersAmountOfEggs = amount
+            };
+
+            //послать через сайгнал Р информацию на клиенты
+            //о состоянии аукциона
+
+            return Json(info);
         }
 
 

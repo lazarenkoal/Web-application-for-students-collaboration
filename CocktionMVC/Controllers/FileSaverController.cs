@@ -62,7 +62,7 @@ namespace CocktionMVC.Controllers
             auction.SellProduct = product;
             auction.WinnerChosen = false;
             auction.AuctionToteBoard = new ToteBoard();
-
+            
             //задаем время окончания аукциона
             DateTime auctionsEndTime = DateTime.Now;
             TimeZoneInfo tzi; //указываем временную зону

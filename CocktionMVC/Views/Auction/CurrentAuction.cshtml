@@ -81,9 +81,10 @@
             <button type="button" class=" btn btn-danger" id="stopAuction">Завершить аукцион</button>
             <button type="button" class="btn btn-info" id="scrollToChatBtn">К чату</button>
             <div id="toteBoardContainer">
+                <div id="eggInfo"></div>
                 <p>Введите количество яиц</p>
                 <input type="text" id="eggsAmount" />
-                <button type="button" class="btn-info" id="addEggsBtn">Поставить ставку</button>
+                <button type="button" class="btn btn-info" id="addEggsBtn">Поставить ставку</button>
             </div>
           </div>
     </div>
@@ -98,10 +99,11 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="~/Scripts/MyLib/auctionActiveLogic.js"></script>
+    
     <script type="text/javascript" src="~/Scripts/MyLib/checkers.js"></script>
-    <script type="text/javascript" src="~/Scripts/MyLib/auctionEndLogic.js"></script>
-    <script>
+
+    <script>   
+
 
     //Здесь содержится таймер и проверка
     //на то, что человек кнопку увидит
@@ -137,6 +139,9 @@
         //если выбран победитель аукциона
     var nodeId;
         </script>
+    <script type="text/javascript" src="~/Scripts/MyLib/auctionActiveLogic.js"></script>
+    <script type="text/javascript" src="~/Scripts/MyLib/auctionEndLogic.js"></script>
+    <script type="text/javascript" src="~/Scripts/MyLib/btnsOnClickPrcsg.js"></script>
     <script>
         // create an array with nodes
         var nodes = new vis.DataSet();
@@ -163,7 +168,6 @@
 
     </script>
     <script type="text/javascript" src="~/Scripts/MyLib/scroller.js"></script>
-    <script type="text/javascript" src="~/Scripts/MyLib/btnsOnClickPrcsg.js"></script>
     <script>
         //вывод на экран лидера аукциона
         printLider(nodeId);
