@@ -5,22 +5,23 @@ namespace CocktionMVC.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage="Ну никак нельзя обойтись без почтового адреса!")]
+        [EmailAddress(ErrorMessage="Введенный имейл недействителен!")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage="Необходимо ввести свое имя!")]
         [StringLength(25, ErrorMessage = "Странно, что ваше имя превышает 25 символов...")]
-        [Display(Name = "Имя по паспорту;)")]
+        [Display(Name = "Ваше имя")]
         public string UserRealName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Необходимо ввести свою фамилию")]
         [StringLength(25, ErrorMessage = "Странно, что ваша фамилия превышает 25 символов...")]
-        [Display(Name = "Фамилия по паспорту!!!")]
+        [Display(Name = "Ваша фамилия")]
         public string UserRealSurname { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Необходимо ввести номер телефона!")]
+        [RegularExpression("^[0-9\\-\\+]{11,12}$", ErrorMessage="Ваш номер телефона недействителен!")]
         public string PhoneNumber { get; set; }
 
     }
@@ -79,31 +80,32 @@ namespace CocktionMVC.Models
 
     public class RegisterViewModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "Ну никак нельзя обойтись без почтового адреса!")]
+        [EmailAddress(ErrorMessage = "Введенный имейл не действителен!")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Необходимо ввести свое имя!")]
         [StringLength(25, ErrorMessage = "Странно, что ваше имя превышает 25 символов...")]
-        [Display(Name = "Имя по паспорту;)")]
+        [Display(Name = "Ваше имя")]
         public string UserRealName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Необходимо ввести свою фамилию")]
         [StringLength(25, ErrorMessage = "Странно, что ваша фамилия превышает 25 символов...")]
-        [Display(Name = "Фамилия по паспорту!!!")]
+        [Display(Name = "Ваша фамилия")]
         public string UserRealSurname { get; set; }
 
-        [Required]
-        [Phone]
+        [Required(ErrorMessage = "Необходимо ввести номер телефона!")]
+        [RegularExpression("^[0-9\\-\\+]{11,12}$", ErrorMessage = "Ваш номер телефона недействителен!")]
         public string PhoneNumber { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Необходимо придумать пароль")]
         [StringLength(100, ErrorMessage = "Пароль должен быть как минимум {2} значный.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
         public string Password { get; set; }
 
+        [Required(ErrorMessage="Необходимо подтвердить пароль!")]
         [DataType(DataType.Password)]
         [Display(Name = "Подтвердите пароль")]
         [Compare("Password", ErrorMessage = "Упс, пароли не совпадают.")]
