@@ -4,6 +4,7 @@ using Microsoft.AspNet.SignalR;
 using System.Threading.Tasks;
 using CocktionMVC.Functions;
 using CocktionMVC.Models.DAL;
+using System.Collections.Generic;
 namespace CocktionMVC
 {
     
@@ -73,6 +74,21 @@ namespace CocktionMVC
             await DbItemsAdder.FalseAuctionStatus(db, auctionId);
             Clients.Group(auctionId.ToString()).finishAuction();
 
+        }
+
+        /// <summary>
+        /// Метод для отправки на клиент всех значений тотализатора
+        /// в данный момент времени
+        /// </summary>
+        /// <param name="auctionId">Айди аукциона, участникам которого необходимо сообщить</param>
+        /// <param name="data">Словарь с данными для отображения</param>
+        public static void UpdateToteBoard(int auctionId, Dictionary<string, int> data)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<AuctionHub>();
+            int dataLength = data.Count;
+            string respond = DataFormatter.DictionaryConverter(data);
+            
+            context.Clients.Group(auctionId.ToString()).updateToteBoard(respond);
         }
         
     }

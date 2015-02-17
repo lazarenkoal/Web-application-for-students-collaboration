@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
-
+using CocktionMVC.Models.Hubs;
 namespace CocktionMVC.Models.DAL
 {
     /// <summary>
@@ -131,7 +131,7 @@ namespace CocktionMVC.Models.DAL
         /// <param name="userId">Айди пользователя</param>
         /// <param name="eggsAmount">Количество яиц</param>
         /// <param name="productId">Айдишник товара</param>
-        public async Task<bool> SetRateForUser(string userId, int eggsAmount, int productId, CocktionContext db)
+        public async Task<bool> SetRateForUser(int auctionId, string userId, int eggsAmount, int productId, CocktionContext db)
         {
             //добавить проверку на хватит ли у пользователя яиц
             AspNetUser user = db.AspNetUsers.Find(userId);
@@ -143,18 +143,21 @@ namespace CocktionMVC.Models.DAL
 
                 //ЗАПИСЬ ВСЕХ ДАННЫХ В СЛОВАРИ
                 //запись данных в словарь пользователь - яйца
-                AddInfoToDict(this.UserEggsAmount, userId, eggsAmount, "Insert");
+                this.UserEggsAmount = AddInfoToDict(this.UserEggsAmount, userId, eggsAmount, "Insert");
 
                 //запись данных в словарь Продукт - количество яиц
-                AddInfoToDict(this.EggsOnProductsAmount, productId.ToString(), eggsAmount, "AddToSum");
+                this.EggsOnProductsAmount = AddInfoToDict(this.EggsOnProductsAmount, productId.ToString(), eggsAmount, "AddToSum");
 
                 //запись данных в словарь пользователь - продукт
-                AddInfoToDict(this.UserProductsConnection, userId, productId, "Insert");
+                this.UserProductsConnection = AddInfoToDict(this.UserProductsConnection, userId, productId, "Insert");
 
                 //ПЕРЕСЧИТАТЬ ВСЕ ДАННЫЕ ПО ТОТАЛИЗАТОРУ
                 CountTotalAmountOfEggs(); //количество яиц в тотализаторе
                 CountAllCoefficientsForProducts(); //коэффициенты для всех товаров
                 await Functions.DbItemsAdder.SaveDb(db);
+
+                //Обновление таблички с тотализатором
+                AuctionHub.UpdateToteBoard(auctionId, EggsOnProductsAmount);
                 return true;
             }
             else
@@ -194,7 +197,7 @@ namespace CocktionMVC.Models.DAL
         /// <param name="index">Ключ к ячейке, с которой надо проводить операции</param>
         /// <param name="value">Значение, которое необходимо добавлять в словарь</param>
         /// <param name="typeOfOperation">Тип операции вставки</param>
-        private void AddInfoToDict(Dictionary<string, int> dict ,string index, int value, string typeOfOperation)
+        private Dictionary<string, int> AddInfoToDict(Dictionary<string, int> dict ,string index, int value, string typeOfOperation)
         {
             if (dict.ContainsKey(index))
             {//если в словаре есть искомый индекс
@@ -212,6 +215,7 @@ namespace CocktionMVC.Models.DAL
             {//если в словаре нет искомого индекса
                 dict.Add(index, value);
             }
+            return dict;
         }
     }
 }

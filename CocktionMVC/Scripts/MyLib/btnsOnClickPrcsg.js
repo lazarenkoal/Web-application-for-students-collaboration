@@ -39,6 +39,4 @@ $('#addEggsBtn').click(function () {
             };
         };
         return false;
-
-    
 });

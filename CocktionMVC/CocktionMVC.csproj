@@ -182,6 +182,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MobileController.cs" />
+    <Compile Include="Functions\DataFormatter.cs" />
     <Compile Include="Functions\ThumbnailGenerator.cs" />
     <Compile Include="Functions\DbItemsAdder.cs" />
     <Compile Include="Functions\WinnerGenerator.cs" />

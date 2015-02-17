@@ -53,7 +53,7 @@ namespace CocktionMVC.Controllers
             //добавить все эти данные в словари 
             //вернуть статус добавления
             bool x; 
-            x = await auction.AuctionToteBoard.SetRateForUser(userId, eggsAmount, productId, db);
+            x = await auction.AuctionToteBoard.SetRateForUser(auctionId, userId, eggsAmount, productId, db);
             int amount = db.AspNetUsers.Find(userId).Eggs;
 
             ToteEggsInfo info = new ToteEggsInfo

@@ -22,6 +22,14 @@
                 $('#msgContainer').append('<p>'+name+':'+message+ '</p>');
             };
 
+            //Функция для отображения информации о тотализаторе
+            chat.client.updateToteBoard = function(data)
+            {
+                $('#toteBoardInfo').empty();
+                $('#toteBoardInfo').append(data);
+                
+            };
+            
             //Функция для добавления товара на все страницы аукциона
             chat.client.addNodesToPages = function (fileName, name, productId){
                 nodes.add([{ id: productId, label: name, shape: 'circularImage', image: 'http://cocktion.azurewebsites.net/Images/Thumbnails/' + fileName }]);
@@ -72,31 +80,37 @@
                     <input type="text" id="bidCategory" />
                     <p>Можете прикрепить файлик</p>
                     <input type="file" name="docs" id="fileInput">
-                    <input type="submit" value="Добавить ставку" id="addBid" />
+                    <input type="submit" value="Добавить свой лот" id="addBid" />
                 </form>
             </div>
             <div id="nodeInfo"></div>
             <div id="leaderInfo"></div>
-            <button type="button" class="btn btn-success" id="chooseLeader">Выбрать этого?)</button>
+            <button type="button" class="btn btn-success" id="chooseLeader">Выбрать лидера</button>
             <button type="button" class=" btn btn-danger" id="stopAuction">Завершить аукцион</button>
             <button type="button" class="btn btn-info" id="scrollToChatBtn">К чату</button>
-            <div id="toteBoardContainer">
-                <div id="eggInfo"></div>
-                <p>Введите количество яиц</p>
-                <input type="text" id="eggsAmount" />
-                <button type="button" class="btn btn-info" id="addEggsBtn">Поставить ставку</button>
-            </div>
           </div>
     </div>
 
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-5">
             <div id="chatContainer">
                 <ul id="msgContainer"></ul>
                 <input type="text" class="form-control" placeholder="Text input" id="enterMsgContainer">
                 <button type="button" class="btn btn-success" id="sendMsg">Кудахнуть</button>
                 <button type="button" class="btn btn-info" id="scrollToTreeBtn">К аукциону</button>
             </div>
+        </div>
+        <div class="col-lg-7">
+            <div id="toteBoardContainer">
+                <div id="eggInfo"></div>
+                <p>Введите количество яиц</p>
+                <input type="text" id="eggsAmount" />
+                <button type="button" class="btn btn-info" id="addEggsBtn">Поставить ставку</button>
+                <div id="toteBoardInfo">
+
+                </div>
+            </div>
+            
         </div>
     </div>
     
