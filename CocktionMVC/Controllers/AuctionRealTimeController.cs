@@ -45,7 +45,6 @@ namespace CocktionMVC.Controllers
             //Найти в базе нужный аукцион
             Auction auction = db.Auctions.Find(auctionId);
             auction.AuctionToteBoard.IsActive = true;
-
             //проверить, достаточно ли яиц на счете
             //у этого человека
             //произвести все расчеты, связанные 
@@ -53,6 +52,7 @@ namespace CocktionMVC.Controllers
             //добавить все эти данные в словари 
             //вернуть статус добавления
             bool x; 
+            //ДОБАВИТЬ ПРОВЕРКУ НА ВЫБОР ПОЛЬЗОВАТЕЛЕМ ТОВАРА-ПРОДАВЦА
             x = await auction.AuctionToteBoard.SetRateForUser(auctionId, userId, eggsAmount, productId, db);
             int amount = db.AspNetUsers.Find(userId).Eggs;
 

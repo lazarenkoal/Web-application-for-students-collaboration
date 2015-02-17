@@ -23,6 +23,7 @@ namespace CocktionMVC.Models.DAL
         public virtual DbSet<Photo> Photos { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ThumbnailSet> ThumbnailSets { get; set; }
+        public virtual DbSet<ToteEntity> ToteEntities { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -71,6 +72,9 @@ namespace CocktionMVC.Models.DAL
 
             modelBuilder.Entity<Auction>()
                 .HasRequired(e => e.AuctionToteBoard);
+
+            modelBuilder.Entity<ToteBoard>()
+                .HasMany(e => e.Bids);
 
             modelBuilder.Entity<Product>()
                 .HasMany(e => e.Auctions)

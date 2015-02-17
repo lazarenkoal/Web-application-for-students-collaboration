@@ -81,13 +81,11 @@ namespace CocktionMVC
         /// в данный момент времени
         /// </summary>
         /// <param name="auctionId">Айди аукциона, участникам которого необходимо сообщить</param>
-        /// <param name="data">Словарь с данными для отображения</param>
-        public static void UpdateToteBoard(int auctionId, Dictionary<string, int> data)
+        public static void UpdateToteBoard(int auctionId, Dictionary<string, double> data)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<AuctionHub>();
-            int dataLength = data.Count;
-            string respond = DataFormatter.DictionaryConverter(data);
-            
+            string respond;
+            respond = DataFormatter.DictionaryConverter(data);
             context.Clients.Group(auctionId.ToString()).updateToteBoard(respond);
         }
         

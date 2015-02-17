@@ -13,11 +13,8 @@ namespace CocktionMVC.Models.DAL
     {
         public ToteBoard()
         {
-            this.IsActive = false;
-            this.EggsOnProductsAmount = new Dictionary<string, int>();
-            this.ProductCoefficients = new Dictionary<string, double>();
-            this.UserEggsAmount = new Dictionary<string, int>();
-            this.UserProductsConnection = new Dictionary<string, int>();
+            IsActive = false;
+            Bids = new HashSet<ToteEntity>();
         }
 
         /// <summary>
@@ -36,33 +33,11 @@ namespace CocktionMVC.Models.DAL
         public int TotalEggs { get; set; }
 
         /// <summary>
-        /// Словарь для хранения информации о том,
-        /// сколько яиц поставлено на конкретный товар.
-        /// </summary>
-        public Dictionary<string, int> EggsOnProductsAmount { get; set; } 
-
-        /// <summary>
-        /// Словарь для хранения информации о том,
-        /// сколько яиц поставил конкретный пользователь.
-        /// </summary>
-        public Dictionary<string, int> UserEggsAmount { get; set; }
-
-        /// <summary>
-        /// Словарь для хранения информации о том, 
-        /// какой пользователь поставил на какой товар.
-        /// </summary>
-        public Dictionary<string, int> UserProductsConnection { get; set; }
-
-        /// <summary>
-        /// Коеффициенты на каждом товаре
-        /// </summary>
-        public Dictionary<string, double> ProductCoefficients { get; set; }
-
-        /// <summary>
         /// Аукцион, для которого организован тотализатор.
         /// </summary>
         public virtual Auction ToteAuction { get; set; }
 
+        public virtual ICollection<ToteEntity> Bids { get; set; }
 
         /// <summary>
         /// Метод для подсчета коэффициента для конкретного продукта
@@ -70,23 +45,53 @@ namespace CocktionMVC.Models.DAL
         /// Коэффициент = яица на продукте / общее количество яиц в тотале
         /// </summary>
         /// <param name="productId">Айдишник продукта</param>
-        /// <param name="eggsOnProduct">Количество яиц, поставленных на продукт</param>
-        /// <param name="totalAmountOfEggs">Общее количество яиц в аукциона</param>
-        /// <returns></returns>
-        public double CountCoefficientForProduct(string productId)
+        /// <returns>Коэффициент на аукционе для продукта</returns>
+        public double CountCoefficientForProduct(int productId)
         {
-            return this.EggsOnProductsAmount[productId] / this.TotalEggs;
+            var eggsCollection = (from x in Bids
+                        where x.ProductId == productId
+                        select x);
+            double coefficient = 0;
+            foreach (var egg in eggsCollection)
+            {
+                coefficient += egg.EggsAmount;
+            }
+            coefficient /= this.TotalEggs;
+            return coefficient;
         }
 
         /// <summary>
         /// Метод для подсчета коэффициента для конкретного пользователя
         /// </summary>
         /// <param name="userName">Имя пользователя</param>
-        /// <returns></returns>
+        /// <returns>Коэффициент пользователя</returns>
         private double CountCoefficientForUser(string userId)
         {
-            int eggsOnProduct = this.EggsOnProductsAmount[this.UserProductsConnection[userId].ToString()];
-            return this.UserEggsAmount[userId] / eggsOnProduct;
+            
+            //Ставку можно делать только один раз    
+            //выбираем все ставки данного пользователя          
+            var eggsCollection = (from x in Bids
+                                  where x.UserId == userId
+                                  select x);
+
+            double coefficient = 0; //вводим коэффициент
+            
+            //суммируем все его ставки (она должна быть одна, но не важно)
+            foreach (var i in eggsCollection)
+                coefficient += i.EggsAmount;
+
+            //выбираем все ставки, которые поставили на данный продукт
+            var eggsOnProductCollection = (from x in Bids
+                                           where x.ProductId == eggsCollection.First().ProductId
+                                           select x);
+            //суммируем количество яиц, поставленных на данный продукт
+            double eggsOnProduct = 0;
+            foreach (var i in eggsOnProductCollection)
+                eggsOnProduct += i.EggsAmount;
+
+            //рассчитываем коэффициент
+            coefficient /= eggsOnProduct;
+            return coefficient;
         }
 
         /// <summary>
@@ -107,22 +112,25 @@ namespace CocktionMVC.Models.DAL
         private void CountTotalAmountOfEggs()
         {
             int sum = 0;
-            foreach (var i in this.EggsOnProductsAmount)
+            foreach (var i in Bids)
             {
-                sum += i.Value;
+                sum += i.EggsAmount;
             }
             this.TotalEggs = sum;
         }
 
         /// <summary>
-        /// Считает и записывает коеффициенты для всех товаров
+        /// Формирует cловарь, содержащий имя каждого продукта
+        /// и расчет коэффициента для него.
         /// </summary>
-        private void CountAllCoefficientsForProducts()
+        private Dictionary<string, double> CountAllCoefficientsForProducts()
         {
-            foreach(var i in this.EggsOnProductsAmount)
+            Dictionary<string, double> data = new Dictionary<string, double>();
+            foreach (var i in ToteAuction.BidProducts)
             {
-                this.ProductCoefficients.Add(i.Key, i.Value / this.TotalEggs);
+                data.Add(i.Name, CountCoefficientForProduct(i.Id));
             }
+            return data;
         }
 
         /// <summary>
@@ -138,26 +146,16 @@ namespace CocktionMVC.Models.DAL
 
             if (IsEnoughEggs(user.Eggs, eggsAmount))
             {
-                //уменьшить количество яиц у пользовател
+                Bids.Add(new ToteEntity
+                {
+                    UserId = userId,
+                    EggsAmount = eggsAmount,
+                    ProductId = productId
+                });
                 user.Eggs -= eggsAmount;
-
-                //ЗАПИСЬ ВСЕХ ДАННЫХ В СЛОВАРИ
-                //запись данных в словарь пользователь - яйца
-                this.UserEggsAmount = AddInfoToDict(this.UserEggsAmount, userId, eggsAmount, "Insert");
-
-                //запись данных в словарь Продукт - количество яиц
-                this.EggsOnProductsAmount = AddInfoToDict(this.EggsOnProductsAmount, productId.ToString(), eggsAmount, "AddToSum");
-
-                //запись данных в словарь пользователь - продукт
-                this.UserProductsConnection = AddInfoToDict(this.UserProductsConnection, userId, productId, "Insert");
-
-                //ПЕРЕСЧИТАТЬ ВСЕ ДАННЫЕ ПО ТОТАЛИЗАТОРУ
-                CountTotalAmountOfEggs(); //количество яиц в тотализаторе
-                CountAllCoefficientsForProducts(); //коэффициенты для всех товаров
-                await Functions.DbItemsAdder.SaveDb(db);
-
-                //Обновление таблички с тотализатором
-                AuctionHub.UpdateToteBoard(auctionId, EggsOnProductsAmount);
+                CountTotalAmountOfEggs();
+                AuctionHub.UpdateToteBoard(auctionId, CountAllCoefficientsForProducts());
+                db.SaveChanges();
                 return true;
             }
             else
@@ -184,38 +182,6 @@ namespace CocktionMVC.Models.DAL
 
         }
 
-        /// <summary>
-        /// Метод для добавления информации в словарь с верификацией.
-        /// В частности, метод написан с целью добавления денег к словарям.
-        /// Если typeOfOperation == "Insert", то просто добавляется
-        /// значение в словарь по соответствующему ключу.
-        /// Если typeOfOperation == "AddToSum", то суммирются значения в
-        /// соответствующей ячейке по ключу и значение, которое передано 
-        /// в параметире.
-        /// </summary>
-        /// <param name="dict">Словарь, с которым проводятся операции</param>
-        /// <param name="index">Ключ к ячейке, с которой надо проводить операции</param>
-        /// <param name="value">Значение, которое необходимо добавлять в словарь</param>
-        /// <param name="typeOfOperation">Тип операции вставки</param>
-        private Dictionary<string, int> AddInfoToDict(Dictionary<string, int> dict ,string index, int value, string typeOfOperation)
-        {
-            if (dict.ContainsKey(index))
-            {//если в словаре есть искомый индекс
-                switch(typeOfOperation)
-                {
-                    case "Insert": //если нужно просто вставить значение в сущ-ий ключ
-                        dict[index] = value;
-                        break;
-                    case "AddToSum": //если нужно увеличить количество денег в нужном ключе
-                        dict[index] += value;
-                        break;
-                }
-            }
-            else
-            {//если в словаре нет искомого индекса
-                dict.Add(index, value);
-            }
-            return dict;
-        }
+       
     }
 }
