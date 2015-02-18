@@ -15,6 +15,7 @@ namespace CocktionMVC.Models.DAL
         {
             IsActive = false;
             Bids = new HashSet<ToteEntity>();
+            ToteResultsForUsers = new HashSet<ToteResult>();
         }
 
         /// <summary>
@@ -37,6 +38,10 @@ namespace CocktionMVC.Models.DAL
         /// </summary>
         public virtual Auction ToteAuction { get; set; }
 
+        /// <summary>
+        /// результаты тотализатора с точки зрения пользователй
+        /// </summary>
+        public virtual ICollection<ToteResult> ToteResultsForUsers { get; set; }
         public virtual ICollection<ToteEntity> Bids { get; set; }
 
         /// <summary>
@@ -155,7 +160,7 @@ namespace CocktionMVC.Models.DAL
                 user.Eggs -= eggsAmount;
                 CountTotalAmountOfEggs();
                 AuctionHub.UpdateToteBoard(auctionId, CountAllCoefficientsForProducts());
-                db.SaveChanges();
+                await Functions.DbItemsAdder.SaveDb(db);
                 return true;
             }
             else
@@ -177,11 +182,54 @@ namespace CocktionMVC.Models.DAL
             else return false;
         }
 
-        public void FinishTote(int winProductId)
+        /// <summary>
+        /// Метод, завершающий тотализатор
+        /// </summary>
+        /// <param name="winProductId">Айдишник продукта - победителя</param>
+        public async Task FinishTote(int winProductId, CocktionContext db)
         {
+            //Рассчитать для каждого из пользователей результат аукциона.
+            foreach (var i in Bids)
+            {
+                SetResult(winProductId, i, db);
+            }
 
+            await Functions.DbItemsAdder.SaveDb(db);
         }
 
+        /// <summary>
+        ///  Метод устанавливает результат тотализатора
+        ///  для каждого пользователя
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="winProductId"></param>
+        private void SetResult(int winProductId, ToteEntity bid, CocktionContext db)
+        {
+            //Проверка на успешность
+            ToteResult result;
+            if (bid.ProductId == winProductId)
+            {//если чувак поставил на победителя
+                int profit = CountProfitForUser(bid.UserId);
+                db.AspNetUsers.Find(bid.UserId).Eggs += profit;
+                result = new ToteResult
+                {
+                    UserId = bid.UserId,
+                    IsSucсessful = true,
+                    Profit = profit //считаем прибыль, потому что чел успешен
+                };
+            }
+            else
+            {//если чувак неправильно поставил
+                result = new ToteResult
+                {
+                    UserId = bid.UserId,
+                    IsSucсessful = false,
+                    Profit = -bid.EggsAmount //просто добавляем ему отрицательную прибыль!
+                };
+            }
+            //записать все это дело в таблицу с результами
+            this.ToteResultsForUsers.Add(result);
+        }
        
     }
 }

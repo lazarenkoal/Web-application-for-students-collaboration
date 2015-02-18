@@ -11,8 +11,19 @@ namespace CocktionMVC.Models.JsonModels
     /// </summary>
     public class ProductInfo
     {
+        /// <summary>
+        /// Наименование продукта
+        /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Описание продукта
+        /// </summary>
         public string Description { get; set; }
+
+        /// <summary>
+        /// Название файла
+        /// </summary>
         public string FileName { get; set; }
     }
 }

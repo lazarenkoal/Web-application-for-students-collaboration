@@ -526,3 +526,4 @@
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.lol.resources
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.EggsAdded.resources
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.ToteEntityAdded.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.ToteUpgrade.resources

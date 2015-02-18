@@ -6,32 +6,32 @@ using System.Web;
 namespace CocktionMVC.Models.DAL
 {
     /// <summary>
-    /// Сущность, олицетворяющая ставку яйцами на аукционе.
+    /// Класс, содержащий в себе результаты аукциона
     /// </summary>
-    public class ToteEntity
+    public class ToteResult
     {
         /// <summary>
-        /// Номер для хранения в базе данных
+        /// Айди для базы данных
         /// </summary>
         public int Id { get; set; }
-
+  
         /// <summary>
-        /// Айди пользователя
+        /// Айди человека, к которому относится результат
         /// </summary>
         public string UserId { get; set; }
 
         /// <summary>
-        /// Количество яиц
+        /// Его выручка в яйцах
         /// </summary>
-        public int EggsAmount { get; set; }
+        public int Profit { get; set; }
 
         /// <summary>
-        /// Айдишник продукта
+        /// Успешнометр
         /// </summary>
-        public int ProductId { get; set; }
+        public bool IsSucсessful { get; set; }
 
         /// <summary>
-        /// связь с отцом-тотализатором
+        /// Тотализатор - владелец это ставки
         /// </summary>
         public virtual ToteBoard OwnerTote { get; set; }
     }

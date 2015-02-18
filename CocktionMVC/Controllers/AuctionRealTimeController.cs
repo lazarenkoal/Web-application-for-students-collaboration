@@ -132,7 +132,6 @@ namespace CocktionMVC.Controllers
             //Получаем информацию с клиента
             int auctionId = int.Parse(Request.Form.GetValues("auctionId")[0]);
 
-            string userName = User.Identity.Name;
 
             var db = new CocktionContext();
             Auction auction = db.Auctions.Find(auctionId);
@@ -142,6 +141,7 @@ namespace CocktionMVC.Controllers
                 //рандомно выбираем победителя
                 if (User.Identity.IsAuthenticated)
                 {
+                    string userName = User.Identity.Name;
                     if (userName == auction.OwnerName)
                     {
                         BidSeller owner = new BidSeller();
@@ -175,6 +175,8 @@ namespace CocktionMVC.Controllers
 
                 if (User.Identity.IsAuthenticated)
                 {
+                    string userName = User.Identity.Name;
+                    string userId = User.Identity.GetUserId();
                     if (userName == auction.OwnerName)
                     {//if user os owner
                         //send to client info about winner
@@ -191,26 +193,41 @@ namespace CocktionMVC.Controllers
                     {//if user is winner
                         //send to client info about owner
                         BidSeller owner = new BidSeller();
+                        
+                        var q = (from x in auction.AuctionToteBoard.ToteResultsForUsers
+                                     where (x.UserId == userId)
+                                     select x);
+
+                        owner.ProfitFromTote = q.First().Profit;
+                        //проверка на то, участвовал ли товарищ вообще в аукционе
+                        
                         owner.Id = auction.OwnerId;
                         owner.Name = auction.OwnerName;
                         string phone = db.AspNetUsers.Find(auction.OwnerId).PhoneNumber;
                         owner.Type = "Owner";
-                        owner.Message = "Аукцион закончен, вам необходимо связаться с продавцом! " + phone;
+                        owner.Message = "Аукцион закончен, вам необходимо связаться с продавцом! " + phone + "/n" +
+                            String.Format("Вы срубили бабла {0} ", owner.ProfitFromTote) +
+                            String.Format("У вас бабла тепрь {0}", db.AspNetUsers.Find(userId).Eggs);
 
                         return Json(owner);
                     }
                     else
                     {//if user is authenticated
                         BidSeller looser = new BidSeller();
+                        var q = (from x in auction.AuctionToteBoard.ToteResultsForUsers
+                                 where (x.UserId == userId)
+                                 select x);   
+                        looser.ProfitFromTote = q.First().Profit;
                         looser.Name = userName;
                         looser.Type = "Looser";
-                        looser.Message = String.Format("Дорогой, аукцион закончен и победил товар {0}", winProduct.Name);
-
+                        looser.Message = String.Format("Дорогой, аукцион закончен и победил товар {0}", winProduct.Name) +
+                                         String.Format("Вы срубили бабла {0}", looser.ProfitFromTote) +
+                                         String.Format("У вас бабла тепрь {0}", db.AspNetUsers.Find(userId).Eggs);
                         return Json(looser);
                     }
-                }//if user is not authenticated
+                }
                 else
-                {
+                {//if user is not authenticated
                     BidSeller person = new BidSeller();
                     person.Type = "Info";
                     person.Message = "Аукцион закончился, выйграл товар " + winProduct.Name;

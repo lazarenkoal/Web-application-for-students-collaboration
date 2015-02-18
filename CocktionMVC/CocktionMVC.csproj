@@ -241,6 +241,10 @@
     <Compile Include="Migrations\201502172000280_ToteEntityAdded.Designer.cs">
       <DependentUpon>201502172000280_ToteEntityAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502181940171_ToteUpgrade.cs" />
+    <Compile Include="Migrations\201502181940171_ToteUpgrade.Designer.cs">
+      <DependentUpon>201502181940171_ToteUpgrade.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AuctionModels.cs" />
@@ -256,6 +260,7 @@
     <Compile Include="Models\DAL\ThumbnailSet.cs" />
     <Compile Include="Models\DAL\ToteBoard.cs" />
     <Compile Include="Models\DAL\ToteEntity.cs" />
+    <Compile Include="Models\DAL\ToteResult.cs" />
     <Compile Include="Models\JsonModels\BidSeller.cs" />
     <Compile Include="Models\JsonModels\ProductInfo.cs" />
     <Compile Include="Models\JsonModels\ToteEggsInfo.cs" />
@@ -427,6 +432,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502172000280_ToteEntityAdded.resx">
       <DependentUpon>201502172000280_ToteEntityAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502181940171_ToteUpgrade.resx">
+      <DependentUpon>201502181940171_ToteUpgrade.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -46,8 +46,14 @@ namespace CocktionMVC.Functions
         /// <returns></returns>
         public static async Task FalseAuctionStatus(CocktionContext db, int auctionId)
         {
+            //заканчиваем аукцион
             Auction auction = db.Auctions.Find(auctionId);
             auction.IsActive = false;
+            
+            //вырубаем тотализатор
+            await auction.AuctionToteBoard.FinishTote(int.Parse(auction.WinProductId), db);
+
+            //сохраняем изменения в базу данных
             await Task.Run(() => db.SaveChangesAsync());
         }
        
