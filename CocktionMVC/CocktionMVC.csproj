@@ -66,11 +66,15 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -79,6 +83,14 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
@@ -174,14 +186,17 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AuctionController.cs" />
-    <Compile Include="Controllers\AuctionRealTimeController.cs" />
-    <Compile Include="Controllers\FileSaverController.cs" />
-    <Compile Include="Controllers\HelpController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\MobileController.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ApiControllers\AccountController.cs" />
+    <Compile Include="Controllers\StandartControllers\AccountController.cs" />
+    <Compile Include="Controllers\AuctionControllers\AuctionController.cs" />
+    <Compile Include="Controllers\AuctionControllers\AuctionRealTimeController.cs" />
+    <Compile Include="Controllers\FunctionalControllers\FileSaverController.cs" />
+    <Compile Include="Controllers\StandartControllers\HelpController.cs" />
+    <Compile Include="Controllers\StandartControllers\HomeController.cs" />
+    <Compile Include="Controllers\StandartControllers\ManageController.cs" />
+    <Compile Include="Controllers\FunctionalControllers\TestController.cs" />
+    <Compile Include="Controllers\ApiControllers\ValuesController.cs" />
     <Compile Include="Functions\DataFormatter.cs" />
     <Compile Include="Functions\ThumbnailGenerator.cs" />
     <Compile Include="Functions\DbItemsAdder.cs" />
@@ -246,8 +261,7 @@
       <DependentUpon>201502181940171_ToteUpgrade.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AuctionModels.cs" />
+    <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\DAL\AspNetRole.cs" />
     <Compile Include="Models\DAL\AspNetUser.cs" />
     <Compile Include="Models\DAL\AspNetUserClaim.cs" />
@@ -269,7 +283,7 @@
     <Compile Include="Models\Hubs\AuctionHub.cs" />
     <Compile Include="Models\Hubs\ProductAddHub.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\ViewModels\ProductShortViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -290,28 +304,25 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Bootstrap\bootstrap.js" />
+    <Content Include="Scripts\Bootstrap\bootstrap.min.js" />
     <None Include="Properties\PublishProfiles\cocktion - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\cocktion - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\cocktion.pubxml" />
     <None Include="Properties\PublishProfiles\Cocktion_2_FTP.pubxml" />
-    <None Include="Scripts\jquery-2.1.3.intellisense.js" />
-    <Content Include="Scripts\jquery-2.1.3.js" />
-    <Content Include="Scripts\jquery-2.1.3.min.js" />
-    <Content Include="Scripts\jquery-2.1.3.min.map" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery-scrollto.js" />
-    <Content Include="Scripts\jquery.countdown.js" />
-    <Content Include="Scripts\jquery.countdown.min.js" />
-    <Content Include="Scripts\jquery.signalR-2.2.0.js" />
-    <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <None Include="Scripts\Jquery\jquery-2.1.3.intellisense.js" />
+    <Content Include="Scripts\Jquery\jquery-2.1.3.js" />
+    <Content Include="Scripts\Jquery\jquery-2.1.3.min.js" />
+    <Content Include="Scripts\Jquery\jquery-2.1.3.min.map" />
+    <None Include="Scripts\Jquery\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\Jquery\jquery.countdown.js" />
+    <Content Include="Scripts\Jquery\jquery.countdown.min.js" />
+    <Content Include="Scripts\Jquery\jquery.signalR-2.2.0.js" />
+    <Content Include="Scripts\Jquery\jquery.signalR-2.2.0.min.js" />
+    <Content Include="Scripts\Jquery\jquery.validate.js" />
+    <Content Include="Scripts\Jquery\jquery.validate.min.js" />
+    <Content Include="Scripts\Jquery\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\Jquery\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\MyLib\auctionActiveLogic.js" />
     <Content Include="Scripts\MyLib\auctionEndLogic.js" />
@@ -320,8 +331,8 @@
     <Content Include="Scripts\MyLib\scroller.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\vis.js" />
-    <Content Include="Scripts\vis.min.js" />
+    <Content Include="Scripts\MyLib\vis.js" />
+    <Content Include="Scripts\MyLib\vis.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -376,6 +387,7 @@
     <Content Include="Views\Shared\PageNotFound.cshtml" />
     <Content Include="Views\Shared\Test.cshtml" />
     <Content Include="Views\Mobile\Test.cshtml" />
+    <Content Include="Views\Test\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

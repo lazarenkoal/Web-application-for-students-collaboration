@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<p>Логин</p>
+<input type="text" id = "login" />
+<p>Пароль</p>
+<input type="text" id = "password" />
+<button id="sendLogin">Послать</button>
+<script type="text/javascript" src="~/Scripts/Jquery/jquery-2.1.3.js"></script>
+<script>
+    
+    $('#sendLogin').click(function () {
+        var customer = { Email: $('#login').val(), Password: $('#password').val(), RememberMe: false };
+            $.ajax({
+                type: "POST",
+                data: JSON.stringify(customer),
+                url: "/api/Account",
+                contentType: "application/json"
+            });
+     });
+        
+   
+        ///request.open('GET', '/api/TestApi/GetAuthorized/3');
+</script>
