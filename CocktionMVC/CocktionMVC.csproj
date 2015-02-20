@@ -188,6 +188,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ApiControllers\AccountController.cs" />
+    <Compile Include="Controllers\ApiControllers\AuctionController.cs" />
     <Compile Include="Controllers\StandartControllers\AccountController.cs" />
     <Compile Include="Controllers\AuctionControllers\AuctionController.cs" />
     <Compile Include="Controllers\AuctionControllers\AuctionRealTimeController.cs" />
@@ -196,7 +197,6 @@
     <Compile Include="Controllers\StandartControllers\HomeController.cs" />
     <Compile Include="Controllers\StandartControllers\ManageController.cs" />
     <Compile Include="Controllers\FunctionalControllers\TestController.cs" />
-    <Compile Include="Controllers\ApiControllers\ValuesController.cs" />
     <Compile Include="Functions\DataFormatter.cs" />
     <Compile Include="Functions\ThumbnailGenerator.cs" />
     <Compile Include="Functions\DbItemsAdder.cs" />
@@ -260,7 +260,12 @@
     <Compile Include="Migrations\201502181940171_ToteUpgrade.Designer.cs">
       <DependentUpon>201502181940171_ToteUpgrade.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502201820362_StartTimeToAuctionAdded.cs" />
+    <Compile Include="Migrations\201502201820362_StartTimeToAuctionAdded.Designer.cs">
+      <DependentUpon>201502201820362_StartTimeToAuctionAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\JsonModels\AuctionInfo.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\DAL\AspNetRole.cs" />
     <Compile Include="Models\DAL\AspNetUser.cs" />
@@ -385,7 +390,6 @@
     <Content Include="Views\Auction\ShowProducts.cshtml" />
     <Content Include="Views\Help\Index.cshtml" />
     <Content Include="Views\Shared\PageNotFound.cshtml" />
-    <Content Include="Views\Shared\Test.cshtml" />
     <Content Include="Views\Mobile\Test.cshtml" />
     <Content Include="Views\Test\Index.cshtml" />
   </ItemGroup>
@@ -447,6 +451,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502181940171_ToteUpgrade.resx">
       <DependentUpon>201502181940171_ToteUpgrade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502201820362_StartTimeToAuctionAdded.resx">
+      <DependentUpon>201502201820362_StartTimeToAuctionAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

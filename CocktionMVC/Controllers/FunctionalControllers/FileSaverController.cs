@@ -23,15 +23,15 @@ namespace CocktionMVC.Controllers
         {
             //создаем продукт, получаем с клиента информацию о нем
             Product product = new Product();
-            product.Name = Request.Form.GetValues("Name")[0];
-            product.Description = Request.Form.GetValues("Description")[0];
-            product.Category = Request.Form.GetValues("Category")[0];
-
+            product.Name = Request.Form.GetValues("Name")[0].Trim();
+            product.Description = Request.Form.GetValues("Description")[0].Trim();
+            product.Category = Request.Form.GetValues("Category")[0].Trim();
+            
             //получаем данные с клиента о времени для окончания аукцйиона,
             //обрабатываем их
             //ТУДУ: добавить проверку значений времени
-            string minutesString = Request.Form.GetValues("Minutes")[0];
-            string hoursString = Request.Form.GetValues("Hours")[0];
+            string minutesString = Request.Form.GetValues("Minutes")[0].Trim();
+            string hoursString = Request.Form.GetValues("Hours")[0].Trim();
             int minutes = int.Parse(minutesString);
             int hours = int.Parse(hoursString);
 
@@ -63,14 +63,17 @@ namespace CocktionMVC.Controllers
             auction.WinnerChosen = false;
             auction.AuctionToteBoard = new ToteBoard();
             
-            //задаем время окончания аукциона
+            //задаем время окончания и начала аукциона
             DateTime auctionsEndTime = DateTime.Now;
+            DateTime auctionStartTime;
             TimeZoneInfo tzi; //указываем временную зону
             tzi = TimeZoneInfo.FindSystemTimeZoneById("Russian Standard Time");
             auctionsEndTime = TimeZoneInfo.ConvertTime(auctionsEndTime, tzi);
+            auctionStartTime = auctionsEndTime;
             auctionsEndTime = auctionsEndTime.AddHours(hours);
             auctionsEndTime = auctionsEndTime.AddMinutes(minutes);
             auction.EndTime = auctionsEndTime;
+            auction.StartTime = auctionStartTime;
 
             //добавление фотографии для товара
             Photo photo = new Photo();
@@ -131,12 +134,12 @@ namespace CocktionMVC.Controllers
             thumbNail.FilePath = thumbNailPath + fileName;
 
             //обработка данных из формы
-            string bidName = Request.Form.GetValues("name")[0]; //получение имени
-            string bidDescription = Request.Form.GetValues("description")[0];//getting description
-            string bidCategory = Request.Form.GetValues("category")[0];//getting category
+            string bidName = Request.Form.GetValues("name")[0].Trim(); //получение имени
+            string bidDescription = Request.Form.GetValues("description")[0].Trim();//getting description
+            string bidCategory = Request.Form.GetValues("category")[0].Trim();//getting category
 
             //handling data about auction
-            string auctionId = Request.Form.GetValues("auctionId")[0];//getting Auction's Id
+            string auctionId = Request.Form.GetValues("auctionId")[0].Trim();//getting Auction's Id
 
             //Adding new product to the DB
             CocktionContext db = new CocktionContext();

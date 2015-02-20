@@ -1,0 +1,89 @@
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Документация к CocktionAPI
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+----------------------------------
+Запросы к аукционам
+----------------------------------
+1) Получение списка всех активных аукционов:
+
+!!!Он тебе вернет что-то только в том случае, если ты авторизовался
+Нужно послать запрос типа 'GET' на адрес
+http://cocktion.azurewebsites.net/api/Auction/GetActiveAuctions
+Без всяких параметров. Метод вернет тебе JSON с List<AuctionInfo> внутри
+Обрати внимание, что AuctionId это int !!! Его надо будет кидать в след.
+метод, который будет получать инфушку об одном аукционе.
+Пример того, что он тебе пришлет:
+[{
+    "AuctionDescription": "Описание 1",
+    "AuctionTitle": "Аукцион 1",
+    "AuctionImage": "http://cocktion.azurewebsites.net/Images/Thumbnails/music-mouse.jpg",
+    "AuctionCategory": "Категория 1",
+    "AuctionStartTime": "2015-02-20T21:45:49.287",
+    "AuctionEndTime": "2015-02-21T00:48:49.287",
+    "AuctionId": 1
+}, {
+    "AuctionDescription": "Описание 2",
+    "AuctionTitle": "Аукцион 2",
+    "AuctionImage": "http://cocktion.azurewebsites.net/Images/Thumbnails/music-mouse.jpg",
+    "AuctionCategory": "Категория 2",
+    "AuctionStartTime": "2015-02-20T21:46:09.483",
+    "AuctionEndTime": "2015-02-21T00:49:09.483",
+    "AuctionId": 2
+}, {
+    "AuctionDescription": "Описание 3",
+    "AuctionTitle": "Аукцион 3",
+    "AuctionImage": "http://cocktion.azurewebsites.net/Images/Thumbnails/Unknown.jpg",
+    "AuctionCategory": "Категория 3",
+    "AuctionStartTime": "2015-02-20T21:46:34.61",
+    "AuctionEndTime": "2015-02-21T00:49:34.61",
+    "AuctionId": 3
+}, {
+    "AuctionDescription": "lkjkljl;",
+    "AuctionTitle": "WESDFL",
+    "AuctionImage": "http://cocktion.azurewebsites.net/Images/Thumbnails/1.jpg",
+    "AuctionCategory": ";lkjl;kj",
+    "AuctionStartTime": "2015-02-20T21:49:46.983",
+    "AuctionEndTime": "2015-02-21T00:52:46.983",
+    "AuctionId": 4
+}, {
+    "AuctionDescription": "норм пример3",
+    "AuctionTitle": "Норм пример3",
+    "AuctionImage": "http://cocktion.azurewebsites.net/Images/Thumbnails/Снимок экрана 2015-01-25 в 23.50.35.png",
+    "AuctionCategory": "норм пример3",
+    "AuctionStartTime": "2015-02-20T21:55:45.203",
+    "AuctionEndTime": "2015-02-21T00:58:45.203",
+    "AuctionId": 5
+}
+]
+На данный момент (22:21 20.02.2012) все пути к картинкам рабочие
+
+2)Получение доступа к конкретному аукциону по айдишнику
+(По полю AuctionId, которое ты получишь в списке аукционов)
+Нужно отправить запрос тип GET по адресу
+http://cocktion.azurewebsites.net/api/Auction/GetDirectAuction/{id}
+где вместо {id} ты должен будешь вставить четко цифрой айдишник того
+аукциона, данные о котором хочешь получить. Будь аккуратен, потому что
+защиту я еще не навесил, но надо будет обсудить в каком формате ошибки
+будем обрабатывать
+Возвращает объект типа AuctionInfo
+Пример вывода:
+{"AuctionDescription":"Описание 1",
+"AuctionTitle":"Аукцион 1",
+"AuctionImage":"http://cocktion.azurewebsites.net/Images/Thumbnails/music-mouse.jpg",
+"AuctionCategory":"Категория 1",
+"AuctionStartTime":"2015-02-20T21:45:49.287",
+"AuctionEndTime":"2015-02-21T00:48:49.287",
+"AuctionId":1}
+
+-----------------------------------
+Авторизация
+------------------------------------
+1) LogIn (не менял с тех пор, как соединили с тобой)
+Отправляешь запрос типа 'POST' по адресу
+http://cocktion.azurewebsites.net/api/api/Account
+Надо туда отправить Джейсончик с параметрами
+{ "Email": "emailValue", "Password": "passwordValue" }
+Короч, все как у тебя сделано
+
+p.s. все что есть, я тестил, все работает. 

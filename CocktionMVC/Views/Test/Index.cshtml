@@ -9,6 +9,12 @@
 <p>Пароль</p>
 <input type="text" id = "password" />
 <button id="sendLogin">Послать</button>
+<br />
+<p>Айди аукциона</p>
+<input type="number" id="id" />
+<br />
+<button id="getAuctions">Давай аукционы!!!</button>
+<button id="sendId">Шли айди!!!</button>
 <script type="text/javascript" src="~/Scripts/Jquery/jquery-2.1.3.js"></script>
 <script>
     
@@ -21,7 +27,21 @@
                 contentType: "application/json"
             });
      });
-        
+       
+    $('#getAuctions').click(function () {
+        $.ajax({
+            type: "GET",
+            url: "/api/Auction/GetActiveAuctions"
+        });
+    });
+
+    $('#sendId').click(function () {
+        $.ajax({
+            type: "GET",
+            url: "/api/Auction/GetDirectAuction/" + $('#id').val()
+        });
+    });
+
    
         ///request.open('GET', '/api/TestApi/GetAuthorized/3');
 </script>

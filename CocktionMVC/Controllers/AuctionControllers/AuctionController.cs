@@ -58,7 +58,7 @@ namespace CocktionMVC.Controllers
         /// <returns></returns>
         [Authorize]
         [HttpGet]
-        public ActionResult Create() //второй кусок находится в контроллере FileSaver
+        public ActionResult Create() //метод для создания находится в контроллере FileSaver
         {
             return View();
         }//end of create

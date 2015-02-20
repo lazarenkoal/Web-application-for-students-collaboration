@@ -25,6 +25,7 @@ namespace CocktionMVC.Controllers.ApiControllers
             }
             private set { _signInManager = value; }
         }
+
         [HttpPost]
         public async Task<Respond> Login(UserToLogin model)
         {
@@ -51,6 +52,11 @@ namespace CocktionMVC.Controllers.ApiControllers
                     return resp;
             }
         }
+
+        /*
+         * Небходимо дописать методы для регистрации
+         * для входа через вкшку-какашку
+         */ 
     }
     
 

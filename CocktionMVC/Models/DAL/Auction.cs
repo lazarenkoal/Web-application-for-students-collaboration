@@ -21,6 +21,8 @@ namespace CocktionMVC.Models.DAL
 
         public DateTime EndTime { get; set; }
 
+        public DateTime StartTime { get; set; }
+
         [Required]
         public string OwnerName { get; set; }
 
