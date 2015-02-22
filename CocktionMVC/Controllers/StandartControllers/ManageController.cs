@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CocktionMVC.Models;
+using Microsoft.Owin.Security.Cookies;
 
 namespace CocktionMVC.Controllers
 {
@@ -326,7 +327,7 @@ namespace CocktionMVC.Controllers
         private async Task SignInAsync(ApplicationUser user, bool isPersistent)
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie, DefaultAuthenticationTypes.TwoFactorCookie);
-            AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = isPersistent }, await user.GenerateUserIdentityAsync(UserManager));
+            AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = isPersistent }, await user.GenerateUserIdentityAsync(UserManager, DefaultAuthenticationTypes.ApplicationCookie));
         }
 
         private void AddErrors(IdentityResult result)

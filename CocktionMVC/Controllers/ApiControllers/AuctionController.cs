@@ -7,6 +7,7 @@ using System.Web.Http;
 using CocktionMVC.Models.DAL;
 using CocktionMVC.Models.JsonModels;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 namespace CocktionMVC.Controllers.ApiControllers
 {
     public class AuctionController : ApiController
@@ -17,8 +18,7 @@ namespace CocktionMVC.Controllers.ApiControllers
         /// для нужд мобильного приложения
         /// </summary>
         /// <returns>Джейсоном лист из аукционов</returns>
-        [Authorize]
-        [HttpGet]
+        [HttpPost]
         public List<AuctionInfo> GetActiveAuctions()
         {
             CocktionContext db = new CocktionContext();
@@ -44,11 +44,12 @@ namespace CocktionMVC.Controllers.ApiControllers
                            AuctionImage = @"http://cocktion.azurewebsites.net/Images/Thumbnails/" + auction.SellProduct.Photos.First().FileName,
                            AuctionStartTime = auction.StartTime,
                            AuctionTitle = auction.SellProduct.Name.Trim(),
-                           AuctionId = auction.Id
+                           AuctionId = auction.Id,
+                           UserLoggedIn = User.Identity.IsAuthenticated.ToString()
                        }
                        );
             }//end of foreach
-
+            
             return auctiInfo;
         }//end of GetActiveAuctions()
 
@@ -57,8 +58,7 @@ namespace CocktionMVC.Controllers.ApiControllers
         /// </summary>
         /// <param name="id">Айди для доступа к аукциону</param>
         /// <returns>Джейсон с инфой об аукционе</returns>
-        [Authorize]
-        [HttpGet]
+        [HttpPost]
         public AuctionInfo GetDirectAuction(int id)
         {
             CocktionContext db = new CocktionContext();
@@ -75,5 +75,6 @@ namespace CocktionMVC.Controllers.ApiControllers
             };
         }
 
+        
     }
 }

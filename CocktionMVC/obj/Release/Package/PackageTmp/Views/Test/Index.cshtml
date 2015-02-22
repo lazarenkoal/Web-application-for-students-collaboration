@@ -30,14 +30,14 @@
        
     $('#getAuctions').click(function () {
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: "/api/Auction/GetActiveAuctions"
         });
     });
 
     $('#sendId').click(function () {
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: "/api/Auction/GetDirectAuction/" + $('#id').val()
         });
     });

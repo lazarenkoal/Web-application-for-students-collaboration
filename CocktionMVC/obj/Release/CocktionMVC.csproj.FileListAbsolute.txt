@@ -379,3 +379,6 @@
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.Http.xml
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.Http.WebHost.xml
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Release\CocktionMVC.Migrations.StartTimeToAuctionAdded.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.Owin.Cors.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.Cors.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.Owin.Cors.xml

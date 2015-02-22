@@ -509,7 +509,6 @@
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.Owin.Security.Google.xml
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.Owin.Security.Twitter.xml
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.csprojResolveAssemblyReference.cache
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.dll
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.pdb
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.ModelChainged.resources
@@ -534,3 +533,9 @@
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.Http.xml
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.Http.WebHost.xml
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.StartTimeToAuctionAdded.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.Owin.Cors.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.Cors.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.Owin.Cors.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.Http.Owin.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.Http.Owin.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.csprojResolveAssemblyReference.cache

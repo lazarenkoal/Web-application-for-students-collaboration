@@ -45,5 +45,7 @@ namespace CocktionMVC.Models.JsonModels
         /// Айдишник аукциона
         /// </summary>
         public int AuctionId { get; set; }
+
+        public string UserLoggedIn { get; set; }
     }
 }
