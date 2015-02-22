@@ -204,68 +204,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201502111732481_ModelChainged.cs" />
-    <Compile Include="Migrations\201502111732481_ModelChainged.Designer.cs">
-      <DependentUpon>201502111732481_ModelChainged.cs</DependentUpon>
+    <Compile Include="Migrations\201502221725227_LocationAdded.cs" />
+    <Compile Include="Migrations\201502221725227_LocationAdded.Designer.cs">
+      <DependentUpon>201502221725227_LocationAdded.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201502111737214_asdasd.cs" />
-    <Compile Include="Migrations\201502111737214_asdasd.Designer.cs">
-      <DependentUpon>201502111737214_asdasd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502111745298_jkj.cs" />
-    <Compile Include="Migrations\201502111745298_jkj.Designer.cs">
-      <DependentUpon>201502111745298_jkj.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502111747547_lk.cs" />
-    <Compile Include="Migrations\201502111747547_lk.Designer.cs">
-      <DependentUpon>201502111747547_lk.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502111749084_asd.cs" />
-    <Compile Include="Migrations\201502111749084_asd.Designer.cs">
-      <DependentUpon>201502111749084_asd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502111755140_SeriousMigration.cs" />
-    <Compile Include="Migrations\201502111755140_SeriousMigration.Designer.cs">
-      <DependentUpon>201502111755140_SeriousMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502111807349_asda.cs" />
-    <Compile Include="Migrations\201502111807349_asda.Designer.cs">
-      <DependentUpon>201502111807349_asda.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502111900582_fixevrth.cs" />
-    <Compile Include="Migrations\201502111900582_fixevrth.Designer.cs">
-      <DependentUpon>201502111900582_fixevrth.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502111912555_aspn.cs" />
-    <Compile Include="Migrations\201502111912555_aspn.Designer.cs">
-      <DependentUpon>201502111912555_aspn.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502142000113_ToteBoardAdded.cs" />
-    <Compile Include="Migrations\201502142000113_ToteBoardAdded.Designer.cs">
-      <DependentUpon>201502142000113_ToteBoardAdded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502151132036_lol.cs" />
-    <Compile Include="Migrations\201502151132036_lol.Designer.cs">
-      <DependentUpon>201502151132036_lol.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502151151455_EggsAdded.cs" />
-    <Compile Include="Migrations\201502151151455_EggsAdded.Designer.cs">
-      <DependentUpon>201502151151455_EggsAdded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502172000280_ToteEntityAdded.cs" />
-    <Compile Include="Migrations\201502172000280_ToteEntityAdded.Designer.cs">
-      <DependentUpon>201502172000280_ToteEntityAdded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502181940171_ToteUpgrade.cs" />
-    <Compile Include="Migrations\201502181940171_ToteUpgrade.Designer.cs">
-      <DependentUpon>201502181940171_ToteUpgrade.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502201820362_StartTimeToAuctionAdded.cs" />
-    <Compile Include="Migrations\201502201820362_StartTimeToAuctionAdded.Designer.cs">
-      <DependentUpon>201502201820362_StartTimeToAuctionAdded.cs</DependentUpon>
+    <Compile Include="Migrations\201502221733018_FillTheLocation.cs" />
+    <Compile Include="Migrations\201502221733018_FillTheLocation.Designer.cs">
+      <DependentUpon>201502221733018_FillTheLocation.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\JsonModels\AuctionInfo.cs" />
+    <Compile Include="Models\DAL\Location.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\DAL\AspNetRole.cs" />
     <Compile Include="Models\DAL\AspNetUser.cs" />
@@ -418,50 +367,11 @@
     <Folder Include="Views\FileSaver\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201502111732481_ModelChainged.resx">
-      <DependentUpon>201502111732481_ModelChainged.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201502221725227_LocationAdded.resx">
+      <DependentUpon>201502221725227_LocationAdded.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201502111737214_asdasd.resx">
-      <DependentUpon>201502111737214_asdasd.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201502111745298_jkj.resx">
-      <DependentUpon>201502111745298_jkj.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201502111747547_lk.resx">
-      <DependentUpon>201502111747547_lk.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201502111749084_asd.resx">
-      <DependentUpon>201502111749084_asd.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201502111755140_SeriousMigration.resx">
-      <DependentUpon>201502111755140_SeriousMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201502111807349_asda.resx">
-      <DependentUpon>201502111807349_asda.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201502111900582_fixevrth.resx">
-      <DependentUpon>201502111900582_fixevrth.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201502111912555_aspn.resx">
-      <DependentUpon>201502111912555_aspn.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201502142000113_ToteBoardAdded.resx">
-      <DependentUpon>201502142000113_ToteBoardAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201502151132036_lol.resx">
-      <DependentUpon>201502151132036_lol.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201502151151455_EggsAdded.resx">
-      <DependentUpon>201502151151455_EggsAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201502172000280_ToteEntityAdded.resx">
-      <DependentUpon>201502172000280_ToteEntityAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201502181940171_ToteUpgrade.resx">
-      <DependentUpon>201502181940171_ToteUpgrade.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201502201820362_StartTimeToAuctionAdded.resx">
-      <DependentUpon>201502201820362_StartTimeToAuctionAdded.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201502221733018_FillTheLocation.resx">
+      <DependentUpon>201502221733018_FillTheLocation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

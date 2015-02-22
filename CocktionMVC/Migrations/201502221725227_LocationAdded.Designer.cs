@@ -7,13 +7,13 @@ namespace CocktionMVC.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.2-31219")]
-    public sealed partial class ToteEntityAdded : IMigrationMetadata
+    public sealed partial class LocationAdded : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ToteEntityAdded));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(LocationAdded));
         
         string IMigrationMetadata.Id
         {
-            get { return "201502172000280_ToteEntityAdded"; }
+            get { return "201502221725227_LocationAdded"; }
         }
         
         string IMigrationMetadata.Source

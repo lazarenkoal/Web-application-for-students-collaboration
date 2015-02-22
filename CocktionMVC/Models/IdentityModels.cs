@@ -30,7 +30,7 @@ namespace CocktionMVC.Models
     {
 
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("DefaultConnection", false)
         {
         }
 

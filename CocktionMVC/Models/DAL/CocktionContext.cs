@@ -25,7 +25,7 @@ namespace CocktionMVC.Models.DAL
         public virtual DbSet<ThumbnailSet> ThumbnailSets { get; set; }
         public virtual DbSet<ToteEntity> ToteEntities { get; set; }
         public virtual DbSet<ToteResult> ToteResults { get; set; }
-
+        public virtual DbSet<Location> Locations { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AspNetRole>()
@@ -52,6 +52,18 @@ namespace CocktionMVC.Models.DAL
                 .HasMany(e => e.BidProducts)  //Products1 ---> BidProducts 
                 .WithMany(e => e.BidAuctions)   //Auctions2 ---> BidAuctions
                 .Map(m => m.ToTable("ProductAuction1").MapLeftKey("BidAuctions_Id").MapRightKey("BidProducts_Id"));
+
+            modelBuilder.Entity<Auction>()
+                .HasMany(e => e.GeoLocations);
+
+            modelBuilder.Entity<Product>()
+                .HasMany(e => e.GeoLocations);
+
+            modelBuilder.Entity<Location>()
+                .HasMany(e => e.Auctions);
+
+            modelBuilder.Entity<Location>()
+                .HasMany(e => e.Products);
 
             modelBuilder.Entity<Photo>()
                 .HasMany(e => e.ThumbnailSets)

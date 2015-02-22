@@ -17,7 +17,6 @@ namespace CocktionMVC.Controllers.ApiControllers
         /// для нужд мобильного приложения
         /// </summary>
         /// <returns>Джейсоном лист из аукционов</returns>
-        [Authorize]
         [HttpPost]
         public List<AuctionInfo> GetActiveAuctions()
         {
@@ -57,7 +56,6 @@ namespace CocktionMVC.Controllers.ApiControllers
         /// </summary>
         /// <param name="id">Айди для доступа к аукциону</param>
         /// <returns>Джейсон с инфой об аукционе</returns>
-        [Authorize]
         [HttpPost]
         public AuctionInfo GetDirectAuction(int id)
         {

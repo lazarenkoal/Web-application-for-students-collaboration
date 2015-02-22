@@ -47,7 +47,6 @@ namespace CocktionMVC.Controllers
             var auctions = (from x in db.Auctions
                             where ((x.EndTime > controlTime) && (x.IsActive == true))
                             select x).ToList<Auction>();
-
             return View(auctions);
         }//end of index
 

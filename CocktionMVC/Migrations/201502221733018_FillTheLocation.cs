@@ -3,7 +3,7 @@ namespace CocktionMVC.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class asdasd : DbMigration
+    public partial class FillTheLocation : DbMigration
     {
         public override void Up()
         {
