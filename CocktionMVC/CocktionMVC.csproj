@@ -192,7 +192,7 @@
     <Compile Include="Controllers\StandartControllers\AccountController.cs" />
     <Compile Include="Controllers\AuctionControllers\AuctionController.cs" />
     <Compile Include="Controllers\AuctionControllers\AuctionRealTimeController.cs" />
-    <Compile Include="Controllers\FunctionalControllers\FileSaverController.cs" />
+    <Compile Include="Controllers\FunctionalControllers\BidAuctionCreatorController.cs" />
     <Compile Include="Controllers\StandartControllers\HelpController.cs" />
     <Compile Include="Controllers\StandartControllers\HomeController.cs" />
     <Compile Include="Controllers\StandartControllers\ManageController.cs" />
@@ -300,7 +300,11 @@
     </Content>
     <Content Include="bin\CocktionMVC.dll" />
     <Content Include="bin\CocktionMVC.pdb" />
+    <Content Include="Content\bootstrap-responsive.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\hiddenButtons.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\vis.css" />
@@ -311,6 +315,12 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\Bootstrap\bootstrap.js" />
     <Content Include="Scripts\Bootstrap\bootstrap.min.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
     <None Include="Properties\PublishProfiles\cocktion - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\cocktion - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\cocktion.pubxml" />
@@ -334,6 +344,7 @@
     <Content Include="Scripts\MyLib\btnsOnClickPrcsg.js" />
     <Content Include="Scripts\MyLib\checkers.js" />
     <Content Include="Scripts\MyLib\scroller.js" />
+    <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\MyLib\vis.js" />
@@ -397,9 +408,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>

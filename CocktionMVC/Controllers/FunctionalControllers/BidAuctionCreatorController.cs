@@ -11,7 +11,7 @@ using CocktionMVC.Functions;
 using System.Threading.Tasks;
 namespace CocktionMVC.Controllers
 {
-    public class FileSaverController : Controller
+    public class BidAuctionCreatorController : Controller
     {
         /// <summary>
         /// Создает аукцион и записывает его в базу данных

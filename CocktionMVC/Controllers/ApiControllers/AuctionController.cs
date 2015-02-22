@@ -18,7 +18,7 @@ namespace CocktionMVC.Controllers.ApiControllers
         /// </summary>
         /// <returns>Джейсоном лист из аукционов</returns>
         [Authorize]
-        [HttpGet]
+        [HttpPost]
         public List<AuctionInfo> GetActiveAuctions()
         {
             CocktionContext db = new CocktionContext();
@@ -58,7 +58,7 @@ namespace CocktionMVC.Controllers.ApiControllers
         /// <param name="id">Айди для доступа к аукциону</param>
         /// <returns>Джейсон с инфой об аукционе</returns>
         [Authorize]
-        [HttpGet]
+        [HttpPost]
         public AuctionInfo GetDirectAuction(int id)
         {
             CocktionContext db = new CocktionContext();

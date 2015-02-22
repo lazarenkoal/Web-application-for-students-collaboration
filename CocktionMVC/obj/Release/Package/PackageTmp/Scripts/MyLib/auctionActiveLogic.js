@@ -27,7 +27,7 @@ function addBid(auctionId) {
 
         //создаю запрос
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/FileSaver/UploadFile');
+        xhr.open('POST', '/BidAuctionCreator/UploadFile');
         xhr.send(formData); //отправка данных
         //если все хорошо
         xhr.onreadystatechange = function () {
@@ -39,6 +39,7 @@ function addBid(auctionId) {
             };
 
         }
+
         return false;
     }
 }
