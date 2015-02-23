@@ -189,6 +189,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ApiControllers\AccountController.cs" />
     <Compile Include="Controllers\ApiControllers\AuctionController.cs" />
+    <Compile Include="Controllers\FunctionalControllers\PlacemarkController.cs" />
     <Compile Include="Controllers\StandartControllers\AccountController.cs" />
     <Compile Include="Controllers\AuctionControllers\AuctionController.cs" />
     <Compile Include="Controllers\AuctionControllers\AuctionRealTimeController.cs" />
@@ -215,6 +216,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\JsonModels\AuctionInfo.cs" />
     <Compile Include="Models\DAL\Location.cs" />
+    <Compile Include="Models\JsonModels\LocationInfo.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\DAL\AspNetRole.cs" />
     <Compile Include="Models\DAL\AspNetUser.cs" />
@@ -365,6 +367,7 @@
     <Folder Include="Images\Thumbnails\" />
     <Folder Include="Views\AuctionRealTime\" />
     <Folder Include="Views\FileSaver\" />
+    <Folder Include="Views\Placemark\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201502221725227_LocationAdded.resx">
