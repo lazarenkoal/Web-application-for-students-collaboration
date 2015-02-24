@@ -13,9 +13,9 @@
 <div class="row">
     <div id="formContainer" class="col-lg-5">
         <p>Имя</p>
-        <input type="text" id="Name" name="Name" />
+        <input type="text" id="Name" name="Name" required/>
         <p>Описание</p>
-        <input type="text" id="Description" name="Description" />
+        <input type="text" id="Description" name="Description" required />
         <div class="dropdown">
             <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
                 Выбрать категорию
@@ -84,12 +84,13 @@
         </div>
         <div id="info"></div>
         <p>Часов</p>
-        <input type="text" id="Hours" name="Hours" />
+        <input type="number" min="0" id="Hours" name="Hours" required />
         <p>Минут</p>
-        <input type="text" id="Minutes" name="Minutes" />
+        <input type="number" min="1" id="Minutes" name="Minutes" required />
         <p></p>
         <input type="file" id="file" />
         <input type="button" id="creator" class="btn btn-default" value="Создать аукцион" />
+        <input type="button" id="createAndUploadPhotoFromMobile" class="btn btn-success" value="Загрузить фотку с телефона" />
     </div>
     <div class="col-lg-7">
         <div id="map" style="width: 600px; height:400px"></div>
@@ -166,7 +167,6 @@
         formData.append("Name", $('#Name').val());
         formData.append("Description", $('#Description').val());
         formData.append("Category", $('#info').text());
-        var time = new Date();
         formData.append("Hours", $('#Hours').val());
         formData.append("Minutes", $('#Minutes').val());
         var fileInput = document.getElementById('file');
@@ -183,6 +183,28 @@
             }
         }
     });
+
+    $('#createAndUploadPhotoFromMobile').click(function () {
+        var formData = new FormData();
+        var req = new XMLHttpRequest;
+        formData.append("Name", $('#Name').val());
+        formData.append("Description", $('#Description').val());
+        formData.append("Category", $('#info').text());
+        formData.append("Hours", $('#Hours').val());
+        formData.append("Minutes", $('#Minutes').val());
+        $('#formContainer').empty();
+        $('#formContainer').append('<p>загрузка в процессе c мобилки</p>');
+        req.open("POST", "/BidAuctionCreator/SaveProductInfo");
+        req.send(formData);
+        req.onreadystatechange = function () {
+            if (req.readyState == 4 && req.status == 200) {
+                $('#formContainer').empty();
+                var respond = JSON.parse(req.responseText);
+                $('#formContainer').append('<p>' + respond.Path + '</p>');
+            }
+        }
+    });
+
 </script>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval");

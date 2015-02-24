@@ -205,13 +205,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201502221725227_LocationAdded.cs" />
-    <Compile Include="Migrations\201502221725227_LocationAdded.Designer.cs">
-      <DependentUpon>201502221725227_LocationAdded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502221733018_FillTheLocation.cs" />
-    <Compile Include="Migrations\201502221733018_FillTheLocation.Designer.cs">
-      <DependentUpon>201502221733018_FillTheLocation.cs</DependentUpon>
+    <Compile Include="Migrations\201502242146355_fixEverything.cs" />
+    <Compile Include="Migrations\201502242146355_fixEverything.Designer.cs">
+      <DependentUpon>201502242146355_fixEverything.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\JsonModels\AuctionInfo.cs" />
@@ -354,6 +350,7 @@
     <Content Include="Views\Shared\PageNotFound.cshtml" />
     <Content Include="Views\Mobile\Test.cshtml" />
     <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\BidAuctionCreator\UploadPhotoFromMobile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -370,11 +367,8 @@
     <Folder Include="Views\Placemark\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201502221725227_LocationAdded.resx">
-      <DependentUpon>201502221725227_LocationAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201502221733018_FillTheLocation.resx">
-      <DependentUpon>201502221733018_FillTheLocation.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201502242146355_fixEverything.resx">
+      <DependentUpon>201502242146355_fixEverything.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

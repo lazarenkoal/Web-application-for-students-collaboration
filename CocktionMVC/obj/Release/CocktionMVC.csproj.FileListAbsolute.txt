@@ -355,7 +355,6 @@
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.Owin.Security.Twitter.xml
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Release\CocktionMVC.csprojResolveAssemblyReference.cache
-\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Release\CocktionMVC.csproj.GenerateResource.Cache
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Release\CocktionMVC.dll
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Release\CocktionMVC.pdb
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Net.Http.Formatting.dll
@@ -364,5 +363,5 @@
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Net.Http.Formatting.xml
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.Http.xml
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.Http.WebHost.xml
-\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Release\CocktionMVC.Migrations.LocationAdded.resources
-\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Release\CocktionMVC.Migrations.FillTheLocation.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Release\CocktionMVC.Migrations.fixEverything.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Release\CocktionMVC.csproj.GenerateResource.Cache

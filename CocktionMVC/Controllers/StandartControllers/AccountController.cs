@@ -17,6 +17,8 @@ namespace CocktionMVC.Controllers
     {
         private ApplicationUserManager _userManager;
 
+
+
         public AccountController()
         {
         }
@@ -26,9 +28,9 @@ namespace CocktionMVC.Controllers
             UserManager = userManager;
             SignInManager = signInManager;
         }
-
+        
         public ApplicationUserManager UserManager
-        {
+        { 
             get
             {
                 return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();

@@ -7,6 +7,8 @@
     <script type="text/javascript" src="~/Scripts/Jquery/jquery-2.1.3.js"></script>
     <script type="text/javascript" src="~/Scripts/MyLib/vis.js"></script>
     <script type="text/javascript" src="~/Scripts/Jquery/jquery.countdown.js"></script>
+    <script type="text/javascript" src="~/Scripts/MyLib/auctionEndLogic.js"></script>
+
     <title></title>
     <link rel="stylesheet" href="~/Content/hiddenButtons.css" />
 </head>
@@ -14,6 +16,7 @@
 @section scripts{ 
     <script src="~/Scripts/Jquery/jquery.signalR-2.2.0.min.js"></script>
     <script src="~/signalr/hubs"></script>
+
     <script>
         $(function () {
             chat = $.connection.auctionHub;
@@ -55,6 +58,7 @@
                 $('#sendMsg').click(function () {
                     chat.server.send('@User.Identity.Name', $('#enterMsgContainer').val(), @Model.Id);
                     $('#enterMsgContainer').val('').focus();
+
                 });
             });
         });
@@ -114,8 +118,7 @@
         </div>
     </div>
     
-    <script type="text/javascript" src="~/Scripts/MyLib/checkers.js"></script>
-    <script type="text/javascript" src="~/Scripts/MyLib/auctionEndLogic.js"></script>
+    <script type="text/javascript" src="~/Scripts/MyLib/checkers.js">//ниже был окшнэндлоджик</script>
 
     <script>   
 

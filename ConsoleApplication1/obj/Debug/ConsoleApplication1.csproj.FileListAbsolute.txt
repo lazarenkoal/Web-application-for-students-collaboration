@@ -1,0 +1,5 @@
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb

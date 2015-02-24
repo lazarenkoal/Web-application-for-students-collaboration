@@ -7,13 +7,13 @@ namespace CocktionMVC.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.2-31219")]
-    public sealed partial class FillTheLocation : IMigrationMetadata
+    public sealed partial class fixEverything : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(FillTheLocation));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(fixEverything));
         
         string IMigrationMetadata.Id
         {
-            get { return "201502221733018_FillTheLocation"; }
+            get { return "201502242146355_fixEverything"; }
         }
         
         string IMigrationMetadata.Source
