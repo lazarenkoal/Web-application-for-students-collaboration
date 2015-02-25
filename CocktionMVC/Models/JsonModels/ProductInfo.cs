@@ -5,10 +5,6 @@ using System.Web;
 
 namespace CocktionMVC.Models.JsonModels
 {
-    /// <summary>
-    /// Класс для вывода информации о продукте
-    /// на клиент
-    /// </summary>
     public class ProductInfo
     {
         /// <summary>

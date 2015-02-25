@@ -72,6 +72,30 @@ namespace CocktionMVC.Controllers.ApiControllers
                 AuctionId = auction.Id
             };
         }
+        //В АПИ КОНТРОЛЛЕРАХ РУТИНГ ДРУГОЙ!!!
 
+        /// <summary>
+        /// Метод отправляет на мобильный клиент информацию о всех товарах, 
+        /// которые поставлены на данном аукционе
+        /// </summary>
+        /// <param name="auctionId">Айди аукциона</param>
+        /// <returns>Лист с информацией о продуктах</returns>
+        [HttpPost]
+        public List<ProductInfoMobile> GetAuctionBids(int id)
+        {
+            CocktionContext db = new CocktionContext();
+            Auction auction = db.Auctions.Find(id);
+            List<ProductInfoMobile> bidProducts = new List<ProductInfoMobile>();
+            foreach (var bid in auction.BidProducts)
+                bidProducts.Add(new ProductInfoMobile
+                    {
+                        ProductDescription = bid.Description.Trim(),
+                        ProductFileName =  @"http://cocktion.azurewebsites.net/Images/Thumbnails/" + bid.Photos.First().FileName,
+                        ProductName = bid.Name.Trim(),
+                        ProductCategory = bid.Category.Trim(),
+                        ProductId = bid.Id
+                    });
+            return bidProducts;
+        }
     }
 }
