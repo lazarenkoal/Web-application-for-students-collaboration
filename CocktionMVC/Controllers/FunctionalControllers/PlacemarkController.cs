@@ -9,6 +9,11 @@ namespace CocktionMVC.Controllers
 {
     public class PlacemarkController : Controller
     {
+        /// <summary>
+        /// Метод достает из базы данных все локации, которые есть, 
+        /// приводит их в удобочитаемый вид для карт.
+        /// </summary>
+        /// <returns>Коллекцию с информацией о локациях</returns>
         [HttpPost]
         public JsonResult GetAllPlacemarks()
         {
@@ -24,6 +29,17 @@ namespace CocktionMVC.Controllers
             }
 
             return Json(jsonLocations);
+        }
+
+        [HttpPost]
+        public JsonResult GetCurrentPlacemark()
+        {
+            int placemarkId = int.Parse(Request.Form.GetValues("locationId")[0]);
+            CocktionContext db = new CocktionContext();
+            Location location = db.Locations.Find(placemarkId);
+            LocationInfo placemark = new LocationInfo(location.Latitude, location.Longitude, location.IconContent,
+                                                          location.BaloonContent, location.Option);
+            return Json(placemark);
         }
     }
 }

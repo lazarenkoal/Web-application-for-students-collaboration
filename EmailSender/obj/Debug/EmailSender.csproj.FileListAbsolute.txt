@@ -1,5 +1,0 @@
-\\psf\Home\Documents\cocktion.source\CocktionWorking2\EmailSender\bin\Debug\EmailSender.exe.config
-\\psf\Home\Documents\cocktion.source\CocktionWorking2\EmailSender\bin\Debug\EmailSender.exe
-\\psf\Home\Documents\cocktion.source\CocktionWorking2\EmailSender\bin\Debug\EmailSender.pdb
-\\psf\Home\Documents\cocktion.source\CocktionWorking2\EmailSender\obj\Debug\EmailSender.exe
-\\psf\Home\Documents\cocktion.source\CocktionWorking2\EmailSender\obj\Debug\EmailSender.pdb

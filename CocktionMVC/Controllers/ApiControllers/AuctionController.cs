@@ -34,6 +34,7 @@ namespace CocktionMVC.Controllers.ApiControllers
             //формируем список в том формате, который нужен для отображения в приложении
             foreach (var auction in auctions)
             {
+             
                 auctiInfo.Add(
                        new AuctionInfo
                        {

@@ -26,7 +26,13 @@ namespace CocktionMVC.Controllers
             product.Name = Request.Form.GetValues("Name")[0].Trim();
             product.Description = Request.Form.GetValues("Description")[0].Trim();
             product.Category = Request.Form.GetValues("Category")[0].Trim();
-            
+
+            //Cтроку получаем в формате !1!1!1!
+            //в строке содержатся айдишники локаций
+            string locationsIdString = Request.Form.GetValues("LocationsId")[0].Trim('!');
+            string[] locIds = locationsIdString.Split('!');
+            //переводим массив в массив инта
+            int[] locIdsInt = Array.ConvertAll(locIds, x => int.Parse(x));
             //получаем данные с клиента о времени для окончания аукцйиона,
             //обрабатываем их
             //ТУДУ: добавить проверку значений времени
@@ -62,7 +68,8 @@ namespace CocktionMVC.Controllers
             auction.SellProduct = product;
             auction.WinnerChosen = false;
             auction.AuctionToteBoard = new ToteBoard();
-            
+            //добавляем все локации списочком к аукциону
+            Array.ForEach(locIdsInt, x => auction.GeoLocations.Add(db.Locations.Find(x)));
             //задаем время окончания и начала аукциона
             DateTime auctionsEndTime = DateTime.Now;
             DateTime auctionStartTime;
