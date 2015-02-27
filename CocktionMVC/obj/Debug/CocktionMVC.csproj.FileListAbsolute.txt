@@ -520,3 +520,5 @@
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.Http.WebHost.xml
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.fixEverything.resources
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.csproj.GenerateResource.Cache
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.Http.Owin.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.Http.Owin.xml

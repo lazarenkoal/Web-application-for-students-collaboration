@@ -7,13 +7,19 @@ using Microsoft.Owin.Security.Google;
 using Owin;
 using CocktionMVC.Models.DAL;
 using CocktionMVC.Models;
+using Microsoft.Owin.Security.OAuth;
 namespace CocktionMVC
 {
     public partial class Startup
     {
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864
+        public static OAuthBearerAuthenticationOptions OAuthBearerOptions { get; private set; }
+
         public void ConfigureAuth(IAppBuilder app)
         {
+            OAuthBearerOptions = new OAuthBearerAuthenticationOptions();
+            app.UseOAuthBearerAuthentication(OAuthBearerOptions);
+
             // Configure the db context, user manager and signin manager to use a single instance per request
             app.CreatePerOwinContext(ApplicationDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
