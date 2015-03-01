@@ -212,6 +212,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\JsonModels\AuctionInfo.cs" />
     <Compile Include="Models\DAL\Location.cs" />
+    <Compile Include="Models\JsonModels\BidChecker.cs" />
     <Compile Include="Models\JsonModels\ExtraBidInfo.cs" />
     <Compile Include="Models\JsonModels\LocationInfo.cs" />
     <Compile Include="Models\JsonModels\ProductInfo.cs" />

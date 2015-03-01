@@ -81,7 +81,6 @@ function addExtraBid(auctionId) {
                 var response = JSON.parse(xhr.responseText);
                 var parentId = response.FirstBidId;
                 var childId = response.ThisBidId;
-
                 chat.server.addNodesToClients(name1, filename1, auctionId, xhr.responseText);
                 chat.server.addExtraNodeToClients(name1, filename1, auctionId, parentId, childId);
             };
@@ -91,3 +90,18 @@ function addExtraBid(auctionId) {
 function showExtraBidAdder() {
     $("#extraBidContainer").show();
 }
+
+//Функция проверяет на то, что чувак сделал ставочку
+function check() {
+    var xhr = new XMLHttpRequest();
+    var data = new FormData();
+    data.append("auctionId", @Model.Id);
+    xhr.open("POST", "/AuctionRealTime/CheckIfUserBidded");
+    xhr.send(data);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var info = JSON.parse(xhr.responseText);
+            $("#nodeInfo").append(info.HaveBid);
+        };
+    };
+};

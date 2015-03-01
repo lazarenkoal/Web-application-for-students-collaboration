@@ -104,6 +104,23 @@ namespace CocktionMVC.Controllers
             }
         }
 
+        /// <summary>
+        /// Проверяет ставил ли пользователь свою ставку на этом
+        /// аукционе
+        /// </summary>
+        /// <returns>Джейсончик со статусом</returns>
+        [HttpPost]
+        public JsonResult CheckIfUserBidded()
+        {
+            BidChecker checker = new BidChecker();
+            CocktionContext db = new CocktionContext();
+            var userId = User.Identity.GetUserId();
+            int auctionId = int.Parse(Request.Form.GetValues("auctionId")[0]);
+            //Ищем товар с владельцем с данным айдишником.
+            checker.HaveBid = db.Auctions.Find(auctionId).BidProducts.First(x => x.OwnerId == userId) == null ? false : true;
+            return Json(checker);
+        }
+
 
         /// <summary>
         /// Получает с клиента айдишник, по нему находит 
