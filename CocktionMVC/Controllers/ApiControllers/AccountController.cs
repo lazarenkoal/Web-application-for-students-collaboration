@@ -68,39 +68,6 @@ namespace CocktionMVC.Controllers.ApiControllers
                 return new Respond { Status = "Unable to resolve user id" };
 
         }
-
-
-        //[HttpPost]
-        //public async Task<Respond> Login(UserToLogin model)
-        //{
-            
-
-        //    // This doesn't count login failures towards account lockout
-        //    // To enable password failures to trigger account lockout, change to shouldLockout: true
-        //    var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, true, shouldLockout: false);
-        //    Respond resp = new Respond();
-        //    switch (result)
-        //    {
-        //        case SignInStatus.Success:
-        //            resp.Status = "Success";
-        //            return resp;
-        //        case SignInStatus.LockedOut:
-        //            resp.Status = "Lockout";
-        //            return resp;
-        //        case SignInStatus.RequiresVerification:
-        //            resp.Status = "RequiresVerification";
-        //            return resp;
-        //        case SignInStatus.Failure:
-        //        default:
-        //            resp.Status = "Failure";
-        //            return resp;
-        //    }
-        //}
-
-        /*
-         * Небходимо дописать методы для регистрации
-         * для входа через вкшку-какашку
-         */ 
     }
     
 

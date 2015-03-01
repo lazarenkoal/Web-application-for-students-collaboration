@@ -7,6 +7,8 @@ using System.Web.Http;
 using CocktionMVC.Models.DAL;
 using CocktionMVC.Models.JsonModels;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
+
 namespace CocktionMVC.Controllers.ApiControllers
 {
     public class AuctionController : ApiController
@@ -17,11 +19,11 @@ namespace CocktionMVC.Controllers.ApiControllers
         /// для нужд мобильного приложения
         /// </summary>
         /// <returns>Джейсоном лист из аукционов</returns>
+        [Authorize]
         [HttpPost]
         public List<AuctionInfo> GetActiveAuctions()
         {
             CocktionContext db = new CocktionContext();
-            
             //выбираем все аукционы, которые активны в данный момент
             DateTime controlTime = DateTime.Now;
             TimeZoneInfo tst = TimeZoneInfo.FindSystemTimeZoneById("Russian Standard Time");
@@ -34,15 +36,15 @@ namespace CocktionMVC.Controllers.ApiControllers
             //формируем список в том формате, который нужен для отображения в приложении
             foreach (var auction in auctions)
             {
-             
+
+                int minutes = (int)auction.EndTime.Subtract(controlTime).TotalMinutes;
                 auctiInfo.Add(
                        new AuctionInfo
                        {
                            AuctionCategory = auction.SellProduct.Category.Trim(),
                            AuctionDescription = auction.SellProduct.Description.Trim(),
-                           AuctionEndTime = auction.EndTime,
+                           AuctionEndTime = minutes,
                            AuctionImage = @"http://cocktion1.azurewebsites.net/Images/Thumbnails/" + auction.SellProduct.Photos.First().FileName,
-                           AuctionStartTime = auction.StartTime,
                            AuctionTitle = auction.SellProduct.Name.Trim(),
                            AuctionId = auction.Id
                        }
@@ -53,26 +55,43 @@ namespace CocktionMVC.Controllers.ApiControllers
         }//end of GetActiveAuctions()
 
         /// <summary>
-        /// Метод для получения конкретного аукциона по айди
+        /// Метод позволяет достать все аукционы, где хозяин - владелец
         /// </summary>
-        /// <param name="id">Айди для доступа к аукциону</param>
-        /// <returns>Джейсон с инфой об аукционе</returns>
+        /// <returns>Лист с информацией об аукионах</returns>
+        [Authorize]
         [HttpPost]
-        public AuctionInfo GetDirectAuction(int id)
+        public List<AuctionInfo> GetMyAuctions()
         {
             CocktionContext db = new CocktionContext();
-            Auction auction = db.Auctions.Find(id);
-            return new AuctionInfo
+            var userId = User.Identity.GetUserId();
+            var auctions = (from x in db.Auctions
+                            where x.OwnerId == userId
+                            select x).ToList<Auction>();
+            List<AuctionInfo> auctionInfo = new List<AuctionInfo>();
+            DateTime controlTime = DateTime.Now;
+            TimeZoneInfo tst = TimeZoneInfo.FindSystemTimeZoneById("Russian Standard Time");
+            controlTime = TimeZoneInfo.ConvertTime(controlTime, TimeZoneInfo.Local, tst);
+            foreach (var auction in auctions)
             {
-                AuctionCategory = auction.SellProduct.Category.Trim(),
-                AuctionDescription = auction.SellProduct.Description.Trim(),
-                AuctionEndTime = auction.EndTime,
-                AuctionImage = @"http://cocktion1.azurewebsites.net/Images/Thumbnails/" + auction.SellProduct.Photos.First().FileName,
-                AuctionStartTime = auction.StartTime,
-                AuctionTitle = auction.SellProduct.Name.Trim(),
-                AuctionId = auction.Id
-            };
+
+                int minutes = (int)auction.EndTime.Subtract(controlTime).TotalMinutes;
+                auctionInfo.Add(
+                       new AuctionInfo
+                       {
+                           AuctionCategory = auction.SellProduct.Category.Trim(),
+                           AuctionDescription = auction.SellProduct.Description.Trim(),
+                           AuctionEndTime = minutes,
+                           AuctionImage = @"http://cocktion1.azurewebsites.net/Images/Thumbnails/" + auction.SellProduct.Photos.First().FileName,
+                           AuctionTitle = auction.SellProduct.Name.Trim(),
+                           AuctionId = auction.Id
+                       }
+                       );
+            }//end of foreach
+
+            return auctionInfo;
         }
+
+
         //В АПИ КОНТРОЛЛЕРАХ РУТИНГ ДРУГОЙ!!!
 
         /// <summary>
@@ -81,6 +100,8 @@ namespace CocktionMVC.Controllers.ApiControllers
         /// </summary>
         /// <param name="auctionId">Айди аукциона</param>
         /// <returns>Лист с информацией о продуктах</returns>
+
+        [Authorize]
         [HttpPost]
         public List<ProductInfoMobile> GetAuctionBids(int id)
         {

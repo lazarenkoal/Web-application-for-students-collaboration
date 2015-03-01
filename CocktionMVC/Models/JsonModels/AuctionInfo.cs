@@ -31,15 +31,12 @@ namespace CocktionMVC.Models.JsonModels
         /// </summary>
         public string AuctionCategory { get; set; }
 
-        /// <summary>
-        /// Время начала аукциона
-        /// </summary>
-        public DateTime AuctionStartTime { get; set; }
+       
 
         /// <summary>
-        /// Время окончания аукциона
+        /// Время окончания аукциона в минутах от текущего
         /// </summary>
-        public DateTime AuctionEndTime { get; set; }
+        public int AuctionEndTime { get; set; }
 
         /// <summary>
         /// Айдишник аукциона
