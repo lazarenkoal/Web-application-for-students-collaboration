@@ -7,13 +7,13 @@ namespace CocktionMVC.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.2-31219")]
-    public sealed partial class fixEverything : IMigrationMetadata
+    public sealed partial class AzureDepl : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(fixEverything));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AzureDepl));
         
         string IMigrationMetadata.Id
         {
-            get { return "201502242146355_fixEverything"; }
+            get { return "201503010917313_AzureDepl"; }
         }
         
         string IMigrationMetadata.Source

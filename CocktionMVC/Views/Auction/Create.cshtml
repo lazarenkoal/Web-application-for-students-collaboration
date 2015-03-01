@@ -179,12 +179,13 @@
         formData.append("Category", $('#info').text());
         formData.append("Hours", $('#Hours').val());
         formData.append("Minutes", $('#Minutes').val());
-        var locationsIdString = "!";
+        /*var locationsIdString = "!";
         locationsId.forEach(function (value) {
             locationsIdString += value + '!';
         });
 
         formData.append("LocationsId", locationsIdString);
+        */
         var fileInput = document.getElementById('file');
         var filename1 = fileInput.files[0].name;
         formData.append(fileInput.files[0].name, fileInput.files[0]);

@@ -17,6 +17,8 @@ namespace CocktionMVC.Models
         public string StudyAdress { get; set; }
         public string PhoneNumber { get; set; }
         public int Eggs { get; set; }
+
+        public int Rating { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

@@ -41,7 +41,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                            AuctionCategory = auction.SellProduct.Category.Trim(),
                            AuctionDescription = auction.SellProduct.Description.Trim(),
                            AuctionEndTime = auction.EndTime,
-                           AuctionImage = @"http://cocktion.azurewebsites.net/Images/Thumbnails/" + auction.SellProduct.Photos.First().FileName,
+                           AuctionImage = @"http://cocktion1.azurewebsites.net/Images/Thumbnails/" + auction.SellProduct.Photos.First().FileName,
                            AuctionStartTime = auction.StartTime,
                            AuctionTitle = auction.SellProduct.Name.Trim(),
                            AuctionId = auction.Id
@@ -67,7 +67,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                 AuctionCategory = auction.SellProduct.Category.Trim(),
                 AuctionDescription = auction.SellProduct.Description.Trim(),
                 AuctionEndTime = auction.EndTime,
-                AuctionImage = @"http://cocktion.azurewebsites.net/Images/Thumbnails/" + auction.SellProduct.Photos.First().FileName,
+                AuctionImage = @"http://cocktion1.azurewebsites.net/Images/Thumbnails/" + auction.SellProduct.Photos.First().FileName,
                 AuctionStartTime = auction.StartTime,
                 AuctionTitle = auction.SellProduct.Name.Trim(),
                 AuctionId = auction.Id
@@ -91,7 +91,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                 bidProducts.Add(new ProductInfoMobile
                     {
                         ProductDescription = bid.Description.Trim(),
-                        ProductFileName =  @"http://cocktion.azurewebsites.net/Images/Thumbnails/" + bid.Photos.First().FileName,
+                        ProductFileName =  @"http://cocktion1.azurewebsites.net/Images/Thumbnails/" + bid.Photos.First().FileName,
                         ProductName = bid.Name.Trim(),
                         ProductCategory = bid.Category.Trim(),
                         ProductId = bid.Id

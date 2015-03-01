@@ -53,7 +53,7 @@ namespace CocktionMVC.Models.DAL
         public string Faculty { get; set; }
 
         public string Dormitory { get; set; }
-
+        public int? Rating { get; set; }
         public string StudyAdress { get; set; }
 
         public string ConfirmationToken { get; set; }

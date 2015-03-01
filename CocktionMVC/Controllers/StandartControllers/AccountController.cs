@@ -163,7 +163,8 @@ namespace CocktionMVC.Controllers
                     UserRealName = model.UserRealName,
                     UserRealSurname = model.UserRealSurname,
                     PhoneNumber = model.PhoneNumber,
-                    Eggs = 1000
+                    Eggs = 1000,
+                    Rating = 1000
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

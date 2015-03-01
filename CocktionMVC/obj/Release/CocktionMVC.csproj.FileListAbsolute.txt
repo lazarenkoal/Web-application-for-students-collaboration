@@ -363,5 +363,7 @@
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Net.Http.Formatting.xml
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.Http.xml
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.Http.WebHost.xml
-\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Release\CocktionMVC.Migrations.fixEverything.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.Http.Owin.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.Http.Owin.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Release\CocktionMVC.Migrations.AzureDepl.resources
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Release\CocktionMVC.csproj.GenerateResource.Cache
