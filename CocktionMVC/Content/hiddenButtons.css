@@ -31,3 +31,11 @@
 #toteBoardContainer{
     display: none;
 }
+
+#extraBidContainer{
+    display: none;
+}
+
+#addExtraBid{
+    display: none;
+}

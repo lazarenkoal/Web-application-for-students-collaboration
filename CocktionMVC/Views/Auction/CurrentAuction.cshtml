@@ -33,12 +33,19 @@
                 
             };
             
+            chat.client.addExtraNodesToPages = function (fileName, name, parentProductId, childProductId) {
+                nodes.add([{ id: childProductId, label: name, shape: 'circularImage', image: 'http://cocktion1.azurewebsites.net/Images/Thumbnails/' + fileName }]);
+                edges.add([{ from: parentProductId, to: childProductId }]);
+            }
+
             //Функция для добавления товара на все страницы аукциона
             chat.client.addNodesToPages = function (fileName, name, productId){
                 nodes.add([{ id: productId, label: name, shape: 'circularImage', image: 'http://cocktion1.azurewebsites.net/Images/Thumbnails/' + fileName }]);
                 edges.add([{ from: i, to: productId }]);
 
             };
+
+
             //функция для объявления лидера на всех страничках
             //ВО ВРЕМЯ АУКЦИОНА!!!!!!!
             chat.client.showLeaderOnPage = function (leaderId){
@@ -87,6 +94,18 @@
                     <input type="submit" value="Добавить свой лот" id="addBid" />
                 </form>
             </div>
+            <div id="extraBidContainer">
+                <p>Введите наименование довеска</p>
+                <input type="text" id="extraBidName" />
+                <p>Введите Описание довеска</p>
+                <input type="text" id="extraBidDescription" />
+                <p>Введите категорию довеска</p>
+                <input type="text" id="extraBidCategory" />
+                <p>Можете прикрепить файлик</p>
+                <input type="file"  id="extraFileInput">
+                <button type="button" id="submitExtraBid" class="btn btn-danger" onclick="addExtraBid(@Model.Id)">Послать довесок</button>
+            </div>
+            <button type="button" class="btn btn-success" id="addExtraBid" onclick="showExtraBidAdder()">Добавить довесок</button>
             <div id="nodeInfo"></div>
             <div id="leaderInfo"></div>
             <button type="button" class="btn btn-success" id="chooseLeader">Выбрать лидера</button>

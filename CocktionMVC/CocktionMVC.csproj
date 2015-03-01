@@ -212,6 +212,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\JsonModels\AuctionInfo.cs" />
     <Compile Include="Models\DAL\Location.cs" />
+    <Compile Include="Models\JsonModels\ExtraBidInfo.cs" />
     <Compile Include="Models\JsonModels\LocationInfo.cs" />
     <Compile Include="Models\JsonModels\ProductInfo.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
@@ -370,9 +371,6 @@
   <ItemGroup>
     <Folder Include="Images\Photos\" />
     <Folder Include="Images\Thumbnails\" />
-    <Folder Include="Views\AuctionRealTime\" />
-    <Folder Include="Views\FileSaver\" />
-    <Folder Include="Views\Placemark\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

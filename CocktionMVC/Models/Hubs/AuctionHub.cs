@@ -52,6 +52,21 @@ namespace CocktionMVC
         }
 
         /// <summary>
+        /// Добавляет довесок к товару на всех клиентах, где
+        /// открыта страничка с аукционом
+        /// </summary>
+        /// <param name="name">Название товара</param>
+        /// <param name="fileName">Название файла с фотографией</param>
+        /// <param name="auctionId">Айдишник аукциона</param>
+        /// <param name="parentProductId">айдишник товара, к которому добавлен довесок</param>
+        /// <param name="childProductId">Айдишник товара, который добавляется в кач-ве довеска</param>
+        public void AddExtraNodeToClients(string name, string fileName, int auctionId, int parentProductId,
+                                            int childProductId)
+        {
+            Clients.Group(auctionId.ToString()).addExtraNodesToPages(fileName, name, parentProductId, childProductId);
+        }
+
+        /// <summary>
         /// Метод посылает айдишник лидера на все клиенты
         /// </summary>
         /// <param name="leaderId">Айдишник лидера</param>

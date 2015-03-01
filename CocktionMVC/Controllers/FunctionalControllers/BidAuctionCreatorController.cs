@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using CocktionMVC.Models.Hubs;
 using CocktionMVC.Functions;
 using System.Threading.Tasks;
+using CocktionMVC.Models.JsonModels;
 namespace CocktionMVC.Controllers
 {
     public class BidAuctionCreatorController : Controller
@@ -119,8 +120,66 @@ namespace CocktionMVC.Controllers
 
         }
 
+        [HttpPost]
+        public async Task<JsonResult> AddExtraBid()
+        {
+            //получение информации с формы
+            //обработка файла
+            HttpPostedFileBase file = Request.Files[0]; //загрузка файла из запроса
+            string fileName = System.IO.Path.GetFileName(file.FileName); //получаем имя файла
+            string path = Server.MapPath("~/Images/Photos/") + fileName; //путь на сервере
+            file.SaveAs(path); //сохранение
+
+            //получаем thumbnail
+            string thumbNailPath = Server.MapPath("~/Images/Thumbnails/"); //путь на сервере для сохранения
+            ThumbnailGenerator.ResizeImage(file, thumbNailPath, 60, 60);
+            ThumbnailSet thumbNail = new ThumbnailSet();
+            thumbNail.FileName = fileName;
+            thumbNail.FilePath = thumbNailPath + fileName;
+
+            //обработка данных из формы
+            string bidName = Request.Form.GetValues("name")[0].Trim(); //получение имени
+            string bidDescription = Request.Form.GetValues("description")[0].Trim();//getting description
+            string bidCategory = Request.Form.GetValues("category")[0].Trim();//getting category
+
+            //handling data about auction
+            string auctionId = Request.Form.GetValues("auctionId")[0].Trim();//getting Auction's Id
+
+            //Adding new product to the DB
+            CocktionContext db = new CocktionContext();
+
+            //Creating Photo for product and adding to the DB
+            Photo photo = new Photo();
+            photo.FileName = fileName;
+            photo.FilePath = path;
+            photo.ThumbnailSets.Add(thumbNail);
+
+            //Creating product for the db
+            Product product = new Product();
+            product.Name = bidName;
+            product.Description = bidDescription;
+            product.Category = bidCategory;
+            int id = int.Parse(auctionId);
+            product.OwnerId = User.Identity.GetUserId();
+            product.Photos.Add(photo);
+            product.OwnerName = User.Identity.Name;
+            photo.Product = product;
+            
+            var auction = db.Auctions.Find(id);
+            auction.BidProducts.Add(product);
+
+            await DbItemsAdder.AddProduct(db, product, photo);
+            int result = product.Id;
+
+            //Добавление информации о ставках (необходимо для связи)
+            ExtraBidInfo info = new ExtraBidInfo();
+            info.FirstBidId = auction.BidProducts.First(x => x.OwnerId == User.Identity.GetUserId()).Id;
+            info.ThisBidId = result;
+            return Json(info);
+        }
+
         /// <summary>
-        /// Метод для загрузки файла
+        /// Метод добавления ставки на аукцион (товара)
         /// </summary>
         /// <returns></returns>
         [HttpPost]
