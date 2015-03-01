@@ -1,0 +1,10 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+@using CocktionMVC.Models.ViewModels
+@model ProfileViewModel
+<h2>Статистика о пользователе</h2>
+<p>Ваши яйца: @Model.EggsAmount</p>
+<p>Количество ваших аукционов: @Model.AuctionsAmount</p>
+<p>Количество ваших товаров: @Model.ProductsAmount</p>

@@ -56,8 +56,6 @@ namespace CocktionMVC.Models.DAL
         public int? Rating { get; set; }
         public string StudyAdress { get; set; }
 
-        public string ConfirmationToken { get; set; }
-
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
 
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }

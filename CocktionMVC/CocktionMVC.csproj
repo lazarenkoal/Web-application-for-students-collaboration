@@ -201,16 +201,13 @@
     <Compile Include="Controllers\StandartControllers\HomeController.cs" />
     <Compile Include="Controllers\StandartControllers\ManageController.cs" />
     <Compile Include="Controllers\FunctionalControllers\TestController.cs" />
+    <Compile Include="Controllers\StandartControllers\ProfileController.cs" />
     <Compile Include="Functions\DataFormatter.cs" />
     <Compile Include="Functions\ThumbnailGenerator.cs" />
     <Compile Include="Functions\DbItemsAdder.cs" />
     <Compile Include="Functions\WinnerGenerator.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="AzureMigrations\201503010917313_AzureDepl.cs" />
-    <Compile Include="AzureMigrations\201503010917313_AzureDepl.Designer.cs">
-      <DependentUpon>201503010917313_AzureDepl.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\JsonModels\AuctionInfo.cs" />
@@ -241,6 +238,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\ViewModels\ProductShortViewModel.cs" />
+    <Compile Include="Models\ViewModels\ProfileViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -275,7 +273,9 @@
     <None Include="Properties\PublishProfiles\cocktion - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\cocktion - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\cocktion.pubxml" />
+    <None Include="Properties\PublishProfiles\cocktion1 - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\cocktion1 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\cocktion1 - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\cocktion1 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Cocktion_2_FTP.pubxml" />
     <None Include="Scripts\Jquery\jquery-2.1.3.intellisense.js" />
@@ -357,6 +357,8 @@
     <Content Include="Views\Mobile\Test.cshtml" />
     <Content Include="Views\Test\Index.cshtml" />
     <Content Include="Views\BidAuctionCreator\UploadPhotoFromMobile.cshtml" />
+    <Content Include="Views\Profile\HowItCouldBe.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -371,11 +373,6 @@
     <Folder Include="Views\AuctionRealTime\" />
     <Folder Include="Views\FileSaver\" />
     <Folder Include="Views\Placemark\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="AzureMigrations\201503010917313_AzureDepl.resx">
-      <DependentUpon>201503010917313_AzureDepl.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

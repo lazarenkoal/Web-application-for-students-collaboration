@@ -85,15 +85,20 @@ http://cocktion.azurewebsites.net/api/Auction/GetAuctionBids/{id}
 [{"ProductName":"400","ProductDescription":"gsd","ProductFileName":"http://cocktion.azurewebsites.net/Images/Thumbnails/-KFBHaWyEYU.jpg","ProductId":22,"ProductCategory":"деньги"},{"ProductName":"вв","ProductDescription":"ввв","ProductFileName":"http://cocktion.azurewebsites.net/Images/Thumbnails/Снимок экрана 2015-02-12 в 19.37.56.png","ProductId":26,"ProductCategory":"ввв"}]
 
 -----------------------------------
-Авторизация
+Авторизация (ТОКЕЕЕЕЕЕЕН)
 ------------------------------------
-1) LogIn (не менял с тех пор, как соединили с тобой)
-Отправляешь запрос типа 'POST' по адресу
-http://cocktion.azurewebsites.net/api/api/Account
-Надо туда отправить Джейсончик с параметрами
-{ "Email": "emailValue", "Password": "passwordValue" }
-Короч, все как у тебя сделано
+1)http://cocktion1.azurewebsites.net/api/Account/Authenticate
+Сюды посылаешь POST запрос с таким джейсоном
+{"Email":"a@a.ru", "Password":"london29"}
+Он тебе вернет json
+{"Token":"-p_I2SrWioZ_7aKwpOHbHPgihbJsHLnc46VyZhlxZfqrckrNuPwVaQfYUPCocULss4N3gT12qQkq8XvPccU0bFTReSgB-9Z9jeebP-5KrYsXtd084aj97HgLlgf0lORKBfVgXYriZVDb0SMSUldkubWcoCzwVc_oCr_KQDd-LDAXHkpRumN1g2LpdvhpJ-k_sJMBUENIwXf1-PLSu0QQTBvt6fXa6hbtMhtzzE7w3DmtYf_9M_rbgs750U1aSfNdifx9yYfOrlmpy2lcfyfZRnZlk4y3NPLjN-1DoNm7-9f3QG4IyL2b0Z5FHOymO995Ayk4Er5WaH_zXy9-5SlZug"}
 
-p.s. все что есть, я тестил, все работает. 
+Ты этот токен сохраняешь и 
+Чтобы проверить, что ты можешь авторизовываться, делаешь GET запрос
+на http://cocktion1.azurewebsites.net/api/Account/ValidateToken
+User-Agent: FiddlerContent-Type : application/jsonHost: cocktion1.azurewebsites.netContent-Length: 41Authorization: Bearer wH32VwSegq19UQA-0MMCSvB9_PaFpUyUquathhH-SJ5b5r_-fB6WP1oTlkj_oUezQt-bCrovQ3ARKeUX_DtnDkRw5HdsU2xXks4js4AzPyqcQB45jhR6ggAmBLqIN0RbaxPF4IvYxN_mBQ5OCinK7T7krZ7kIAjdbpKGoz2j_NZHqLLUgxigDMCKxN8TiwedS_rfG1ZQnVzXOrhgCqk3eOeErV6uHGVp-TWcK8sDUHVJ8BwFSmFixtI81rjvCQoBjyMrCCtI40Aheivt2oBw3_DK1qZPt_hX9OCBy4bcFyHIdSnYjjHy2Lbq5Eb1m_p4wMjOgY835uD8XOkamHl52QВот в это место, где у тебя формирует HTTP запрос тебе надо вставить свойство 
+с авторизацией и этим токеном
 
-
+Он тебе вернет вот что-то такое, если ты все правильно сделал
+Будет возвращать вот такое:
+{"Status":"89d8bb23-2b0f-4459-ab10-e91321e74e6b - a@a.ru"}

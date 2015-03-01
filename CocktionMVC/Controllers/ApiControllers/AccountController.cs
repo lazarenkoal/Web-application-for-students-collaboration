@@ -33,11 +33,11 @@ namespace CocktionMVC.Controllers.ApiControllers
 
 
         [HttpPost]
-        public string Authenticate(UserToLogin model)
+        public Response Authenticate(UserToLogin model)
         {
             string user = model.Email, password = model.Password;
             if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
-                return "failed";
+                return new Response { Token = "failed" };
             
             var userIdentity = UserManager.FindAsync(user, password).Result;
 
@@ -51,21 +51,21 @@ namespace CocktionMVC.Controllers.ApiControllers
                 ticket.Properties.IssuedUtc = currentUtc;
                 ticket.Properties.ExpiresUtc = currentUtc.Add(TimeSpan.FromMinutes(30));
                 string AccessToken = Startup.OAuthBearerOptions.AccessTokenFormat.Protect(ticket);
-                return AccessToken;
+                return new Response { Token = AccessToken };
             }
-            return "failed";
+            return new Response { Token = "failed" };
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpGet]
         [ActionName("ValidateToken")]
-        public String ValidateToken()
+        public Respond ValidateToken()
         {
             var user = this.User.Identity;
             if (user != null)
-                return string.Format("{0} - {1}", user.GetUserId(), user.GetUserName());
+                return new Respond { Status = string.Format("{0} - {1}", user.GetUserId(), user.GetUserName()) };
             else
-                return "Unable to resolve user id";
+                return new Respond { Status = "Unable to resolve user id" };
 
         }
 
@@ -103,6 +103,11 @@ namespace CocktionMVC.Controllers.ApiControllers
          */ 
     }
     
+
+  public class Response
+  {
+      public string Token { get; set; }
+  }
 
   public class Respond
   {
