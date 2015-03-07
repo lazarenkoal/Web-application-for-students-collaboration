@@ -8,7 +8,6 @@
 <head>
     <title></title>
     <script src="~/Scripts/Jquery/jquery-2.1.3.js"></script>
-    <script src="http://api-maps.yandex.ru/2.0/?load=package.full&lang=ru-RU" type="text/javascript"></script>
 </head>
 <div class="row">
     <div class="col-lg-6">
@@ -23,7 +22,7 @@
                         <p>@i.SellProduct.Description</p>
                         <p>@i.EndTime</p>
                         <p>@Html.ActionLink("Хочу купить!", "CurrentAuction", "Auction", new { id = i.Id }, null)</p>
-                        <img src="http://cocktion1.azurewebsites.net/Images/Photos/@i.SellProduct.Photos.First().FileName" height="150" width="150" />
+    <img src="http://cocktion.com/Images/Photos/@i.SellProduct.Photos.First().FileName" height="150" width="150" />
                     }
                 }
             }
@@ -34,39 +33,9 @@
             }
         }
     </div>
-    <div class="col-lg-6">
-        <div id="map" style="width: 600px; height:400px"></div>
-
-    </div>
+   
 </div>
-<script>
-    
-    var myMap;
-    var myPlacemark;
-    var obj
-    {
-        [55.76132639, 37.63286275], {
-            // Свойства
-            iconContent: 'Вышка',
-            balloonContent: 'Мясо 20'
-        }, {
-            // Опции
-            preset: 'twirl#blackStretchyIcon' // иконка растягивается под контент
-        }
-    };
-    function init() {
-        myMap = new ymaps.Map("map", {
-            center: [55.76, 37.64],
-            zoom: 12
-        });
 
-        myPlacemark = new ymaps.Placemark(obj);
-
-        myMap.controls.add('zoomControl', { right: '10px', top: '5px' });
-        myMap.geoObjects.add(myPlacemark);
-    }
-    ymaps.ready(init);
-</script>
 
 @section scripts{
     <script src="~/Scripts/Jquery/jquery.signalR-2.2.0.min.js"></script>
@@ -78,7 +47,7 @@
             adder.client.addAuctionToTheList = function (name, description, category, photoPath)
             {
                 $('.AuctionContainer').prepend('<div>' + '<p>' + name + '</p>' + '<p>' + description + '</p>' + '<p>' + category + '</p>' +
-                    '<img src="' + 'http://cocktion1.azurewebsites.net/Images/Photos/' + photoPath + '" width="150" height="150" />' + '</div>');
+                    '<img src="' + 'http://cocktion.com/Images/Photos/' + photoPath + '" width="150" height="150" />' + '</div>');
             }
             $.connection.hub.start().done(function () {
             });

@@ -34,13 +34,13 @@
             };
             
             chat.client.addExtraNodesToPages = function (fileName, name, parentProductId, childProductId) {
-                nodes.add([{ id: childProductId, label: name, shape: 'circularImage', image: 'http://cocktion1.azurewebsites.net/Images/Thumbnails/' + fileName }]);
+                nodes.add([{ id: childProductId, label: name, shape: 'circularImage', image: 'http://cocktion.com/Images/Thumbnails/' + fileName }]);
                 edges.add([{ from: parentProductId, to: childProductId }]);
             }
 
             //Функция для добавления товара на все страницы аукциона
             chat.client.addNodesToPages = function (fileName, name, productId){
-                nodes.add([{ id: productId, label: name, shape: 'circularImage', image: 'http://cocktion1.azurewebsites.net/Images/Thumbnails/' + fileName }]);
+                nodes.add([{ id: productId, label: name, shape: 'circularImage', image: 'http://cocktion.com/Images/Thumbnails/' + fileName }]);
                 edges.add([{ from: i, to: productId }]);
 
             };
@@ -172,6 +172,7 @@
     {
         getAuctionResults();
     }
+    
 
         //если выбран победитель аукциона
     var nodeId;
@@ -183,7 +184,7 @@
         var nodes = new vis.DataSet();
         var i = @Model.SellProduct.Id;
         nodes.add([
-          { id: i, label: '@Model.SellProduct.Name', shape: 'circularImage', image:'http://cocktion1.azurewebsites.net/Images/Thumbnails/'+'@Model.SellProduct.Photos.First().FileName' }
+          { id: i, label: '@Model.SellProduct.Name', shape: 'circularImage', image:'http://cocktion.com/Images/Thumbnails/'+'@Model.SellProduct.Photos.First().FileName' }
         ]);
         // create an array with edges
         var edges = new vis.DataSet();
@@ -198,7 +199,7 @@
         var network = new vis.Network(container, data, options);
         network.on('select',nodeSelected);
         function addNode(fileName, name, productId) {
-            nodes.add([{ id: productId, label: name, shape: 'circularImage', image: 'http://cocktion1.azurewebsites.net/Images/Thumbnails/'+ fileName }]);
+            nodes.add([{ id: productId, label: name, shape: 'circularImage', image: 'http://cocktion.com/Images/Thumbnails/'+ fileName }]);
             edges.add([{ from: i, to: productId }]);
         };
 

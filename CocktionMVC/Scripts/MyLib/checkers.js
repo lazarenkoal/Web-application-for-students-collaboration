@@ -11,7 +11,7 @@ function getNodeInfo(nodeId) {
             $('#nodeInfo').empty();
             $('#nodeInfo').append('<p>' + info.Name + '</p>');
             $('#nodeInfo').append('<p>' + info.Description + '</p>');
-            $('#nodeInfo').append('<img src = " ' + 'http://cocktion1.azurewebsites.net/Images/Thumbnails/' + info.FileName + ' "/>');
+            $('#nodeInfo').append('<img src = " ' + 'http://cocktion.com/Images/Thumbnails/' + info.FileName + '"/>');
         };
     }
     req.onprogress = function () {

@@ -272,14 +272,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
-    <None Include="Properties\PublishProfiles\cocktion - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\cocktion - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\cocktion.pubxml" />
-    <None Include="Properties\PublishProfiles\cocktion1 - FTP %282%29.pubxml" />
-    <None Include="Properties\PublishProfiles\cocktion1 - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\cocktion1 - Web Deploy %282%29.pubxml" />
-    <None Include="Properties\PublishProfiles\cocktion1 - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\Cocktion_2_FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\Cocktion_AWS2.pubxml" />
     <None Include="Scripts\Jquery\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\Jquery\jquery-2.1.3.js" />
     <Content Include="Scripts\Jquery\jquery-2.1.3.min.js" />
@@ -353,7 +346,7 @@
     <Content Include="Views\Auction\CurrentAuction.cshtml" />
     <Content Include="Views\Auction\_AddBid.cshtml" />
     <Content Include="Views\Auction\_OkAdd.cshtml" />
-    <Content Include="Views\Auction\ShowProducts.cshtml" />
+    <Content Include="Views\BidAuctionCreator\ShowProducts.cshtml" />
     <Content Include="Views\Help\Index.cshtml" />
     <Content Include="Views\Shared\PageNotFound.cshtml" />
     <Content Include="Views\Mobile\Test.cshtml" />

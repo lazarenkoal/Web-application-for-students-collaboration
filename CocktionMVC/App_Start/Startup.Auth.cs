@@ -72,8 +72,8 @@ namespace CocktionMVC
            
             app.UseVkontakteAuthentication(
             //"{AppId}", "{AppSecret}", "{Permissions}"
-            "4719561",
-            "zQCmxCnRbpZTa6iQOvOb",
+            "4815489",
+            "M4KiGS3Lt3OQ2fRWbnHR",
             "email"
                 );
              

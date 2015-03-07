@@ -92,10 +92,10 @@ function showExtraBidAdder() {
 }
 
 //Функция проверяет на то, что чувак сделал ставочку
-function check() {
+function check(modelId) {
     var xhr = new XMLHttpRequest();
     var data = new FormData();
-    data.append("auctionId", @Model.Id);
+    data.append("auctionId", modelId);
     xhr.open("POST", "/AuctionRealTime/CheckIfUserBidded");
     xhr.send(data);
     xhr.onreadystatechange = function () {

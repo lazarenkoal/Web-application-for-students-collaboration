@@ -44,7 +44,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                            AuctionCategory = auction.SellProduct.Category.Trim(),
                            AuctionDescription = auction.SellProduct.Description.Trim(),
                            AuctionEndTime = minutes,
-                           AuctionImage = @"http://cocktion1.azurewebsites.net/Images/Thumbnails/" + auction.SellProduct.Photos.First().FileName,
+                           AuctionImage = @"http://cocktion.com/Images/Thumbnails/" + auction.SellProduct.Photos.First().FileName,
                            AuctionTitle = auction.SellProduct.Name.Trim(),
                            AuctionId = auction.Id
                        }
@@ -81,7 +81,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                            AuctionCategory = auction.SellProduct.Category.Trim(),
                            AuctionDescription = auction.SellProduct.Description.Trim(),
                            AuctionEndTime = minutes,
-                           AuctionImage = @"http://cocktion1.azurewebsites.net/Images/Thumbnails/" + auction.SellProduct.Photos.First().FileName,
+                           AuctionImage = @"http://cocktion.com/Images/Thumbnails/" + auction.SellProduct.Photos.First().FileName,
                            AuctionTitle = auction.SellProduct.Name.Trim(),
                            AuctionId = auction.Id
                        }
@@ -112,7 +112,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                 bidProducts.Add(new ProductInfoMobile
                     {
                         ProductDescription = bid.Description.Trim(),
-                        ProductFileName =  @"http://cocktion1.azurewebsites.net/Images/Thumbnails/" + bid.Photos.First().FileName,
+                        ProductFileName = @"http://cocktion.com/Images/Thumbnails/" + bid.Photos.First().FileName,
                         ProductName = bid.Name.Trim(),
                         ProductCategory = bid.Category.Trim(),
                         ProductId = bid.Id

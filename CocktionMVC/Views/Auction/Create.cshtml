@@ -6,7 +6,6 @@
 }
 <head>
     <script src="~/Scripts/Jquery/jquery-2.1.3.js"></script>
-    <script src="http://api-maps.yandex.ru/2.0/?load=package.full&lang=ru-RU" type="text/javascript"></script>
     
 </head>>
 
@@ -94,75 +93,8 @@
         <input type="button" id="createAndUploadPhotoFromMobile" class="btn btn-success" value="Загрузить фотку с телефона" />
         <div id="checkboxInfo"></div>
     </div>
-    <div class="col-lg-3">
-        <div id="locationForm">
-            <ul>
-                @foreach (var location in Model)
-                {
-                    <li role="presentation"><input type="checkbox" onclick="getLocationId(event)" id="@location.Id" name="locationCheckbox">@location.BaloonContent</li>
-                }
-            </ul>
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div id="map" style="width: 600px; height:400px"></div>
-        <div id="mapInfo"></div>
-    </div>
 </div>
 
-<script>
-    var locationsId = new Set();
-    var locCollection = new Map();
-    function getLocationId(event) {
-        if (event.target.checked) {
-            //Если чувак поставил отметку
-            var xhr = new XMLHttpRequest();
-            locationData = new FormData();
-            locationsId.add(event.target.id);
-            locationData.append("locationId", event.target.id);
-            xhr.open('POST', '/Placemark/GetCurrentPlacemark');
-            xhr.send(locationData);
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    var location = JSON.parse(xhr.responseText);
-                    myPlacemark = new ymaps.Placemark(
-                    location.Coordinates,
-                    {
-                        iconContent: location.Baloon.IconContent,
-                        balloonContent: location.Baloon.BaloonContent
-                    },
-                    {
-                        preset: location.Options.Preset
-                    }
-                    );
-                    myPlacemarkCollection.add(myPlacemark);
-                    locCollection.set(event.target.id, myPlacemark);
-                }
-            };
-            myMap.geoObjects.add(myPlacemarkCollection);
-        }
-        else {//если чувак снял отметку
-            //реализовать удаление с карты 
-            //locationsId.delete(event.target.id);
-            //myMap.geoObjects.remove(locCollection(event.target.id));
-            locCollection.delete(event.target.id);
-        }
-    };
-</script>
-<script>
-    //Сделать метод, который будет собирать все чекнутые чекбоксы и отправлять их на серваке
-    var myMap;
-    function init() {
-        myMap = new ymaps.Map("map", {
-            center: [55.76, 37.64],
-            zoom: 12
-        });
-        myMap.controls.add('zoomControl', { right: '10px', top: '5px' });
-        myPlacemarkCollection = new ymaps.GeoObjectCollection();
-    };
-    ymaps.ready(init);
-    var myPlacemarkCollection;
-</script>
 <script>
     //достает то, на что пользователь кликнул при выборе категорий
     $(document).on('click', '.dropdown-menu li a', function () {
