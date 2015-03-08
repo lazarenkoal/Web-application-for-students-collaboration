@@ -36,7 +36,7 @@ function addBid(auctionId) {
                 document.getElementById('updater').outerText = 'успешно добавлено';
                 $("#addExtraBid").show();
                 //добавление нодика ко всем остальным клиентам
-                chat.server.addNodesToClients(name1, filename1, auctionId, xhr.responseText);
+               // chat.server.addNodesToClients(name1, filename1, auctionId, xhr.responseText);
             };
 
         }
@@ -78,11 +78,11 @@ function addExtraBid(auctionId) {
                 //получение статуса с сервера при отправке
                 document.getElementById('extraBidContainer').outerText = 'успешно добавлен довесок';
                 //добавление нодика ко всем остальным клиентам
-                var response = JSON.parse(xhr.responseText);
-                var parentId = response.FirstBidId;
-                var childId = response.ThisBidId;
-                chat.server.addNodesToClients(name1, filename1, auctionId, xhr.responseText);
-                chat.server.addExtraNodeToClients(name1, filename1, auctionId, parentId, childId);
+                //var response = JSON.parse(xhr.responseText);
+                //var parentId = response.FirstBidId;
+                //var childId = response.ThisBidId;
+                //chat.server.addNodesToClients(name1, filename1, auctionId, xhr.responseText);
+                //chat.server.addExtraNodeToClients(name1, filename1, auctionId, parentId, childId);
             };
 
         }

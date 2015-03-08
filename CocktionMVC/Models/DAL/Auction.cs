@@ -13,6 +13,7 @@ namespace CocktionMVC.Models.DAL
             LidProducts = new HashSet<Product>();
             BidProducts = new HashSet<Product>();
             GeoLocations = new HashSet<Location>();
+            UsersBids = new HashSet<BidCluster>();
         }
 
         public int Id { get; set; }
@@ -38,7 +39,7 @@ namespace CocktionMVC.Models.DAL
         public virtual ToteBoard AuctionToteBoard { get; set; }
 
         public virtual Product SellProduct { get; set; }
-
+        public virtual ICollection<BidCluster> UsersBids { get; set; }
         public virtual ICollection<Location> GeoLocations { get; set; }
 
         public virtual ICollection<Product> LidProducts { get; set; }

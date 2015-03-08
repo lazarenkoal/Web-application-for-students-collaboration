@@ -121,7 +121,7 @@ namespace CocktionMVC.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> AddExtraBid()
+        public async Task AddExtraBid()
         {
             //получение информации с формы
             //обработка файла
@@ -168,14 +168,30 @@ namespace CocktionMVC.Controllers
             var auction = db.Auctions.Find(id);
             auction.BidProducts.Add(product);
 
-            await DbItemsAdder.AddProduct(db, product, photo);
+            BidCluster cluster = (from x in auction.UsersBids
+                                  where x.UserId == User.Identity.GetUserId()
+                                  select x).First();
+            cluster.Products.Add(product);
+
+
+            await DbItemsAdder.AddProduct(db, product, photo, cluster);
             int result = product.Id;
 
             //Добавление информации о ставках (необходимо для связи)
-            ExtraBidInfo info = new ExtraBidInfo();
-            info.FirstBidId = auction.BidProducts.First(x => x.OwnerId == User.Identity.GetUserId()).Id;
-            info.ThisBidId = result;
-            return Json(info);
+            
+            //если несколько йопта
+                int firstProductId = cluster.Products.First().Id;
+
+                foreach (var bidProduct in cluster.Products)
+                {
+                    int bidProductId = bidProduct.Id;
+                    if (bidProductId != firstProductId)
+                    {
+                        AuctionHub.AddExtraNodeToClients(bidProduct.Name, bidProduct.Photos.First().FileName,
+                                                   id, firstProductId, bidProductId);
+                    }
+                }
+                //AuctionHub.AddNodesToClients
         }
 
         /// <summary>
@@ -183,7 +199,7 @@ namespace CocktionMVC.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public async Task<JsonResult> UploadFile()
+        public async Task UploadFile()
         {
             //получение информации с формы
             //обработка файла
@@ -210,6 +226,9 @@ namespace CocktionMVC.Controllers
             //Adding new product to the DB
             CocktionContext db = new CocktionContext();
 
+            BidCluster bidCluster = new BidCluster();
+            bidCluster.UserId = User.Identity.GetUserId();
+
             //Creating Photo for product and adding to the DB
             Photo photo = new Photo();
             photo.FileName = fileName;
@@ -227,9 +246,13 @@ namespace CocktionMVC.Controllers
             product.OwnerName = User.Identity.Name;
             photo.Product = product;
             db.Auctions.Find(id).BidProducts.Add(product);
-            await DbItemsAdder.AddProduct(db, product, photo);
-            int result = product.Id;
-            return Json(result);
+
+            bidCluster.HostAuction = db.Auctions.Find(id);
+            bidCluster.Products.Add(product);
+
+            await DbItemsAdder.AddProduct(db, product, photo, bidCluster);
+
+            AuctionHub.AddNodesToClients(bidName, fileName, id, product.Id);
         }
 
         /// <summary>

@@ -15,6 +15,7 @@ namespace CocktionMVC.Models.DAL
             LidAuctions = new HashSet<Auction>();
             BidAuctions = new HashSet<Auction>();
             GeoLocations = new HashSet<Location>();
+            BidClusters = new HashSet<BidCluster>();
         }
 
         public int Id { get; set; }
@@ -51,5 +52,7 @@ namespace CocktionMVC.Models.DAL
         public virtual ICollection<Auction> LidAuctions { get; set; }
 
         public virtual ICollection<Auction> BidAuctions { get; set; }
+
+        public virtual ICollection<BidCluster> BidClusters { get; set; }
     }
 }

@@ -45,10 +45,12 @@ namespace CocktionMVC
         /// <param name="name">Название товара</param>
         /// <param name="fileName">Название файла с фотографией</param>
         /// <param name="auctionId">Айди аукциона</param>
-        public void AddNodesToClients(string name, string fileName, int auctionId, int productId)
+        public static void AddNodesToClients(string name, string fileName, int auctionId, int productId)
         {
             //Добавляем клиентам всей группы Нодики
-            Clients.Group(auctionId.ToString()).addNodesToPages(fileName, name, productId);
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<AuctionHub>();
+
+            context.Clients.Group(auctionId.ToString()).addNodesToPages(fileName, name, productId);
         }
 
         /// <summary>
@@ -60,10 +62,12 @@ namespace CocktionMVC
         /// <param name="auctionId">Айдишник аукциона</param>
         /// <param name="parentProductId">айдишник товара, к которому добавлен довесок</param>
         /// <param name="childProductId">Айдишник товара, который добавляется в кач-ве довеска</param>
-        public void AddExtraNodeToClients(string name, string fileName, int auctionId, int parentProductId,
+        public static void AddExtraNodeToClients(string name, string fileName, int auctionId, int parentProductId,
                                             int childProductId)
         {
-            Clients.Group(auctionId.ToString()).addExtraNodesToPages(fileName, name, parentProductId, childProductId);
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<AuctionHub>();
+
+            context.Clients.Group(auctionId.ToString()).addExtraNodesToPages(fileName, name, parentProductId, childProductId);
         }
 
         /// <summary>

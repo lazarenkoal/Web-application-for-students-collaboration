@@ -45,7 +45,6 @@
 
             };
 
-
             //функция для объявления лидера на всех страничках
             //ВО ВРЕМЯ АУКЦИОНА!!!!!!!
             chat.client.showLeaderOnPage = function (leaderId){
@@ -198,10 +197,24 @@
         };
         var network = new vis.Network(container, data, options);
         network.on('select',nodeSelected);
+
+        //Функция добавляет кружочек на "карту" аукциона.
         function addNode(fileName, name, productId) {
             nodes.add([{ id: productId, label: name.trim(), shape: 'circularImage', image: 'http://cocktion.com/Images/Thumbnails/'+ fileName }]);
             edges.add([{ from: i, to: productId }]);
         };
+        /*Функция добавляет дополнительную связь между довеском
+        и тем товаром, к которому он приклеен
+        fileName - название файла на сервер
+        name - имя товара, которое надо отобразить
+        parentId - айдишник товара, к которому надо приклеить
+        childId - айдишник товара, который надо приклеить к 
+        parent'у
+        */
+        function addExtraNode(fileName, name, parentId, childId){
+            nodes.add([{ id: childId, label: name.trim(), shape: 'circularImage', image: 'http://cocktion.com/Images/Thumbnails/'+ fileName }]);
+            edges.add([{ from: parentId, to: childId }]);
+        }
 
     </script>
     <script type="text/javascript" src="~/Scripts/MyLib/scroller.js"></script>
@@ -218,11 +231,29 @@
 
         if (Model.BidProducts != null)
         {
-            foreach (var i in Model.BidProducts)
+           
+            
+            foreach (var i in Model.UsersBids)
             {
-                <script>
-                    addNode('@i.Photos.First().FileName', '@i.Name'.trim(), @i.Id);
-                </script>
+                if (i.Products.Count == 1)
+                {
+                    <script>
+                        addNode('@i.Products.First().Photos.First().FileName', '@i.Products.First().Name', @i.Products.First().Id);
+                    </script>
+                }
+                else
+                {
+                    var parentId = i.Products.First().Id;
+                    foreach (var product in i.Products)
+                    {
+                        if (product.Id != parentId)
+                        {
+                            <script>
+                                addExtraNode('@product.Photos.First().FileName','@product.Name', @parentId, @product.Id );
+                            </script>
+                        }
+                    }
+                }
             }
         }
     }

@@ -23,6 +23,7 @@ namespace CocktionMVC.Models.DAL
         public virtual DbSet<Photo> Photos { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ThumbnailSet> ThumbnailSets { get; set; }
+        public virtual DbSet<BidCluster> AuctionBids { get; set; }
         public virtual DbSet<ToteEntity> ToteEntities { get; set; }
         public virtual DbSet<ToteResult> ToteResults { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
@@ -52,6 +53,19 @@ namespace CocktionMVC.Models.DAL
                 .HasMany(e => e.BidProducts)  //Products1 ---> BidProducts 
                 .WithMany(e => e.BidAuctions)   //Auctions2 ---> BidAuctions
                 .Map(m => m.ToTable("ProductAuction1").MapLeftKey("BidAuctions_Id").MapRightKey("BidProducts_Id"));
+
+            modelBuilder.Entity<Auction>()
+                .HasMany(e => e.UsersBids)
+                .WithRequired(e => e.HostAuction);
+
+            modelBuilder.Entity<BidCluster>()
+                .HasRequired(e => e.HostAuction);
+
+            modelBuilder.Entity<BidCluster>()
+                .HasMany(e => e.Products);
+
+            modelBuilder.Entity<Product>()
+                .HasMany(e => e.BidClusters);
 
             modelBuilder.Entity<Auction>()
                 .HasMany(e => e.GeoLocations);

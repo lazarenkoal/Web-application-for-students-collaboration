@@ -213,7 +213,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503081951286_BidClusterAdded.cs" />
+    <Compile Include="Migrations\201503081951286_BidClusterAdded.Designer.cs">
+      <DependentUpon>201503081951286_BidClusterAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\DAL\BidCluster.cs" />
     <Compile Include="Models\JsonModels\AuctionApiRespondModels.cs" />
     <Compile Include="Models\JsonModels\AuctionInfo.cs" />
     <Compile Include="Models\DAL\Location.cs" />
@@ -372,6 +377,11 @@
   <ItemGroup>
     <Folder Include="Images\Photos\" />
     <Folder Include="Images\Thumbnails\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201503081951286_BidClusterAdded.resx">
+      <DependentUpon>201503081951286_BidClusterAdded.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
