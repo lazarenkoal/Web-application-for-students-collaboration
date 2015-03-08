@@ -53,5 +53,43 @@ namespace CocktionMVC.Functions
             stream.Dispose();
 
         }
+
+        public static void ResizeImage(HttpPostedFile file, string serverPath, int width, int height)
+        {
+            string pic = Path.GetFileName(file.FileName);
+            string path = Path.Combine(serverPath, pic);
+
+            //Стрим для сохранения файла после ресайза
+            FileStream stream = new FileStream(path, FileMode.OpenOrCreate);
+
+            //Конвертация файла в картинку
+            Image originalImage = Image.FromStream(file.InputStream);
+
+            //Создание нового битмапа с размером картинки
+            Bitmap bitMapTempImg = new Bitmap(width, height);
+
+            //Создание новой картинки, содержащей настройки качества
+            Graphics newImage = Graphics.FromImage(bitMapTempImg);
+            newImage.CompositingQuality = CompositingQuality.HighQuality;
+            newImage.SmoothingMode = SmoothingMode.HighQuality;
+            newImage.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+            //Cоздаем прямоугольник и рисуем картинку
+            Rectangle imageRectangle = new Rectangle(0, 0, width, height);
+            newImage.DrawImage(originalImage, imageRectangle);
+
+            //Cохраняем получившееся изображение
+            bitMapTempImg.Save(stream, originalImage.RawFormat);
+
+            //Зачистка ресурсов
+            newImage.Dispose();
+            bitMapTempImg.Dispose();
+            originalImage.Dispose();
+            stream.Close();
+            stream.Dispose();
+
+        }
     }
+
+
 }

@@ -8,7 +8,9 @@ using CocktionMVC.Models.DAL;
 using CocktionMVC.Models.JsonModels;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
-
+using System.Web;
+using CocktionMVC.Functions;
+using CocktionMVC.Models.Hubs;
 namespace CocktionMVC.Controllers.ApiControllers
 {
     public class AuctionController : ApiController
@@ -119,5 +121,106 @@ namespace CocktionMVC.Controllers.ApiControllers
                     });
             return bidProducts;
         }
+
+        [Authorize]
+        [HttpPost]
+        public CocktionMVC.Models.JsonModels.AuctionApiRespondModels.AuctionCreateStatus CreateAuction()
+        {
+            //создаем продукт и сохраняем информацию о нем.
+            Product product = new Product();
+            product.Name = HttpContext.Current.Request.Form.GetValues("name")[0].Trim();
+            product.Description = HttpContext.Current.Request.Form.GetValues("description")[0].Trim();
+            product.Category = HttpContext.Current.Request.Form.GetValues("category")[0].Trim();
+
+            //получаем информацию о времени
+            string minutesString = HttpContext.Current.Request.Form.GetValues("minutes")[0].Trim();
+            string hoursString = HttpContext.Current.Request.Form.GetValues("hours")[0].Trim();
+            int minutes = int.Parse(minutesString);
+            int hours = int.Parse(hoursString);
+            
+            //Заводим возвращалку статуса
+            AuctionApiRespondModels.AuctionCreateStatus info =
+                new AuctionApiRespondModels.AuctionCreateStatus();
+
+            //получаем файлик
+            string filePath = "";
+            string fileName = "";
+            HttpPostedFile postedFile = null;
+            var httpRequest = HttpContext.Current.Request;
+            if (httpRequest.Files.Count > 0)
+            {
+                foreach (string file in httpRequest.Files)
+                {
+                    postedFile = httpRequest.Files[file];
+                    filePath = HttpContext.Current.Server.MapPath("~/Images/Photos/" + postedFile.FileName);
+                    fileName = postedFile.FileName;
+                    postedFile.SaveAs(filePath);
+
+                }
+                info.Status = "success";
+            }
+            else
+            {
+                info.Status = "failed";
+            }
+
+            //получаем информацию о пользователе
+            string userId = User.Identity.GetUserId();
+            string userName = User.Identity.Name;
+
+            //подключаемся к базе данных
+            CocktionContext db = new CocktionContext();
+
+            //объявление свойств продукта
+            product.OwnerId = userId;
+            product.IsOnAuctionAsALot = true;
+            product.OwnerName = userName;
+
+            //инициализация аукциона
+            Auction auction = new Auction();
+            auction.IsActive = true;
+            auction.OwnerId = userId;
+            auction.OwnerName = userName;
+            auction.SellProduct = product;
+            auction.WinnerChosen = false;
+            auction.AuctionToteBoard = new ToteBoard();
+            
+            DateTime auctionsEndTime = DateTime.Now;
+            DateTime auctionStartTime;
+            TimeZoneInfo tzi; //указываем временную зону
+            tzi = TimeZoneInfo.FindSystemTimeZoneById("Russian Standard Time");
+            auctionsEndTime = TimeZoneInfo.ConvertTime(auctionsEndTime, tzi);
+            auctionStartTime = auctionsEndTime;
+            auctionsEndTime = auctionsEndTime.AddHours(hours);
+            auctionsEndTime = auctionsEndTime.AddMinutes(minutes);
+            auction.EndTime = auctionsEndTime;
+            auction.StartTime = auctionStartTime;
+
+            //добавляем фоточку и фабмнейл
+            Photo photo = new Photo();
+            string thumbNailPath = HttpContext.Current.Server.MapPath("~/Images/Thumbnails/"); //путь на сервере для сохранения
+            ThumbnailGenerator.ResizeImage(postedFile, thumbNailPath, 90, 90);
+            ThumbnailSet thumbNail = new ThumbnailSet();
+            thumbNail.FileName = fileName;
+            thumbNail.FilePath = thumbNailPath + fileName;
+
+            //забиваем данные о фотке
+            photo.FileName = fileName;
+            photo.FilePath = filePath;
+            photo.Product = product;
+            photo.ThumbnailSets.Add(thumbNail);
+
+            db.Photos.Add(photo);
+            db.Products.Add(product);
+            db.Auctions.Add(auction);
+            db.SaveChanges();
+
+            AuctionListHub.UpdateList(product.Name, product.Description, product.Category, photo.FileName);
+
+            info.PhotoPath = "http://cocktion.com/Images/Thumbnails/" + fileName;
+
+            return info;
+        }
+        
     }
 }

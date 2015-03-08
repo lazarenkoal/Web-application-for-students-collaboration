@@ -68,6 +68,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Recaptcha.Web">
+      <HintPath>..\packages\RecaptchaNet.1.6.0\lib\net45\Recaptcha.Web.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -192,6 +195,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ApiControllers\AccountController.cs" />
     <Compile Include="Controllers\ApiControllers\AuctionController.cs" />
+    <Compile Include="Controllers\ApiControllers\UploadFileController.cs" />
     <Compile Include="Controllers\FunctionalControllers\PlacemarkController.cs" />
     <Compile Include="Controllers\StandartControllers\AccountController.cs" />
     <Compile Include="Controllers\AuctionControllers\AuctionController.cs" />
@@ -210,12 +214,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\JsonModels\AuctionApiRespondModels.cs" />
     <Compile Include="Models\JsonModels\AuctionInfo.cs" />
     <Compile Include="Models\DAL\Location.cs" />
     <Compile Include="Models\JsonModels\BidChecker.cs" />
     <Compile Include="Models\JsonModels\ExtraBidInfo.cs" />
     <Compile Include="Models\JsonModels\LocationInfo.cs" />
     <Compile Include="Models\JsonModels\ProductInfo.cs" />
+    <Compile Include="Models\JsonModels\AddAuctionModel.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\DAL\AspNetRole.cs" />
     <Compile Include="Models\DAL\AspNetUser.cs" />
@@ -264,6 +270,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="RecaptchaNet.ReadMe.txt" />
     <Content Include="Scripts\Bootstrap\bootstrap.js" />
     <Content Include="Scripts\Bootstrap\bootstrap.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
