@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "GetCurrentAuctionHouse";
+}
+@using CocktionMVC.Models.DAL
+@model House
+<h2>GetCurrentAuctionHouse</h2>
+<p>Привет!</p>
+@Model.University
+@Model.Faculty
+@Model.Address
+<script src="~/Scripts/Jquery/jquery-2.1.3.min.js"></script>
+<script src="~/Scripts/MyLib/ForumScripts/addComment.js"></script>
+<div id="forumContainer">
+    <div id="messageEnter">
+        <p>Введите свое сообщение</p>
+        <textarea id="message" cols ="40" rows ="3"></textarea>
+        <button id="addCommentButton" onclick="addComment(@Model.Id)" class="btn btn-info"></button>
+    </div>
+    <div id="messageContainer">
+        @if (Model.Posts.Count > 0)
+        {
+            foreach (var post in Model.Posts)
+            {
+                <br />
+                <p>@post.AuthorName</p>
+                <p>@post.Message</p>
+            }
+        }
+        else
+        {
+            <p>Нет сообщений никаких!</p>
+        }
+    </div>
+
+</div>

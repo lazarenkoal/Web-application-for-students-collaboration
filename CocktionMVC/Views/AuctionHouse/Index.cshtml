@@ -1,0 +1,17 @@
+﻿@using CocktionMVC.Models.DAL;
+@{
+    ViewBag.Title = "Index";
+}
+@model List<House>
+<h2>Index</h2>
+<div class="row">
+    <div class="col-lg-6">
+        @foreach (var house in Model)
+        {
+            <p>@house.University</p>
+            <p>@house.Faculty</p>
+            <p>@house.Address</p>
+            <p>@Html.ActionLink("Хочу посмотреть", "GetCurrentAuctionHouse", "AuctionHouse", new {id = house.Id}, null)</p>
+        }
+    </div>
+</div>

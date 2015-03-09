@@ -5,6 +5,9 @@ namespace CocktionMVC.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
     using CocktionMVC.Models.DAL;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using CocktionMVC.Models;
     internal sealed class Configuration : DbMigrationsConfiguration<CocktionContext>
     {
         public Configuration()
@@ -14,6 +17,7 @@ namespace CocktionMVC.Migrations
             
         }
 
+        
         protected override void Seed(CocktionContext context)
         {
             //  This method will be called after migrating to the latest version.
@@ -28,8 +32,15 @@ namespace CocktionMVC.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-
-            
+            context.Houses.AddOrUpdate(new House
+            {
+                Address = "Кочновский проезд, 3",
+                Faculty = "ФКН",
+                University = "ВШЭ",
+                Likes = 0,
+                Rating = 0
+            });
+            context.SaveChanges();
         }
     }
 }

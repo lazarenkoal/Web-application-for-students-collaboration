@@ -7,13 +7,13 @@ namespace CocktionMVC.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.2-31219")]
-    public sealed partial class BidClusterAdded : IMigrationMetadata
+    public sealed partial class sdfsdf : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(BidClusterAdded));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(sdfsdf));
         
         string IMigrationMetadata.Id
         {
-            get { return "201503081951286_BidClusterAdded"; }
+            get { return "201503092019139_sdfsdf"; }
         }
         
         string IMigrationMetadata.Source

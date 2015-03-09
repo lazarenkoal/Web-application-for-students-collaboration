@@ -14,7 +14,6 @@ namespace CocktionMVC.Models.DAL
             Photos = new HashSet<Photo>();
             LidAuctions = new HashSet<Auction>();
             BidAuctions = new HashSet<Auction>();
-            GeoLocations = new HashSet<Location>();
             BidClusters = new HashSet<BidCluster>();
         }
 
@@ -44,7 +43,6 @@ namespace CocktionMVC.Models.DAL
 
         public string OwnerName { get; set; }
 
-        public virtual ICollection<Location> GeoLocations { get; set; }
         public virtual ICollection<Auction> Auctions { get; set; }
 
         public virtual ICollection<Photo> Photos { get; set; }

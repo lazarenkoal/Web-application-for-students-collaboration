@@ -26,9 +26,21 @@ namespace CocktionMVC.Models.DAL
         public virtual DbSet<BidCluster> AuctionBids { get; set; }
         public virtual DbSet<ToteEntity> ToteEntities { get; set; }
         public virtual DbSet<ToteResult> ToteResults { get; set; }
-        public virtual DbSet<Location> Locations { get; set; }
+        public virtual DbSet<House> Houses { get; set; }
+
+        public virtual DbSet<ForumPost> Posts { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<House>()
+                .HasMany(e => e.Auctions);
+
+            modelBuilder.Entity<Auction>()
+                .HasMany(e => e.Houses);
+
+            modelBuilder.Entity<House>()
+                .HasMany(e => e.Posts);
+           
             modelBuilder.Entity<AspNetRole>()
                 .HasMany(e => e.AspNetUsers)
                 .WithMany(e => e.AspNetRoles)
@@ -67,17 +79,10 @@ namespace CocktionMVC.Models.DAL
             modelBuilder.Entity<Product>()
                 .HasMany(e => e.BidClusters);
 
-            modelBuilder.Entity<Auction>()
-                .HasMany(e => e.GeoLocations);
 
-            modelBuilder.Entity<Product>()
-                .HasMany(e => e.GeoLocations);
 
-            modelBuilder.Entity<Location>()
-                .HasMany(e => e.Auctions);
 
-            modelBuilder.Entity<Location>()
-                .HasMany(e => e.Products);
+
 
             modelBuilder.Entity<Photo>()
                 .HasMany(e => e.ThumbnailSets)
