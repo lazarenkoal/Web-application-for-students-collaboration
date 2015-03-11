@@ -1,0 +1,28 @@
+﻿@using CocktionMVC.Models.DAL;
+@{
+    ViewBag.Title = "Дома, в которых живут самые крутые аукционы!";
+}
+@model List<House>
+<div class="row">
+    <div class="col-lg-4">
+        <h3>Дома, в которых обитают самые крутые аукционы!</h3>
+        @foreach (var house in Model)
+        {
+            <p>@house.University</p>
+            <p>@house.Faculty</p>
+            <p>@house.Address</p>
+            <p>@Html.ActionLink("Хочу посмотреть", "GetCurrentAuctionHouse", "AuctionHouse", new {id = house.Id}, null)</p>
+        }
+    </div>
+    <div class="col-lg-4">
+        <h3>Не нашел нужный? Добавь свой!</h3>
+        <p>На самом деле, здесь пока что нельзя добавлять свои.
+        Я еще не готов к таким буйным развитиям событий! Но, я обещаю,
+        что буду готов скоро... Очень скоро!
+        </p>
+    </div>
+    <div class="col-lg-4">
+        <h3>Спасибо, что зашел! Ты классный!</h3>
+        <img src="~/Content/SiteImages/ThanksCock.jpg" height="100%" width="100%"/>
+    </div>
+</div>
