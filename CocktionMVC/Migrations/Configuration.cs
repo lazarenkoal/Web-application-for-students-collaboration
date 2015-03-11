@@ -32,15 +32,56 @@ namespace CocktionMVC.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-            context.Houses.AddOrUpdate(new House
-            {
-                Address = "Кочновский проезд, 3",
-                Faculty = "ФКН",
-                University = "ВШЭ",
-                Likes = 0,
-                Rating = 0
-            });
-            context.SaveChanges();
+
+            //context.Houses.AddOrUpdate(new House
+            //{
+            //    Address = "Кочновский проезд, 3",
+            //    Faculty = "ФКН",
+            //    University = "НИУ ВШЭ",
+            //    Likes = 0,
+            //    Rating = 0
+            //});
+            //context.SaveChanges();
+
+            //context.Houses.AddOrUpdate(new House
+            //{
+            //    Address = "Мясницкая, 20",
+            //    Faculty = "ГМУ",
+            //    University = "НИУ ВШЭ",
+            //    Likes = 0,
+            //    Rating = 0
+            //});
+            //context.SaveChanges();
+
+            //context.Houses.AddOrUpdate(new House
+            //{
+            //    Address = "Кирпичная, 33",
+            //    Faculty = "ФБМ",
+            //    University = "НИУ ВШЭ",
+            //    Likes = 0,
+            //    Rating = 0
+            //});
+            //context.SaveChanges();
+
+            //context.Houses.AddOrUpdate(new House
+            //{
+            //    Address = "Одинцово, ул.Маковского, 2",
+            //    Faculty = "Общага Трилистник (8-ка)",
+            //    University = "НИУ ВШЭ",
+            //    Likes = 0,
+            //    Rating = 0
+            //});
+            //context.SaveChanges();
+
+            //context.Houses.AddOrUpdate(new House
+            //{
+            //    Address = "ВНИИСОК, Дениса Давыдова",
+            //    Faculty = "Общага Дубки (7 и 9-ка)",
+            //    University = "НИУ ВШЭ",
+            //    Likes = 0,
+            //    Rating = 0
+            //});
+            //context.SaveChanges();
         }
     }
 }

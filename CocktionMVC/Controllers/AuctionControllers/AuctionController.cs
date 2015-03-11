@@ -60,7 +60,8 @@ namespace CocktionMVC.Controllers
         public ActionResult Create() //метод для создания находится в контроллере FileSaver
         {
             CocktionContext context = new CocktionContext();
-            return View();
+            var locations = context.Houses.ToList<House>();
+            return View(locations);
         }//end of create
 
         /// <summary>

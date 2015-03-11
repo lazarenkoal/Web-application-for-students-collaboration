@@ -269,6 +269,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\hiddenButtons.css" />
+    <Content Include="Content\SiteImages\petuh6.jpg" />
+    <Content Include="Content\SiteImages\ThanksCock.jpg" />
     <Content Include="Content\style.css" />
     <Content Include="Content\vis.css" />
     <Content Include="Content\vis.min.css" />
@@ -304,6 +306,7 @@
     <Content Include="Scripts\MyLib\auctionEndLogic.js" />
     <Content Include="Scripts\MyLib\btnsOnClickPrcsg.js" />
     <Content Include="Scripts\MyLib\checkers.js" />
+    <Content Include="Scripts\MyLib\CreateAuctionScripts\HousesSender.js" />
     <Content Include="Scripts\MyLib\ForumScripts\addComment.js" />
     <Content Include="Scripts\MyLib\scroller.js" />
     <Content Include="Scripts\npm.js" />
@@ -381,6 +384,7 @@
   <ItemGroup>
     <Folder Include="Images\Photos\" />
     <Folder Include="Images\Thumbnails\" />
+    <Folder Include="Scripts\MyLib\CurrentAuctionScripts\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201503092019139_sdfsdf.resx">

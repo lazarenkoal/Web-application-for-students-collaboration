@@ -14,7 +14,7 @@
 
 </head>
 <body>
-    <div class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -29,10 +29,9 @@
                     <li>@Html.ActionLink("Главная", "Index", "Home")</li>
                     <li>@Html.ActionLink("Аукционы", "Index", "Auction")</li>
                     <li>@Html.ActionLink("Продать", "Create", "Auction")</li>
-                    <li>@Html.ActionLink("Кто мы", "About", "Home")</li>
-                    <li>@Html.ActionLink("Наши контакты", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Дома", "Index", "AuctionHouse")</li>
                 </ul>
-                <form class="navbar-form navbar-left">
+                <form class="navbar-form navbar-right">
                     <input type="text" class="form-control col-lg-8" placeholder="Поиск">
                 </form>
                 @Html.Partial("_LoginPartial")

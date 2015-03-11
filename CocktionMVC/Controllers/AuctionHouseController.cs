@@ -14,8 +14,7 @@ namespace CocktionMVC.Controllers
         public ActionResult Index()
         {
             CocktionContext db = new CocktionContext();
-            var houses = db.Houses.ToList<House>();
-           
+            var houses = db.Houses.ToList<House>();            
             return View(houses);
         }
 
@@ -26,24 +25,36 @@ namespace CocktionMVC.Controllers
             return View(house);
         }
 
-        public async Task<string> AddComment()
+        public JsonResult AddComment()
         {
-            ForumPost post = new ForumPost();
-            post.Message = Request.Form.GetValues("message")[0].Trim();
-            post.AuthorName = User.Identity.Name;
-            CocktionContext db = new CocktionContext();
-            int houseId = int.Parse(Request.Form.GetValues("houseId")[0].Trim());
-            var house = db.Houses.Find(houseId);
-            post.Likes = 0;
-            post.HostHouse = house;
-            house.Posts.Add(post);
-            db.SaveChanges();
-            return Json("ewr");
+            Respond resp = new Respond();
+            try
+            {
+                ForumPost post = new ForumPost();
+                post.Message = Request.Form.GetValues("message")[0].Trim();
+                post.AuthorName = User.Identity.Name;
+                CocktionContext db = new CocktionContext();
+                int houseId = int.Parse(Request.Form.GetValues("houseId")[0].Trim());
+                var house = db.Houses.Find(houseId);
+                post.Likes = 0;
+                post.HostHouse = house;
+                house.Posts.Add(post);
+                db.SaveChanges();
+                resp.Status = "Success";
+                resp.Author = User.Identity.Name;
+                return Json(resp);
+            }
+            catch
+            {
+                resp.Status = "Failed";
+                return Json(resp);
+            }
         }
 
         public class Respond
         {
             public string Status { get; set; }
+            public string Author { get; set; }
         }
     }
 }

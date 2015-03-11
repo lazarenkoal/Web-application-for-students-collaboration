@@ -10,8 +10,15 @@
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 var respond = JSON.parse(xhr.responseText);
-                $("#messageContainer").append(respond.AuthorName);
-                $("#messageContainer").append(respond.Message);
+                if (respond.Status == "Success") {
+                    $("#messageContainer").prepend("<p>" + $("#message").val() + "</p>");
+                    $("#messageContainer").prepend("<p>" + respond.Author + "</p>");
+                    $("#message").val("");
+                }
+                else
+                {
+                    $("#messageContainer").prepend("<p>" + "Не удалось!" + "</p>");
+                }
             }
         }
     }
