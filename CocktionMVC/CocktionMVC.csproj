@@ -193,6 +193,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AdminControllers\EditHousesController.cs" />
     <Compile Include="Controllers\ApiControllers\AccountController.cs" />
     <Compile Include="Controllers\ApiControllers\AuctionController.cs" />
     <Compile Include="Controllers\ApiControllers\UploadFileController.cs" />
@@ -206,9 +207,13 @@
     <Compile Include="Controllers\StandartControllers\ManageController.cs" />
     <Compile Include="Controllers\FunctionalControllers\TestController.cs" />
     <Compile Include="Controllers\StandartControllers\ProfileController.cs" />
-    <Compile Include="Functions\DataFormatter.cs" />
+    <Compile Include="Functions\DataProcessing\DataFormatter.cs" />
+    <Compile Include="Functions\DataProcessing\DateTimeManager.cs" />
+    <Compile Include="Functions\DataProcessing\PhotoProcessor.cs" />
+    <Compile Include="Functions\DataProcessing\RequestFormReader.cs" />
     <Compile Include="Functions\ThumbnailGenerator.cs" />
     <Compile Include="Functions\DbItemsAdder.cs" />
+    <Compile Include="Functions\ToteResultsManager.cs" />
     <Compile Include="Functions\WinnerGenerator.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -220,14 +225,18 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DAL\Auction\BidCluster.cs" />
     <Compile Include="Models\DAL\AuctionHouse\ForumPost.cs" />
-    <Compile Include="Models\JsonModels\AuctionApiRespondModels.cs" />
-    <Compile Include="Models\JsonModels\AuctionInfo.cs" />
+    <Compile Include="Models\JsonModels\MobileClientModels\AuctionApiRespondModels.cs" />
+    <Compile Include="Models\JsonModels\MobileClientModels\AuctionInfo.cs" />
     <Compile Include="Models\DAL\AuctionHouse\House.cs" />
-    <Compile Include="Models\JsonModels\BidChecker.cs" />
-    <Compile Include="Models\JsonModels\ExtraBidInfo.cs" />
-    <Compile Include="Models\JsonModels\LocationInfo.cs" />
-    <Compile Include="Models\JsonModels\ProductInfo.cs" />
-    <Compile Include="Models\JsonModels\AddAuctionModel.cs" />
+    <Compile Include="Models\JsonModels\BidRelatedModels\BidChecker.cs" />
+    <Compile Include="Models\JsonModels\BidRelatedModels\ExtraBidInfo.cs" />
+    <Compile Include="Models\JsonModels\HouseRelatedModels\ForumRespond.cs" />
+    <Compile Include="Models\JsonModels\HouseRelatedModels\HouseRespond.cs" />
+    <Compile Include="Models\JsonModels\YaMapsModels\LocationInfo.cs" />
+    <Compile Include="Models\JsonModels\MobileClientModels\MobileUserLogin.cs" />
+    <Compile Include="Models\JsonModels\ProductRelatedModels\ProductInfo.cs" />
+    <Compile Include="Models\JsonModels\MobileClientModels\AddAuctionModel.cs" />
+    <Compile Include="Models\JsonModels\MobileClientModels\TokenResponse.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\DAL\AspNet\AspNetRole.cs" />
     <Compile Include="Models\DAL\AspNet\AspNetUser.cs" />
@@ -242,16 +251,15 @@
     <Compile Include="Models\DAL\Tote\ToteBoard.cs" />
     <Compile Include="Models\DAL\Tote\ToteEntity.cs" />
     <Compile Include="Models\DAL\Tote\ToteResult.cs" />
-    <Compile Include="Models\JsonModels\BidSeller.cs" />
-    <Compile Include="Models\JsonModels\ProductInfoMobile.cs" />
-    <Compile Include="Models\JsonModels\ToteEggsInfo.cs" />
+    <Compile Include="Models\JsonModels\BidRelatedModels\BidSeller.cs" />
+    <Compile Include="Models\JsonModels\MobileClientModels\ProductInfoMobile.cs" />
+    <Compile Include="Models\JsonModels\ToteRelatedModels\ToteEggsInfo.cs" />
     <Compile Include="Models\ViewModels\AuctionViewModels.cs" />
     <Compile Include="Models\Hubs\AuctionListHub.cs" />
     <Compile Include="Models\Hubs\AuctionHub.cs" />
     <Compile Include="Models\Hubs\ProductAddHub.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ViewModels\ManageViewModels.cs" />
-    <Compile Include="Models\ViewModels\ProductShortViewModel.cs" />
     <Compile Include="Models\ViewModels\ProfileViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -289,6 +297,11 @@
     <Content Include="Content\bootstrap.css.map" />
     <None Include="Properties\PublishProfiles\Cocktion_AWS2.pubxml" />
     <None Include="Scripts\Jquery\jquery-2.1.3.intellisense.js" />
+    <None Include="Scripts\DefaultScripts\_references.js" />
+    <Content Include="Scripts\DefaultScripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\DefaultScripts\npm.js" />
+    <Content Include="Scripts\DefaultScripts\respond.js" />
+    <Content Include="Scripts\DefaultScripts\respond.min.js" />
     <Content Include="Scripts\Jquery\jquery-2.1.3.js" />
     <Content Include="Scripts\Jquery\jquery-2.1.3.min.js" />
     <Content Include="Scripts\Jquery\jquery-2.1.3.min.map" />
@@ -301,20 +314,22 @@
     <Content Include="Scripts\Jquery\jquery.validate.min.js" />
     <Content Include="Scripts\Jquery\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\Jquery\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\MyLib\auctionActiveLogic.js" />
-    <Content Include="Scripts\MyLib\auctionEndLogic.js" />
-    <Content Include="Scripts\MyLib\btnsOnClickPrcsg.js" />
-    <Content Include="Scripts\MyLib\checkers.js" />
-    <Content Include="Scripts\MyLib\CreateAuctionScripts\HousesSender.js" />
-    <Content Include="Scripts\MyLib\ForumScripts\addComment.js" />
-    <Content Include="Scripts\MyLib\scroller.js" />
-    <Content Include="Scripts\npm.js" />
-    <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\MyLib\vis.js" />
-    <Content Include="Scripts\MyLib\vis.min.js" />
-    <Content Include="Scripts\_references.js" />
+    <Content Include="Scripts\MyLib\AuctionHouse\addComment.js" />
+    <Content Include="Scripts\MyLib\Auction\CurrentAuction\auctionEndLogic.js" />
+    <Content Include="Scripts\MyLib\Auction\Create\categoryOnClick.js" />
+    <Content Include="Scripts\MyLib\Auction\Create\creatorOnClick.js" />
+    <Content Include="Scripts\MyLib\Auction\Create\formValuesVerifier.js" />
+    <Content Include="Scripts\MyLib\Auction\CurrentAuction\bidProcessor.js" />
+    <Content Include="Scripts\MyLib\Auction\CurrentAuction\btnsOnClickPrcsg.js" />
+    <Content Include="Scripts\MyLib\Auction\CurrentAuction\formShower.js" />
+    <Content Include="Scripts\MyLib\Auction\CurrentAuction\liderManager.js" />
+    <Content Include="Scripts\MyLib\Auction\CurrentAuction\nodeProcessor.js" />
+    <Content Include="Scripts\MyLib\Auction\CurrentAuction\scroller.js" />
+    <Content Include="Scripts\MyLib\Auction\Index\hubConnection.js" />
+    <Content Include="Scripts\MyLib\EditHouses\formVerifier.js" />
+    <Content Include="Scripts\MyLib\EditHouses\housesSender.js" />
+    <Content Include="Scripts\MyLib\Vis\vis.js" />
+    <Content Include="Scripts\MyLib\Vis\vis.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -361,18 +376,16 @@
     <Content Include="Views\Auction\AuctionAdded.cshtml" />
     <Content Include="Views\Auction\MyAuctions.cshtml" />
     <Content Include="Views\Auction\CurrentAuction.cshtml" />
-    <Content Include="Views\Auction\_AddBid.cshtml" />
-    <Content Include="Views\Auction\_OkAdd.cshtml" />
     <Content Include="Views\BidAuctionCreator\ShowProducts.cshtml" />
     <Content Include="Views\Help\Index.cshtml" />
     <Content Include="Views\Shared\PageNotFound.cshtml" />
     <Content Include="Views\Mobile\Test.cshtml" />
     <Content Include="Views\Test\Index.cshtml" />
-    <Content Include="Views\BidAuctionCreator\UploadPhotoFromMobile.cshtml" />
     <Content Include="Views\Profile\HowItCouldBe.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\AuctionHouse\Index.cshtml" />
     <Content Include="Views\AuctionHouse\GetCurrentAuctionHouse.cshtml" />
+    <Content Include="Views\EditHouses\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -384,7 +397,6 @@
   <ItemGroup>
     <Folder Include="Images\Photos\" />
     <Folder Include="Images\Thumbnails\" />
-    <Folder Include="Scripts\MyLib\CurrentAuctionScripts\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201503092019139_sdfsdf.resx">

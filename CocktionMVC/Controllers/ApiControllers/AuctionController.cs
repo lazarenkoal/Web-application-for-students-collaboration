@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using CocktionMVC.Models.DAL;
-using CocktionMVC.Models.JsonModels;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
 using System.Web;
+using System.Web.Http;
 using CocktionMVC.Functions;
+using CocktionMVC.Models.DAL;
 using CocktionMVC.Models.Hubs;
+using CocktionMVC.Models.JsonModels;
+using Microsoft.AspNet.Identity;
+
 namespace CocktionMVC.Controllers.ApiControllers
 {
     public class AuctionController : ApiController
@@ -26,19 +24,21 @@ namespace CocktionMVC.Controllers.ApiControllers
         public List<AuctionInfo> GetActiveAuctions()
         {
             CocktionContext db = new CocktionContext();
-            //выбираем все аукционы, которые активны в данный момент
-            DateTime controlTime = DateTime.Now;
-            TimeZoneInfo tst = TimeZoneInfo.FindSystemTimeZoneById("Russian Standard Time");
-            controlTime = TimeZoneInfo.ConvertTime(controlTime, TimeZoneInfo.Local, tst);
+
+            //Конвертация времени из ютс в местное
+            DateTime controlTime = DateTimeManager.GetCurrentTime();
+
+            //Выборка активных в данный момент аукционов
             var auctions = (from x in db.Auctions
-                            where ((x.EndTime > controlTime) && (x.IsActive == true))
+                            where ((x.EndTime > controlTime) && (x.IsActive))
                             select x).ToList<Auction>();
+
             List<AuctionInfo> auctiInfo = new List<AuctionInfo>();
             
             //формируем список в том формате, который нужен для отображения в приложении
             foreach (var auction in auctions)
             {
-
+                //для мобилки нужно количество минут до конца
                 int minutes = (int)auction.EndTime.Subtract(controlTime).TotalMinutes;
                 auctiInfo.Add(
                        new AuctionInfo
@@ -52,47 +52,8 @@ namespace CocktionMVC.Controllers.ApiControllers
                        }
                        );
             }//end of foreach
-
             return auctiInfo;
         }//end of GetActiveAuctions()
-
-        /// <summary>
-        /// Метод позволяет достать все аукционы, где хозяин - владелец
-        /// </summary>
-        /// <returns>Лист с информацией об аукионах</returns>
-        [Authorize]
-        [HttpPost]
-        public List<AuctionInfo> GetMyAuctions()
-        {
-            CocktionContext db = new CocktionContext();
-            var userId = User.Identity.GetUserId();
-            var auctions = (from x in db.Auctions
-                            where x.OwnerId == userId
-                            select x).ToList<Auction>();
-            List<AuctionInfo> auctionInfo = new List<AuctionInfo>();
-            DateTime controlTime = DateTime.Now;
-            TimeZoneInfo tst = TimeZoneInfo.FindSystemTimeZoneById("Russian Standard Time");
-            controlTime = TimeZoneInfo.ConvertTime(controlTime, TimeZoneInfo.Local, tst);
-            foreach (var auction in auctions)
-            {
-
-                int minutes = (int)auction.EndTime.Subtract(controlTime).TotalMinutes;
-                auctionInfo.Add(
-                       new AuctionInfo
-                       {
-                           AuctionCategory = auction.SellProduct.Category.Trim(),
-                           AuctionDescription = auction.SellProduct.Description.Trim(),
-                           AuctionEndTime = minutes,
-                           AuctionImage = @"http://cocktion.com/Images/Thumbnails/" + auction.SellProduct.Photos.First().FileName,
-                           AuctionTitle = auction.SellProduct.Name.Trim(),
-                           AuctionId = auction.Id
-                       }
-                       );
-            }//end of foreach
-
-            return auctionInfo;
-        }
-
 
         //В АПИ КОНТРОЛЛЕРАХ РУТИНГ ДРУГОЙ!!!
 
@@ -100,16 +61,19 @@ namespace CocktionMVC.Controllers.ApiControllers
         /// Метод отправляет на мобильный клиент информацию о всех товарах, 
         /// которые поставлены на данном аукционе
         /// </summary>
-        /// <param name="auctionId">Айди аукциона</param>
+        /// <param name="id">Айди аукциона</param>
         /// <returns>Лист с информацией о продуктах</returns>
-
         [Authorize]
         [HttpPost]
         public List<ProductInfoMobile> GetAuctionBids(int id)
         {
             CocktionContext db = new CocktionContext();
+
+            //находим аукцион по айди
             Auction auction = db.Auctions.Find(id);
             List<ProductInfoMobile> bidProducts = new List<ProductInfoMobile>();
+
+            //добавляем все в коллекцию
             foreach (var bid in auction.BidProducts)
                 bidProducts.Add(new ProductInfoMobile
                     {
@@ -122,12 +86,16 @@ namespace CocktionMVC.Controllers.ApiControllers
             return bidProducts;
         }
 
+        /// <summary>
+        /// Создание аукциона с мобильного клиента
+        /// </summary>
         [Authorize]
         [HttpPost]
-        public CocktionMVC.Models.JsonModels.AuctionApiRespondModels.AuctionCreateStatus CreateAuction()
+        public AuctionApiRespondModels.AuctionCreateStatus CreateAuction()
         {
             //создаем продукт и сохраняем информацию о нем.
             Product product = new Product();
+
             product.Name = HttpContext.Current.Request.Form.GetValues("name")[0].Trim();
             product.Description = HttpContext.Current.Request.Form.GetValues("description")[0].Trim();
             product.Category = HttpContext.Current.Request.Form.GetValues("category")[0].Trim();
@@ -184,13 +152,10 @@ namespace CocktionMVC.Controllers.ApiControllers
             auction.SellProduct = product;
             auction.WinnerChosen = false;
             auction.AuctionToteBoard = new ToteBoard();
-            
-            DateTime auctionsEndTime = DateTime.Now;
-            DateTime auctionStartTime;
-            TimeZoneInfo tzi; //указываем временную зону
-            tzi = TimeZoneInfo.FindSystemTimeZoneById("Russian Standard Time");
-            auctionsEndTime = TimeZoneInfo.ConvertTime(auctionsEndTime, tzi);
-            auctionStartTime = auctionsEndTime;
+
+            //Совершаем манипуляции со временем
+            DateTime auctionsEndTime = DateTimeManager.GetCurrentTime();
+            DateTime auctionStartTime = auctionsEndTime;
             auctionsEndTime = auctionsEndTime.AddHours(hours);
             auctionsEndTime = auctionsEndTime.AddMinutes(minutes);
             auction.EndTime = auctionsEndTime;

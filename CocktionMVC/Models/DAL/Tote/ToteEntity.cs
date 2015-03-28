@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace CocktionMVC.Models.DAL
+﻿namespace CocktionMVC.Models.DAL
 {
     /// <summary>
     /// Сущность, олицетворяющая ставку яйцами на аукционе.

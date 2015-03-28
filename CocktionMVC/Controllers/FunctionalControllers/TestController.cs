@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using CocktionMVC.Models;
-using System.Net.Mail;
+﻿using System.Web.Mvc;
+
 namespace CocktionMVC.Controllers
 {
     public class TestController : Controller

@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Threading.Tasks;
 using CocktionMVC.Models.DAL;
+
 namespace CocktionMVC.Functions
 {
     /// <summary>

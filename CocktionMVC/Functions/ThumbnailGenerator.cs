@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.IO;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Drawing2D;
-using Microsoft.SqlServer;
+using System.IO;
+using System.Web;
+
 namespace CocktionMVC.Functions
 {
     public class ThumbnailGenerator

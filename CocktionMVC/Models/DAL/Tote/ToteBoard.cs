@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
-using CocktionMVC.Models.Hubs;
+using CocktionMVC.Functions;
+
 namespace CocktionMVC.Models.DAL
 {
     /// <summary>
@@ -160,7 +159,7 @@ namespace CocktionMVC.Models.DAL
                 user.Eggs -= eggsAmount;
                 CountTotalAmountOfEggs();
                 AuctionHub.UpdateToteBoard(auctionId, CountAllCoefficientsForProducts());
-                await Functions.DbItemsAdder.SaveDb(db);
+                await DbItemsAdder.SaveDb(db);
                 return true;
             }
             else
@@ -194,7 +193,7 @@ namespace CocktionMVC.Models.DAL
                 SetResult(winProductId, i, db);
             }
 
-            await Functions.DbItemsAdder.SaveDb(db);
+            await DbItemsAdder.SaveDb(db);
         }
 
         /// <summary>

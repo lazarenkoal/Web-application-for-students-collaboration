@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web.Http;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using Microsoft.Owin;
-using System.Web;
-using Newtonsoft.Json;
 using System.Security.Claims;
+using System.Web;
+using System.Web.Http;
+using CocktionMVC.Models.JsonModels;
+using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Infrastructure;
+using Microsoft.Owin.Security;
+
 namespace CocktionMVC.Controllers.ApiControllers
 {
     public class AccountController : ApiController
@@ -25,68 +19,45 @@ namespace CocktionMVC.Controllers.ApiControllers
             {
                 return _userManager ?? HttpContext.Current.Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
-            private set
-            {
-                _userManager = value;
-            }
         }
 
-
+        /// <summary>
+        /// Производит аутентификацию пользователя через логин пароль
+        /// и возвращает мобильнику его токен
+        /// </summary>
+        /// <param name="model">Модель с логином и паролем</param>
+        /// <returns>Токен для авторизации последующей</returns>
         [HttpPost]
-        public Response Authenticate(UserToLogin model)
+        public TokenResponse Authenticate(MobileUserLogin model)
         {
+            //полчуаем информацию о пользоватлее
             string user = model.Email, password = model.Password;
+
+            //Если чего-то нет (логин или парль) авторизация невозможна
             if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
-                return new Response { Token = "failed" };
+                return new TokenResponse { Token = "failed" };
             
+            //Ищем пользователя с таким паролем и логином
             var userIdentity = UserManager.FindAsync(user, password).Result;
 
             if (userIdentity != null)
-            {
+            { //если пользователь нашелся
+                //проверяем все и возвращаем токен
                 var identity = new ClaimsIdentity(Startup.OAuthBearerOptions.AuthenticationType);
                 identity.AddClaim(new Claim(ClaimTypes.Name, user));
                 identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, userIdentity.Id));
+
                 AuthenticationTicket ticket = new AuthenticationTicket(identity, new AuthenticationProperties());
                 var currentUtc = new SystemClock().UtcNow;
                 ticket.Properties.IssuedUtc = currentUtc;
-                ticket.Properties.ExpiresUtc = currentUtc.Add(TimeSpan.FromMinutes(30));
-                string AccessToken = Startup.OAuthBearerOptions.AccessTokenFormat.Protect(ticket);
-                return new Response { Token = AccessToken };
+                ticket.Properties.ExpiresUtc = currentUtc.Add(TimeSpan.FromDays(100));
+
+                string accessToken = Startup.OAuthBearerOptions.AccessTokenFormat.Protect(ticket);
+                return new TokenResponse { Token = accessToken };
             }
-            return new Response { Token = "failed" };
+
+            //если не нашелся - возвращаем ошибку
+            return new TokenResponse { Token = "failed" };
         }
-
-        [Authorize]
-        [HttpGet]
-        [ActionName("ValidateToken")]
-        public Respond ValidateToken()
-        {
-            var user = this.User.Identity;
-            if (user != null)
-                return new Respond { Status = string.Format("{0} - {1}", user.GetUserId(), user.GetUserName()) };
-            else
-                return new Respond { Status = "Unable to resolve user id" };
-
-        }
-    }
-    
-
-  public class Response
-  {
-      public string Token { get; set; }
-  }
-
-  public class Respond
-  {
-      public string Status { get; set; }
-  }
-
-    public class UserToLogin
-    {
-        
-        public string Email { get; set; }
-
-        public string Password { get; set; }
-
     }
 }

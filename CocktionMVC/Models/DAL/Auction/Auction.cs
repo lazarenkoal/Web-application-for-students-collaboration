@@ -1,11 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
 namespace CocktionMVC.Models.DAL
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
-
     public partial class Auction
     {
         public Auction()
@@ -16,6 +14,21 @@ namespace CocktionMVC.Models.DAL
             UsersBids = new HashSet<BidCluster>();
         }
 
+        public Auction(bool isActive, string ownerId, string ownerName, Product product,
+            bool winnerChosen, ToteBoard tote)
+        {
+            LidProducts = new HashSet<Product>();
+            BidProducts = new HashSet<Product>();
+            Houses = new HashSet<House>();
+            UsersBids = new HashSet<BidCluster>();
+            IsActive = isActive;
+            OwnerId = ownerId;
+            OwnerName = ownerName;
+            SellProduct = product;
+            WinnerChosen = winnerChosen;
+            AuctionToteBoard = tote;
+        }
+        
         public int Id { get; set; }
 
         [Required]

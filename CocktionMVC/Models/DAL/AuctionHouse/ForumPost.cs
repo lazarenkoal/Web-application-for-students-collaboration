@@ -1,15 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace CocktionMVC.Models.DAL
+﻿namespace CocktionMVC.Models.DAL
 {
     /// <summary>
     /// Моделирует пост на форуме
     /// </summary>
     public class ForumPost
     {
+        public ForumPost(string message, string authorName)
+        {
+            Message = message;
+            AuthorName = authorName;
+            Likes = 0;
+        }
+
+        public ForumPost()
+        { }
+
         /// <summary>
         /// Айдишник для базы данных
         /// </summary>

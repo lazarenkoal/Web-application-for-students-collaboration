@@ -1,23 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using CocktionMVC.Models.DAL;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+using CocktionMVC.Models.JsonModels;
+
 namespace CocktionMVC.Controllers
 {
+    /// <summary>
+    /// Отвечает за взаимодействие пользователя с домами
+    /// </summary>
     public class AuctionHouseController : Controller
     {
-        // GET: AuctionHouse
+        /// <summary>
+        /// Выводит пользователя на страницу со списком всех домов
+        /// </summary>
+        /// <returns>страницу со списком</returns>
         public ActionResult Index()
         {
             CocktionContext db = new CocktionContext();
-            var houses = db.Houses.ToList<House>();            
+            var houses = db.Houses.ToList();            
             return View(houses);
         }
 
+        /// <summary>
+        /// Показывает данынй дом
+        /// </summary>
+        /// <param name="id">айдишник дома</param>
+        /// <returns>страницу с домом, соотв. данному айдишнику</returns>
         public ActionResult GetCurrentAuctionHouse(int id)
         {
             CocktionContext db = new CocktionContext();
@@ -25,36 +33,37 @@ namespace CocktionMVC.Controllers
             return View(house);
         }
 
+        /// <summary>
+        /// Добавляет комментарий на форум
+        /// </summary>
+        /// <returns>Джейсончик со статусом и именем автора</returns>
         public JsonResult AddComment()
         {
-            Respond resp = new Respond();
             try
-            {
-                ForumPost post = new ForumPost();
-                post.Message = Request.Form.GetValues("message")[0].Trim();
-                post.AuthorName = User.Identity.Name;
-                CocktionContext db = new CocktionContext();
+            {//пробуем добавить сообщение
+                //Получаем информацию с формы
+                string message = Request.Form.GetValues("message")[0].Trim();
                 int houseId = int.Parse(Request.Form.GetValues("houseId")[0].Trim());
+
+                //Подключаемся к базе данных
+                CocktionContext db = new CocktionContext();
+
+                //находим дом
                 var house = db.Houses.Find(houseId);
-                post.Likes = 0;
+                
+                //Создаем пост и добавляем в дом
+                ForumPost post = new ForumPost(message, User.Identity.Name);
                 post.HostHouse = house;
                 house.Posts.Add(post);
                 db.SaveChanges();
-                resp.Status = "Success";
-                resp.Author = User.Identity.Name;
-                return Json(resp);
+
+                //возвращаем успех
+                return Json(new ForumRespond("Success", User.Identity.Name));
             }
             catch
-            {
-                resp.Status = "Failed";
-                return Json(resp);
+            {//если произошла какая-то ошибка
+                return Json(new ForumRespond("Failed"));
             }
-        }
-
-        public class Respond
-        {
-            public string Status { get; set; }
-            public string Author { get; set; }
         }
     }
 }

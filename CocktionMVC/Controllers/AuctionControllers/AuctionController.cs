@@ -1,21 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Script.Services;
-using System.Web.Services;
 using System.Web.Mvc;
-using CocktionMVC.Models;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using CocktionMVC.Models.Hubs;
-using CocktionMVC.Models.ViewModels;
-using System.IO;
-using System.Threading.Tasks;
 using CocktionMVC.Functions;
-using CocktionMVC.Models.JsonModels;
 using CocktionMVC.Models.DAL;
-using System.Web.Hosting;
+using Microsoft.AspNet.Identity;
+
 namespace CocktionMVC.Controllers
 {
     /// <summary>
@@ -40,15 +30,19 @@ namespace CocktionMVC.Controllers
              * 
              * Подумать насчет фильтров (как их лучше прифигачить)
              */
-            DateTime controlTime = DateTime.Now;
-            TimeZoneInfo tst = TimeZoneInfo.FindSystemTimeZoneById("Russian Standard Time");
-            controlTime = TimeZoneInfo.ConvertTime(controlTime, TimeZoneInfo.Local, tst);
+
+            //Конвертим время
+            var controlTime = DateTimeManager.GetCurrentTime();
+
             CocktionContext db = new CocktionContext();
+
+            //Получаем все активные в данный момент аукционы
             var auctions = (from x in db.Auctions
-                            where ((x.EndTime > controlTime) && (x.IsActive == true))
+                            where ((x.EndTime > controlTime) && (x.IsActive))
                             select x).ToList<Auction>();
+
             return View(auctions);
-        }//end of index
+        }
 
         /// <summary>
         /// Выводит страничку, где нужно создать
@@ -60,7 +54,7 @@ namespace CocktionMVC.Controllers
         public ActionResult Create() //метод для создания находится в контроллере FileSaver
         {
             CocktionContext context = new CocktionContext();
-            var locations = context.Houses.ToList<House>();
+            var locations = context.Houses.ToList();
             return View(locations);
         }//end of create
 
@@ -74,9 +68,12 @@ namespace CocktionMVC.Controllers
         {
             var db = new CocktionContext();
             string userId = User.Identity.GetUserId();
+
+            //Получаем все аукционы, у которых владелец == данный пользватель
             List<Auction> auctions = (from o in db.Auctions
                                       where o.OwnerId == userId
                                       select o).ToList<Auction>();
+
             return View("MyAuctions", auctions);
         }//end of ShowMyAuctions()
 
@@ -85,7 +82,6 @@ namespace CocktionMVC.Controllers
         /// сам торг
         /// </summary>
         /// <param name="id">Айди аукциона, который надо показать</param>
-        /// <returns></returns>
         [HttpGet]
         public ActionResult CurrentAuction(int? id)
         {
@@ -93,6 +89,8 @@ namespace CocktionMVC.Controllers
             {
                 var db = new CocktionContext();
                 Auction auction = db.Auctions.Find(id);
+
+                //Если не удалось найти аукцион - кидаем эксепшн
                 if (auction == null && id == null) throw new Exception();
                 return View(auction);
             }
@@ -101,7 +99,5 @@ namespace CocktionMVC.Controllers
                 return View("PageNotFound");
             }
         }//end of CurrentAuction
-
-
     }//end of AuctionController
 }

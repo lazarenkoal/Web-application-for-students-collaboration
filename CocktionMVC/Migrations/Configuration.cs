@@ -8,6 +8,7 @@ namespace CocktionMVC.Migrations
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using CocktionMVC.Models;
+    using System.Web;
     internal sealed class Configuration : DbMigrationsConfiguration<CocktionContext>
     {
         public Configuration()
@@ -17,7 +18,6 @@ namespace CocktionMVC.Migrations
             
         }
 
-        
         protected override void Seed(CocktionContext context)
         {
             //  This method will be called after migrating to the latest version.

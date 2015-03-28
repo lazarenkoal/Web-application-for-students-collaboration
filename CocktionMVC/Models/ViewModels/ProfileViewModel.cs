@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace CocktionMVC.Models.ViewModels
+﻿namespace CocktionMVC.Models.ViewModels
 {
     /// <summary>
     /// Модель для просмотра статистики о пользователе

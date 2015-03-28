@@ -1,15 +1,13 @@
-﻿using CocktionMVC.Functions;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using System.Web.Mvc;
+using CocktionMVC.Functions;
+using CocktionMVC.Models;
 using CocktionMVC.Models.DAL;
 using CocktionMVC.Models.JsonModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using CocktionMVC.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
+
 namespace CocktionMVC.Controllers
 {
     /// <summary>
@@ -25,41 +23,37 @@ namespace CocktionMVC.Controllers
         [HttpPost]
         public async Task<JsonResult> AddRate()
         {
-            //Получить с сервера информацию об айди
-            //аукциона, айди товара, на который
-            //поставлена ставка, количество яиц
-            int auctionId, productId, eggsAmount;
-            string auctionIdStr, productIdStr, eggsAmountStr;
-            auctionIdStr = Request.Form.GetValues("auctionId")[0];
-            productIdStr = Request.Form.GetValues("productId")[0];
-            eggsAmountStr = Request.Form.GetValues("eggsAmount")[0];
-            auctionId = int.Parse(auctionIdStr);
-            productId = int.Parse(productIdStr);
-            eggsAmount = int.Parse(eggsAmountStr);
+            //Получаем инморфмацию из формы о добавленной ставке
+            int auctionId;
+            int productId;
+            int eggsAmount;
+            RequestFormReader.ReadAddRateForm(Request, out auctionId, out productId, out eggsAmount);
             
-            //получить информацию о том, кто есть
-            //пользователь
+            //Идентифицируем пользователя
             string userId = User.Identity.GetUserId();
 
-            //Подключиться к базе данных
+            //Подключемся к базе данных
             CocktionContext db = new CocktionContext();
 
-            //Найти в базе нужный аукцион
+            //Находим в базе этот аукцион
             Auction auction = db.Auctions.Find(auctionId);
+
+            //Активируем тотализатор
             auction.AuctionToteBoard.IsActive = true;
-            //проверить, достаточно ли яиц на счете
-            //у этого человека
-            //произвести все расчеты, связанные 
-            //тотализатором
-            //добавить все эти данные в словари 
-            //вернуть статус добавления
-            bool x; 
-            //ДОБАВИТЬ ПРОВЕРКУ НА ВЫБОР ПОЛЬЗОВАТЕЛЕМ ТОВАРА-ПРОДАВЦА
-            x = await auction.AuctionToteBoard.SetRateForUser(auctionId, userId, eggsAmount, productId, db);
+
+            //TODO ДОБАВИТЬ ПРОВЕРКУ НА ВЫБОР ПОЛЬЗОВАТЕЛЕМ ТОВАРА-ПРОДАВЦА
+
+            //Добавляем ставку пользователя
+            bool x = await auction.AuctionToteBoard.SetRateForUser(auctionId, userId, eggsAmount, productId, db);
+
+            //Получаем инстанс пользователя
             var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
             var currentUser = manager.FindById(userId);
+
+            //Получаем количество яиц у пользователя
             int amount = currentUser.Eggs;
 
+            //Создаем результат добавления ставки
             ToteEggsInfo info = new ToteEggsInfo
             {
                 Status = x.ToString(),
@@ -73,8 +67,6 @@ namespace CocktionMVC.Controllers
         }
 
 
-
-
         /// <summary>
         /// Записыват лидера в аукцион
         /// Добавляет эти данные в бд.
@@ -84,16 +76,18 @@ namespace CocktionMVC.Controllers
         public async Task<JsonResult> AddLider()
         {
             //TODO: сделать эту хрень асинхронной
-            string Auctionid, ProductId;
-            Auctionid = Request.Form.GetValues("AuctionId")[0];
-            ProductId = Request.Form.GetValues("ProductId")[0];
+            string auctionId;
+            string productId;
+            RequestFormReader.ReadAddLiderForm(Request, out auctionId, out productId);
             try
             {
                 var db = new CocktionContext();
-                Auction auction = db.Auctions.Find(int.Parse(Auctionid));
-                auction.WinProductId = ProductId;
+                Auction auction = db.Auctions.Find(int.Parse(auctionId));
+
+                auction.WinProductId = productId;
                 auction.WinnerChosen = true;
                 await DbItemsAdder.SaveDb(db);
+
                 string answer = "Выбор сделан:)";
                 return Json(answer);
             }
@@ -116,11 +110,11 @@ namespace CocktionMVC.Controllers
             CocktionContext db = new CocktionContext();
             var userId = User.Identity.GetUserId();
             int auctionId = int.Parse(Request.Form.GetValues("auctionId")[0]);
+
             //Ищем товар с владельцем с данным айдишником.
-            checker.HaveBid = db.Auctions.Find(auctionId).BidProducts.First(x => x.OwnerId == userId) == null ? false : true;
+            checker.HaveBid = db.Auctions.Find(auctionId).BidProducts.First(x => x.OwnerId == userId) != null;
             return Json(checker);
         }
-
 
         /// <summary>
         /// Получает с клиента айдишник, по нему находит 
@@ -152,17 +146,20 @@ namespace CocktionMVC.Controllers
         {
             //Получаем информацию с клиента
             int auctionId = int.Parse(Request.Form.GetValues("auctionId")[0]);
+            
+            //ищем аукцион, который завершился в базе
             var db = new CocktionContext();
             Auction auction = db.Auctions.Find(auctionId);
+
+            //раздаем результаты
             if (auction.WinnerChosen == false)
             {//если человек не выбрал победителя
-
-                //рандомно выбираем победителя
+                //TODO рандомно выбираем победителя
                 if (User.Identity.IsAuthenticated)
-                {
+                {//Если пользователь авторизован
                     string userName = User.Identity.Name;
                     if (userName == auction.OwnerName)
-                    {
+                    {//если пользователь является создателем
                         BidSeller owner = new BidSeller();
                         owner.Name = userName;
                         owner.Type = "Owner_undfnd";
@@ -171,7 +168,7 @@ namespace CocktionMVC.Controllers
                         return Json(owner);
                     }
                     else
-                    {
+                    {//если любой другой
                         BidSeller person = new BidSeller();
                         person.Type = "Info";
                         person.Message = "Создатель аукциона совсем не смог выбрать :(";
@@ -180,7 +177,7 @@ namespace CocktionMVC.Controllers
                     }
                 }
                 else
-                {
+                {//если пользователь не авторизован
                     BidSeller person = new BidSeller();
                     person.Type = "Info";
                     person.Message = "Создатель аукциона совсем не смог выбрать :(";
@@ -188,18 +185,22 @@ namespace CocktionMVC.Controllers
                     return Json(person);
                 }
             }
-            else //если победитель выбран
-            {
+            else
+            {//если победитель выбран
+
+                //Ищем продукт - победиель
                 Product winProduct = db.Products.Find(int.Parse(auction.WinProductId));
+                
+                //получаем доступ к пользовательским полям
                 var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                
                 if (User.Identity.IsAuthenticated)
-                {
+                {//если пользователь авторизован
                     string userName = User.Identity.Name;
                     string userId = User.Identity.GetUserId();
                     var currentUser = manager.FindById(userId);
                     if (userName == auction.OwnerName)
-                    {//if user os owner
-                        //send to client info about winner
+                    {//если пользователь - владелец
                         BidSeller winner = new BidSeller();
                         winner.Id = winProduct.OwnerId;
                         winner.Name = winProduct.OwnerName;
@@ -210,54 +211,31 @@ namespace CocktionMVC.Controllers
                         return Json(winner);
                     }
                     else if (userName == winProduct.OwnerName)
-                    {//if user is winner
-                        //send to client info about owner
+                    {//если пользователь - победитель
                         BidSeller owner = new BidSeller();
                         owner.Id = auction.OwnerId;
                         owner.Name = auction.OwnerName;
                         string phone = currentUser.PhoneNumber;
                         owner.Type = "Owner";
-                        var q = (from x in auction.AuctionToteBoard.ToteResultsForUsers
-                                     where (x.UserId == userId)
-                                     select x);
-                        if (q.Count() != 0)
-                        {
-                            owner.ProfitFromTote = q.First().Profit;
-                            owner.Message = "Аукцион закончен, вам необходимо связаться с продавцом! " + phone + "/n" +
-                                String.Format("Вы срубили бабла {0} ", owner.ProfitFromTote) +
-                                String.Format("У вас бабла тепрь {0}", currentUser.Eggs);
-                        }
-                        else
-                        {
-                            owner.Message = "Аукцион закончен, вам необходимо связаться с продавцом! " + phone;
-                        }
+
+                        //Получаем результаты тотализатора
+                        ToteResultsManager.GetToteResults(auction, userId, owner, phone, currentUser);
 
                         return Json(owner);
                     }
                     else
-                    {//if user is authenticated
+                    {//если пользователь - любой другой пользователь
                         BidSeller looser = new BidSeller();
                         looser.Name = userName;
                         looser.Type = "Looser";
-                        var q = (from x in auction.AuctionToteBoard.ToteResultsForUsers
-                                 where (x.UserId == userId)
-                                 select x);
-                        if (q.Count() != 0)
-                        { 
-                            looser.ProfitFromTote = q.First().Profit;
-                            looser.Message = String.Format("Дорогой, аукцион закончен и победил товар {0}", winProduct.Name) +
-                                         String.Format("Вы срубили бабла {0}", looser.ProfitFromTote) +
-                                         String.Format("У вас бабла тепрь {0}", currentUser.Eggs);
-                        }
-                        else
-                        {
-                            looser.Message = String.Format("Дорогой, аукцион закончен и победил товар {0}", winProduct.Name);
-                        }
+
+                        //получаем результаты тотализатора
+                        ToteResultsManager.GetToteResults(auction, userId, looser, currentUser, winProduct.Name);
                         return Json(looser);
                     }
                 }
                 else
-                {//if user is not authenticated
+                {//если пользователь неавторизован
                     BidSeller person = new BidSeller();
                     person.Type = "Info";
                     person.Message = "Аукцион закончился, выйграл товар " + winProduct.Name;

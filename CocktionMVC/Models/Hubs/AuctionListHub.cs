@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Microsoft.AspNet.SignalR;
-using CocktionMVC.Models.DAL;
+﻿using Microsoft.AspNet.SignalR;
+
 namespace CocktionMVC.Models.Hubs
 {
     public class AuctionListHub : Hub
@@ -15,7 +11,7 @@ namespace CocktionMVC.Models.Hubs
         /// <param name="name">Имя товара для аукциона</param>
         /// <param name="description">Описание товара для аукциона</param>
         /// <param name="category">Категория товара для аукциона</param>
-        /// <param name="photoPath">Имя фотки</param>
+        /// <param name="photoName">Имя фотки</param>
         public static void UpdateList(string name, string description, string category, string photoName)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<AuctionListHub>();

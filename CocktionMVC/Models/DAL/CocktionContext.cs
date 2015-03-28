@@ -1,12 +1,7 @@
+using System.Data.Entity;
+
 namespace CocktionMVC.Models.DAL
 {
-    using System;
-    using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
-    using Microsoft.AspNet.Identity;
-    using Microsoft.AspNet.Identity.EntityFramework;
-
     public partial class CocktionContext : DbContext
     {
         public CocktionContext()
@@ -78,11 +73,6 @@ namespace CocktionMVC.Models.DAL
 
             modelBuilder.Entity<Product>()
                 .HasMany(e => e.BidClusters);
-
-
-
-
-
 
             modelBuilder.Entity<Photo>()
                 .HasMany(e => e.ThumbnailSets)

@@ -1,10 +1,9 @@
-﻿using System;
-using System.Web;
-using Microsoft.AspNet.SignalR;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using CocktionMVC.Functions;
 using CocktionMVC.Models.DAL;
-using System.Collections.Generic;
+using Microsoft.AspNet.SignalR;
+
 namespace CocktionMVC
 {
     

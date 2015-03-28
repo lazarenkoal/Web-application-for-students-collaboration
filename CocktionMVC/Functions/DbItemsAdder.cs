@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CocktionMVC.Models.DAL;
+
 namespace CocktionMVC.Functions
 {
     /// <summary>
@@ -19,6 +16,7 @@ namespace CocktionMVC.Functions
         /// <param name="db">База, в которую надо добавить изменения</param>
         /// <param name="product">Сущность продукта, которую надо добавить</param>
         /// <param name="photo">Фото, которое надо добваить</param>
+        /// <param name ="cluster">Хранилище ставок, в которое надо вставить данный продукт</param>
         /// <returns></returns>
         public static async Task AddProduct(CocktionContext db, Product product, Photo photo, BidCluster cluster)
         {
@@ -55,6 +53,23 @@ namespace CocktionMVC.Functions
             await auction.AuctionToteBoard.FinishTote(int.Parse(auction.WinProductId), db);
 
             //сохраняем изменения в базу данных
+            await Task.Run(() => db.SaveChangesAsync());
+        }
+
+        /// <summary>
+        /// Асинхронно добавляет аукцион,
+        /// товар, фотку в базу
+        /// </summary>
+        /// <param name="db">База, в которую необходимо добавить информацию</param>
+        /// <param name="auction">Аукцион, который необходимо добавить</param>
+        /// <param name="product">Товар, который необходимо добавить</param>
+        /// <param name="photo">фотка, которую надо добавить</param>
+        public static async Task AddAuctionProductPhotoAsync(CocktionContext db, Auction auction,
+            Product product, Photo photo)
+        {
+            db.Auctions.Add(auction);
+            db.Products.Add(product);
+            db.Photos.Add(photo);
             await Task.Run(() => db.SaveChangesAsync());
         }
        

@@ -5,15 +5,20 @@
 
 <head>
     <script type="text/javascript" src="~/Scripts/Jquery/jquery-2.1.3.js"></script>
-    <script type="text/javascript" src="~/Scripts/MyLib/vis.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/MyLib/Vis/vis.min.js"></script>
     <script type="text/javascript" src="~/Scripts/Jquery/jquery.countdown.js"></script>
-    <script type="text/javascript" src="~/Scripts/MyLib/auctionEndLogic.js"></script>
+    <script type="text/javascript" src="~/Scripts/MyLib/Auction/CurrentAuction/auctionEndLogic.js"></script>
+    <script type="text/javascript" src="~/Scripts/MyLib/Auction/CurrentAuction/bidProcessor.js"></script>
+    <script type="text/javascript" src="~/Scripts/MyLib/Auction/CurrentAuction/scroller.js"></script>
+    <script type="text/javascript" src="~/Scripts/MyLib/Auction/CurrentAuction/liderManager.js"></script>
+    <script type="text/javascript" src="~/Scripts/MyLib/Auction/CurrentAuction/formShower.js"></script>
+
 
     <title></title>
     <link rel="stylesheet" href="~/Content/hiddenButtons.css" />
 </head>
 <h2>Текущий аукцион</h2>
-@section scripts{ 
+@section scripts{
     <script src="~/Scripts/Jquery/jquery.signalR-2.2.0.min.js"></script>
     <script src="~/signalr/hubs"></script>
 
@@ -30,9 +35,9 @@
             {
                 $('#toteBoardInfo').empty();
                 $('#toteBoardInfo').append(data);
-                
+
             };
-            
+
             chat.client.addExtraNodesToPages = function (fileName, name, parentProductId, childProductId) {
                 nodes.add([{ id: childProductId, label: name.trim(), shape: 'circularImage', image: 'http://cocktion.com/Images/Thumbnails/' + fileName }]);
                 edges.add([{ from: parentProductId, to: childProductId }]);
@@ -101,7 +106,7 @@
                 <p>Введите категорию довеска</p>
                 <input type="text" id="extraBidCategory" />
                 <p>Можете прикрепить файлик</p>
-                <input type="file"  id="extraFileInput">
+                <input type="file" id="extraFileInput">
                 <button type="button" id="submitExtraBid" class="btn btn-danger" onclick="addExtraBid(@Model.Id)">Послать довесок</button>
             </div>
             <button type="button" class="btn btn-success" id="addExtraBid" onclick="showExtraBidAdder()">Добавить довесок</button>
@@ -110,80 +115,74 @@
             <button type="button" class="btn btn-success" id="chooseLeader">Выбрать лидера</button>
             <button type="button" class=" btn btn-danger" id="stopAuction">Завершить аукцион</button>
             <button type="button" class="btn btn-info" id="scrollToChatBtn">К чату</button>
-          </div>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-5">
-            <div id="chatContainer">
-                <ul id="msgContainer"></ul>
-                <input type="text" class="form-control" placeholder="Text input" id="enterMsgContainer">
-                <button type="button" class="btn btn-success" id="sendMsg">Кудахнуть</button>
-                <button type="button" class="btn btn-info" id="scrollToTreeBtn">К аукциону</button>
-            </div>
-        </div>
-        <div class="col-lg-7">
-            <div id="toteBoardContainer">
-                <div id="eggInfo"></div>
-                <p>Введите количество яиц</p>
-                <input type="text" id="eggsAmount" />
-                <button type="button" class="btn btn-info" id="addEggsBtn">Поставить ставку</button>
-                <div id="toteBoardInfo">
-
-                </div>
-            </div>
-            
         </div>
     </div>
-    
-    <script type="text/javascript" src="~/Scripts/MyLib/checkers.js">//ниже был окшнэндлоджик</script>
 
-    <script>   
+<div class="row">
+    <div class="col-lg-5">
+        <div id="chatContainer">
+            <ul id="msgContainer"></ul>
+            <input type="text" class="form-control" placeholder="Text input" id="enterMsgContainer">
+            <button type="button" class="btn btn-success" id="sendMsg">Кудахнуть</button>
+            <button type="button" class="btn btn-info" id="scrollToTreeBtn">К аукциону</button>
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <div id="toteBoardContainer">
+            <div id="eggInfo"></div>
+            <p>Введите количество яиц</p>
+            <input type="text" id="eggsAmount"/>
+            <button type="button" class="btn btn-info" id="addEggsBtn">Поставить ставку</button>
+            <div id="toteBoardInfo">
 
+            </div>
+        </div>
+    </div>
+</div>
+    <script type="text/javascript" src="~/Scripts/MyLib/Auction/CurrentAuction/nodeProcessor.js"></script>
 
-    //Здесь содержится таймер и проверка
-    //на то, что человек кнопку увидит
-    var chat;
-    var isChoosed = false;
-    var auctionId = @Model.Id;
-    var ownerId;
-    var winnerId;
-    var userStatus = '@User.Identity.IsAuthenticated';
-    var userName = '@User.Identity.Name';
+    <script>
+        //Здесь содержится таймер и проверка
+        //на то, что человек кнопку увидит
+        var chat;
+        var isChoosed = false;
+        var auctionId = @Model.Id;
+        var ownerId;
+        var winnerId;
+        var userStatus = '@User.Identity.IsAuthenticated';
+        var userName = '@User.Identity.Name';
         var ownerName = '@Model.OwnerName';
-    var $n = $('#timer');
-    if ('@Model.IsActive' == "True")
-    {
-        $n.countdown('@Model.EndTime.Year/@Model.EndTime.Month/@Model.EndTime.Day @Model.EndTime.Hour:@Model.EndTime.Minute:@Model.EndTime.Second')
-            .on('update.countdown',function(event) {
-                var totalHours = event.offset.totalDays * 24 + event.offset.hours;
-                var $this = $(this).html(event.strftime(''
-                     + totalHours + ' : '
-                     + '<span>%M</span> : '
-                    + '<span>%S</span>'));
-            }).on('finish.countdown', function(event) {
-                sayThatFinished();
-            });
-        showUploaderOrStopper(userStatus, userName);
+        var $n = $('#timer');
+        if ('@Model.IsActive' == "True")
+        {
+            $n.countdown('@Model.EndTime.Year/@Model.EndTime.Month/@Model.EndTime.Day @Model.EndTime.Hour:@Model.EndTime.Minute:@Model.EndTime.Second')
+                .on('update.countdown',function(event) {
+                    var totalHours = event.offset.totalDays * 24 + event.offset.hours;
+                    var $this = $(this).html(event.strftime(''
+                         + totalHours + ' : '
+                         + '<span>%M</span> : '
+                        + '<span>%S</span>'));
+                }).on('finish.countdown', function(event) {
+                    sayThatFinished();
+                });
+            showUploaderOrStopper(userStatus, userName);
 
-    }
-    else
-    {
-        getAuctionResults();
-    }
-    
+        }
+        else
+        {
+            getAuctionResults();
+        }
 
         //если выбран победитель аукциона
-    var nodeId;
-        </script>
-    <script type="text/javascript" src="~/Scripts/MyLib/auctionActiveLogic.js"></script>
-    <script type="text/javascript" src="~/Scripts/MyLib/btnsOnClickPrcsg.js"></script>
+        var nodeId;
+    </script>
+    <script type="text/javascript" src="~/Scripts/MyLib/Auction/CurrentAuction/btnsOnClickPrcsg.js"></script>
     <script>
         // create an array with nodes
         var nodes = new vis.DataSet();
         var i = @Model.SellProduct.Id;
         nodes.add([
-          { id: i, label: '@Model.SellProduct.Name'.trim(), shape: 'circularImage', image:'http://cocktion.com/Images/Thumbnails/'+'@Model.SellProduct.Photos.First().FileName' }
+            { id: i, label: '@Model.SellProduct.Name'.trim(), shape: 'circularImage', image: 'http://cocktion.com/Images/Thumbnails/' + '@Model.SellProduct.Photos.First().FileName' }
         ]);
         // create an array with edges
         var edges = new vis.DataSet();
@@ -194,30 +193,12 @@
             edges: edges,
         };
         var options = {
+
         };
         var network = new vis.Network(container, data, options);
-        network.on('select',nodeSelected);
-
-        //Функция добавляет кружочек на "карту" аукциона.
-        function addNode(fileName, name, productId) {
-            nodes.add([{ id: productId, label: name.trim(), shape: 'circularImage', image: 'http://cocktion.com/Images/Thumbnails/'+ fileName }]);
-            edges.add([{ from: i, to: productId }]);
-        };
-        /*Функция добавляет дополнительную связь между довеском
-        и тем товаром, к которому он приклеен
-        fileName - название файла на сервер
-        name - имя товара, которое надо отобразить
-        parentId - айдишник товара, к которому надо приклеить
-        childId - айдишник товара, который надо приклеить к 
-        parent'у
-        */
-        function addExtraNode(fileName, name, parentId, childId){
-            nodes.add([{ id: childId, label: name.trim(), shape: 'circularImage', image: 'http://cocktion.com/Images/Thumbnails/'+ fileName }]);
-            edges.add([{ from: parentId, to: childId }]);
-        }
-
+        network.on('select', nodeSelected);
     </script>
-    <script type="text/javascript" src="~/Scripts/MyLib/scroller.js"></script>
+
     <script>
         //вывод на экран лидера аукциона
         printLider(nodeId);
@@ -231,8 +212,8 @@
 
         if (Model.BidProducts != null)
         {
-           
-            
+
+
             foreach (var i in Model.UsersBids)
             {
                 if (i.Products.Count == 1)
@@ -258,4 +239,3 @@
         }
     }
 </body>
-
