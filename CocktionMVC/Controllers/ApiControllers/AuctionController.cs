@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -120,8 +121,9 @@ namespace CocktionMVC.Controllers.ApiControllers
                 foreach (string file in httpRequest.Files)
                 {
                     postedFile = httpRequest.Files[file];
-                    filePath = HttpContext.Current.Server.MapPath("~/Images/Photos/" + postedFile.FileName);
-                    fileName = postedFile.FileName;
+                    string extension = Path.GetExtension(postedFile.FileName);
+                    fileName = Guid.NewGuid().ToString() + extension;
+                    filePath = HttpContext.Current.Server.MapPath("~/Images/Photos/" + fileName);
                     postedFile.SaveAs(filePath);
 
                 }

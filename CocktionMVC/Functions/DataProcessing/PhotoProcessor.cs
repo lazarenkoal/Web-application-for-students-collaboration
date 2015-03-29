@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Web;
 using CocktionMVC.Models.DAL;
 
@@ -25,7 +26,9 @@ namespace CocktionMVC.Functions.DataProcessing
             if (file != null)
             {
                 //Получаем информацию о том, откуда ж взялся файлик
-                string fileName = Path.GetFileName(file.FileName); //имя файла
+                //string fileName = Path.GetFileName(file.FileName); //имя файла
+                string extension = Path.GetExtension(file.FileName);
+                string fileName = Guid.NewGuid().ToString() + extension;
                 string path = Path.Combine(
                     requestBase.MapPath("~/Images/Photos/"), fileName); //директория, в которую его загрузят
                 file.SaveAs(path);
@@ -33,12 +36,11 @@ namespace CocktionMVC.Functions.DataProcessing
                 //создаем мини-картинку
                 //TODO нормальный размер сделать у нее
                 string thumbNailPath = requestBase.MapPath("~/Images/Thumbnails/"); //путь на сервере для сохранения
-                ThumbnailGenerator.ResizeImage(file, thumbNailPath, width, height); //переделываем размер картиночки
-                
                 ThumbnailSet thumbNail = new ThumbnailSet();
                 thumbNail.FileName = fileName;
                 thumbNail.FilePath = thumbNailPath + fileName;
-
+                ThumbnailGenerator.ResizeImage(file, thumbNail.FilePath, width, height); //переделываем размер картиночки
+               
                 //забиваем данные о фотке
                 photo.FileName = fileName;
                 photo.FilePath = path;

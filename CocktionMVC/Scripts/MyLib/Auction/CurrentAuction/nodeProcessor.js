@@ -19,7 +19,6 @@ function getNodeInfo(nodeId) {
     }
 };
 
-
 //если выбран какой-то из товаров
 function nodeSelected(properties) {
     nodeId = properties.nodes[0];
@@ -57,28 +56,21 @@ function nodeSelected(properties) {
 
 };
 
-function showUploaderOrStopper(userStatus, userName) {
-    //если пользователь авторищован
-    if (userStatus == 'True') {
-        //если это создатель, показываем ему кнопку
-        if (userName == ownerName) {
-            $('#stopAuction').show();
+//Функция добавляет кружочек на "карту" аукциона.
+function addNode(fileName, name, productId) {
+    nodes.add([{ id: productId, label: name.trim(), shape: 'circularImage', image: 'http://cocktion.com/Images/Thumbnails/' + fileName }]);
+    edges.add([{ from: i, to: productId }]);
+};
 
-        }
-            //если это не создатель, то показываем форму добавления ставки
-        else {
-            $('#uploader').show();
-        }
-    }
-    else {
-        $('#updater').append('<p>Для того, чтобы принять участие в аукционе, пожалуйста авторизуйтесь или зарегистрируйтесь:) </p>');
-    }
-}
-
-function printLider(nodeId)
-{
-    if (nodeId != null) {
-        $('#leaderInfo').empty();
-        $('#leaderInfo').append('В данный момент id лидера = ' + nodeId);
-    }
+/*Функция добавляет дополнительную связь между довеском
+        и тем товаром, к которому он приклеен
+        fileName - название файла на сервер
+        name - имя товара, которое надо отобразить
+        parentId - айдишник товара, к которому надо приклеить
+        childId - айдишник товара, который надо приклеить к 
+        parent'у
+        */
+function addExtraNode(fileName, name, parentId, childId) {
+    nodes.add([{ id: childId, label: name.trim(), shape: 'circularImage', image: 'http://cocktion.com/Images/Thumbnails/' + fileName }]);
+    edges.add([{ from: parentId, to: childId }]);
 }

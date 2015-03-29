@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace CocktionMVC.Models.JsonModels
+﻿namespace CocktionMVC.Models.JsonModels
 {
+    /// <summary>
+    /// Контейнер для информации о товаре
+    /// </summary>
     public class ProductInfo
     {
         /// <summary>

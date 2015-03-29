@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace CocktionMVC.Models.JsonModels
+﻿namespace CocktionMVC.Models.JsonModels
 {
     /// <summary>
     /// Класс для отображения информации о 
@@ -11,8 +6,14 @@ namespace CocktionMVC.Models.JsonModels
     /// </summary>
     public class ExtraBidInfo
     {
+        /// <summary>
+        /// Айдишник самой первой ставки в кластере
+        /// </summary>
         public int FirstBidId { get; set; }
 
+        /// <summary>
+        /// Айдишник данной добавки в кластер
+        /// </summary>
         public int ThisBidId { get; set; }
     }
 }

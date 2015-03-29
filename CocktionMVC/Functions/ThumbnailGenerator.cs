@@ -12,16 +12,16 @@ namespace CocktionMVC.Functions
         /// любого, наперед заданного размера!!!
         /// </summary>
         /// <param name="file">Файл, который надо поменять</param>
-        /// <param name="serverPath">Адрес на сервере, в которую надо положить thumbNail</param>
+        /// <param name="fileFullPath">Полный путь и имя файла</param>
         /// <param name="width">Необходимая ширина картинки</param>
         /// <param name="height">Необходимая высота картинки</param>
-        public static void ResizeImage(HttpPostedFileBase file, string serverPath, int width, int height)
+        public static void ResizeImage(HttpPostedFileBase file, string fileFullPath, int width, int height)
         {
-            string pic = Path.GetFileName(file.FileName);
-            string path = Path.Combine(serverPath, pic);
+            //string pic = Path.GetFileName(file.FileName);
+            //string path = Path.Combine(serverPath, pic);
 
             //Стрим для сохранения файла после ресайза
-            FileStream stream = new FileStream(path, FileMode.OpenOrCreate);
+            FileStream stream = new FileStream(fileFullPath, FileMode.OpenOrCreate);
 
             //Конвертация файла в картинку
             Image originalImage = Image.FromStream(file.InputStream);

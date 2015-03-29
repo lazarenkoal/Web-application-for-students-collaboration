@@ -16,9 +16,8 @@
                     $("#message").val("");
                 }
                 else
-                {
                     $("#messageContainer").prepend("<p>" + "Не удалось!" + "</p>");
-                }
+
             }
         }
     }

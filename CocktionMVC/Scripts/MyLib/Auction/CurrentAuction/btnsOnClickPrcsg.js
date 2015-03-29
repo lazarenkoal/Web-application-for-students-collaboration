@@ -2,8 +2,8 @@
 //при нажатии на кнопку выбрать лидера
 document.getElementById('chooseLeader').onclick = function () {
     var data = new FormData();
-    data.append('AuctionId', auctionId);
-    data.append('ProductId', nodeId);
+    data.append('auctionId', auctionId);
+    data.append('productId', nodeId);
     winnerId = nodeId;
     var request = new XMLHttpRequest();
     request.open('POST', '/AuctionRealTime/AddLider');

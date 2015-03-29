@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace CocktionMVC.Models.JsonModels
+﻿namespace CocktionMVC.Models.JsonModels
 {
     /// <summary>
-    /// Класс для предоставления информации для клиента
+    /// Моделирует пользователя при окончании аукциона
     /// </summary>
     public class BidSeller
     {
