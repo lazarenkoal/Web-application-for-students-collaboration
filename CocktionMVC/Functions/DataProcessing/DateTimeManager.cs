@@ -30,6 +30,7 @@ namespace CocktionMVC.Functions
         /// <param name="minutesString">Длительность в минутах</param>
         public static void SetAuctionStartAndEndTime(Auction auction, string hoursString, string minutesString)
         {
+            //получаем текущее время и устанавливаем время старта
             DateTime auctionsEndTime = GetCurrentTime();
             DateTime auctionStartTime = auctionsEndTime;
 
@@ -37,9 +38,11 @@ namespace CocktionMVC.Functions
             int minutes = int.Parse(minutesString);
             int hours = int.Parse(hoursString);
 
+            //вычисляем время окончания аукциона
             auctionsEndTime = auctionsEndTime.AddHours(hours);
             auctionsEndTime = auctionsEndTime.AddMinutes(minutes);
 
+            //устанавливаем время окончания и начала аукциона
             auction.EndTime = auctionsEndTime;
             auction.StartTime = auctionStartTime;
         }

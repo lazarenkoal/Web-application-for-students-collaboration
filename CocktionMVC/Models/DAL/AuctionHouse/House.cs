@@ -13,6 +13,17 @@ namespace CocktionMVC.Models.DAL
             Posts = new HashSet<ForumPost>();
         }
 
+        public House(string adress, string university, string faculty)
+        {
+            Auctions = new HashSet<Auction>();
+            Posts = new HashSet<ForumPost>();
+            Address = adress;
+            Faculty = faculty;
+            University = university;
+            Likes = 0;
+            Rating = 0;
+        }
+
         /// <summary>
         /// Айдишник для базы данных
         /// </summary>

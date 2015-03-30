@@ -64,6 +64,35 @@ namespace CocktionMVC.Functions
             hours = request.Form.GetValues("hours")[0].Trim();
         }
 
+        /// <summary>
+        /// Читает данные из формы с созданием аукциона.
+        /// </summary>
+        /// <param name="request">Запрос, содержащий форму с информацией об аукционе</param>
+        /// <param name="name">Наименование товара</param>
+        /// <param name="description">Описание товара</param>
+        /// <param name="category">Категория, в которую товар плавненько попадает</param>
+        /// <param name="housesId">Айдишники домов, в которых торгуется данный товар</param>
+        /// <param name="minutes">Количество минут, которые будет длиться аукцион</param>
+        /// <param name="hours">Количество часов продолжительности аукциона</param>
+        public static void ReadCreateAuctionFormMobile(HttpRequest request, out string name,
+            out string description, out string category, out string minutes,
+            out string hours)
+        {
+            name = request.Form.GetValues("name")[0].Trim();
+            description = request.Form.GetValues("description")[0].Trim();
+            category = request.Form.GetValues("category")[0].Trim();
+            minutes = request.Form.GetValues("minutes")[0].Trim();
+            hours = request.Form.GetValues("hours")[0].Trim();
+        }
+
+        /// <summary>
+        /// Читает данные из формы с добавлением ставки на аукцион
+        /// </summary>
+        /// <param name="requestBase">Запрос, содержащий форму с информацией о товаре</param>
+        /// <param name="name">Наименование товара</param>
+        /// <param name="auctionId">Айдишник аукциона</param>
+        /// <param name="category">Категория, к которой относится товар</param>
+        /// <param name="description">Описание товара</param>
         public static void ReadAddProductBetForm(HttpRequestBase requestBase, out string name,
             out string auctionId, out string category, out string description)
         {
@@ -71,6 +100,14 @@ namespace CocktionMVC.Functions
             description = requestBase.Form.GetValues("description")[0].Trim();
             category = requestBase.Form.GetValues("category")[0].Trim();
             auctionId = requestBase.Form.GetValues("auctionId")[0].Trim();
+        }
+
+        public static void ReadAddHouseForm(HttpRequestBase requestBase, out string university,
+            out string faculty, out string adress)
+        {
+            university = requestBase.Form.GetValues("university")[0].Trim();
+            faculty = requestBase.Form.GetValues("faculty")[0].Trim();
+            adress = requestBase.Form.GetValues("adress")[0].Trim();
         }
     }
 }

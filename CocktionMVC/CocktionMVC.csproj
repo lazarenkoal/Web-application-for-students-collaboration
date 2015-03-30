@@ -196,8 +196,7 @@
     <Compile Include="Controllers\AdminControllers\EditHousesController.cs" />
     <Compile Include="Controllers\ApiControllers\AccountController.cs" />
     <Compile Include="Controllers\ApiControllers\AuctionController.cs" />
-    <Compile Include="Controllers\ApiControllers\UploadFileController.cs" />
-    <Compile Include="Controllers\AuctionHouseController.cs" />
+    <Compile Include="Controllers\HouseControllers\AuctionHouseController.cs" />
     <Compile Include="Controllers\StandartControllers\AccountController.cs" />
     <Compile Include="Controllers\AuctionControllers\AuctionController.cs" />
     <Compile Include="Controllers\AuctionControllers\AuctionRealTimeController.cs" />
@@ -232,6 +231,8 @@
     <Compile Include="Models\JsonModels\BidRelatedModels\ExtraBidInfo.cs" />
     <Compile Include="Models\JsonModels\HouseRelatedModels\ForumRespond.cs" />
     <Compile Include="Models\JsonModels\HouseRelatedModels\HouseRespond.cs" />
+    <Compile Include="Models\JsonModels\MobileClientModels\RegisterUserData.cs" />
+    <Compile Include="Models\JsonModels\MobileClientModels\RegisterUserRespond.cs" />
     <Compile Include="Models\JsonModels\YaMapsModels\LocationInfo.cs" />
     <Compile Include="Models\JsonModels\MobileClientModels\MobileUserLogin.cs" />
     <Compile Include="Models\JsonModels\ProductRelatedModels\ProductInfo.cs" />
@@ -280,6 +281,22 @@
     <Content Include="Content\SiteImages\petuh6.jpg" />
     <Content Include="Content\SiteImages\ThanksCock.jpg" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\UniversityLogos\1medLogo.jpg" />
+    <Content Include="Content\UniversityLogos\finashkaLogo.jpg" />
+    <Content Include="Content\UniversityLogos\guuLogo.jpg" />
+    <Content Include="Content\UniversityLogos\hseLogo.jpg" />
+    <Content Include="Content\UniversityLogos\mamiLogo.jpg" />
+    <Content Include="Content\UniversityLogos\mftiLogo.jpg" />
+    <Content Include="Content\UniversityLogos\mfuaLogo.jpg" />
+    <Content Include="Content\UniversityLogos\mgimoLogo.jpg" />
+    <Content Include="Content\UniversityLogos\mgtuLogo.jpg" />
+    <Content Include="Content\UniversityLogos\mifiLogo.jpg" />
+    <Content Include="Content\UniversityLogos\msuLogo.jpg" />
+    <Content Include="Content\UniversityLogos\ranhigsLogo.jpg" />
+    <Content Include="Content\UniversityLogos\reuLogo.jpg" />
+    <Content Include="Content\UniversityLogos\rgsuLogo.jpg" />
+    <Content Include="Content\UniversityLogos\rudnLogo.jpg" />
+    <Content Include="Content\UniversityLogos\sinergyLogo.jpg" />
     <Content Include="Content\vis.css" />
     <Content Include="Content\vis.min.css" />
     <Content Include="favicon.ico" />
@@ -315,6 +332,7 @@
     <Content Include="Scripts\Jquery\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\Jquery\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\MyLib\AuctionHouse\addComment.js" />
+    <Content Include="Scripts\MyLib\AuctionHouse\getUniversityHouses.js" />
     <Content Include="Scripts\MyLib\Auction\CurrentAuction\auctionEndLogic.js" />
     <Content Include="Scripts\MyLib\Auction\Create\categoryOnClick.js" />
     <Content Include="Scripts\MyLib\Auction\Create\creatorOnClick.js" />
@@ -386,6 +404,7 @@
     <Content Include="Views\AuctionHouse\Index.cshtml" />
     <Content Include="Views\AuctionHouse\GetCurrentAuctionHouse.cshtml" />
     <Content Include="Views\EditHouses\Index.cshtml" />
+    <Content Include="Views\AuctionHouse\GetUniversityHouses.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

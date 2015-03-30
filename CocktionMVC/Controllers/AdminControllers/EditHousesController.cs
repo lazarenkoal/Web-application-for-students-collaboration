@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
+using CocktionMVC.Functions;
 using CocktionMVC.Models.DAL;
 using CocktionMVC.Models.JsonModels;
 
@@ -39,20 +40,14 @@ namespace CocktionMVC.Controllers.AdminControllers
         public JsonResult AddHouse()
         {
             //Чтение из запроса с клиента данных о доме.
-            string university = Request.Form.GetValues("university")[0].Trim();
-            string faculty = Request.Form.GetValues("faculty")[0].Trim();
-            string adress = Request.Form.GetValues("adress")[0].Trim();
+            string university;
+            string faculty;
+            string adress;
+            RequestFormReader.ReadAddHouseForm(Request, out university, out faculty, out adress);
 
             //Добавляем дом в боазу данных
             CocktionContext db = new CocktionContext();
-            db.Houses.Add(new House()
-            {
-                Address = adress,
-                Faculty = faculty,
-                Likes = 0, 
-                University = university,
-                Rating = 0
-            });
+            db.Houses.Add(new House(adress, university, faculty));
             db.SaveChanges();
 
             //Создаем ответ для сервера

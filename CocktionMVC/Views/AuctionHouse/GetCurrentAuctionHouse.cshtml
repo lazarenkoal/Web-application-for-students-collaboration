@@ -41,9 +41,9 @@
             <h3>Посмотри всю историю этого места!</h3>
             foreach (var auction in Model.Auctions)
             {
-                <br/>
                 <p>Выставили: @auction.SellProduct.Name</p>
-                <p>Что это было: @auction.SellProduct.Description</p>            
+                <p>Что это было: @auction.SellProduct.Description</p>   
+                int i = 0;         
             }
         }
         else

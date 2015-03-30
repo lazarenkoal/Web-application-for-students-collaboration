@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using CocktionMVC.Models.DAL;
 using CocktionMVC.Models.JsonModels;
@@ -16,8 +17,18 @@ namespace CocktionMVC.Controllers
         /// <returns>страницу со списком</returns>
         public ActionResult Index()
         {
+            //CocktionContext db = new CocktionContext();
+            //var houses = db.Houses.ToList();            
+            return View();
+        }
+
+        public ActionResult GetUniversityHouses()
+        {
             CocktionContext db = new CocktionContext();
-            var houses = db.Houses.ToList();            
+            List<House> houses = (from x in db.Houses
+                where x.University == "НИУ ВШЭ"
+                              select x).ToList();
+              
             return View(houses);
         }
 
@@ -65,5 +76,6 @@ namespace CocktionMVC.Controllers
                 return Json(new ForumRespond("Failed"));
             }
         }
+
     }
 }

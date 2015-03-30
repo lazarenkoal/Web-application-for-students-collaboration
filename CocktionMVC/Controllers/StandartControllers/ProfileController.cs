@@ -59,5 +59,6 @@ namespace CocktionMVC.Controllers.StandartControllers
             //TODO сделать эту страниу
             return View();
         }
-    }
+
+     }
 }

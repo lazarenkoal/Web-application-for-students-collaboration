@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using CocktionMVC.Models;
 using CocktionMVC.Models.JsonModels;
+using CocktionMVC.Models.JsonModels.MobileClientModels;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Infrastructure;
 using Microsoft.Owin.Security;
@@ -19,6 +22,32 @@ namespace CocktionMVC.Controllers.ApiControllers
             {
                 return _userManager ?? HttpContext.Current.Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
+        }
+
+        /// <summary>
+        /// Регистрирует пользователя с мобильного клиента
+        /// </summary>
+        /// <param name="data">Данные для регистрации</param>
+        /// <returns>Результат регистрации</returns>
+        [HttpPost]
+        public async Task<RegisterUserRespond> Registrate(RegisterUserData data)
+        {
+            var user = new ApplicationUser
+            {
+                UserName = data.Email,
+                Email = data.Email,
+                UserRealName = data.UserRealName,
+                UserRealSurname = data.UserRealSurname,
+                PhoneNumber = data.PhoneNumber,
+                Rating = 1000,
+                Eggs = 100
+            };
+            var resultOfRegistration = await UserManager.CreateAsync(user, data.Password);
+            if (resultOfRegistration.Succeeded)
+            {
+                return new RegisterUserRespond("succeded");
+            }
+            return new RegisterUserRespond("failed");
         }
 
         /// <summary>

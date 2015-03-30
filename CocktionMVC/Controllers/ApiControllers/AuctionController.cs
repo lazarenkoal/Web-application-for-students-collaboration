@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using CocktionMVC.Functions;
@@ -92,21 +93,13 @@ namespace CocktionMVC.Controllers.ApiControllers
         /// </summary>
         [Authorize]
         [HttpPost]
-        public AuctionApiRespondModels.AuctionCreateStatus CreateAuction()
+        public async Task<AuctionApiRespondModels.AuctionCreateStatus> CreateAuction()
         {
-            //создаем продукт и сохраняем информацию о нем.
-            Product product = new Product();
+            //Получаем данные из запроса
+            string minutesString, hoursString, name, description, category;
+            RequestFormReader.ReadCreateAuctionFormMobile(HttpContext.Current.Request, out name, out description,
+                out category, out minutesString, out hoursString);
 
-            product.Name = HttpContext.Current.Request.Form.GetValues("name")[0].Trim();
-            product.Description = HttpContext.Current.Request.Form.GetValues("description")[0].Trim();
-            product.Category = HttpContext.Current.Request.Form.GetValues("category")[0].Trim();
-
-            //получаем информацию о времени
-            string minutesString = HttpContext.Current.Request.Form.GetValues("minutes")[0].Trim();
-            string hoursString = HttpContext.Current.Request.Form.GetValues("hours")[0].Trim();
-            int minutes = int.Parse(minutesString);
-            int hours = int.Parse(hoursString);
-            
             //Заводим возвращалку статуса
             AuctionApiRespondModels.AuctionCreateStatus info =
                 new AuctionApiRespondModels.AuctionCreateStatus();
@@ -122,7 +115,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                 {
                     postedFile = httpRequest.Files[file];
                     string extension = Path.GetExtension(postedFile.FileName);
-                    fileName = Guid.NewGuid().ToString() + extension;
+                    fileName = Guid.NewGuid().ToString() + extension; //генерируем новое имя для фотки
                     filePath = HttpContext.Current.Server.MapPath("~/Images/Photos/" + fileName);
                     postedFile.SaveAs(filePath);
 
@@ -134,6 +127,13 @@ namespace CocktionMVC.Controllers.ApiControllers
                 info.Status = "failed";
             }
 
+            //добавляем фоточку и фабмнейл
+            string thumbNailPath = HttpContext.Current.Server.MapPath("~/Images/Thumbnails/"); //путь на сервере для сохранения
+            ThumbnailSet thumbNail = new ThumbnailSet();
+            thumbNail.FileName = fileName;
+            thumbNail.FilePath = thumbNailPath + fileName;
+            ThumbnailGenerator.ResizeImage(postedFile, thumbNail.FilePath, 90, 90);
+
             //получаем информацию о пользователе
             string userId = User.Identity.GetUserId();
             string userName = User.Identity.Name;
@@ -141,49 +141,29 @@ namespace CocktionMVC.Controllers.ApiControllers
             //подключаемся к базе данных
             CocktionContext db = new CocktionContext();
 
-            //объявление свойств продукта
-            product.OwnerId = userId;
-            product.IsOnAuctionAsALot = true;
-            product.OwnerName = userName;
+            //создаем продукт и сохраняем информацию о нем.
+            Product product = new Product(name, description, category, userId, true, userName);
 
             //инициализация аукциона
-            Auction auction = new Auction();
-            auction.IsActive = true;
-            auction.OwnerId = userId;
-            auction.OwnerName = userName;
-            auction.SellProduct = product;
-            auction.WinnerChosen = false;
-            auction.AuctionToteBoard = new ToteBoard();
+            Auction auction = new Auction(true, userId, userName, product, false, new ToteBoard());
 
             //Совершаем манипуляции со временем
-            DateTime auctionsEndTime = DateTimeManager.GetCurrentTime();
-            DateTime auctionStartTime = auctionsEndTime;
-            auctionsEndTime = auctionsEndTime.AddHours(hours);
-            auctionsEndTime = auctionsEndTime.AddMinutes(minutes);
-            auction.EndTime = auctionsEndTime;
-            auction.StartTime = auctionStartTime;
-
-            //добавляем фоточку и фабмнейл
-            Photo photo = new Photo();
-            string thumbNailPath = HttpContext.Current.Server.MapPath("~/Images/Thumbnails/"); //путь на сервере для сохранения
-            ThumbnailGenerator.ResizeImage(postedFile, thumbNailPath, 90, 90);
-            ThumbnailSet thumbNail = new ThumbnailSet();
-            thumbNail.FileName = fileName;
-            thumbNail.FilePath = thumbNailPath + fileName;
+            DateTimeManager.SetAuctionStartAndEndTime(auction, hoursString, minutesString);
 
             //забиваем данные о фотке
+            Photo photo = new Photo();
             photo.FileName = fileName;
             photo.FilePath = filePath;
             photo.Product = product;
             photo.ThumbnailSets.Add(thumbNail);
 
-            db.Photos.Add(photo);
-            db.Products.Add(product);
-            db.Auctions.Add(auction);
-            db.SaveChanges();
+            //все в базу добавляем
+            await DbItemsAdder.AddAuctionProductPhotoAsync(db, auction, product, photo);
 
+            //обновляем список аукционов
             AuctionListHub.UpdateList(product.Name, product.Description, product.Category, photo.FileName);
 
+            //шлем ссылочку на фотку
             info.PhotoPath = "http://cocktion.com/Images/Thumbnails/" + fileName;
 
             return info;
