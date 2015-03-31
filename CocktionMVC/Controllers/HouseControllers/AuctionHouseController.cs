@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using CocktionMVC.Models.DAL;
 using CocktionMVC.Models.JsonModels;
 
+// ReSharper disable once CheckNamespace
 namespace CocktionMVC.Controllers
 {
     /// <summary>
@@ -17,16 +18,24 @@ namespace CocktionMVC.Controllers
         /// <returns>страницу со списком</returns>
         public ActionResult Index()
         {
-            //CocktionContext db = new CocktionContext();
-            //var houses = db.Houses.ToList();            
+            //Мб добавим потом тут какой-то код для связи с БД
             return View();
         }
 
-        public ActionResult GetUniversityHouses()
+        /// <summary>
+        /// Показывает пользователю страничку со всеми домами конкретного
+        /// университета
+        /// </summary>
+        /// <param name="id">Университет, который надо добавить</param>
+        /// <returns>страницу со списком</returns>
+        public ActionResult GetUniversityHouses(string id)
         {
+            //подключаемся к базе
             CocktionContext db = new CocktionContext();
+
+            //Выбираем все дома, относящиеся к данному ВУЗу
             List<House> houses = (from x in db.Houses
-                where x.University == "НИУ ВШЭ"
+                where x.University == id
                               select x).ToList();
               
             return View(houses);

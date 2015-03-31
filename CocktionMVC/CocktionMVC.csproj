@@ -196,6 +196,7 @@
     <Compile Include="Controllers\AdminControllers\EditHousesController.cs" />
     <Compile Include="Controllers\ApiControllers\AccountController.cs" />
     <Compile Include="Controllers\ApiControllers\AuctionController.cs" />
+    <Compile Include="Controllers\ApiControllers\DataController.cs" />
     <Compile Include="Controllers\HouseControllers\AuctionHouseController.cs" />
     <Compile Include="Controllers\StandartControllers\AccountController.cs" />
     <Compile Include="Controllers\AuctionControllers\AuctionController.cs" />
@@ -221,6 +222,10 @@
     <Compile Include="Migrations\201503092019139_sdfsdf.Designer.cs">
       <DependentUpon>201503092019139_sdfsdf.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503311809387_RenamingAdress.cs" />
+    <Compile Include="Migrations\201503311809387_RenamingAdress.Designer.cs">
+      <DependentUpon>201503311809387_RenamingAdress.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DAL\Auction\BidCluster.cs" />
     <Compile Include="Models\DAL\AuctionHouse\ForumPost.cs" />
@@ -231,6 +236,7 @@
     <Compile Include="Models\JsonModels\BidRelatedModels\ExtraBidInfo.cs" />
     <Compile Include="Models\JsonModels\HouseRelatedModels\ForumRespond.cs" />
     <Compile Include="Models\JsonModels\HouseRelatedModels\HouseRespond.cs" />
+    <Compile Include="Models\JsonModels\MobileClientModels\HouseInfo.cs" />
     <Compile Include="Models\JsonModels\MobileClientModels\RegisterUserData.cs" />
     <Compile Include="Models\JsonModels\MobileClientModels\RegisterUserRespond.cs" />
     <Compile Include="Models\JsonModels\YaMapsModels\LocationInfo.cs" />
@@ -332,7 +338,7 @@
     <Content Include="Scripts\Jquery\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\Jquery\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\MyLib\AuctionHouse\addComment.js" />
-    <Content Include="Scripts\MyLib\AuctionHouse\getUniversityHouses.js" />
+    <Content Include="Scripts\MyLib\AuctionHouse\GetUniversityHouses\printHousesInCells.js" />
     <Content Include="Scripts\MyLib\Auction\CurrentAuction\auctionEndLogic.js" />
     <Content Include="Scripts\MyLib\Auction\Create\categoryOnClick.js" />
     <Content Include="Scripts\MyLib\Auction\Create\creatorOnClick.js" />
@@ -420,6 +426,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201503092019139_sdfsdf.resx">
       <DependentUpon>201503092019139_sdfsdf.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503311809387_RenamingAdress.resx">
+      <DependentUpon>201503311809387_RenamingAdress.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

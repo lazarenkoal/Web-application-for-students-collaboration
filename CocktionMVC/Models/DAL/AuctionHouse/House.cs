@@ -17,7 +17,7 @@ namespace CocktionMVC.Models.DAL
         {
             Auctions = new HashSet<Auction>();
             Posts = new HashSet<ForumPost>();
-            Address = adress;
+            Adress = adress;
             Faculty = faculty;
             University = university;
             Likes = 0;
@@ -38,7 +38,7 @@ namespace CocktionMVC.Models.DAL
         /// <summary>
         /// Адрес
         /// </summary>
-        public string Address { get; set; }
+        public string Adress { get; set; }
 
         /// <summary>
         /// Количество лайков

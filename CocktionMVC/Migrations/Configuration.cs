@@ -35,7 +35,7 @@ namespace CocktionMVC.Migrations
 
             //context.Houses.AddOrUpdate(new House
             //{
-            //    Address = "Кочновский проезд, 3",
+            //    Adress = "Кочновский проезд, 3",
             //    Faculty = "ФКН",
             //    University = "НИУ ВШЭ",
             //    Likes = 0,
@@ -45,7 +45,7 @@ namespace CocktionMVC.Migrations
 
             //context.Houses.AddOrUpdate(new House
             //{
-            //    Address = "Мясницкая, 20",
+            //    Adress = "Мясницкая, 20",
             //    Faculty = "ГМУ",
             //    University = "НИУ ВШЭ",
             //    Likes = 0,
@@ -55,7 +55,7 @@ namespace CocktionMVC.Migrations
 
             //context.Houses.AddOrUpdate(new House
             //{
-            //    Address = "Кирпичная, 33",
+            //    Adress = "Кирпичная, 33",
             //    Faculty = "ФБМ",
             //    University = "НИУ ВШЭ",
             //    Likes = 0,
@@ -65,7 +65,7 @@ namespace CocktionMVC.Migrations
 
             //context.Houses.AddOrUpdate(new House
             //{
-            //    Address = "Одинцово, ул.Маковского, 2",
+            //    Adress = "Одинцово, ул.Маковского, 2",
             //    Faculty = "Общага Трилистник (8-ка)",
             //    University = "НИУ ВШЭ",
             //    Likes = 0,
@@ -75,7 +75,7 @@ namespace CocktionMVC.Migrations
 
             //context.Houses.AddOrUpdate(new House
             //{
-            //    Address = "ВНИИСОК, Дениса Давыдова",
+            //    Adress = "ВНИИСОК, Дениса Давыдова",
             //    Faculty = "Общага Дубки (7 и 9-ка)",
             //    University = "НИУ ВШЭ",
             //    Likes = 0,

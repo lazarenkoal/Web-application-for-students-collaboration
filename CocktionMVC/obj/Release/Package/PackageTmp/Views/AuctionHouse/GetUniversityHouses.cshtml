@@ -1,20 +1,57 @@
 ﻿@{
     ViewBag.Title = "Дома в " + Model[0].University;
-    int i = 0;
+    int amountOfElemnts = Model.Count;
 }
 @model List<CocktionMVC.Models.DAL.House>
-<h3>Дома в @Model[0].University</h3>
-<div class="row">
-    <div class="col-lg-4">
-        @foreach (var house in Model)
-        {
-            <p style="font-weight: bold">@house.University</p>
-            <p>Факультет: @house.Faculty</p>
-            <p>Адрес: @house.Address</p>
-            <p>@Html.ActionLink("Хочу посмотреть", "GetCurrentAuctionHouse", "AuctionHouse", new {id = house.Id}, null)</p>
-        }
-    </div>
-    <div class="col-lg-8">
-        <p>В этих домах много интересного происходит!!!</p>
-    </div>
+<h3 style="text-align: center">Дома в @Model[0].University</h3>
+<br/>
+<br/>
+<div id="housesContainer" class ="row">
+    @{
+        int q1 = 0, q2 = 1, q3 = 2, q4 = 3;
+        <div class="col-md-3">
+            @while (q1 < amountOfElemnts)
+            {
+                <p style="font-weight: bold">@Model[q1].University</p>
+                <p>Факультет: @Model[q1].Faculty</p>
+                <p>Адрес: @Model[q1].Adress</p>
+                <p>@Html.ActionLink("Хочу посмотреть", "GetCurrentAuctionHouse", "AuctionHouse", new {id = Model[q1].Id}, null)</p>
+                <br/>
+                q1 += 4;
+            } 
+        </div>
+        <div class="col-md-3">
+            @while (q2 < amountOfElemnts)
+            {
+                <p style="font-weight: bold">@Model[q2].University</p>
+                <p>Факультет: @Model[q2].Faculty</p>
+                <p>Адрес: @Model[q2].Adress</p>
+                <p>@Html.ActionLink("Хочу посмотреть", "GetCurrentAuctionHouse", "AuctionHouse", new { id = Model[q2].Id }, null)</p>
+                <br />
+                q2 += 4;
+            } 
+        </div>
+        <div class="col-md-3">
+            @while (q3 < amountOfElemnts)
+            {
+                <p style="font-weight: bold">@Model[q3].University</p>
+                <p>Факультет: @Model[q3].Faculty</p>
+                <p>Адрес: @Model[q3].Adress</p>
+                <p>@Html.ActionLink("Хочу посмотреть", "GetCurrentAuctionHouse", "AuctionHouse", new { id = Model[q3].Id }, null)</p>
+                <br />
+                q3 += 4;
+            } 
+        </div>
+        <div class="col-md-3">
+            @while (q4 < amountOfElemnts)
+            {
+                <p style="font-weight: bold">@Model[q4].University</p>
+                <p>Факультет: @Model[q4].Faculty</p>
+                <p>Адрес: @Model[q4].Adress</p>
+                <p>@Html.ActionLink("Хочу посмотреть", "GetCurrentAuctionHouse", "AuctionHouse", new {id = Model[q4].Id}, null)</p>
+                <br />
+                q4 += 4;
+            } 
+        </div>
+    }
 </div>

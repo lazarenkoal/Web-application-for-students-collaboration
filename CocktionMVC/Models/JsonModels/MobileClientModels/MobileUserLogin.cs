@@ -14,5 +14,6 @@
         /// Пароль
         /// </summary>
         public string Password { get; set; }
+
     }
 }
