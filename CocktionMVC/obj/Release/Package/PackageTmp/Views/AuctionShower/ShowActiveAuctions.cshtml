@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "Активные аукционы";
+}
+<h3>Активные аукционы на данной площадке</h3>
+@model List<CocktionMVC.Models.DAL.Auction>
+<div class="row">
+    @{
+        int amountOfAuctions;
+        if ((amountOfAuctions = Model.Count) != 0)
+        {
+            int i1 = 0, i2 = 1, i3 = 2, i4 = 3;
+            <div class="col-md-3">
+                @while (i1 < amountOfAuctions)
+                {
+                    <h4>Продается: @Model[i1].SellProduct.Name</h4>
+                    <p>Описание: @Model[i1].SellProduct.Description</p>
+                    <p>Кончится: @Model[i1].EndTime</p>
+                    <p>@Html.ActionLink("Заглянуть", "CurrentAuction", "Auction", new { id = Model[i1].Id }, null)</p>
+                    <img src="http://cocktion.com/Images/Thumbnails/@Model[i1].SellProduct.Photos.First().FileName"
+                         class ="img-thumbnail"/>
+                    <br />
+                    <br />
+                    i1 += 4;
+                }
+            </div>
+            <div class="col-md-3">
+                @while (i2 < amountOfAuctions)
+                {
+                    <h4>Продается: @Model[i2].SellProduct.Name</h4>
+                    <p>Описание: @Model[i2].SellProduct.Description</p>
+                    <p>Кончится: @Model[i2].EndTime</p>
+                    <p>@Html.ActionLink("Заглянуть", "CurrentAuction", "Auction", new { id = Model[i2].Id }, null)</p>
+    <img src="http://cocktion.com/Images/Thumbnails/@Model[i2].SellProduct.Photos.First().FileName" class="img-thumbnail" />
+                    <br />
+                    <br />
+                    i2 += 4;
+                }
+            </div>
+            <div class="col-md-3">
+                @while (i3 < amountOfAuctions)
+                {
+                    <h4>Продается: @Model[i3].SellProduct.Name</h4>
+                    <p>Описание: @Model[i3].SellProduct.Description</p>
+                    <p>Кончится: @Model[i3].EndTime</p>
+                    <p>@Html.ActionLink("Заглянуть", "CurrentAuction", "Auction", new { id = Model[i3].Id }, null)</p>
+    <img src="http://cocktion.com/Images/Thumbnails/@Model[i3].SellProduct.Photos.First().FileName" class="img-thumbnail" />
+                    <br />
+                    <br />
+
+                    i3 += 4;
+                }
+            </div>
+            <div class="col-md-3">
+                @while (i4 < amountOfAuctions)
+                {
+                    <h4>Продается: @Model[i4].SellProduct.Name</h4>
+                    <p>Описание: @Model[i4].SellProduct.Description</p>
+                    <p>Кончится: @Model[i4].EndTime</p>
+                    <p>@Html.ActionLink("Заглянуть", "CurrentAuction", "Auction", new { id = Model[i4].Id }, null)</p>
+    <img src="http://cocktion.com/Images/Thumbnails/@Model[i4].SellProduct.Photos.First().FileName"
+         class="img-thumbnail" />
+                    <br />
+                    <br />
+                    i4 += 4;
+                }
+            </div>
+        }
+        else
+        {
+            <p>К сожалению, пока что никто ничего не продает :(</p>
+        }
+    }
+</div>
+

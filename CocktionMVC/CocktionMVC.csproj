@@ -197,6 +197,7 @@
     <Compile Include="Controllers\ApiControllers\AccountController.cs" />
     <Compile Include="Controllers\ApiControllers\AuctionController.cs" />
     <Compile Include="Controllers\ApiControllers\DataController.cs" />
+    <Compile Include="Controllers\DataControllers\AuctionShowerController.cs" />
     <Compile Include="Controllers\HouseControllers\AuctionHouseController.cs" />
     <Compile Include="Controllers\StandartControllers\AccountController.cs" />
     <Compile Include="Controllers\AuctionControllers\AuctionController.cs" />
@@ -284,7 +285,12 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\hiddenButtons.css" />
+    <Content Include="Content\SiteImages\allProducts.jpg" />
+    <Content Include="Content\SiteImages\anonPhoto.jpg" />
+    <Content Include="Content\SiteImages\finishedAuctions.jpg" />
+    <Content Include="Content\SiteImages\hseBuilding.jpg" />
     <Content Include="Content\SiteImages\petuh6.jpg" />
+    <Content Include="Content\SiteImages\Roosters-Playing-Football-Funny-Animals.jpg" />
     <Content Include="Content\SiteImages\ThanksCock.jpg" />
     <Content Include="Content\style.css" />
     <Content Include="Content\UniversityLogos\1medLogo.jpg" />
@@ -337,7 +343,8 @@
     <Content Include="Scripts\Jquery\jquery.validate.min.js" />
     <Content Include="Scripts\Jquery\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\Jquery\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\MyLib\AuctionHouse\addComment.js" />
+    <Content Include="Scripts\MyLib\AuctionHouse\GetCurrentAuctionHouse\addComment.js" />
+    <Content Include="Scripts\MyLib\AuctionHouse\GetCurrentAuctionHouse\scroller.js" />
     <Content Include="Scripts\MyLib\AuctionHouse\GetUniversityHouses\printHousesInCells.js" />
     <Content Include="Scripts\MyLib\Auction\CurrentAuction\auctionEndLogic.js" />
     <Content Include="Scripts\MyLib\Auction\Create\categoryOnClick.js" />
@@ -411,6 +418,8 @@
     <Content Include="Views\AuctionHouse\GetCurrentAuctionHouse.cshtml" />
     <Content Include="Views\EditHouses\Index.cshtml" />
     <Content Include="Views\AuctionHouse\GetUniversityHouses.cshtml" />
+    <Content Include="Views\AuctionShower\ShowOldAuctions.cshtml" />
+    <Content Include="Views\AuctionShower\ShowActiveAuctions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

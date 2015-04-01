@@ -9,7 +9,6 @@
     <script type="text/javascript" src="~/Scripts/Jquery/jquery.countdown.js"></script>
     <script type="text/javascript" src="~/Scripts/MyLib/Auction/CurrentAuction/auctionEndLogic.js"></script>
     <script type="text/javascript" src="~/Scripts/MyLib/Auction/CurrentAuction/bidProcessor.js"></script>
-    <script type="text/javascript" src="~/Scripts/MyLib/Auction/CurrentAuction/scroller.js"></script>
     <script type="text/javascript" src="~/Scripts/MyLib/Auction/CurrentAuction/liderManager.js"></script>
     <script type="text/javascript" src="~/Scripts/MyLib/Auction/CurrentAuction/formShower.js"></script>
 
@@ -75,6 +74,8 @@
         });
     </script>
 }
+<script type="text/javascript" src="~/Scripts/MyLib/Auction/CurrentAuction/scroller.js"></script>
+
 <body id="globalContainer">
     <div class="row" id="networkContainer">
         <div class=" col-lg-8">
@@ -114,7 +115,7 @@
             <div id="leaderInfo"></div>
             <button type="button" class="btn btn-success" id="chooseLeader">Выбрать лидера</button>
             <button type="button" class=" btn btn-danger" id="stopAuction">Завершить аукцион</button>
-            <button type="button" class="btn btn-info" id="scrollToChatBtn">К чату</button>
+            <button type="button" class="btn btn-info" onclick="scrollToChat()" id="scrollToChatBtn">К чату</button>
         </div>
     </div>
 
@@ -124,7 +125,7 @@
             <ul id="msgContainer"></ul>
             <input type="text" class="form-control" placeholder="Text input" id="enterMsgContainer">
             <button type="button" class="btn btn-success" id="sendMsg">Кудахнуть</button>
-            <button type="button" class="btn btn-info" id="scrollToTreeBtn">К аукциону</button>
+            <button type="button" class="btn btn-info" onclick="scrollToTree()" id="scrollToTreeBtn">К аукциону</button>
         </div>
     </div>
     <div class="col-lg-7">

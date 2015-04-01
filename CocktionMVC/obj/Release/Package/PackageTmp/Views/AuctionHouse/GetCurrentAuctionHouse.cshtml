@@ -3,30 +3,181 @@
 }
 @using CocktionMVC.Models.DAL
 @model House
- <h4>Смотри статистику. Оставляй комменты. Жги!</h4>
-<p>Привет!</p>
-@Model.University
-@Model.Faculty
-@Model.Adress
+<h3>Домик в @Model.University</h3>
+
 <script src="~/Scripts/Jquery/jquery-2.1.3.min.js"></script>
-<script src="~/Scripts/MyLib/AuctionHouse/addComment.js"></script>
-<div class="row">
-    <div id="forumContainer" class="col-lg-6">
-        <h3>Напиши здесь все, что думаешь об этом месте</h3>
-        <div id="messageEnter">
-            <p>Введите свое сообщение</p>
-            <textarea id="message" cols="40" rows="3"></textarea>
-            <button id="addCommentButton" onclick="addComment(@Model.Id)" title ="АРРРРР!!!!" class="btn btn-info">Царапнуть</button>
+<script src="~/Scripts/MyLib/AuctionHouse/GetCurrentAuctionHouse/addComment.js"></script>
+<script src="~/Scripts/MyLib/Vis/vis.min.js"></script>
+<script src="~/Scripts/MyLib/AuctionHouse/GetCurrentAuctionHouse/scroller.js"></script>
+<link rel="stylesheet" href="~/Content/vis.min.css"/>
+
+<style>
+    p {
+        font-family: monospace;
+    }
+    h3 {
+        text-align: center;
+        font-family: monospace;
+    }
+    
+     #houseDescriptionContainer {
+         border: 1px solid black;
+         padding: 10px;
+         font-family: monospace;
+         border-radius: 3px;
+     }
+
+     #secondInfoColumn {
+         border: 1px solid black;
+         padding: 10px;
+         border-radius: 3px;
+     }
+
+     #messageInstance {
+        border: 1px solid black;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 2px;
+        padding-top: 2px;
+        font-family: monospace;
+        border-bottom-left-radius: 3px;
+        border-bottom-right-radius: 3px;
+    }
+    #author{
+        border-top: 1px solid black;
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 2px;
+        padding-top: 2px;
+        background-color: lightgrey;
+        border-top-right-radius: 3px;
+        border-top-left-radius: 3px;
+    }
+    #messageEnter {
+        border: 1px solid black;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 3px;
+    }
+    
+    #messageEnterContainer {
+        border-top: 2px dotted black;
+        padding-top: 30px;
+    }
+    textarea {
+        width: 100%;
+        height: 100%;
+    }
+
+    button {
+        float: right;
+    }
+</style>
+
+<div class="row" id ="top">
+    <!--Контейнер для первой части страницы-->
+    <div class="col-md-3">
+        <!--Фотка и описание доам-->
+        <!--Фотография-->
+        <img src="~/Content/SiteImages/hseBuilding.jpg" class="img-thumbnail" />
+        <br/>
+        <br/>
+        <!--Контейнер для описания-->
+        <div id="houseDescriptionContainer">
+            <p>
+                <b>Описание:</b> очень классный дом, ребята постоянно выкладывают интересные штуки,
+                который постоянно удивляют своей уникальностью и необычностью.
+            </p>
+            <p><b>Адрес:</b> @Model.Adress </p>
+            <p><b>Факультет:</b> @Model.Faculty</p>
         </div>
+    </div>
+    <div class="col-md-7">
+        <!--График и картинки на активные-->
+        <!--Место для графика-хуяфика-->
+        <div id="visualization"></div>
+        <script type="text/javascript">
+            var container = document.getElementById('visualization');
+            var items = [
+                { x: '2014-06-11', y: 10 },
+                { x: '2014-06-12', y: 25 },
+                { x: '2014-06-13', y: 30 },
+                { x: '2014-06-14', y: 10 },
+                { x: '2014-06-15', y: 15 },
+                { x: '2014-06-16', y: 30 }
+            ];
+
+            var dataset = new vis.DataSet(items);
+            var options = {
+                start: '2014-06-10',
+                end: '2014-06-18',
+                height: '300px',
+                width: '100%'
+            };
+            var graph2d = new vis.Graph2d(container, dataset, options);
+        </script>
+        <br/>
+        <br/>
+        <div class="row" id="imageLinksContainer">
+            <!--Тут находятся ссылочки на странички с разными аукционами-->
+            <div class="col-md-6">
+                <!--Картинка с ссылкой на прошедшие аукционы-->
+                <a href="http://cocktion.com/AuctionShower/ShowOldAuctions/@Model.Id">
+                    <img src="~/Content/SiteImages/allProducts.jpg" class="img-thumbnail" />
+                </a>
+                <p>Прошедшие аукционы</p>
+            </div>
+            <div class="col-md-6">
+                <!--Картинка с ссылкой на активные аукционы-->
+                <a href="http://cocktion.com/AuctionShower/ShowActiveAuctions/@Model.Id">
+                    <img src="~/Content/SiteImages/Roosters-Playing-Football-Funny-Animals.jpg" class="img-thumbnail" />
+                </a>
+                <p>Активные аукционы</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2" id="secondInfoColumn">
+        <!--Лайки, рейтинг и кнопка-->
+        <p><b>Лайки:</b> @Model.Likes</p>
+        <br />
+        <p><b>Дизлайки:</b> 0</p>
+        <br />
+        <p><b>Рейтинг:</b> @Model.Rating</p>
+        <br />
+        <p><b>Жители:</b> 0</p>
+        <br />
+        <p><b>Количество аукционов:</b> @Model.Auctions.Count</p>
+        <br />
+        <button class="btn-xs" onclick="scrollToTheForum()">К форуму</button>
+    </div>
+</div>
+
+
+<div class="row">
+    <!--Здесь начинается форум-->
+    <div class="col-md-3"></div>
+    <div id="forumContainer" class="col-md-6">
+        <h3 style="text-align: center">Напиши здесь все, что думаешь об этом месте</h3>
         <div id="messageContainer">
+            <!--Тут отображаются сообщения с форума-->
             @if (Model.Posts.Count > 0)
             {
                 foreach (var post in Model.Posts)
                 {
+                    <div id="postContainer">
+                        <div id="author">
+                            <p>
+                                <b>@post.AuthorName</b> сказал сегодня:
+                            </p>
+                        </div>
+                        <div id="messageInstance">
+                            <p>@post.Message</p>
+                        </div>
+                    </div>
                     <br />
-                    <p>@post.AuthorName</p>
-                    <p>@post.Message</p>
-
+                    <br />
                 }
             }
             else
@@ -34,21 +185,18 @@
                 <p>Нет сообщений никаких!</p>
             }
         </div>
+        <div id="messageEnterContainer">
+            <div id="messageEnter">
+                <p>
+                    <b>Написать коммент</b>
+                </p>
+                <textarea id="message">
+                </textarea>
+                <button id="addCommentButton" onclick="addComment(@Model.Id) " title=" аррррр!!!!" class="btn btn-info">Царапнуть</button>
+                <button id="toTheTopBtn" onclick="scrollToTheTop()">Вверххх!!!</button>
+            </div>
+        </div>
     </div>
-    <div id="auctionListContainer">
-        @if(Model.Auctions.Count > 0)
-        {
-            <h3>Посмотри всю историю этого места!</h3>
-            foreach (var auction in Model.Auctions)
-            {
-                <p>Выставили: @auction.SellProduct.Name</p>
-                <p>Что это было: @auction.SellProduct.Description</p>   
-                int i = 0;         
-            }
-        }
-        else
-        {
-            <p>Пока что никто не решился тут продавать;(</p>
-        }
+    <div class="col-md-3">
     </div>
 </div>

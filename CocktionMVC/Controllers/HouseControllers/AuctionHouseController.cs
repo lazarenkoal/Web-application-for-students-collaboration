@@ -16,6 +16,7 @@ namespace CocktionMVC.Controllers
         /// Выводит пользователя на страницу со списком всех домов
         /// </summary>
         /// <returns>страницу со списком</returns>
+        [OutputCache(Duration = 1000)]
         public ActionResult Index()
         {
             //Мб добавим потом тут какой-то код для связи с БД

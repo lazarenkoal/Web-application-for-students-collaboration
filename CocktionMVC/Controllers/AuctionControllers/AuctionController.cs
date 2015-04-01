@@ -23,6 +23,7 @@ namespace CocktionMVC.Controllers
         /// </summary>
         /// <returns></returns>
         [AllowAnonymous]
+        [OutputCache(Duration = 10)]
         public ActionResult Index()
         {
             /*Сделать страничку с бесконечной прокруткой

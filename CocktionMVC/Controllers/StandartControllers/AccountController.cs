@@ -142,6 +142,7 @@ namespace CocktionMVC.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
+
         public ActionResult Register()
         {
             return View();
@@ -152,6 +153,7 @@ namespace CocktionMVC.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             RecaptchaVerificationHelper recaptchaHelper = this.GetRecaptchaVerificationHelper();
