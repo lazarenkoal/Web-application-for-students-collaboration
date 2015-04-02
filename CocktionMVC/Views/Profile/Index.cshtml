@@ -3,7 +3,205 @@
 }
 @using CocktionMVC.Models.ViewModels
 @model ProfileViewModel
-<h2>Это все ты сделал!!!!</h2>
-<p>Твои яйца: @Model.EggsAmount</p>
-<p>Количество твоих аукционов: @Model.AuctionsAmount</p>
-<p>Количество твоих товаров: @Model.ProductsAmount</p>
+<style>
+    h3 {
+        text-align: center;
+    }
+
+    #userInformation, #subcribedHouses, #usersAuctions, #usersFeedback {
+        background-color: transparent;
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+        border-color: black;
+        border: groove 1px;
+    }
+
+    #userInformation {
+        height: 250px;
+        align-items: center;
+    }
+
+    #userLifePos {
+        border-bottom-right-radius: 3px;
+        border-top-right-radius: 3px;
+        border-top: groove 1px;
+        border-bottom: groove 1px;
+        border-color: lightgray;
+        border-right: groove 1px;
+        background-color: transparent;
+        height: 250px;
+    }
+
+    #interests {
+        padding: 1px;
+    }
+
+    #auctionHeader, #housesHeader, #oppinionHeader {
+        border-bottom: dotted 1px gray;
+        padding: 10px;
+    }
+</style>
+
+<div class="row">
+    <br/>
+    <!--Фотка и информация о пользователе-->
+    <div class="col-md-3" style="align-items:flex-start">
+        <!--Контейнер для аватарки-->
+        <img src="~/Content/SiteImages/anonPhoto.jpg" class="img-thumbnail"/>
+        <p>Ваша фотокарточка.</p>
+    </div>
+    <div class="col-md-2" id="userInformation">
+        <!--Контейнер для информации-->
+        <div id="userName">
+            <!--Контейнер для имени пользователя-->
+            <h4>@Model.Name @Model.Surname</h4>
+        </div>
+        <br/>
+        <div id="userRates">
+            <!--Контейнер для информации о пользователе-->
+            <p><b>Рейтинг:</b> @Model.Rating</p>
+            <p><b>Яиц: </b> @Model.EggsAmount</p>
+            <p><b>Аукционов сделал:</b> @Model.AuctionsAmount</p>
+            <p><b>Победил </b> 40 раз
+            </p>
+            <p><b>Ставок сделал: </b> @Model.ProductsAmount штук
+            </p>
+            <p><b>Вместе с нами: </b> @Model.DaysWithUsAmount дней
+            </p>
+        </div>
+    </div>
+    <div class="col-md-7" id="userLifePos">
+        <h4>Жизненная позиция пользователя</h4>
+        <div class="row" id="interests">
+            <div class="col-md-3">
+                <h4>Интерес #1</h4>
+                <p>Тачки</p>
+                <img src="~/Content/SiteImages/car.jpg" class="img-thumbnail"/>
+            </div>
+            <div class="col-md-3">
+                <h4>Интерес #2</h4>
+                <p>Бабки</p>
+                <img src="~/Content/SiteImages/money.jpg" class="img-thumbnail" />
+            </div>
+            <div class="col-md-3">
+                <h4>Интерес #3</h4>
+                <p>Девушки</p>
+                <img src="~/Content/SiteImages/girl.jpg" class="img-thumbnail" />
+            </div>
+            <div class="col-md-3">
+                <h4>Интерес #4</h4>
+                <p>Блэкджек</p>
+                <img src="~/Content/SiteImages/blackjack.jpg" class="img-thumbnail" />
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+
+<div class="row" id="subcribedHouses">
+    <!--Дома, на которые подписан пользователь-->
+    <h3 id="housesHeader">Житель следующих домов</h3>
+    <div class="col-md-3">
+        <p>Какой-то дом</p>
+        <img src="~/Content/SiteImages/house1.jpg" class="img-responsive"/>
+    </div>
+    <div class="col-md-3">
+        <p>Какой-то дом</p>
+        <img src="~/Content/SiteImages/house1.jpg" class="img-responsive" />
+    </div>
+    <div class="col-md-3">
+        <p>Какой-то дом</p>
+        <img src="~/Content/SiteImages/house1.jpg" class="img-responsive" />
+    </div>
+    <div class="col-md-3">
+        <p>Какой-то дом</p>
+        <img src="~/Content/SiteImages/house1.jpg" class="img-responsive" />
+    </div>
+</div>
+
+<br />
+<br/>
+
+<div class="row" id="usersAuctions">
+    <!--Аукционы пользователя-->
+    <h3 id="auctionHeader">Владелец прекрасных аукционов</h3>
+    @{
+        if ((Model.AuctionsAmount) != 0)
+        {
+            int i1 = 0, i2 = 1, i3 = 2, i4 = 3;
+            <div class="col-md-3">
+                @while (i1 < Model.AuctionsAmount)
+                {
+                    <h4>@Model.HisAuctions[i1].SellProduct.Name</h4>
+                    <p>Описание: @Model.HisAuctions[i1].SellProduct.Description</p>
+                    <p>@Html.ActionLink("Заглянуть", "CurrentAuction", "Auction", new { id = Model.HisAuctions[i1].Id }, null)</p>
+                    <img src="http://cocktion.com/Images/Thumbnails/@Model.HisAuctions[i1].SellProduct.Photos.First().FileName"
+                         class="img-responsive" />
+                    <br />
+                    <br />
+                    i1 += 4;
+                }
+            </div>
+            <div class="col-md-3">
+                @while (i2 < Model.AuctionsAmount)
+                {
+                    <h4>@Model.HisAuctions[i2].SellProduct.Name</h4>
+                    <p>Описание: @Model.HisAuctions[i2].SellProduct.Description</p>
+                    <p>@Html.ActionLink("Заглянуть", "CurrentAuction", "Auction", new { id = Model.HisAuctions[i2].Id }, null)</p>
+    <img src="http://cocktion.com/Images/Thumbnails/@Model.HisAuctions[i2].SellProduct.Photos.First().FileName"
+         class="img-responsive" />
+                    <br />
+                    <br />
+                    i2 += 4;
+                }
+            </div>
+            <div class="col-md-3">
+                @while (i3 < Model.AuctionsAmount)
+                {
+                    <h4>@Model.HisAuctions[i3].SellProduct.Name</h4>
+                    <p>Описание: @Model.HisAuctions[i3].SellProduct.Description</p>
+                    <p>@Html.ActionLink("Заглянуть", "CurrentAuction", "Auction", new { id = Model.HisAuctions[i3].Id }, null)</p>
+    <img src="http://cocktion.com/Images/Thumbnails/@Model.HisAuctions[i3].SellProduct.Photos.First().FileName" class="img-responsive" />
+                    <br />
+                    <br />
+
+                    i3 += 4;
+                }
+            </div>
+            <div class="col-md-3">
+                @while (i4 < Model.AuctionsAmount)
+                {
+                    <h4>@Model.HisAuctions[i4].SellProduct.Name</h4>
+                    <p>Описание: @Model.HisAuctions[i4].SellProduct.Description</p>
+                    <p>@Html.ActionLink("Заглянуть", "CurrentAuction", "Auction", new { id = Model.HisAuctions[i4].Id }, null)</p>
+    <img src="http://cocktion.com/Images/Thumbnails/@Model.HisAuctions[i4].SellProduct.Photos.First().FileName" class="img-responsive" />
+                    <br />
+                    <br />
+                    i4 += 4;
+                }
+            </div>
+        }
+        else
+        {
+            <p>К сожалению, пока что вы ничего не продали :(</p>
+        }
+    }
+</div>
+<br />
+<br/>
+
+<div class="row" id="usersFeedback">
+    <!--Отзывы о пользователе-->
+    <h3 id="oppinionHeader">Мнения других пользователей</h3>
+    <div class="col-md-3">
+        <p>Здесь можно разместить свой отзыв о данном пользователе</p>
+    </div>
+    <div class="col-md-6">
+        <p>Место для формы с отзывалкой!!!</p>
+    </div>
+    <div class="col-md-3">
+        <p>Не надо стесняяяться!</p>
+        <button>Наверх</button>
+    </div>
+</div>

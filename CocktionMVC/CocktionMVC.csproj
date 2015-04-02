@@ -287,8 +287,13 @@
     <Content Include="Content\hiddenButtons.css" />
     <Content Include="Content\SiteImages\allProducts.jpg" />
     <Content Include="Content\SiteImages\anonPhoto.jpg" />
+    <Content Include="Content\SiteImages\blackjack.jpg" />
+    <Content Include="Content\SiteImages\car.jpg" />
     <Content Include="Content\SiteImages\finishedAuctions.jpg" />
+    <Content Include="Content\SiteImages\girl.jpg" />
+    <Content Include="Content\SiteImages\house1.jpg" />
     <Content Include="Content\SiteImages\hseBuilding.jpg" />
+    <Content Include="Content\SiteImages\money.jpg" />
     <Content Include="Content\SiteImages\petuh6.jpg" />
     <Content Include="Content\SiteImages\Roosters-Playing-Football-Funny-Animals.jpg" />
     <Content Include="Content\SiteImages\ThanksCock.jpg" />
@@ -346,6 +351,7 @@
     <Content Include="Scripts\MyLib\AuctionHouse\GetCurrentAuctionHouse\addComment.js" />
     <Content Include="Scripts\MyLib\AuctionHouse\GetCurrentAuctionHouse\scroller.js" />
     <Content Include="Scripts\MyLib\AuctionHouse\GetUniversityHouses\printHousesInCells.js" />
+    <Content Include="Scripts\MyLib\Auction\Create\housePrinter.js" />
     <Content Include="Scripts\MyLib\Auction\CurrentAuction\auctionEndLogic.js" />
     <Content Include="Scripts\MyLib\Auction\Create\categoryOnClick.js" />
     <Content Include="Scripts\MyLib\Auction\Create\creatorOnClick.js" />

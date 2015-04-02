@@ -45,9 +45,9 @@ namespace CocktionMVC.Controllers.ApiControllers
             var resultOfRegistration = await UserManager.CreateAsync(user, data.Password);
             if (resultOfRegistration.Succeeded)
             {
-                return new RegisterUserRespond("succeded");
+                return new RegisterUserRespond("Success");
             }
-            return new RegisterUserRespond("failed");
+            return new RegisterUserRespond("Failure");
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace CocktionMVC.Controllers.ApiControllers
 
             //Если чего-то нет (логин или парль) авторизация невозможна
             if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
-                return new TokenResponse { Token = "failed" };
+                return new TokenResponse { Token = "Failure" };
             
             //Ищем пользователя с таким паролем и логином
             var userIdentity = UserManager.FindAsync(user, password).Result;
@@ -86,7 +86,7 @@ namespace CocktionMVC.Controllers.ApiControllers
             }
 
             //если не нашелся - возвращаем ошибку
-            return new TokenResponse { Token = "failed" };
+            return new TokenResponse { Token = "Failure" };
         }
     }
 }

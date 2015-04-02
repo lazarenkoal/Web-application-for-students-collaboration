@@ -1,4 +1,5 @@
-﻿@model List<CocktionMVC.Models.DAL.House>
+﻿@using WebGrease.Css.Ast.Selectors
+@model List<CocktionMVC.Models.DAL.House>
 @{
     ViewBag.Title = "Создать аукцион";
 }
@@ -6,8 +7,14 @@
 <script src="~/Scripts/MyLib/Auction/Create/categoryOnClick.js"></script>
 <script src="~/Scripts/MyLib/Auction/Create/formValuesVerifier.js"></script>
 <script src="~/Scripts/MyLib/Auction/Create/creatorOnClick.js"></script>
+<script src="~/Scripts/MyLib/Auction/Create/housePrinter.js"></script>
+<style>
+    p {
+        font-family: monospace;
+    }
+</style>
 <div class="row">
-    <div id="formContainer" class="col-lg-4">
+    <div id="formContainer" class="col-lg-3">
         <h3>Создай свой аукцион!</h3>
         <p>Имя</p>
         <div id="nameErrorField"></div>
@@ -95,14 +102,31 @@
         <div id="fileErrorField"></div>
         <div id="checkboxInfo"></div>
     </div>
-    <div id="locationsContainer" class="col-lg-4">
+    <div id="locationsContainer" class="col-lg-5">
         <h3>Выбери дом для него</h3>
-        <div id="housesErrorField"></div>
         @foreach (var item in Model)
-        {
-            <p><input type="checkbox" name="houseCheckbox" id="@item.Id" /> @item.University, @item.Faculty, @item.Adress </p>
+        { 
+            <script>
+                var q = {
+                    id: @item.Id,
+                    university: '@item.University',
+                    faculty: '@item.Faculty',
+                    adress: '@item.Adress'
+                    };
+                a.push(q);
+            </script>
         }
- 
+        <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=" printHouses(this) ">МГТУ</button>
+            <button type="button" class="btn btn-default" onclick=" printHouses(this) ">МФТИ</button>
+            <button type="button" class="btn btn-default" onclick=" printHouses(this) ">НИУ ВШЭ</button>
+            <button type="button" class="btn btn-default" onclick=" printHouses(this) ">МГУ</button>
+            <button type="button" class="btn btn-default" onclick=" printHouses(this) ">НИЯУ МИФИ</button>
+        </div>
+        <div id="houses">
+        </div>
+        <div id="housesErrorField"></div>
+         
     </div>
     <div id="infoForm" class="col-lg-4">
         <h3>Привет, друг</h3>

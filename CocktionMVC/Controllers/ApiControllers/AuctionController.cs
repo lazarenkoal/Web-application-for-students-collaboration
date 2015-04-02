@@ -120,11 +120,11 @@ namespace CocktionMVC.Controllers.ApiControllers
                     postedFile.SaveAs(filePath);
 
                 }
-                info.Status = "success";
+                info.Status = "Success";
             }
             else
             {
-                info.Status = "failed";
+                info.Status = "Failure";
             }
 
             //добавляем фоточку и фабмнейл
