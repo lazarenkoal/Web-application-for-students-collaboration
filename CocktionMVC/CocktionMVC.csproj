@@ -227,9 +227,14 @@
     <Compile Include="Migrations\201503311809387_RenamingAdress.Designer.cs">
       <DependentUpon>201503311809387_RenamingAdress.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504031852011_feedBackAdded.cs" />
+    <Compile Include="Migrations\201504031852011_feedBackAdded.Designer.cs">
+      <DependentUpon>201504031852011_feedBackAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DAL\Auction\BidCluster.cs" />
     <Compile Include="Models\DAL\AuctionHouse\ForumPost.cs" />
+    <Compile Include="Models\DAL\UsersFeedback.cs" />
     <Compile Include="Models\JsonModels\MobileClientModels\AuctionApiRespondModels.cs" />
     <Compile Include="Models\JsonModels\MobileClientModels\AuctionInfo.cs" />
     <Compile Include="Models\DAL\AuctionHouse\House.cs" />
@@ -279,12 +284,13 @@
     </Content>
     <Content Include="bin\CocktionMVC.dll" />
     <Content Include="bin\CocktionMVC.pdb" />
-    <Content Include="Content\bootstrap-responsive.css" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\BootstrapCss\bootstrap-responsive.css" />
+    <Content Include="Content\BootstrapCss\bootstrap-theme.css" />
+    <Content Include="Content\BootstrapCss\bootstrap-theme.min.css" />
+    <Content Include="Content\BootstrapCss\bootstrap.css" />
+    <Content Include="Content\BootstrapCss\bootstrap.min.css" />
     <Content Include="Content\hiddenButtons.css" />
+    <Content Include="Content\ProfileStyle\ProfileStyle.css" />
     <Content Include="Content\SiteImages\allProducts.jpg" />
     <Content Include="Content\SiteImages\anonPhoto.jpg" />
     <Content Include="Content\SiteImages\blackjack.jpg" />
@@ -327,8 +333,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\BootstrapCss\bootstrap-theme.css.map" />
+    <Content Include="Content\BootstrapCss\bootstrap.css.map" />
     <None Include="Properties\PublishProfiles\Cocktion_AWS2.pubxml" />
     <None Include="Scripts\Jquery\jquery-2.1.3.intellisense.js" />
     <None Include="Scripts\DefaultScripts\_references.js" />
@@ -365,6 +371,7 @@
     <Content Include="Scripts\MyLib\Auction\Index\hubConnection.js" />
     <Content Include="Scripts\MyLib\EditHouses\formVerifier.js" />
     <Content Include="Scripts\MyLib\EditHouses\housesSender.js" />
+    <Content Include="Scripts\MyLib\Profile\opinionAdder.js" />
     <Content Include="Scripts\MyLib\Vis\vis.js" />
     <Content Include="Scripts\MyLib\Vis\vis.min.js" />
     <Content Include="Web.config">
@@ -444,6 +451,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201503311809387_RenamingAdress.resx">
       <DependentUpon>201503311809387_RenamingAdress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504031852011_feedBackAdded.resx">
+      <DependentUpon>201504031852011_feedBackAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

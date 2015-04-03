@@ -1,0 +1,71 @@
+﻿h3, h4,h5 {
+    text-align: center;
+}
+#userInformation, #subcribedHouses, #usersAuctions{
+    background-color: transparent;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-color: black;
+    border: groove 1px;
+}
+
+#userInformation {
+    height: 250px;
+    align-items: center;
+}
+
+#userLifePos {
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
+    border-top: groove 1px;
+    border-bottom: groove 1px;
+    border-color: lightgray;
+    border-right: groove 1px;
+    background-color: transparent;
+    height: 250px;
+}
+
+#interests {
+    padding: 1px;
+}
+
+#auctionHeader, #housesHeader {
+    border-bottom: dotted 1px gray;
+    padding: 10px;
+}
+
+#feedbackFormContainer {
+    border: solid 1px gray;
+    border-radius: 3px;
+    padding-bottom: 10px;
+}
+
+textarea{
+    width:100%;
+    height: 100px;
+}
+
+.postAuthor {
+    border-bottom: solid 1px lightgray;
+}
+
+#sendFeedbackBtn {
+    float: right;
+}
+
+#feedbackPosts{
+    border: solid 1px lightblue;
+    border-radius: 3px;
+    padding: 10px;
+}
+
+.feedbackPost{
+    border: dotted 1px lightgray;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+
+
+
+

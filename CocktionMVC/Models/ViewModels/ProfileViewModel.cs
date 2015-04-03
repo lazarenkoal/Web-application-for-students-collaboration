@@ -16,7 +16,8 @@ namespace CocktionMVC.Models.ViewModels
         }
 
         public ProfileViewModel(int eggsAmount, int auctionsAmount, int productsAmount,
-            string surname, string name, int? rating, int daysWithUs, List<Auction> hisAuctions)
+            string surname, string name, int? rating, int daysWithUs, List<Auction> hisAuctions, string userId,
+            List<UsersFeedback> feeds)
         {
             EggsAmount = eggsAmount;
             AuctionsAmount = auctionsAmount;
@@ -26,7 +27,12 @@ namespace CocktionMVC.Models.ViewModels
             Rating = rating;
             DaysWithUsAmount = daysWithUs;
             HisAuctions = hisAuctions;
+            UserId = userId;
+            Feeds = feeds;
         }
+
+        public List<UsersFeedback> Feeds { get; set; }
+        public string UserId { get; set; }
         public int EggsAmount { get; set; }
         public int AuctionsAmount { get; set; }
         public int ProductsAmount { get; set; }

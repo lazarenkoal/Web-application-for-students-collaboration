@@ -9,6 +9,7 @@ namespace CocktionMVC.Models.DAL
         {
         }
         public virtual DbSet<ToteBoard> ToteBoards { get; set; }
+        public virtual DbSet<UsersFeedback> Feedbacks { get; set; }
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
