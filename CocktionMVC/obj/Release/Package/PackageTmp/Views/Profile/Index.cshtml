@@ -182,20 +182,14 @@
             }
             else
             {
-                <div class="feedbackPost">
+                <div class="feedbackPost" id="defaultFeedback">
                     <p class="postAuthor">
                         <b>Коки Кок</b> cказал
                     </p>
                     <p>К сожалению, никто еще не оставил отзыв об этом пользователе</p>
-                    <br />
                 </div>
+                <br />
             }
-        </div>
-        <div id="writeFeedbackForm">
-            <!--Контейнер с формой для отправки своего мнения-->
-            <h5>Напиши своё</h5>
-            <textarea id="writeFeedbackTextarea"></textarea>
-            <button class="btn btn-success" onclick="addOpinion('@Model.UserId')" id="sendFeedbackBtn">Отправить отзыв</button>
         </div>
     </div>
     <div class="col-md-3">

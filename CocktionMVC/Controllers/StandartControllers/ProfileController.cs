@@ -33,9 +33,9 @@ namespace CocktionMVC.Controllers.StandartControllers
             if (User.Identity.IsAuthenticated)
             {//если пользватель авторизован
                 CocktionContext db = new CocktionContext();
-
+                AspNetUser user;
                 //находим пользователя
-                var user = db.AspNetUsers.Find(User.Identity.GetUserId());
+                    user = db.AspNetUsers.Find(User.Identity.GetUserId());
 
                 //Cобираем имя и фамилию
                 string userName = user.UserRealName;

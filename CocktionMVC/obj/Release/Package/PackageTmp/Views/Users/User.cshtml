@@ -4,15 +4,15 @@
 @using CocktionMVC.Models.DAL
 @using CocktionMVC.Models.ViewModels
 @model ProfileViewModel
-<link rel="stylesheet" href="~/Content/ProfileStyle/ProfileStyle.css"/>
+<link rel="stylesheet" href="~/Content/ProfileStyle/ProfileStyle.css" />
 <script src="~/Scripts/MyLib/Profile/opinionAdder.js"></script>
 <div class="row">
-    <br/>
+    <br />
     <!--Фотка и информация о пользователе-->
     <div class="col-md-3" style="align-items:flex-start">
         <!--Контейнер для аватарки-->
-        <img src="~/Content/SiteImages/anonPhoto.jpg" class="img-thumbnail"/>
-        <p>Ваша фотокарточка.</p>
+        <img src="~/Content/SiteImages/anonPhoto.jpg" class="img-thumbnail" />
+        <p>Фотокарточка.</p>
     </div>
     <div class="col-md-2" id="userInformation">
         <!--Контейнер для информации-->
@@ -20,17 +20,20 @@
             <!--Контейнер для имени пользователя-->
             <h4>@Model.Name @Model.Surname</h4>
         </div>
-        <br/>
+        <br />
         <div id="userRates">
             <!--Контейнер для информации о пользователе-->
             <p><b>Рейтинг:</b> @Model.Rating</p>
             <p><b>Яиц: </b> @Model.EggsAmount</p>
             <p><b>Аукционов сделал:</b> @Model.AuctionsAmount</p>
-            <p><b>Победил </b> 40 раз
+            <p>
+                <b>Победил </b> 40 раз
             </p>
-            <p><b>Ставок сделал: </b> @Model.ProductsAmount штук
+            <p>
+                <b>Ставок сделал: </b> @Model.ProductsAmount штук
             </p>
-            <p><b>Вместе с нами: </b> @Model.DaysWithUsAmount дней
+            <p>
+                <b>Вместе с нами: </b> @Model.DaysWithUsAmount дней
             </p>
         </div>
     </div>
@@ -40,7 +43,7 @@
             <div class="col-md-3">
                 <h4>Интерес #1</h4>
                 <p>Тачки</p>
-                <img src="~/Content/SiteImages/car.jpg" class="img-thumbnail"/>
+                <img src="~/Content/SiteImages/car.jpg" class="img-thumbnail" />
             </div>
             <div class="col-md-3">
                 <h4>Интерес #2</h4>
@@ -68,7 +71,7 @@
     <h3 id="housesHeader">Житель следующих домов</h3>
     <div class="col-md-3">
         <p>Какой-то дом</p>
-        <img src="~/Content/SiteImages/house1.jpg" class="img-responsive"/>
+        <img src="~/Content/SiteImages/house1.jpg" class="img-responsive" />
     </div>
     <div class="col-md-3">
         <p>Какой-то дом</p>
@@ -85,7 +88,7 @@
 </div>
 
 <br />
-<br/>
+<br />
 
 <div class="row" id="usersAuctions">
     <!--Аукционы пользователя-->
@@ -113,8 +116,8 @@
                     <h4>@Model.HisAuctions[i2].SellProduct.Name</h4>
                     <p>Описание: @Model.HisAuctions[i2].SellProduct.Description</p>
                     <p>@Html.ActionLink("Заглянуть", "CurrentAuction", "Auction", new { id = Model.HisAuctions[i2].Id }, null)</p>
-    <img src="http://cocktion.com/Images/Thumbnails/@Model.HisAuctions[i2].SellProduct.Photos.First().FileName"
-         class="img-responsive" />
+                    <img src="http://cocktion.com/Images/Thumbnails/@Model.HisAuctions[i2].SellProduct.Photos.First().FileName"
+                         class="img-responsive" />
                     <br />
                     <br />
                     i2 += 4;
@@ -126,7 +129,7 @@
                     <h4>@Model.HisAuctions[i3].SellProduct.Name</h4>
                     <p>Описание: @Model.HisAuctions[i3].SellProduct.Description</p>
                     <p>@Html.ActionLink("Заглянуть", "CurrentAuction", "Auction", new { id = Model.HisAuctions[i3].Id }, null)</p>
-    <img src="http://cocktion.com/Images/Thumbnails/@Model.HisAuctions[i3].SellProduct.Photos.First().FileName" class="img-responsive" />
+                    <img src="http://cocktion.com/Images/Thumbnails/@Model.HisAuctions[i3].SellProduct.Photos.First().FileName" class="img-responsive" />
                     <br />
                     <br />
 
@@ -139,7 +142,7 @@
                     <h4>@Model.HisAuctions[i4].SellProduct.Name</h4>
                     <p>Описание: @Model.HisAuctions[i4].SellProduct.Description</p>
                     <p>@Html.ActionLink("Заглянуть", "CurrentAuction", "Auction", new { id = Model.HisAuctions[i4].Id }, null)</p>
-    <img src="http://cocktion.com/Images/Thumbnails/@Model.HisAuctions[i4].SellProduct.Photos.First().FileName" class="img-responsive" />
+                    <img src="http://cocktion.com/Images/Thumbnails/@Model.HisAuctions[i4].SellProduct.Photos.First().FileName" class="img-responsive" />
                     <br />
                     <br />
                     i4 += 4;
@@ -153,7 +156,7 @@
     }
 </div>
 <br />
-<br/>
+<br />
 
 <div class="row" id="usersFeedback">
     <!--Отзывы о пользователе-->
@@ -167,13 +170,15 @@
     </div>
     <div class="col-md-6" id="feedbackFormContainer">
         <h5 id="oppinionHeader">Мнения</h5>
-        <div id="feedbackPosts"><!--Контейнер для сообщений -->
+        <div id="feedbackPosts">
+            <!--Контейнер для сообщений -->
             @if (Model.Feeds.Count != 0)
             {
                 foreach (UsersFeedback feed in Model.Feeds)
                 {
                     <div class="feedbackPost">
-                        <p class="postAuthor"><b>@feed.AuthorsName @feed.AuthorsSurname</b> cказал
+                        <p class="postAuthor">
+                            <b>@feed.AuthorsName @feed.AuthorsSurname</b> cказал
                         </p>
                         <p>@feed.Message</p>
                     </div>
@@ -182,14 +187,20 @@
             }
             else
             {
-                <div class="feedbackPost" id="defaultFeedback">
+                <div class="feedbackPost">
                     <p class="postAuthor">
                         <b>Коки Кок</b> cказал
                     </p>
                     <p>К сожалению, никто еще не оставил отзыв об этом пользователе</p>
+                    <br />
                 </div>
-                <br />
             }
+        </div>
+        <div id="writeFeedbackForm">
+            <!--Контейнер с формой для отправки своего мнения-->
+            <h5>Напиши своё</h5>
+            <textarea id="writeFeedbackTextarea"></textarea>
+            <button class="btn btn-success" onclick="addOpinion('@Model.UserId')" id="sendFeedbackBtn">Отправить отзыв</button>
         </div>
     </div>
     <div class="col-md-3">

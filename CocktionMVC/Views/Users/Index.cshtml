@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Cocktioneers";
+}
+@using CocktionMVC.Models.DAL
+@model List<CocktionMVC.Models.DAL.AspNetUser>
+<h3>Cocktioneers</h3>
+<link rel="stylesheet" href="~/Content/usersStyle.css"/>
+<script src="~/Scripts/MyLib/Data/userPrinter.js"></script>
+<div class="row">
+    <div class="col-md-3">
+        <!--Контейнер для чего-то -->
+        <p>Что-то еще...</p>
+    </div>
+    <div class="col-md-6" id="usersHere">
+        <!--Контейнер для информации о пользователе -->
+        @{
+            int amountOfUsers = Model.Count;
+            int stopIndex = amountOfUsers - 1;
+            for (int i = 0; i < amountOfUsers; i++)
+            {
+                if (i == stopIndex)
+                {
+                    <script>
+                        addUser('@Model[i].UserRealName', '@Model[i].UserRealSurname','@Model[i].Id', 'Content/SiteImages/anonPhoto.jpg',
+                            '@Model[i].Rating', '@Model[i].Eggs', '150', true)
+                    </script>
+                }
+                else
+                {
+                    <script>
+    addUser('@Model[i].UserRealName', '@Model[i].UserRealSurname','@Model[i].Id', 'Content/SiteImages/anonPhoto.jpg',
+                            '@Model[i].Rating', '@Model[i].Eggs', '150', false)
+                    </script>
+                }
+            }
+}
+    </div>
+    <div class="col-md-3">
+        <p>Выбери по критериям</p>
+        <!--Контейнер для фильтра-->
+
+    </div>
+</div>

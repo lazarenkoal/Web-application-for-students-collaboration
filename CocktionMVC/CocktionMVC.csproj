@@ -198,6 +198,7 @@
     <Compile Include="Controllers\ApiControllers\AuctionController.cs" />
     <Compile Include="Controllers\ApiControllers\DataController.cs" />
     <Compile Include="Controllers\DataControllers\AuctionShowerController.cs" />
+    <Compile Include="Controllers\DataControllers\UsersController.cs" />
     <Compile Include="Controllers\HouseControllers\AuctionHouseController.cs" />
     <Compile Include="Controllers\StandartControllers\AccountController.cs" />
     <Compile Include="Controllers\AuctionControllers\AuctionController.cs" />
@@ -320,6 +321,7 @@
     <Content Include="Content\UniversityLogos\rgsuLogo.jpg" />
     <Content Include="Content\UniversityLogos\rudnLogo.jpg" />
     <Content Include="Content\UniversityLogos\sinergyLogo.jpg" />
+    <Content Include="Content\usersStyle.css" />
     <Content Include="Content\vis.css" />
     <Content Include="Content\vis.min.css" />
     <Content Include="favicon.ico" />
@@ -369,6 +371,7 @@
     <Content Include="Scripts\MyLib\Auction\CurrentAuction\nodeProcessor.js" />
     <Content Include="Scripts\MyLib\Auction\CurrentAuction\scroller.js" />
     <Content Include="Scripts\MyLib\Auction\Index\hubConnection.js" />
+    <Content Include="Scripts\MyLib\Data\userPrinter.js" />
     <Content Include="Scripts\MyLib\EditHouses\formVerifier.js" />
     <Content Include="Scripts\MyLib\EditHouses\housesSender.js" />
     <Content Include="Scripts\MyLib\Profile\opinionAdder.js" />
@@ -433,6 +436,8 @@
     <Content Include="Views\AuctionHouse\GetUniversityHouses.cshtml" />
     <Content Include="Views\AuctionShower\ShowOldAuctions.cshtml" />
     <Content Include="Views\AuctionShower\ShowActiveAuctions.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\User.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
