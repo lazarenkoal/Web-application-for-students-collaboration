@@ -19,5 +19,11 @@
         /// Название файла
         /// </summary>
         public string FileName { get; set; }
+
+        /// <summary>
+        /// Категория товара
+        /// </summary>
+        public string Category { get; set; }
+
     }
 }

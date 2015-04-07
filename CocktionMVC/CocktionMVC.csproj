@@ -232,6 +232,10 @@
     <Compile Include="Migrations\201504031852011_feedBackAdded.Designer.cs">
       <DependentUpon>201504031852011_feedBackAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504071605573_WinProductNameAdded.cs" />
+    <Compile Include="Migrations\201504071605573_WinProductNameAdded.Designer.cs">
+      <DependentUpon>201504071605573_WinProductNameAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DAL\Auction\BidCluster.cs" />
     <Compile Include="Models\DAL\AuctionHouse\ForumPost.cs" />
@@ -285,6 +289,7 @@
     </Content>
     <Content Include="bin\CocktionMVC.dll" />
     <Content Include="bin\CocktionMVC.pdb" />
+    <Content Include="Content\AuctionStyles\currentAuctionStyle.css" />
     <Content Include="Content\BootstrapCss\bootstrap-responsive.css" />
     <Content Include="Content\BootstrapCss\bootstrap-theme.css" />
     <Content Include="Content\BootstrapCss\bootstrap-theme.min.css" />
@@ -366,7 +371,6 @@
     <Content Include="Scripts\MyLib\Auction\Create\formValuesVerifier.js" />
     <Content Include="Scripts\MyLib\Auction\CurrentAuction\bidProcessor.js" />
     <Content Include="Scripts\MyLib\Auction\CurrentAuction\btnsOnClickPrcsg.js" />
-    <Content Include="Scripts\MyLib\Auction\CurrentAuction\formShower.js" />
     <Content Include="Scripts\MyLib\Auction\CurrentAuction\liderManager.js" />
     <Content Include="Scripts\MyLib\Auction\CurrentAuction\nodeProcessor.js" />
     <Content Include="Scripts\MyLib\Auction\CurrentAuction\scroller.js" />
@@ -459,6 +463,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504031852011_feedBackAdded.resx">
       <DependentUpon>201504031852011_feedBackAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504071605573_WinProductNameAdded.resx">
+      <DependentUpon>201504071605573_WinProductNameAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -83,19 +83,32 @@ namespace CocktionMVC.Controllers
             {
                 var db = new CocktionContext();
                 Auction auction = db.Auctions.Find(int.Parse(auctionId));
-
                 auction.WinProductId = productId;
                 auction.WinnerChosen = true;
+                auction.WinProductName = db.Products.Find(int.Parse(productId)).Name;
                 await DbItemsAdder.SaveDb(db);
 
-                string answer = "Выбор сделан:)";
-                return Json(answer);
+                return Json(new StatusHolder(true, auction.WinProductName));
             }
             catch
             {
-                string answer = "Вот дерьмо";
-                return Json(answer);
+                return Json(new StatusHolder(false, ""));
             }
+        }
+
+        /// <summary>
+        /// Универсальный контейнер статуса
+        /// </summary>
+        class StatusHolder
+        {
+            //Используется сразу строка для удобства
+            public StatusHolder(bool truthKeeper, string liderName)
+            {
+                Status = truthKeeper.ToString();
+                LiderName = liderName;
+            }
+            public string Status { get; set; }
+            public string LiderName { get; set; }
         }
 
         /// <summary>
@@ -131,7 +144,8 @@ namespace CocktionMVC.Controllers
             {
                 Name = product.Name,
                 Description = product.Description,
-                FileName = product.Photos.First().FileName
+                FileName = product.Photos.First().FileName,
+                Category = product.Category
             };
             return Json(info);
         }

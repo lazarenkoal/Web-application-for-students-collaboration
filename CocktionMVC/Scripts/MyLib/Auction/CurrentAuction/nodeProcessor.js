@@ -8,10 +8,17 @@ function getNodeInfo(nodeId) {
     req.onreadystatechange = function () {
         if (req.readyState == 4 && req.status == 200) {
             var info = JSON.parse(req.responseText);
-            $('#nodeInfo').empty();
-            $('#nodeInfo').append('<p>' + info.Name + '</p>');
-            $('#nodeInfo').append('<p>' + info.Description + '</p>');
-            $('#nodeInfo').append('<img src = " ' + 'http://cocktion.com/Images/Thumbnails/' + info.FileName + '"/>');
+            $('#productPhotoContainer').empty();
+            $('#productPhotoContainer').append(
+                '<img class=\"img-thumbnail\" src=\"' + 'http://cocktion.com/Images/Photos/' + info.FileName + "\">"
+            );
+
+            $("#productInfoContainer").empty();
+            $("#productInfoContainer").append('<p><b>Что: </b>' + info.Name + '</p>');
+            $("#productInfoContainer").append('<p><b>Конкретно: </b>' + info.Description + '</p>');
+            $("#productInfoContainer").append('<p><b>Категория: </b>' + info.Category + '</p>');
+
+            $("#showNodeInfoBtn").click();
         };
     }
     req.onprogress = function () {
@@ -22,39 +29,26 @@ function getNodeInfo(nodeId) {
 //если выбран какой-то из товаров
 function nodeSelected(properties) {
     nodeId = properties.nodes[0];
-    $('#nodeInfo').empty();
     //проверка того, зашел зарегистрированный пользователь
     //или нет
     if (nodeId != null) {
         getNodeInfo(nodeId);
-        if (userStatus == 'True') {//если зарегистрирован
-            $('#toteBoardContainer').show();
+        if (userStatus == 'True') { //если зарегистрирован
             if (userName == ownerName) {
                 //проверяем выбрал ли или нет
                 if (isChoosed == false) {
-                    $('#chooseLeader').show();
-                    $('#nodeInfo').append('<p>Вы хотите выбрать лидером элемент с айди ' + nodeId + '</p>');
-                }
-                else {
-                    $('#chooseLeader').show();
-                    $('#nodeInfo').append('<p>Можно сменить выбор!!! на ' + nodeId + '</p>');
+                    $('#chooseLiderForm').show();
+                    $('#chooseLiderInfo').empty();
+                    $('#chooseLiderInfo').append('<p>Выбрать этот товар лидером?</p>');
+                } else {
+                    $('#chooseLiderForm').show();
+                    $('#chooseLiderInfo').empty();
+                    $('#chooseLiderInfo').append('<p>Cменить выбор на этот?</p>');
                 }
             }
-            else {
-                $('#nodeInfo').append('<p> информация о нодике с айди ' + nodeId + '</p>');
-            }
-        }
-        else {
-            $('#nodeInfo').append('<p> информация о нодике с айди яуй ' + nodeId + '</p>');
         }
     }
-    else {
-        $('#nodeInfo').append('<p> Если вы хотите посмотреть информацию о товаре - кликнете на него;) </p>');
-        $('#toteBoardContainer').hide();
-        $('#chooseLeader').hide();
-    }
-
-};
+}
 
 //Функция добавляет кружочек на "карту" аукциона.
 function addNode(fileName, name, productId) {
@@ -73,4 +67,4 @@ function addNode(fileName, name, productId) {
 function addExtraNode(fileName, name, parentId, childId) {
     nodes.add([{ id: childId, label: name.trim(), shape: 'circularImage', image: 'http://cocktion.com/Images/Thumbnails/' + fileName }]);
     edges.add([{ from: parentId, to: childId }]);
-}
+};

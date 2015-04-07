@@ -1,17 +1,13 @@
 ﻿//Скрипт, добавляющий ставку к аукциону.
 function addBid(auctionId) {
-    var name1, filename1;
-    document.getElementById('uploader').onsubmit = function () {
         var formData = new FormData();
+        $("#progressBar").show();
 
         //добавляю файл
         var fileInput = document.getElementById('fileInput');
-        filename1 = fileInput.files[0].name;
         formData.append(fileInput.files[0].name, fileInput.files[0]);
-
         //добавляю поле с именем
         var bidName = document.getElementById('bidName').value;
-        name1 = bidName;
         formData.append("name", bidName);
 
         //добавляю поле с опмсание
@@ -27,22 +23,36 @@ function addBid(auctionId) {
 
         //создаю запрос
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/BidAuctionCreator/AddProductBet');
-        xhr.send(formData); //отправка данных
-        //если все хорошо
+        
+    //если все хорошо
+        xhr.upload.onprogress = function (e) {
+            $('#bar').css('width', (e.loaded / e.total) * 100 + '%');
+        }
+        
+        xhr.upload.onload
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 //получение статуса с сервера при отправке
-                document.getElementById('updater').outerText = 'успешно добавлено';
-                $("#addExtraBid").show();
+                // document.getElementById('updater').outerText = 'успешно добавлено';
+                //TODO добавить код взаимодействия с пользователем
+                
+                //Зачистка полей
+                $('#bidName').val("");
+                $('#bidDescription').val("");
+                $('#bidCategory').val("");
+                $("#progressBar").hide();
+                $("#fileInput").val("");
+                // $("#addExtraBid").show();
                 //добавление нодика ко всем остальным клиентам
                 // chat.server.addNodesToClients(name1, filename1, auctionId, xhr.responseText);
             };
-
         }
+
+        xhr.open('POST', '/BidAuctionCreator/AddProductBet');
+        xhr.send(formData); //отправка данных
+        
         return false;
     }
-}
 
 function addExtraBid(auctionId) {
     var formData = new FormData();

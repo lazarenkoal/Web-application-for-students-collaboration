@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using CocktionMVC.Functions;
 using CocktionMVC.Models.DAL;
 using Microsoft.AspNet.SignalR;
+using Microsoft.SqlServer.Server;
 
 namespace CocktionMVC
 {
@@ -74,12 +75,10 @@ namespace CocktionMVC
         /// </summary>
         /// <param name="leaderId">Айдишник лидера</param>
         /// <param name="auctionId">Айдишник аукциона, на котором все это происходит</param>
-        public void SetLider(string leaderId, int auctionId)
+        public void SetLider(string leaderId, int auctionId, string liderName)
         {
-            Clients.Group(auctionId.ToString()).showLeaderOnPage(leaderId);
+            Clients.Group(auctionId.ToString()).showLeaderOnPage(leaderId, liderName);
         }
-
-
 
         /// <summary>
         /// Метод заканчивает аукцион

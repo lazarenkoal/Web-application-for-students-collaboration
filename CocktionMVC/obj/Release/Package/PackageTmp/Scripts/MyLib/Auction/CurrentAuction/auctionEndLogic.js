@@ -4,9 +4,8 @@ function printAuctionResults(obj) {
     if (obj.Type == 'Owner') {
         //необходимо связаться с продавцом
         //печатаем в таймер сообщение
-        $('#directChat').show();
-        $('#msgHiddenContainer').append(obj.Message);
-
+        $('#auctionInfoContainer').empty();
+        $('#auctionInfoContainer').append(obj.Message);
         //открываем окно для чата
         //вызываем метод, кот будет рассылать
         //сообщения
@@ -15,8 +14,8 @@ function printAuctionResults(obj) {
         //необходимо связаться с победителем
 
         //Печатаем в таймер сообщение, затем
-        $('#directChat').show();
-        $('#msgHiddenContainer').append(obj.Message);
+        $('#auctionInfoContainer').empty();
+        $('#auctionInfoContainer').append(obj.Message);
 
         //открываем окно для чата
         //вызываем метод, который будет рассылать

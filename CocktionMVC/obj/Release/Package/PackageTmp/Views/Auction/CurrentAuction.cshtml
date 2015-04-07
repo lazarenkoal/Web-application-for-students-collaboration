@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "CurrentAuction";
 }
+@using System.Linq
 @model CocktionMVC.Models.DAL.Auction
 
 <head>
@@ -14,9 +15,8 @@
 
 
     <title></title>
-    <link rel="stylesheet" href="~/Content/hiddenButtons.css" />
+    <link rel="stylesheet" href="~/Content/AuctionStyles/currentAuctionStyle.css" />
 </head>
-<h2>Текущий аукцион</h2>
 @section scripts{
     <script src="~/Scripts/Jquery/jquery.signalR-2.2.0.min.js"></script>
     <script src="~/signalr/hubs"></script>
@@ -26,14 +26,15 @@
             chat = $.connection.auctionHub;
             //Функция для добавления сообщения на страничку
             chat.client.addNewMessageToPage = function (name, message) {
-                $('#msgContainer').append('<p>'+name+':'+message+ '</p>');
+                var textToAppend = '<p><b>' + name + ': </b>' + message + '</p>';
+                $("#chatMessagesContainer").append(textToAppend);
             };
 
             //Функция для отображения информации о тотализаторе
             chat.client.updateToteBoard = function(data)
             {
-                $('#toteBoardInfo').empty();
-                $('#toteBoardInfo').append(data);
+                $('#coefficientsTable').empty();
+                $('#coefficientsTable').append(data);
 
             };
 
@@ -51,9 +52,9 @@
 
             //функция для объявления лидера на всех страничках
             //ВО ВРЕМЯ АУКЦИОНА!!!!!!!
-            chat.client.showLeaderOnPage = function (leaderId){
-                $('#leaderInfo').empty();
-                $('#leaderInfo').append('<p>Текущий лидер аукциона ' + leaderId + '</p>');
+            chat.client.showLeaderOnPage = function (leaderId, liderName){
+                $('#liderHolder').empty();
+                $('#liderHolder').append('<p><b>Лидер аукциона: </b>' + liderName+'</p>');
                 isChosen = true;
             };
 
@@ -65,10 +66,13 @@
 
             $.connection.hub.start().done(function () {
                 chat.server.addNewRoom(@Model.Id);
-                $('#sendMsg').click(function () {
-                    chat.server.send('@User.Identity.Name', $('#enterMsgContainer').val(), @Model.Id);
-                    $('#enterMsgContainer').val('').focus();
-
+                $('#sendMessageBtn').click(function() {
+                    if ('@User.Identity.IsAuthenticated' == 'True') {
+                        chat.server.send('@User.Identity.Name', $("#enterMessageTextBox").val(), @Model.Id);
+                        $("#enterMessageTextBox").val("").focus();
+                    } else {
+                        alert("Я же предупредил, что вам нужно авторизоваться;)");
+                    }
                 });
             });
         });
@@ -76,70 +80,177 @@
 }
 <script type="text/javascript" src="~/Scripts/MyLib/Auction/CurrentAuction/scroller.js"></script>
 
-<body id="globalContainer">
-    <div class="row" id="networkContainer">
-        <div class=" col-lg-8">
+<body>
+    <div class="row">
+        <div class="col-md-8">
+            <div id="timer"></div>
             <div id="mynetwork"></div>
         </div>
-        <div class="col-lg-4">
-            <div id="timer"></div>
-            <div id="directChat">
-                <ul id="msgHiddenContainer" class="panel panel-default"></ul>
+        <div class="col-md-4" id="globalContainer">
+            <!--Контеенер для тоталика, инфы, чата, формы с загрузчиком-->
+            <br />
+            <div class="btn-group">
+                <button class="btn btn-default" id="showAuctionInfoBtn" onclick=" showAuctionInfo(this) ">Аукцион</button>
+                <button class="btn btn-default" onclick="showProducts(this) "
+                        id="showNodeInfoBtn">
+                    Товар
+                </button>
+                <button class="btn btn-default" onclick=" showToteBets(this) ">Тотализатор</button>
             </div>
-            <div id="updater">
-                <form id="uploader">
-                    <p>Введите наименование ставки</p>
-                    <input type="text" id="bidName" />
-                    <p>Введите Описание</p>
-                    <input type="text" id="bidDescription" />
-                    <p>Введите категорию</p>
-                    <input type="text" id="bidCategory" />
-                    <p>Можете прикрепить файлик</p>
-                    <input type="file" name="docs" id="fileInput">
-                    <input type="submit" value="Добавить свой лот" id="addBid" />
-                </form>
+
+            <div id="firstInfoContainer">
+                <div id="auctionInfoContainer">
+                    <h4>Выставлено на торг: @Model.SellProduct.Name</h4>
+                    <p>
+                        <b>Описание: </b>@Model.SellProduct.Description
+                    </p>
+                    <div id="liderHolder">
+                        <p>
+                            <b>Лидер аукциона: </b>@Model.WinProductName
+                        </p>
+                    </div>
+                    <p>
+                        <b>Всего ставок: </b>@Model.UsersBids.Count()
+                    </p>
+                    <p>
+                        <b>Дом: </b>@Model.Houses.First().University
+                    </p>
+                    <div id="auctionEnderHidden" hidden="">
+                        <button class="btn btn-danger" onclick="finishAuction()" id="endAuctionBtn">Закончить аукцион</button>
+                    </div>
+                </div>
+
+                <div id="productsContainer" hidden="">
+                    <div class="row">
+                        <div class="col-md-5" id="productPhotoContainer">
+                            <img class="img-thumbnail" src="http://cocktion.com/Images/Thumbnails/@Model.SellProduct.Photos.First().ThumbnailSets.First().FileName">
+                            <p>Фотокарточка</p>
+                        </div>
+                        <div class="col-md-5" id="productInfoContainer">
+                            <p>
+                                <b>Что: </b>@Model.SellProduct.Name
+                            </p>
+                            <p>
+                                <b>Конкретно: </b>@Model.SellProduct.Description
+                            </p>
+                            <p>
+                                <b>Категория: </b>@Model.SellProduct.Category
+                            </p>
+                        </div>
+                    </div>
+                    <div id="chooseLiderForm" hidden="">
+                        <div id="chooseLiderInfo"></div>
+                        <button type="button" class="btn btn-success" onclick="chooseLider()" id="chooseLeaderBtn">Выбрать лидера</button>
+                    </div>
+                </div>
+                <div id="toteBetsContainer" hidden="">
+                    <!--Скрытая в начале форма-->
+                    <h4 style="text-align: center">Таблица коэффициентов</h4>
+                    <div id="coefficientsTable">
+                        <!--Таблица коэффициентов для аукциона-->
+                    </div>
+                    <br />
+                    <div class="input-group">
+                        <!--Форма ввода количества яиц для отправки на аукциончик-->
+                        <input type="text" class="form-control" id="enterEggsForBetTextBox">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" id="sendEggsBtn"
+                                    title="ЯИЧКИИИИ!">
+                                Поставь!
+                            </button>
+                        </span>
+                    </div>
+                </div>
             </div>
+            <br />
+            <div class="btn-group">
+                <button class="btn btn-default" onclick=" showProductBids(this, userStatus, userName) "
+                        id="showProductBidsBtn">
+                    Ставка
+                </button>
+                <button class="btn btn-default" onclick=" showChat(this, userStatus) "
+                        id="showChatBtn">
+                    Беседа
+                </button>
+            </div>
+            <div id="secondInfoContainer">
+                <!--Контейнер для ставки и чата-->
+                <div id="chatContainer">
+                    <div id="chatMessagesContainer">
+                        <!--Здесь будут сообщения для чата -->
+                        <p>
+                            <b>Коки: </b>Привет, друг! Это наш чат:) Здесь можно общаться и
+                            беседовать;)
+                        </p>
+                    </div>
+                    <br />
+                    <div class="input-group" id="chatControlPanel">
+                        <!--Поле для ввода и кнопочка -->
+                        <input type="text" class="form-control" id="enterMessageTextBox">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default"
+                                    type="button" id="sendMessageBtn" title="Кокает:)">
+                                Отправь!
+                            </button>
+                        </span>
+                    </div><!-- /input-group -->
+                </div>
+                <div id="productBidContainer" hidden="">
+                    <!--Скрыто с глаз в начале -->
+                    <h4>Поставь свою вещь</h4>
+                    <div id="inputProductTextBoxes">
+                        <input type="text" id="bidName"
+                               class="form-control" placeholder="Название товара">
+                        <br />
+                        <input type="text" id="bidDescription" placeholder="Описание товара"
+                               class="form-control">
+                        <br />
+                        <input type="text" id="bidCategory" placeholder="Категория"
+                               class="form-control">
+                        <br />
+                        <input type="file" name="docs" id="fileInput" />
+                    </div>
+                    <br/>
+                    <div class="progress" hidden="" id="progressBar">
+                        <div class="progress-bar progress-bar-success" id="bar" role="progressbar"
+                             aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                            <!--Здесь можно впендюрить текстовый индикатор процентов загрузки-->
+                        </div>
+                    </div>
+                    <button class="btn btn-default" onclick=" addBid(auctionId) " id="sendProductBidBtn">Отправить товар</button>
+                </div>
+                <div id="productBidErrorInfo" hidden="">
+                    <!--Это для добавления сообщений (чтобы не показывать форму)-->
+                </div>
+            </div>
+            <!-- Добавлялка дополнительной ставки
             <div id="extraBidContainer">
                 <p>Введите наименование довеска</p>
-                <input type="text" id="extraBidName" />
+                <input type="text" id="extraBidName"/>
                 <p>Введите Описание довеска</p>
-                <input type="text" id="extraBidDescription" />
+                <input type="text" id="extraBidDescription"/>
                 <p>Введите категорию довеска</p>
-                <input type="text" id="extraBidCategory" />
+                <input type="text" id="extraBidCategory"/>
                 <p>Можете прикрепить файлик</p>
                 <input type="file" id="extraFileInput">
                 <button type="button" id="submitExtraBid" class="btn btn-danger" onclick="addExtraBid(@Model.Id)">Послать довесок</button>
             </div>
             <button type="button" class="btn btn-success" id="addExtraBid" onclick="showExtraBidAdder()">Добавить довесок</button>
-            <div id="nodeInfo"></div>
-            <div id="leaderInfo"></div>
-            <button type="button" class="btn btn-success" id="chooseLeader">Выбрать лидера</button>
-            <button type="button" class=" btn btn-danger" id="stopAuction">Завершить аукцион</button>
-            <button type="button" class="btn btn-info" onclick="scrollToChat()" id="scrollToChatBtn">К чату</button>
+                -->
         </div>
     </div>
 
-<div class="row">
-    <div class="col-lg-5">
-        <div id="chatContainer">
-            <ul id="msgContainer"></ul>
-            <input type="text" class="form-control" placeholder="Text input" id="enterMsgContainer">
-            <button type="button" class="btn btn-success" id="sendMsg">Кудахнуть</button>
-            <button type="button" class="btn btn-info" onclick="scrollToTree()" id="scrollToTreeBtn">К аукциону</button>
-        </div>
-    </div>
-    <div class="col-lg-7">
-        <div id="toteBoardContainer">
-            <div id="eggInfo"></div>
-            <p>Введите количество яиц</p>
-            <input type="text" id="eggsAmount"/>
-            <button type="button" class="btn btn-info" id="addEggsBtn">Поставить ставку</button>
-            <div id="toteBoardInfo">
+    <!--
+    <div id="toteBoardContainer">
+        <div id="eggInfo"></div>
+        <p>Введите количество яиц</p>
+        <input type="text" id="eggsAmount"/>
+        <button type="button" class="btn btn-info" id="addEggsBtn">Поставить ставку</button>
+        <div id="toteBoardInfo">
 
-            </div>
         </div>
-    </div>
-</div>
+    </div>-->
+
     <script type="text/javascript" src="~/Scripts/MyLib/Auction/CurrentAuction/nodeProcessor.js"></script>
 
     <script>
@@ -159,9 +270,9 @@
             $n.countdown('@Model.EndTime.Year/@Model.EndTime.Month/@Model.EndTime.Day @Model.EndTime.Hour:@Model.EndTime.Minute:@Model.EndTime.Second')
                 .on('update.countdown',function(event) {
                     var totalHours = event.offset.totalDays * 24 + event.offset.hours;
-                    var $this = $(this).html(event.strftime(''
-                         + totalHours + ' : '
-                         + '<span>%M</span> : '
+                    var $this = $(this).html(event.strftime('До конца: '
+                        + totalHours + ' : '
+                        + '<span>%M</span> : '
                         + '<span>%S</span>'));
                 }).on('finish.countdown', function(event) {
                     sayThatFinished();
@@ -176,6 +287,25 @@
 
         //если выбран победитель аукциона
         var nodeId;
+
+        //Отправляет по кнопке энтер сообщение (кликом на кнопку)
+        $(document).ready(function () {
+            $('#enterMessageTextBox').keypress(function (e) {
+                if (e.keyCode == 13)
+                    $('#sendMessageBtn').click();
+            });
+            $("#showChatBtn").click();
+            $("#showAuctionInfoBtn").click();
+
+            if ("@Model.WinnerChosen" == "True") {
+                isChoosed = true;
+            }
+
+            if (userName == ownerName) {
+                $("#auctionEnderHidden").show();
+            }
+        });
+
     </script>
     <script type="text/javascript" src="~/Scripts/MyLib/Auction/CurrentAuction/btnsOnClickPrcsg.js"></script>
     <script>
@@ -194,27 +324,17 @@
             edges: edges,
         };
         var options = {
-
-        };
+            width: '100%',
+            height: '600px'
+        }
         var network = new vis.Network(container, data, options);
         network.on('select', nodeSelected);
     </script>
 
-    <script>
-        //вывод на экран лидера аукциона
-        printLider(nodeId);
-        //вывод на экран формы с загрузчиком
-        //либо кнопки для пользователя
-        //если выбран какой-то из товаров
-        //добавлоенном товаре
-        addBid(auctionId);
-    </script>
     @{
 
         if (Model.BidProducts != null)
         {
-
-
             foreach (var i in Model.UsersBids)
             {
                 if (i.Products.Count == 1)
@@ -231,7 +351,7 @@
                         if (product.Id != parentId)
                         {
                             <script>
-                                addExtraNode('@product.Photos.First().FileName','@product.Name', @parentId, @product.Id );
+                                addExtraNode('@product.Photos.First().FileName', '@product.Name', @parentId, @product.Id);
                             </script>
                         }
                     }

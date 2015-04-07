@@ -43,6 +43,8 @@ namespace CocktionMVC.Models.DAL
 
         public string WinProductId { get; set; }
 
+        public string WinProductName { get; set; }
+
         public bool IsActive { get; set; }
          
         public bool? WinnerChosen { get; set; }
