@@ -520,7 +520,6 @@
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.Http.Owin.dll
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Web.Http.Owin.xml
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\Recaptcha.Web.dll
-\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.csprojResolveAssemblyReference.cache
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.sdfsdf.resources
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.csproj.GenerateResource.Cache
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.RenamingAdress.resources

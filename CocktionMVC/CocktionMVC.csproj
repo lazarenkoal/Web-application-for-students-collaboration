@@ -197,6 +197,8 @@
     <Compile Include="Controllers\ApiControllers\AccountController.cs" />
     <Compile Include="Controllers\ApiControllers\AuctionController.cs" />
     <Compile Include="Controllers\ApiControllers\DataController.cs" />
+    <Compile Include="Controllers\ApiControllers\HouseController.cs" />
+    <Compile Include="Controllers\ApiControllers\ProfileController.cs" />
     <Compile Include="Controllers\DataControllers\AuctionShowerController.cs" />
     <Compile Include="Controllers\DataControllers\UsersController.cs" />
     <Compile Include="Controllers\HouseControllers\AuctionHouseController.cs" />
@@ -240,6 +242,10 @@
     <Compile Include="Models\DAL\Auction\BidCluster.cs" />
     <Compile Include="Models\DAL\AuctionHouse\ForumPost.cs" />
     <Compile Include="Models\DAL\UsersFeedback.cs" />
+    <Compile Include="Models\JsonModels\HouseRelatedModels\ForumPostMobile.cs" />
+    <Compile Include="Models\JsonModels\HouseRelatedModels\Guild.cs" />
+    <Compile Include="Models\JsonModels\HouseRelatedModels\GuildsHouse.cs" />
+    <Compile Include="Models\JsonModels\HouseRelatedModels\HouseMobile.cs" />
     <Compile Include="Models\JsonModels\MobileClientModels\AuctionApiRespondModels.cs" />
     <Compile Include="Models\JsonModels\MobileClientModels\AuctionInfo.cs" />
     <Compile Include="Models\DAL\AuctionHouse\House.cs" />
@@ -248,8 +254,10 @@
     <Compile Include="Models\JsonModels\HouseRelatedModels\ForumRespond.cs" />
     <Compile Include="Models\JsonModels\HouseRelatedModels\HouseRespond.cs" />
     <Compile Include="Models\JsonModels\MobileClientModels\HouseInfo.cs" />
+    <Compile Include="Models\JsonModels\MobileClientModels\ProfileInfoMobile.cs" />
     <Compile Include="Models\JsonModels\MobileClientModels\RegisterUserData.cs" />
     <Compile Include="Models\JsonModels\MobileClientModels\RegisterUserRespond.cs" />
+    <Compile Include="Models\JsonModels\StatusHolder.cs" />
     <Compile Include="Models\JsonModels\YaMapsModels\LocationInfo.cs" />
     <Compile Include="Models\JsonModels\MobileClientModels\MobileUserLogin.cs" />
     <Compile Include="Models\JsonModels\ProductRelatedModels\ProductInfo.cs" />
