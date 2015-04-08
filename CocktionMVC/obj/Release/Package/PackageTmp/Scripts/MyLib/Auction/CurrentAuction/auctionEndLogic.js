@@ -6,6 +6,7 @@ function printAuctionResults(obj) {
         //печатаем в таймер сообщение
         $('#auctionInfoContainer').empty();
         $('#auctionInfoContainer').append(obj.Message);
+        $("#showAuctionInfoBtn").click();
         //открываем окно для чата
         //вызываем метод, кот будет рассылать
         //сообщения
@@ -16,7 +17,7 @@ function printAuctionResults(obj) {
         //Печатаем в таймер сообщение, затем
         $('#auctionInfoContainer').empty();
         $('#auctionInfoContainer').append(obj.Message);
-
+        $("#showAuctionInfoBtn").click();
         //открываем окно для чата
         //вызываем метод, который будет рассылать
         //собшения
@@ -49,7 +50,7 @@ function getAuctionResults() {
             var info = JSON.parse(winnerNameRequest.responseText);
             $('#timer').empty();
             printAuctionResults(info);
-        };
+м        };
     };
     return false;
 };

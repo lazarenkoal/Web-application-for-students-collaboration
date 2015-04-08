@@ -10,7 +10,7 @@ namespace CocktionMVC.Models.DAL
         {
             Auctions = new HashSet<Auction>();
             Photos = new HashSet<Photo>();
-            LidAuctions = new HashSet<Auction>();
+            LeadAuctions = new HashSet<Auction>();
             BidAuctions = new HashSet<Auction>();
             BidClusters = new HashSet<BidCluster>();
         }
@@ -20,7 +20,7 @@ namespace CocktionMVC.Models.DAL
         {
             Auctions = new HashSet<Auction>();
             Photos = new HashSet<Photo>();
-            LidAuctions = new HashSet<Auction>();
+            LeadAuctions = new HashSet<Auction>();
             BidAuctions = new HashSet<Auction>();
             BidClusters = new HashSet<BidCluster>();
             Name = name;
@@ -36,7 +36,7 @@ namespace CocktionMVC.Models.DAL
         {
             Auctions = new HashSet<Auction>();
             Photos = new HashSet<Photo>();
-            LidAuctions = new HashSet<Auction>();
+            LeadAuctions = new HashSet<Auction>();
             BidAuctions = new HashSet<Auction>();
             BidClusters = new HashSet<BidCluster>();
             Description = description;
@@ -76,7 +76,7 @@ namespace CocktionMVC.Models.DAL
 
         public virtual ICollection<Photo> Photos { get; set; }
 
-        public virtual ICollection<Auction> LidAuctions { get; set; }
+        public virtual ICollection<Auction> LeadAuctions { get; set; }
 
         public virtual ICollection<Auction> BidAuctions { get; set; }
 

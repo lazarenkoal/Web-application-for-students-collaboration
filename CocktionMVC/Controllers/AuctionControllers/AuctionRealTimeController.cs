@@ -87,6 +87,7 @@ namespace CocktionMVC.Controllers
                 auction.WinnerChosen = true;
                 auction.WinProductName = db.Products.Find(int.Parse(productId)).Name;
                 await DbItemsAdder.SaveDb(db);
+                AuctionHub.SetLider(productId, int.Parse(auctionId), auction.WinProductName);
 
                 return Json(new StatusHolder(true, auction.WinProductName));
             }

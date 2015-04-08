@@ -53,8 +53,8 @@ namespace CocktionMVC.Models.DAL
                 .HasForeignKey(e => e.UserId);
 
             modelBuilder.Entity<Auction>()
-                .HasMany(e => e.LidProducts) //Products ---> LidProducts
-                .WithMany(e => e.LidAuctions) //Auctions1 ---> LidAuctions
+                .HasMany(e => e.LeadProducts) //Products ---> LeadProducts
+                .WithMany(e => e.LeadAuctions) //Auctions1 ---> LeadAuctions
                 .Map(m => m.ToTable("AuctionProduct2").MapLeftKey("LidAuctions_Id").MapRightKey("LidProducts_Id"));
 
             modelBuilder.Entity<Auction>() 

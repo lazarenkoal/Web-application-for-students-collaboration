@@ -12,9 +12,8 @@ function chooseLider() {
         if (request.readyState == 4 && request.status == 200) {
             var resp = JSON.parse(request.responseText);
             if (resp.Status == 'True') {
-                chat.server.setLider(nodeId, auctionId, resp.LiderName);
-                $("#chooseLiderInfo").empty();
-                $("#chooseLiderInfo").append("Лидер успешно выбран:)");
+                $("#chooseLeaderInfo").empty();
+                $("#chooseLeaderInfo").append("Лидер успешно выбран:)");
                 isChoosed = true;
             } else {
                 alert("Извини, мы облажались... Попробуй еще раз...")

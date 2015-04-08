@@ -102,6 +102,23 @@ namespace CocktionMVC.Functions
             auctionId = requestBase.Form.GetValues("auctionId")[0].Trim();
         }
 
+        /// <summary>
+        /// Читает данные из формы с добавлением ставки на аукцион (для мобильника)
+        /// </summary>
+        /// <param name="requestBase">Запрос, содержащий форму с информацией о товаре</param>
+        /// <param name="name">Наименование товара</param>
+        /// <param name="auctionId">Айдишник аукциона</param>
+        /// <param name="category">Категория, к которой относится товар</param>
+        /// <param name="description">Описание товара</param>
+        public static void ReadAddProductBetForm(HttpRequest requestBase, out string name,
+            out string auctionId, out string category, out string description)
+        {
+            name = requestBase.Form.GetValues("name")[0].Trim();
+            description = requestBase.Form.GetValues("description")[0].Trim();
+            category = requestBase.Form.GetValues("category")[0].Trim();
+            auctionId = requestBase.Form.GetValues("auctionId")[0].Trim();
+        }
+
         public static void ReadAddHouseForm(HttpRequestBase requestBase, out string university,
             out string faculty, out string adress)
         {

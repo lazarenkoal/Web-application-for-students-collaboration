@@ -8,7 +8,7 @@ namespace CocktionMVC.Models.DAL
     {
         public Auction()
         {
-            LidProducts = new HashSet<Product>();
+            LeadProducts = new HashSet<Product>();
             BidProducts = new HashSet<Product>();
             Houses = new HashSet<House>();
             UsersBids = new HashSet<BidCluster>();
@@ -17,7 +17,7 @@ namespace CocktionMVC.Models.DAL
         public Auction(bool isActive, string ownerId, string ownerName, Product product,
             bool winnerChosen, ToteBoard tote)
         {
-            LidProducts = new HashSet<Product>();
+            LeadProducts = new HashSet<Product>();
             BidProducts = new HashSet<Product>();
             Houses = new HashSet<House>();
             UsersBids = new HashSet<BidCluster>();
@@ -47,7 +47,7 @@ namespace CocktionMVC.Models.DAL
 
         public bool IsActive { get; set; }
          
-        public bool? WinnerChosen { get; set; }
+        public bool WinnerChosen { get; set; }
 
         public int SellProduct_Id { get; set; }
 
@@ -57,7 +57,7 @@ namespace CocktionMVC.Models.DAL
         public virtual ICollection<BidCluster> UsersBids { get; set; }
         public virtual ICollection<House> Houses { get; set; }
 
-        public virtual ICollection<Product> LidProducts { get; set; }
+        public virtual ICollection<Product> LeadProducts { get; set; }
 
         public virtual ICollection<Product> BidProducts { get; set; }
     }

@@ -29,7 +29,6 @@ function addBid(auctionId) {
             $('#bar').css('width', (e.loaded / e.total) * 100 + '%');
         }
         
-        xhr.upload.onload
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 //получение статуса с сервера при отправке

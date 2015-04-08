@@ -37,13 +37,13 @@ function nodeSelected(properties) {
             if (userName == ownerName) {
                 //проверяем выбрал ли или нет
                 if (isChoosed == false) {
-                    $('#chooseLiderForm').show();
-                    $('#chooseLiderInfo').empty();
-                    $('#chooseLiderInfo').append('<p>Выбрать этот товар лидером?</p>');
+                    $('#chooseLeaderForm').show();
+                    $('#chooseLeaderInfo').empty();
+                    $('#chooseLeaderInfo').append('<p>Выбрать этот товар лидером?</p>');
                 } else {
-                    $('#chooseLiderForm').show();
-                    $('#chooseLiderInfo').empty();
-                    $('#chooseLiderInfo').append('<p>Cменить выбор на этот?</p>');
+                    $('#chooseLeaderForm').show();
+                    $('#chooseLeaderInfo').empty();
+                    $('#chooseLeaderInfo').append('<p>Cменить выбор на этот?</p>');
                 }
             }
         }

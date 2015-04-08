@@ -75,9 +75,10 @@ namespace CocktionMVC
         /// </summary>
         /// <param name="leaderId">Айдишник лидера</param>
         /// <param name="auctionId">Айдишник аукциона, на котором все это происходит</param>
-        public void SetLider(string leaderId, int auctionId, string liderName)
+        public static void SetLider(string leaderId, int auctionId, string liderName)
         {
-            Clients.Group(auctionId.ToString()).showLeaderOnPage(leaderId, liderName);
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<AuctionHub>();
+            context.Clients.Group(auctionId.ToString()).showLeaderOnPage(leaderId, liderName);
         }
 
         /// <summary>
@@ -90,7 +91,19 @@ namespace CocktionMVC
             CocktionContext db = new CocktionContext();
             await DbItemsAdder.FalseAuctionStatus(db, auctionId);
             Clients.Group(auctionId.ToString()).finishAuction();
+        }
 
+        /// <summary>
+        /// Метод заканчивает аукцион c мобильника
+        /// </summary>
+        /// <param name="auctionId">Айди аукциона, который нужно закончить</param>
+        public static async Task FinishAuctionMobile(int auctionId)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<AuctionHub>();
+            //заканчивать здесь аукцион
+            CocktionContext db = new CocktionContext();
+            await DbItemsAdder.FalseAuctionStatus(db, auctionId);
+            context.Clients.Group(auctionId.ToString()).finishAuction();
         }
 
         /// <summary>

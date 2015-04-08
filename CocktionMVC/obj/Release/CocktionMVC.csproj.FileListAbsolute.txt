@@ -371,3 +371,5 @@
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Release\CocktionMVC.Migrations.RenamingAdress.resources
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Release\CocktionMVC.Migrations.feedBackAdded.resources
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Release\CocktionMVC.Migrations.WinProductNameAdded.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Release\CocktionMVC.Migrations.winnerChosenUnNullableNow.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Release\CocktionMVC.Migrations.liderToLeader.resources

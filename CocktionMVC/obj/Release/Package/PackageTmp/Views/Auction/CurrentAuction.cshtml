@@ -53,8 +53,8 @@
             //функция для объявления лидера на всех страничках
             //ВО ВРЕМЯ АУКЦИОНА!!!!!!!
             chat.client.showLeaderOnPage = function (leaderId, liderName){
-                $('#liderHolder').empty();
-                $('#liderHolder').append('<p><b>Лидер аукциона: </b>' + liderName+'</p>');
+                $('#leaderHolder').empty();
+                $('#leaderHolder').append('<p><b>Лидер аукциона: </b>' + liderName+'</p>');
                 isChosen = true;
             };
 
@@ -90,7 +90,7 @@
             <!--Контеенер для тоталика, инфы, чата, формы с загрузчиком-->
             <br />
             <div class="btn-group">
-                <button class="btn btn-default" id="showAuctionInfoBtn" onclick=" showAuctionInfo(this) ">Аукцион</button>
+                <button class="btn btn-default" id="showAuctionInfoBtn" onclick="showAuctionInfo(this)">Аукцион</button>
                 <button class="btn btn-default" onclick="showProducts(this) "
                         id="showNodeInfoBtn">
                     Товар
@@ -104,7 +104,7 @@
                     <p>
                         <b>Описание: </b>@Model.SellProduct.Description
                     </p>
-                    <div id="liderHolder">
+                    <div id="leaderHolder">
                         <p>
                             <b>Лидер аукциона: </b>@Model.WinProductName
                         </p>
@@ -138,8 +138,8 @@
                             </p>
                         </div>
                     </div>
-                    <div id="chooseLiderForm" hidden="">
-                        <div id="chooseLiderInfo"></div>
+                    <div id="chooseLeaderForm" hidden="">
+                        <div id="chooseLeaderInfo"></div>
                         <button type="button" class="btn btn-success" onclick="chooseLider()" id="chooseLeaderBtn">Выбрать лидера</button>
                     </div>
                 </div>
@@ -294,7 +294,7 @@
                 if (e.keyCode == 13)
                     $('#sendMessageBtn').click();
             });
-            $("#showChatBtn").click();
+            $("#showProductBidsBtn").click();
             $("#showAuctionInfoBtn").click();
 
             if ("@Model.WinnerChosen" == "True") {

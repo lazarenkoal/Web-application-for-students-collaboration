@@ -9,6 +9,7 @@ using CocktionMVC.Functions;
 using CocktionMVC.Models.DAL;
 using CocktionMVC.Models.Hubs;
 using CocktionMVC.Models.JsonModels;
+using CocktionMVC.Models.JsonModels.MobileClientModels;
 using Microsoft.AspNet.Identity;
 
 namespace CocktionMVC.Controllers.ApiControllers
@@ -168,6 +169,178 @@ namespace CocktionMVC.Controllers.ApiControllers
 
             return info;
         }
-        
+
+        public class ChooseLeaderClass
+        {
+            public int auctionId { get; set; }
+            public int productId { get; set; }
+        }
+
+        /// <summary>
+        /// Позволяет выбирать лидера с мобильного клиента 
+        /// </summary>
+        /// <returns>Стандартный статус (удалось или нет)</returns>
+        [HttpPost]
+        [Authorize]
+        public StatusHolder ChooseLeader(ChooseLeaderClass leader)
+        {
+            CocktionContext db = new CocktionContext();
+            string userId = User.Identity.GetUserId();
+            try
+            {
+                var auction = db.Auctions.Find(leader.auctionId);
+                var product = db.Products.Find(leader.productId);
+                
+                if (userId != auction.OwnerId)
+                    throw new Exception();
+
+                auction.WinProductName = product.Name;
+                auction.WinProductId = product.Id.ToString();
+                auction.WinnerChosen = true;
+
+                db.SaveChanges();
+                AuctionHub.SetLider(leader.productId.ToString(), leader.auctionId, product.Name);
+                return new StatusHolder(true);
+            }
+            catch 
+            {
+                return new StatusHolder(false);
+            }
+        }
+
+        public class AuctionId
+        {
+            public int auctionId { get; set; }
+        }
+
+        /// <summary>
+        /// Проверялка на то, является ли пользователь владельцем аукциона
+        /// </summary>
+        /// <returns>логический статус</returns>
+        [HttpPost]
+        [Authorize]
+        public IsOwnerResponder CheckIfOwner(AuctionId auctId)
+        {
+            try
+            {
+                CocktionContext db = new CocktionContext();
+
+                //находим аукцион и пользователя
+                var auction = db.Auctions.Find(auctId.auctionId);
+                string currentUserId = User.Identity.GetUserId();
+
+                //проверяем является ли пользователь владельцем
+                bool isOwner = auction.OwnerId == currentUserId ? true : false;
+
+                return new IsOwnerResponder(isOwner);
+            }
+            catch 
+            {
+                return new IsOwnerResponder(null);
+            }
+        }
+
+        /// <summary>
+        /// Завершает аукцион с мобильника
+        /// </summary>
+        /// <returns>Стандартный статус</returns>
+        [HttpPost]
+        [Authorize]
+        public async Task<StatusHolder> EndAuction(AuctionId aId)
+        {
+            //TODO решить проблему взаимодействия с клиентами. Они не могут узнать, что аукцион завершен с мобильника
+            CocktionContext db = new CocktionContext();
+            string userId = User.Identity.GetUserId();
+            try
+            {
+                //находим аукцион
+                var auction = db.Auctions.Find(aId.auctionId);
+
+                //Проверяем, можно ли его закончить
+
+                //является ли пользователь владельцем?
+                bool isUserOwner = (userId == auction.OwnerId);
+                bool canEnd = auction.IsActive & auction.WinnerChosen;
+                if ((!isUserOwner) & canEnd)
+                    throw new Exception();
+
+                await AuctionHub.FinishAuctionMobile(auction.Id);
+
+                return new StatusHolder(true);
+            }
+            catch
+            {
+                return new StatusHolder(false);
+            }
+
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<StatusHolder> AddBid()
+        {
+                string name, description, category, auctionId;
+                RequestFormReader.ReadAddProductBetForm(HttpContext.Current.Request, out name,
+                    out auctionId, out category, out description);
+
+                //получаем файлик
+                string filePath = "";
+                string fileName = "";
+                HttpPostedFile postedFile = null;
+                var httpRequest = HttpContext.Current.Request;
+                if (httpRequest.Files.Count > 0)
+                {
+                    foreach (string file in httpRequest.Files)
+                    {
+                        postedFile = httpRequest.Files[file];
+                        string extension = Path.GetExtension(postedFile.FileName);
+                        fileName = Guid.NewGuid().ToString() + extension; //генерируем новое имя для фотки
+                        filePath = HttpContext.Current.Server.MapPath("~/Images/Photos/" + fileName);
+                        postedFile.SaveAs(filePath);
+
+                    }
+                }
+
+                string thumbNailPath = HttpContext.Current.Server.MapPath("~/Images/Thumbnails/"); //путь на сервере для сохранения
+                ThumbnailSet thumbNail = new ThumbnailSet();
+                thumbNail.FileName = fileName;
+                thumbNail.FilePath = thumbNailPath + fileName;
+                ThumbnailGenerator.ResizeImage(postedFile, thumbNail.FilePath, 60, 60);
+
+                //получаем информацию о пользователе
+                string userId = User.Identity.GetUserId();
+                string userName = User.Identity.Name;
+
+                //подключаемся к базе данных
+                CocktionContext db = new CocktionContext();
+
+                //создаем продукт и сохраняем информацию о нем.
+                Product product = new Product(name, description, category, userId, true, userName);
+                //забиваем данные о фотке
+                Photo photo = new Photo();
+                photo.FileName = fileName;
+                photo.FilePath = filePath;
+                photo.Product = product;
+                photo.ThumbnailSets.Add(thumbNail);
+
+                //добавляем продукт
+                //Коннектимся к базе
+                int id = int.Parse(auctionId);
+                db.Auctions.Find(id).BidProducts.Add(product);
+
+                //находи кластер
+                BidCluster bidCluster = new BidCluster();
+                bidCluster.UserId = User.Identity.GetUserId();
+                bidCluster.HostAuction = db.Auctions.Find(id);
+                bidCluster.Products.Add(product);
+
+                //сохраняем все в базу
+                await DbItemsAdder.AddProduct(db, product, photo, bidCluster);
+
+                //добавляем нодики на клиенты
+                AuctionHub.AddNodesToClients(name, photo.FileName, id, product.Id);
+
+                return new StatusHolder(true);
+        }
     }
 }

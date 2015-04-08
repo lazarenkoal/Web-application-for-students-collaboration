@@ -238,6 +238,14 @@
     <Compile Include="Migrations\201504071605573_WinProductNameAdded.Designer.cs">
       <DependentUpon>201504071605573_WinProductNameAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504081418344_winnerChosenUnNullableNow.cs" />
+    <Compile Include="Migrations\201504081418344_winnerChosenUnNullableNow.Designer.cs">
+      <DependentUpon>201504081418344_winnerChosenUnNullableNow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504081830136_liderToLeader.cs" />
+    <Compile Include="Migrations\201504081830136_liderToLeader.Designer.cs">
+      <DependentUpon>201504081830136_liderToLeader.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DAL\Auction\BidCluster.cs" />
     <Compile Include="Models\DAL\AuctionHouse\ForumPost.cs" />
@@ -254,6 +262,7 @@
     <Compile Include="Models\JsonModels\HouseRelatedModels\ForumRespond.cs" />
     <Compile Include="Models\JsonModels\HouseRelatedModels\HouseRespond.cs" />
     <Compile Include="Models\JsonModels\MobileClientModels\HouseInfo.cs" />
+    <Compile Include="Models\JsonModels\MobileClientModels\IsOwnerResponder.cs" />
     <Compile Include="Models\JsonModels\MobileClientModels\ProfileInfoMobile.cs" />
     <Compile Include="Models\JsonModels\MobileClientModels\RegisterUserData.cs" />
     <Compile Include="Models\JsonModels\MobileClientModels\RegisterUserRespond.cs" />
@@ -474,6 +483,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504071605573_WinProductNameAdded.resx">
       <DependentUpon>201504071605573_WinProductNameAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504081418344_winnerChosenUnNullableNow.resx">
+      <DependentUpon>201504081418344_winnerChosenUnNullableNow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504081830136_liderToLeader.resx">
+      <DependentUpon>201504081830136_liderToLeader.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
