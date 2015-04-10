@@ -50,7 +50,7 @@ namespace CocktionMVC.Functions
             auction.IsActive = false;
             
             //вырубаем тотализатор
-            await auction.AuctionToteBoard.FinishTote(int.Parse(auction.WinProductId), db);
+            await auction.AuctionToteBoard.FinishTote(auction.LeadProduct.Id, db);
 
             //сохраняем изменения в базу данных
             await Task.Run(() => db.SaveChangesAsync());

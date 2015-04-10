@@ -83,13 +83,13 @@ namespace CocktionMVC.Controllers
             {
                 var db = new CocktionContext();
                 Auction auction = db.Auctions.Find(int.Parse(auctionId));
-                auction.WinProductId = productId;
+                Product product = db.Products.Find(int.Parse(productId));
+                auction.LeadProduct = product;
                 auction.WinnerChosen = true;
-                auction.WinProductName = db.Products.Find(int.Parse(productId)).Name;
                 await DbItemsAdder.SaveDb(db);
-                AuctionHub.SetLider(productId, int.Parse(auctionId), auction.WinProductName);
+                AuctionHub.SetLider(productId, int.Parse(auctionId), product.Name);
 
-                return Json(new StatusHolder(true, auction.WinProductName));
+                return Json(new StatusHolder(true, product.Name));
             }
             catch
             {
@@ -204,7 +204,7 @@ namespace CocktionMVC.Controllers
             {//если победитель выбран
 
                 //Ищем продукт - победиель
-                Product winProduct = db.Products.Find(int.Parse(auction.WinProductId));
+                Product winProduct = auction.LeadProduct;
                 
                 //получаем доступ к пользовательским полям
                 var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));

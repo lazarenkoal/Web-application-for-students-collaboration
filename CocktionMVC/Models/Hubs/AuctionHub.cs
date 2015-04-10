@@ -49,7 +49,6 @@ namespace CocktionMVC
         {
             //Добавляем клиентам всей группы Нодики
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<AuctionHub>();
-
             context.Clients.Group(auctionId.ToString()).addNodesToPages(fileName, name, productId);
         }
 

@@ -218,7 +218,6 @@
     <Compile Include="Functions\ThumbnailGenerator.cs" />
     <Compile Include="Functions\DbItemsAdder.cs" />
     <Compile Include="Functions\ToteResultsManager.cs" />
-    <Compile Include="Functions\WinnerGenerator.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -245,6 +244,18 @@
     <Compile Include="Migrations\201504081830136_liderToLeader.cs" />
     <Compile Include="Migrations\201504081830136_liderToLeader.Designer.cs">
       <DependentUpon>201504081830136_liderToLeader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504091840222_LeadProductsAndAuctionsDeletedFromAuctionAndProduct.cs" />
+    <Compile Include="Migrations\201504091840222_LeadProductsAndAuctionsDeletedFromAuctionAndProduct.Designer.cs">
+      <DependentUpon>201504091840222_LeadProductsAndAuctionsDeletedFromAuctionAndProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504091845036_SellProductIdRenamedInAuction.cs" />
+    <Compile Include="Migrations\201504091845036_SellProductIdRenamedInAuction.Designer.cs">
+      <DependentUpon>201504091845036_SellProductIdRenamedInAuction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504091903030_LeadProductAddedToAuction.cs" />
+    <Compile Include="Migrations\201504091903030_LeadProductAddedToAuction.Designer.cs">
+      <DependentUpon>201504091903030_LeadProductAddedToAuction.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DAL\Auction\BidCluster.cs" />
@@ -307,6 +318,7 @@
     <Content Include="bin\CocktionMVC.dll" />
     <Content Include="bin\CocktionMVC.pdb" />
     <Content Include="Content\AuctionStyles\currentAuctionStyle.css" />
+    <Content Include="Content\AuctionStyles\indexStyle.css" />
     <Content Include="Content\BootstrapCss\bootstrap-responsive.css" />
     <Content Include="Content\BootstrapCss\bootstrap-theme.css" />
     <Content Include="Content\BootstrapCss\bootstrap-theme.min.css" />
@@ -391,6 +403,7 @@
     <Content Include="Scripts\MyLib\Auction\CurrentAuction\liderManager.js" />
     <Content Include="Scripts\MyLib\Auction\CurrentAuction\nodeProcessor.js" />
     <Content Include="Scripts\MyLib\Auction\CurrentAuction\scroller.js" />
+    <Content Include="Scripts\MyLib\Auction\Index\auctionAdder.js" />
     <Content Include="Scripts\MyLib\Auction\Index\hubConnection.js" />
     <Content Include="Scripts\MyLib\Data\userPrinter.js" />
     <Content Include="Scripts\MyLib\EditHouses\formVerifier.js" />
@@ -489,6 +502,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504081830136_liderToLeader.resx">
       <DependentUpon>201504081830136_liderToLeader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504091840222_LeadProductsAndAuctionsDeletedFromAuctionAndProduct.resx">
+      <DependentUpon>201504091840222_LeadProductsAndAuctionsDeletedFromAuctionAndProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504091845036_SellProductIdRenamedInAuction.resx">
+      <DependentUpon>201504091845036_SellProductIdRenamedInAuction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504091903030_LeadProductAddedToAuction.resx">
+      <DependentUpon>201504091903030_LeadProductAddedToAuction.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

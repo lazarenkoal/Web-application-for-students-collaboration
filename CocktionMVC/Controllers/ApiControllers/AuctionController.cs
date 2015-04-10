@@ -193,9 +193,8 @@ namespace CocktionMVC.Controllers.ApiControllers
                 
                 if (userId != auction.OwnerId)
                     throw new Exception();
+                auction.LeadProduct = product;
 
-                auction.WinProductName = product.Name;
-                auction.WinProductId = product.Id.ToString();
                 auction.WinnerChosen = true;
 
                 db.SaveChanges();
@@ -297,7 +296,6 @@ namespace CocktionMVC.Controllers.ApiControllers
                         fileName = Guid.NewGuid().ToString() + extension; //генерируем новое имя для фотки
                         filePath = HttpContext.Current.Server.MapPath("~/Images/Photos/" + fileName);
                         postedFile.SaveAs(filePath);
-
                     }
                 }
 
@@ -330,7 +328,7 @@ namespace CocktionMVC.Controllers.ApiControllers
 
                 //находи кластер
                 BidCluster bidCluster = new BidCluster();
-                bidCluster.UserId = User.Identity.GetUserId();
+                bidCluster.UserId = userId;
                 bidCluster.HostAuction = db.Auctions.Find(id);
                 bidCluster.Products.Add(product);
 

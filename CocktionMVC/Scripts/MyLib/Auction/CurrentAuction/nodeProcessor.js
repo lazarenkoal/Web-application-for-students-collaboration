@@ -10,7 +10,7 @@ function getNodeInfo(nodeId) {
             var info = JSON.parse(req.responseText);
             $('#productPhotoContainer').empty();
             $('#productPhotoContainer').append(
-                '<img class=\"img-thumbnail\" src=\"' + 'http://cocktion.com/Images/Photos/' + info.FileName + "\">"
+                '<img class=\"img-circle\" src=\"' + 'http://cocktion.com/Images/Thumbnails/' + info.FileName + "\">"
             );
 
             $("#productInfoContainer").empty();

@@ -97,7 +97,7 @@
                 </button>
                 <button class="btn btn-default" onclick=" showToteBets(this) ">Тотализатор</button>
             </div>
-
+            
             <div id="firstInfoContainer">
                 <div id="auctionInfoContainer">
                     <h4>Выставлено на торг: @Model.SellProduct.Name</h4>
@@ -105,15 +105,26 @@
                         <b>Описание: </b>@Model.SellProduct.Description
                     </p>
                     <div id="leaderHolder">
-                        <p>
-                            <b>Лидер аукциона: </b>@Model.WinProductName
-                        </p>
+                        @{
+                            if (Model.LeadProduct != null)
+                            {
+                                <p>
+                                    <b>Лидер аукциона: </b>@Model.LeadProduct.Name
+                                </p>
+                            }
+                            else
+                            {
+                                <p>
+                                    <b>Лидер аукциона: </b>не выбран.
+                                </p>
+                            }
+                        }
                     </div>
                     <p>
                         <b>Всего ставок: </b>@Model.UsersBids.Count()
                     </p>
                     <p>
-                        <b>Дом: </b>@Model.Houses.First().University
+                        <b>Дом: </b>красивый и классный
                     </p>
                     <div id="auctionEnderHidden" hidden="">
                         <button class="btn btn-danger" onclick="finishAuction()" id="endAuctionBtn">Закончить аукцион</button>

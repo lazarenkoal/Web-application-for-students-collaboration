@@ -1,0 +1,32 @@
+﻿#auctionPanel{
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border: solid 1px lightgray;
+    padding: 5px;
+}
+
+#auctionsControlPanel{
+    background-color: whitesmoke;
+    text-align: center;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-right: solid 1px lightgray;
+    border-left: solid 1px lightgray;
+    border-top: solid 1px lightgray;
+    padding: 5px;
+}
+
+.row {
+    margin: 3px;
+}
+/*Это ссылка на аукцион в том, что добавляется в таблицу*/
+#auctionLink {
+    text-align: center;
+}
+
+/*Это контейнер для аукциончика*/
+.auction{
+    border: dotted 1px lightgray;
+    border-radius: 3px;
+    padding: 3px;
+}

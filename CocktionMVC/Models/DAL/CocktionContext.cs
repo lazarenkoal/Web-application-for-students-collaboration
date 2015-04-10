@@ -52,11 +52,6 @@ namespace CocktionMVC.Models.DAL
                 .WithRequired(e => e.AspNetUser)
                 .HasForeignKey(e => e.UserId);
 
-            modelBuilder.Entity<Auction>()
-                .HasMany(e => e.LeadProducts) //Products ---> LeadProducts
-                .WithMany(e => e.LeadAuctions) //Auctions1 ---> LeadAuctions
-                .Map(m => m.ToTable("AuctionProduct2").MapLeftKey("LidAuctions_Id").MapRightKey("LidProducts_Id"));
-
             modelBuilder.Entity<Auction>() 
                 .HasMany(e => e.BidProducts)  //Products1 ---> BidProducts 
                 .WithMany(e => e.BidAuctions)   //Auctions2 ---> BidAuctions
@@ -105,7 +100,7 @@ namespace CocktionMVC.Models.DAL
             modelBuilder.Entity<Product>()
                 .HasMany(e => e.Auctions)
                 .WithRequired(e => e.SellProduct)
-                .HasForeignKey(e => e.SellProduct_Id)
+                .HasForeignKey(e => e.SellProductId)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Product>()
