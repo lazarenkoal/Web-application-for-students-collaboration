@@ -1,57 +1,26 @@
 ﻿@{
     ViewBag.Title = "Дома в " + Model[0].University;
-    int amountOfElemnts = Model.Count;
 }
 @model List<CocktionMVC.Models.DAL.House>
-<h3 style="text-align: center">Дома в @Model[0].University</h3>
-<br/>
-<br/>
-<div id="housesContainer" class ="row">
-    @{
-        int q1 = 0, q2 = 1, q3 = 2, q4 = 3;
-        <div class="col-md-3">
-            @while (q1 < amountOfElemnts)
-            {
-                <p style="font-weight: bold">@Model[q1].University</p>
-                <p>Факультет: @Model[q1].Faculty</p>
-                <p>Адрес: @Model[q1].Adress</p>
-                <p>@Html.ActionLink("Хочу посмотреть", "GetCurrentAuctionHouse", "AuctionHouse", new {id = Model[q1].Id}, null)</p>
-                <br/>
-                q1 += 4;
-            } 
-        </div>
-        <div class="col-md-3">
-            @while (q2 < amountOfElemnts)
-            {
-                <p style="font-weight: bold">@Model[q2].University</p>
-                <p>Факультет: @Model[q2].Faculty</p>
-                <p>Адрес: @Model[q2].Adress</p>
-                <p>@Html.ActionLink("Хочу посмотреть", "GetCurrentAuctionHouse", "AuctionHouse", new { id = Model[q2].Id }, null)</p>
-                <br />
-                q2 += 4;
-            } 
-        </div>
-        <div class="col-md-3">
-            @while (q3 < amountOfElemnts)
-            {
-                <p style="font-weight: bold">@Model[q3].University</p>
-                <p>Факультет: @Model[q3].Faculty</p>
-                <p>Адрес: @Model[q3].Adress</p>
-                <p>@Html.ActionLink("Хочу посмотреть", "GetCurrentAuctionHouse", "AuctionHouse", new { id = Model[q3].Id }, null)</p>
-                <br />
-                q3 += 4;
-            } 
-        </div>
-        <div class="col-md-3">
-            @while (q4 < amountOfElemnts)
-            {
-                <p style="font-weight: bold">@Model[q4].University</p>
-                <p>Факультет: @Model[q4].Faculty</p>
-                <p>Адрес: @Model[q4].Adress</p>
-                <p>@Html.ActionLink("Хочу посмотреть", "GetCurrentAuctionHouse", "AuctionHouse", new {id = Model[q4].Id}, null)</p>
-                <br />
-                q4 += 4;
-            } 
-        </div>
-    }
+<script src="~/Scripts/MyLib/AuctionHouse/GetUniversityHouses/printHousesInCells.js"></script>
+<link rel="stylesheet" href="~/Content/universityHousesStyle.css"/>
+<div id="universityHousesControlPanel">
+    <div class="row">
+        <div class="col-md-4"><p>Какая-то опция</p></div>
+        <div class="col-md-4"><h4>Дома в Вышке</h4></div>
+        <div class="col-md-4"><p>Еще какая-то опция</p></div>
+    </div>
 </div>
+<div id="universityHousesContainer"></div>
+
+@{
+    foreach (var house in Model)
+    {
+        <script>
+            addHouseCell('universityHousesContainer', '@house.Faculty', '@house.Adress',
+                'http://cocktion.com/AuctionHouse/GetCurrentAuctionHouse/@house.Id',
+                'http://cocktion.com/Content/SiteImages/hseSmallBuilding.jpg');
+        </script>
+  
+    }
+}

@@ -1,0 +1,28 @@
+﻿.house{
+    border: dotted 1px lightgray;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+#universityHousesControlPanel{
+    background-color: whitesmoke;
+    text-align: center;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-right: solid 1px lightgray;
+    border-left: solid 1px lightgray;
+    border-top: solid 1px lightgray;
+    margin-left: 3px;
+    padding: 5px;
+    margin-right: 3px;
+}
+
+#universityHousesContainer{
+    text-align: center;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border: solid 1px lightgray;
+    margin-left: 3px;
+    margin-right: 3px;
+    padding: 5px;
+}

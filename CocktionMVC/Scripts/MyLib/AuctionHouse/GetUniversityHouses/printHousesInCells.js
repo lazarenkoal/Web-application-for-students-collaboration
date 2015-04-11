@@ -1,60 +1,55 @@
-﻿//Айдишник нового ряда
-var idOfNewRow = -1;
+﻿/**
+ * Created by aleksandrlazarenko on 10.04.15.
+ */
 
-//Функция показывает аукционные дома плиточкой
-function printHousesInCells(house, parentId) {
-    var parent = document.getElementById(parentId);
-    //проверяем количество элементов на больше > 5
-    if (numberOfElementsInRow >= 5) {
-        //обнулить счетчик
-        numberOfElementsInRow = 0;
-        ++idOfNewRow;
-        //если больше - нужно создать новый ряд
-        parent.append("<div class = \"row\" id = \"" +idOfNewRow.toString() + "\"> </div>");
-
-        //добавить в новый ряд колонку
-        addColumn(house, idOfNewRow, numberOfElementsInRow);
-        
-    } else {
-        //если все ок - добавляем в текущий row
-        var newRow = document.getElementById(idOfNewRow);
-        addColumn(house, idOfNewRow, numberOfElementsInRow);
+//Распределяет новую ячейку по сетки со столбцами
+//nameOfRow - название строки, в которую надо вставить все
+//nameOfFaculty - название факультета
+//adress - адрес факультета
+//link - ссылочка на факультет
+//imgSrc - путь к фоточке
+//containerName - название контейнера, в который надо вставить
+function addHouseCell(containerName, nameOfFaculty, adress, link, imgSrc) {
+    if (colCounter < 4) {
+        if (colCounter == 0) {
+            addRow(containerName, rowCounter);
+            appendHouseInfo(rowCounter, nameOfFaculty, adress, link, imgSrc);
+            colCounter++;
+        }
+        else {
+            appendHouseInfo(rowCounter, nameOfFaculty, adress, link, imgSrc);
+            colCounter++;
+        }
     }
-};
-
-/*
-    Добавляет новую колонку в ряд.
-    house - дом, который надо добавить
-    idOfRow - айдишник ряда, в который надо засунуть
-    numsInRow - количество элементов в ряду
-*/
-function addColumn(house, idOfRow, numsInRow) {
-    var row = document.getElementById(idOfRow);
-    row.append(
-        "<div class=\"col-md-2\">" + 
-        "<p style=\"font-weight: bold\" >" + house.university + "</p>" + 
-        "<p>" + house.faculty + "</p>" + 
-        "<p>" + "<a href = \""+ house.link + "\"> Хочу посмотреть! </a>" + "</p>" + "</div>"
-        );
-    numsInRow ++;
+    else {
+        colCounter = 0;
+        ++rowCounter;
+        addRow(containerName, rowCounter);
+        appendHouseInfo(rowCounter, nameOfFaculty, adress, link, imgSrc);
+        colCounter++;
+    }
 }
 
-//Количество элементов в ряду 
-var numberOfElementsInRow = 5;
-
-//инициализация объекта дом
-var house =
-{
-    university : null,
-    faculty : null, 
-    link: null
-};
-
-//Функция инициализирует новый дом, используя текущие параметры
-function initializeHouse(university, faculty, link) {
-    house.university = university;
-    house.faculty = faculty;
-    house.link = link;
-    return house;
+//Добавляет непосредственно саму информацию о доме в ячейку
+//nameOfRow - название строки, в которую надо вставить все
+//nameOfFaculty - название факультета
+//adress - адрес факультета
+//link - ссылочка на факультет
+//imgSrc - путь к фоточке
+function appendHouseInfo(nameOfRow, nameOfFaculty, adress, link, imgSrc) {
+    document.getElementById(nameOfRow).innerHTML += ("<div class=\"col-md-3\"><div class=\"house\"> " +
+    "<img src=\"" + imgSrc + "\" class= \"img-circle\">" + //вставляем фотографию
+    "<p><b>Факультет: </b>" + nameOfFaculty + "</p>" +    //название факультета
+    "<p><b>Адрес: </b>" + adress + "</p>" + //адрес факультета
+    "<p><a href=\"" + link + "\">Заглянуть</a></p></div></div>"); //ссылочка
 }
 
+//Добавляет новый div (class=row) на страничку, для того, чтобы в нее потом запихивать колонки
+//containerName - название контейнера, в который надо вставить
+//nameOfRow - название строчки, в которую надо вставить что-то
+function addRow(containerName, nameOfRow) {
+    document.getElementById(containerName).innerHTML += "<div class=\"row\" id=\"" + nameOfRow + "\"></div></br>";
+}
+
+var rowCounter = 0;
+var colCounter = 0;

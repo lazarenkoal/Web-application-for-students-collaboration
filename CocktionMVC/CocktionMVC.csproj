@@ -335,12 +335,14 @@
     <Content Include="Content\SiteImages\girl.jpg" />
     <Content Include="Content\SiteImages\house1.jpg" />
     <Content Include="Content\SiteImages\hseBuilding.jpg" />
+    <Content Include="Content\SiteImages\hseSmallBuilding.jpg" />
     <Content Include="Content\SiteImages\money.jpg" />
     <Content Include="Content\SiteImages\petuh6.jpg" />
     <Content Include="Content\SiteImages\placeholder.jpg" />
     <Content Include="Content\SiteImages\Roosters-Playing-Football-Funny-Animals.jpg" />
     <Content Include="Content\SiteImages\ThanksCock.jpg" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\universityHousesStyle.css" />
     <Content Include="Content\UniversityLogos\1medLogo.jpg" />
     <Content Include="Content\UniversityLogos\finashkaLogo.jpg" />
     <Content Include="Content\UniversityLogos\guuLogo.jpg" />
