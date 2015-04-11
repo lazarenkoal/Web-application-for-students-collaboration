@@ -319,6 +319,7 @@
     <Content Include="bin\CocktionMVC.pdb" />
     <Content Include="Content\AuctionStyles\createAuctionStyle.css" />
     <Content Include="Content\AuctionStyles\currentAuctionStyle.css" />
+    <Content Include="Content\AuctionStyles\houseAuctionsStyle.css" />
     <Content Include="Content\AuctionStyles\indexStyle.css" />
     <Content Include="Content\BootstrapCss\bootstrap-responsive.css" />
     <Content Include="Content\BootstrapCss\bootstrap-theme.css" />
