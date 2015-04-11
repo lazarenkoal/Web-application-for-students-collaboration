@@ -1,11 +1,10 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using CocktionMVC.Functions;
 using CocktionMVC.Functions.DataProcessing;
 using CocktionMVC.Models.DAL;
-using CocktionMVC.Models.Hubs;
 using Microsoft.AspNet.Identity;
 
 namespace CocktionMVC.Controllers
@@ -27,16 +26,18 @@ namespace CocktionMVC.Controllers
 
             //получаем информацию о пользователе
             string userId = User.Identity.GetUserId();
-            string userName = User.Identity.Name;
 
             //подключаемся к базе данных
             CocktionContext db = new CocktionContext();
+            var user = db.AspNetUsers.Find(userId);
 
             //создаем продуктик, ха
-            Product product = new Product(name, description, category, userId, true, userName);
+            Product product = new Product(name, description, category, true, user);
 
             //инициализация аукциона
-            Auction auction = new Auction(true, userId, userName, product, false, new ToteBoard());
+            Auction auction = new Auction(true, product, false, new ToteBoard(), user);
+
+            
 
             //добавляем все локации списочком к аукциону
             //int[] locIdsInt = DataFormatter.GetHouseIds(housesId);
@@ -53,8 +54,7 @@ namespace CocktionMVC.Controllers
             PhotoProcessor.CreateAndSavePhoto(photo, Request, 90, 90);
             photo.Product = product;
 
-            //сохраняем все изменения в базу
-            await DbItemsAdder.AddAuctionProductPhotoAsync(db, auction, product, photo);
+            await DbItemsAdder.AddAuctionProductPhotoAsync(db, auction, product, photo, user);
 
             //апдейтим список c аукционами
             //AuctionListHub.UpdateList(product.Name, product.Description, product.Category, photo.FileName);
@@ -80,6 +80,7 @@ namespace CocktionMVC.Controllers
         {
             //Adding new product to the DB
             CocktionContext db = new CocktionContext();
+            var user = db.AspNetUsers.Find(User.Identity.GetUserId());
 
             //Инициализируем и добавляем фоточку
             Photo photo = new Photo();
@@ -91,12 +92,9 @@ namespace CocktionMVC.Controllers
                 out bidCategory, out bidDescription);
 
             int id = int.Parse(auctionId);
-            string userId = User.Identity.GetUserId();
-            string userName = User.Identity.Name;
 
             //Создаем товар для базы данных
-            Product product = new Product(bidName, bidDescription, bidCategory, userId,
-                userName);
+            Product product = new Product(bidName, bidDescription, bidCategory, user);
 
             product.Photos.Add(photo);
             photo.Product = product;
@@ -105,8 +103,9 @@ namespace CocktionMVC.Controllers
             auction.BidProducts.Add(product);
 
             //Выбираем все кластер, где пользователь == данный
+            //TODO эта херня работать не будет
             BidCluster cluster = (from x in auction.UsersBids
-                                  where x.UserId == userId
+                                  where x.UserId == user.Id
                                   select x).First();
             cluster.Products.Add(product);
 
@@ -138,19 +137,27 @@ namespace CocktionMVC.Controllers
             RequestFormReader.ReadAddProductBetForm(Request, out bidName, out auctionId, 
                 out bidCategory, out bidDescription);
 
+            CocktionContext db = new CocktionContext();
+            var user = db.AspNetUsers.Find(User.Identity.GetUserId());
+
             //Инициализируем фоточку
             Photo photo = new Photo();
             PhotoProcessor.CreateAndSavePhoto(photo, Request, 60, 60);
            
             //Создаем товар для базы данных
-            Product product = new Product(bidName, bidDescription, bidCategory, User.Identity.GetUserId(),
-                User.Identity.Name);
+            Product product = new Product(bidName, bidDescription, bidCategory, user);
             product.Photos.Add(photo);
             photo.Product = product;
+
+            if (user.HisProducts == null)
+            {
+                user.HisProducts = new HashSet<Product>();
+            }
+
+            user.HisProducts.Add(product);
             
             //добавляем продукт
             //Коннектимся к базе
-            CocktionContext db = new CocktionContext();
             int id = int.Parse(auctionId);
             db.Auctions.Find(id).BidProducts.Add(product);
 

@@ -47,6 +47,11 @@ function nodeSelected(properties) {
                 }
             }
         }
+        if (nodeId == i) {
+            $("#addToteBetContainer").hide();
+        } else {
+            $("#addToteBetContainer").show();
+        }
     }
 }
 

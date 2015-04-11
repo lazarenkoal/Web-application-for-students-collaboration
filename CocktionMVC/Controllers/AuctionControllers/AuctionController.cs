@@ -69,11 +69,10 @@ namespace CocktionMVC.Controllers
         {
             var db = new CocktionContext();
             string userId = User.Identity.GetUserId();
+            var user = db.AspNetUsers.Find(userId);
 
             //Получаем все аукционы, у которых владелец == данный пользватель
-            List<Auction> auctions = (from o in db.Auctions
-                                      where o.OwnerId == userId
-                                      select o).ToList<Auction>();
+            List<Auction> auctions = user.HisAuctions.ToList();
 
             return View("MyAuctions", auctions);
         }//end of ShowMyAuctions()

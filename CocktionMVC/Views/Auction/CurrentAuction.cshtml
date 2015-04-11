@@ -4,22 +4,19 @@
 @using System.Linq
 @model CocktionMVC.Models.DAL.Auction
 
-<head>
-    <script type="text/javascript" src="~/Scripts/Jquery/jquery-2.1.3.js"></script>
-    <script type="text/javascript" src="~/Scripts/MyLib/Vis/vis.min.js"></script>
-    <script type="text/javascript" src="~/Scripts/Jquery/jquery.countdown.js"></script>
-    <script type="text/javascript" src="~/Scripts/MyLib/Auction/CurrentAuction/auctionEndLogic.js"></script>
-    <script type="text/javascript" src="~/Scripts/MyLib/Auction/CurrentAuction/bidProcessor.js"></script>
-    <script type="text/javascript" src="~/Scripts/MyLib/Auction/CurrentAuction/liderManager.js"></script>
-    <script type="text/javascript" src="~/Scripts/MyLib/Auction/CurrentAuction/formShower.js"></script>
+<script type="text/javascript" src="~/Scripts/Jquery/jquery-2.1.3.js"></script>
+<script type="text/javascript" src="~/Scripts/MyLib/Vis/vis.min.js"></script>
+<script type="text/javascript" src="~/Scripts/Jquery/jquery.countdown.js"></script>
+<script type="text/javascript" src="~/Scripts/MyLib/Auction/CurrentAuction/auctionEndLogic.js"></script>
+<script type="text/javascript" src="~/Scripts/MyLib/Auction/CurrentAuction/bidProcessor.js"></script>
+<script type="text/javascript" src="~/Scripts/MyLib/Auction/CurrentAuction/liderManager.js"></script>
+<script type="text/javascript" src="~/Scripts/MyLib/Auction/CurrentAuction/btnsOnClickPrcsg.js"></script>
+<script type="text/javascript" src="~/Scripts/MyLib/Auction/CurrentAuction/nodeProcessor.js"></script>
+<script src="~/Scripts/Jquery/jquery.signalR-2.2.0.min.js"></script>
+<script src="~/signalr/hubs"></script>
 
-
-    <title></title>
-    <link rel="stylesheet" href="~/Content/AuctionStyles/currentAuctionStyle.css" />
-</head>
+<link rel="stylesheet" href="~/Content/AuctionStyles/currentAuctionStyle.css" />
 @section scripts{
-    <script src="~/Scripts/Jquery/jquery.signalR-2.2.0.min.js"></script>
-    <script src="~/signalr/hubs"></script>
 
     <script>
         $(function () {
@@ -78,7 +75,6 @@
         });
     </script>
 }
-<script type="text/javascript" src="~/Scripts/MyLib/Auction/CurrentAuction/scroller.js"></script>
 
 <body>
     <div class="row">
@@ -149,6 +145,22 @@
                             </p>
                         </div>
                     </div>
+                    <div hidden="" id="eggInfo"></div>
+                    <div class="progress" hidden="" id="toteProgress">
+                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                             aria-valuemax="100" id="toteBar" style="width: 0%">
+                        </div>
+                    </div>
+                    <div class="input-group" id="addToteBetContainer">
+                        <!--Форма ввода количества яиц для отправки на аукциончик-->
+                        <input type="text" onchange="eggsTextBoxOnChange()" class="form-control" id="eggsAmountTextbox">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" onclick="makeEggBet()" id="sendEggsBtn"
+                                    title="На cocktion есть настоящий тотализтатор, который позволяет выйграть некоторое количество яиц">
+                                Поставь!
+                            </button>
+                        </span>
+                    </div>
                     <div id="chooseLeaderForm" hidden="">
                         <div id="chooseLeaderInfo"></div>
                         <button type="button" class="btn btn-success" onclick="chooseLider()" id="chooseLeaderBtn">Выбрать лидера</button>
@@ -159,18 +171,9 @@
                     <h4 style="text-align: center">Таблица коэффициентов</h4>
                     <div id="coefficientsTable">
                         <!--Таблица коэффициентов для аукциона-->
+                        <p>Попробуйте сделать ставку :)</p>
                     </div>
                     <br />
-                    <div class="input-group">
-                        <!--Форма ввода количества яиц для отправки на аукциончик-->
-                        <input type="text" class="form-control" id="enterEggsForBetTextBox">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button" id="sendEggsBtn"
-                                    title="ЯИЧКИИИИ!">
-                                Поставь!
-                            </button>
-                        </span>
-                    </div>
                 </div>
             </div>
             <br />
@@ -262,8 +265,6 @@
         </div>
     </div>-->
 
-    <script type="text/javascript" src="~/Scripts/MyLib/Auction/CurrentAuction/nodeProcessor.js"></script>
-
     <script>
         //Здесь содержится таймер и проверка
         //на то, что человек кнопку увидит
@@ -274,7 +275,7 @@
         var winnerId;
         var userStatus = '@User.Identity.IsAuthenticated';
         var userName = '@User.Identity.Name';
-        var ownerName = '@Model.OwnerName';
+        var ownerName = '@Model.Owner.UserName';
         var $n = $('#timer');
         if ('@Model.IsActive' == "True")
         {
@@ -288,8 +289,6 @@
                 }).on('finish.countdown', function(event) {
                     sayThatFinished();
                 });
-            showUploaderOrStopper(userStatus, userName);
-
         }
         else
         {
@@ -314,11 +313,11 @@
 
             if (userName == ownerName) {
                 $("#auctionEnderHidden").show();
+                $("#addToteBetContainer").hide();
             }
         });
 
     </script>
-    <script type="text/javascript" src="~/Scripts/MyLib/Auction/CurrentAuction/btnsOnClickPrcsg.js"></script>
     <script>
         // create an array with nodes
         var nodes = new vis.DataSet();

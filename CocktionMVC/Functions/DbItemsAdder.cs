@@ -65,11 +65,13 @@ namespace CocktionMVC.Functions
         /// <param name="product">Товар, который необходимо добавить</param>
         /// <param name="photo">фотка, которую надо добавить</param>
         public static async Task AddAuctionProductPhotoAsync(CocktionContext db, Auction auction,
-            Product product, Photo photo)
+            Product product, Photo photo, AspNetUser user)
         {
             db.Auctions.Add(auction);
             db.Products.Add(product);
             db.Photos.Add(photo);
+            user.HisAuctions.Add(auction);
+            user.HisProducts.Add(product);
             await Task.Run(() => db.SaveChangesAsync());
         }
        

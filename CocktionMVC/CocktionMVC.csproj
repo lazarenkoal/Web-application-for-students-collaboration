@@ -257,9 +257,34 @@
     <Compile Include="Migrations\201504091903030_LeadProductAddedToAuction.Designer.cs">
       <DependentUpon>201504091903030_LeadProductAddedToAuction.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504111804559_ConAuctProd.cs" />
+    <Compile Include="Migrations\201504111804559_ConAuctProd.Designer.cs">
+      <DependentUpon>201504111804559_ConAuctProd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504111912325_2fieldsDeletedFromProduct.cs" />
+    <Compile Include="Migrations\201504111912325_2fieldsDeletedFromProduct.Designer.cs">
+      <DependentUpon>201504111912325_2fieldsDeletedFromProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504111928045_unusedFieldsDeleted.cs" />
+    <Compile Include="Migrations\201504111928045_unusedFieldsDeleted.Designer.cs">
+      <DependentUpon>201504111928045_unusedFieldsDeleted.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504112020444_CncntBtwnUserAndHous.cs" />
+    <Compile Include="Migrations\201504112020444_CncntBtwnUserAndHous.Designer.cs">
+      <DependentUpon>201504112020444_CncntBtwnUserAndHous.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504112029091_SelfieAddedToHouseAndUser.cs" />
+    <Compile Include="Migrations\201504112029091_SelfieAddedToHouseAndUser.Designer.cs">
+      <DependentUpon>201504112029091_SelfieAddedToHouseAndUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504112037288_InterestsAndHouseSubscriptionsAdded.cs" />
+    <Compile Include="Migrations\201504112037288_InterestsAndHouseSubscriptionsAdded.Designer.cs">
+      <DependentUpon>201504112037288_InterestsAndHouseSubscriptionsAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DAL\Auction\BidCluster.cs" />
     <Compile Include="Models\DAL\AuctionHouse\ForumPost.cs" />
+    <Compile Include="Models\DAL\Interest.cs" />
     <Compile Include="Models\DAL\UsersFeedback.cs" />
     <Compile Include="Models\JsonModels\HouseRelatedModels\ForumPostMobile.cs" />
     <Compile Include="Models\JsonModels\HouseRelatedModels\Guild.cs" />
@@ -513,6 +538,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504091903030_LeadProductAddedToAuction.resx">
       <DependentUpon>201504091903030_LeadProductAddedToAuction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504111804559_ConAuctProd.resx">
+      <DependentUpon>201504111804559_ConAuctProd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504111912325_2fieldsDeletedFromProduct.resx">
+      <DependentUpon>201504111912325_2fieldsDeletedFromProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504111928045_unusedFieldsDeleted.resx">
+      <DependentUpon>201504111928045_unusedFieldsDeleted.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504112020444_CncntBtwnUserAndHous.resx">
+      <DependentUpon>201504112020444_CncntBtwnUserAndHous.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504112029091_SelfieAddedToHouseAndUser.resx">
+      <DependentUpon>201504112029091_SelfieAddedToHouseAndUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504112037288_InterestsAndHouseSubscriptionsAdded.resx">
+      <DependentUpon>201504112037288_InterestsAndHouseSubscriptionsAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

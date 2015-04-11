@@ -138,16 +138,16 @@ namespace CocktionMVC.Controllers.ApiControllers
 
             //получаем информацию о пользователе
             string userId = User.Identity.GetUserId();
-            string userName = User.Identity.Name;
 
             //подключаемся к базе данных
             CocktionContext db = new CocktionContext();
+            var user = db.AspNetUsers.Find(userId);
 
             //создаем продукт и сохраняем информацию о нем.
-            Product product = new Product(name, description, category, userId, true, userName);
+            Product product = new Product(name, description, category,  true, user);
 
             //инициализация аукциона
-            Auction auction = new Auction(true, userId, userName, product, false, new ToteBoard());
+            Auction auction = new Auction(true, product, false, new ToteBoard(), user);
 
             //Совершаем манипуляции со временем
             DateTimeManager.SetAuctionStartAndEndTime(auction, hoursString, minutesString);
@@ -160,7 +160,7 @@ namespace CocktionMVC.Controllers.ApiControllers
             photo.ThumbnailSets.Add(thumbNail);
 
             //все в базу добавляем
-            await DbItemsAdder.AddAuctionProductPhotoAsync(db, auction, product, photo);
+            await DbItemsAdder.AddAuctionProductPhotoAsync(db, auction, product, photo, user);
 
             //обновляем список аукционов
             AuctionListHub.UpdateList(product.Name, product.Description, product.Category, photo.FileName);
@@ -192,7 +192,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                 var auction = db.Auctions.Find(leader.auctionId);
                 var product = db.Products.Find(leader.productId);
                 
-                if (userId != auction.OwnerId)
+                if (userId != auction.Owner.Id)
                     throw new Exception();
                 auction.LeadProduct = product;
 
@@ -230,7 +230,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                 string currentUserId = User.Identity.GetUserId();
 
                 //проверяем является ли пользователь владельцем
-                bool isOwner = auction.OwnerId == currentUserId ? true : false;
+                bool isOwner = auction.Owner.Id == currentUserId ? true : false;
 
                 return new IsOwnerResponder(isOwner);
             }
@@ -259,7 +259,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                 //Проверяем, можно ли его закончить
 
                 //является ли пользователь владельцем?
-                bool isUserOwner = (userId == auction.OwnerId);
+                bool isUserOwner = (userId == auction.Owner.Id);
                 bool canEnd = auction.IsActive & auction.WinnerChosen;
                 if ((!isUserOwner) & canEnd)
                     throw new Exception();
@@ -308,13 +308,14 @@ namespace CocktionMVC.Controllers.ApiControllers
 
                 //получаем информацию о пользователе
                 string userId = User.Identity.GetUserId();
-                string userName = User.Identity.Name;
 
                 //подключаемся к базе данных
                 CocktionContext db = new CocktionContext();
 
+                var user = db.AspNetUsers.Find(userId);
+
                 //создаем продукт и сохраняем информацию о нем.
-                Product product = new Product(name, description, category, userId, true, userName);
+                Product product = new Product(name, description, category, true, user);
                 //забиваем данные о фотке
                 Photo photo = new Photo();
                 photo.FileName = fileName;

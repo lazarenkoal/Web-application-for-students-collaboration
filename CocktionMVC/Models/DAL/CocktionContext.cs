@@ -2,7 +2,7 @@ using System.Data.Entity;
 
 namespace CocktionMVC.Models.DAL
 {
-    public partial class CocktionContext : DbContext
+    public class CocktionContext : DbContext
     {
         public CocktionContext()
             : base("name=DefaultConnection")
@@ -26,8 +26,16 @@ namespace CocktionMVC.Models.DAL
 
         public virtual DbSet<ForumPost> Posts { get; set; }
 
+        public virtual DbSet<Interest> Interests { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Interest>()
+                .HasMany(e => e.Subscribers);
+
+            modelBuilder.Entity<AspNetUser>()
+                .HasMany(e => e.Interests);
+
             modelBuilder.Entity<House>()
                 .HasMany(e => e.Auctions);
 
@@ -36,6 +44,9 @@ namespace CocktionMVC.Models.DAL
 
             modelBuilder.Entity<House>()
                 .HasMany(e => e.Posts);
+
+            modelBuilder.Entity<House>()
+                .HasMany(e => e.Inhabitants);
            
             modelBuilder.Entity<AspNetRole>()
                 .HasMany(e => e.AspNetUsers)
@@ -51,6 +62,15 @@ namespace CocktionMVC.Models.DAL
                 .HasMany(e => e.AspNetUserLogins)
                 .WithRequired(e => e.AspNetUser)
                 .HasForeignKey(e => e.UserId);
+
+            modelBuilder.Entity<AspNetUser>()
+                .HasMany(e => e.HisAuctions);
+
+            modelBuilder.Entity<AspNetUser>()
+                .HasMany(e => e.HisProducts);
+
+            modelBuilder.Entity<AspNetUser>()
+                .HasMany(e => e.SubHouses);
 
             modelBuilder.Entity<Auction>() 
                 .HasMany(e => e.BidProducts)  //Products1 ---> BidProducts 

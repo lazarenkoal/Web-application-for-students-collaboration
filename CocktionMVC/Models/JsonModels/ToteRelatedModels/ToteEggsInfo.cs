@@ -1,14 +1,17 @@
-﻿namespace CocktionMVC.Models.JsonModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CocktionMVC.Models.JsonModels
 {
     /// <summary>
     ///  Контейнер для информации о яйцах
     /// </summary>
     public class ToteEggsInfo
     {
+
         /// <summary>
         /// Статус
         /// </summary>
-        public string Status { get; set; }
+        public bool  Status { get; set; }
 
         /// <summary>
         /// Количество яиц у пользователя

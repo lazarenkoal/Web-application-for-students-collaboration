@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CocktionMVC.Models.DAL
 {
-    public partial class Product
+    public class Product
     {
         public Product()
         {
@@ -13,8 +13,8 @@ namespace CocktionMVC.Models.DAL
             BidClusters = new HashSet<BidCluster>();
         }
 
-        public Product(string name, string description, string category, string ownerId,
-             bool isOnAuctionAsALot, string ownerName)
+        public Product(string name, string description, string category,
+             bool isOnAuctionAsALot, AspNetUser user)
         {
             Auctions = new HashSet<Auction>();
             Photos = new HashSet<Photo>();
@@ -23,13 +23,11 @@ namespace CocktionMVC.Models.DAL
             Name = name;
             Description = description;
             Category = category;
-            OwnerId = ownerId;
             IsOnAuctionAsALot = isOnAuctionAsALot;
-            OwnerName = ownerName;
+            Owner = user;
         }
 
-        public Product(string name, string description, string category, string ownerId,
-            string ownerName)
+        public Product(string name, string description, string category, AspNetUser user)
         {
             Auctions = new HashSet<Auction>();
             Photos = new HashSet<Photo>();
@@ -38,8 +36,7 @@ namespace CocktionMVC.Models.DAL
             Description = description;
             Name = name;
             Category = category;
-            OwnerId = ownerId;
-            OwnerName = ownerName;
+            Owner = user;
         }
 
         public int Id { get; set; }
@@ -56,17 +53,9 @@ namespace CocktionMVC.Models.DAL
         [StringLength(50)]
         public string Category { get; set; }
 
-        public string OwnerId { get; set; }
-
-        public int Rating { get; set; }
-
-        public int Likes { get; set; }
-
-        public int OnAuctionTime { get; set; }
-
         public bool IsOnAuctionAsALot { get; set; }
 
-        public string OwnerName { get; set; }
+        public virtual AspNetUser Owner { get; set; }
 
         public virtual ICollection<Auction> Auctions { get; set; }
 

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using CocktionMVC.Models.DAL;
 using CocktionMVC.Models.ViewModels;
-
 
 namespace CocktionMVC.Controllers
 {
@@ -26,10 +23,6 @@ namespace CocktionMVC.Controllers
             //находим пользователя
             user = db.AspNetUsers.Find(id);
 
-            //Cобираем имя и фамилию
-            string userName = user.UserRealName;
-            string userSurname = user.UserRealSurname;
-
             //Собираем рейтинг, яйца, количество аукционов
             int? userRating = user.Rating;
             int userEggs = user.Eggs;
@@ -46,16 +39,11 @@ namespace CocktionMVC.Controllers
 
             //TODO количество дней с нами
 
-
-            //собираем его аукционы и их количество
-            List<Auction> auctions = db.Auctions.Where(x => x.OwnerId == user.Id).ToList();
-            int userAuctionsAmount = auctions.Count();
-
             //Собираем все его отзывы
             List<UsersFeedback> feeds = db.Feedbacks.Where(x => x.UsersId == user.Id).ToList();
 
-            ProfileViewModel model = new ProfileViewModel(userEggs, userAuctionsAmount, userBets,
-                userSurname, userName, userRating, 56, auctions, id, feeds);
+            ProfileViewModel model = new ProfileViewModel(userEggs, user.HisAuctions.Count, userBets,
+                user.UserRealSurname, user.UserRealName, userRating, 56, user.HisAuctions.ToList<Auction>(), id, feeds);
 
             return View(model);
         }

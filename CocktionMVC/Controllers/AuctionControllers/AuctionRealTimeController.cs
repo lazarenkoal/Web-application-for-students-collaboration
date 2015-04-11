@@ -21,7 +21,8 @@ namespace CocktionMVC.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public async Task<JsonResult> AddRate()
+        [Authorize]
+        public async Task<JsonResult> AddToteRate()
         {
             //Получаем инморфмацию из формы о добавленной ставке
             int auctionId;
@@ -35,6 +36,8 @@ namespace CocktionMVC.Controllers
             //Подключемся к базе данных
             CocktionContext db = new CocktionContext();
 
+            var user = db.AspNetUsers.Find(userId);
+
             //Находим в базе этот аукцион
             Auction auction = db.Auctions.Find(auctionId);
 
@@ -44,25 +47,15 @@ namespace CocktionMVC.Controllers
             //TODO ДОБАВИТЬ ПРОВЕРКУ НА ВЫБОР ПОЛЬЗОВАТЕЛЕМ ТОВАРА-ПРОДАВЦА
 
             //Добавляем ставку пользователя
-            bool x = await auction.AuctionToteBoard.SetRateForUser(auctionId, userId, eggsAmount, productId, db);
-
-            //Получаем инстанс пользователя
-            var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-            var currentUser = manager.FindById(userId);
-
-            //Получаем количество яиц у пользователя
-            int amount = currentUser.Eggs;
+            //эта же штука и в сайгнал все посылает
+            bool x = await auction.AuctionToteBoard.SetRateForUser(auctionId, user, eggsAmount, productId, db);
 
             //Создаем результат добавления ставки
             ToteEggsInfo info = new ToteEggsInfo
             {
-                Status = x.ToString(),
-                UsersAmountOfEggs = amount
+                Status = x,
+                UsersAmountOfEggs = user.Eggs
             };
-
-            //послать через сайгнал Р информацию на клиенты
-            //о состоянии аукциона
-
             return Json(info);
         }
 
@@ -126,7 +119,7 @@ namespace CocktionMVC.Controllers
             int auctionId = int.Parse(Request.Form.GetValues("auctionId")[0]);
 
             //Ищем товар с владельцем с данным айдишником.
-            checker.HaveBid = db.Auctions.Find(auctionId).BidProducts.First(x => x.OwnerId == userId) != null;
+            checker.HaveBid = db.Auctions.Find(auctionId).BidProducts.First(x => x.Owner.Id == userId) != null;
             return Json(checker);
         }
 
@@ -173,7 +166,7 @@ namespace CocktionMVC.Controllers
                 if (User.Identity.IsAuthenticated)
                 {//Если пользователь авторизован
                     string userName = User.Identity.Name;
-                    if (userName == auction.OwnerName)
+                    if (userName == auction.Owner.UserName)
                     {//если пользователь является создателем
                         BidSeller owner = new BidSeller();
                         owner.Name = userName;
@@ -214,22 +207,22 @@ namespace CocktionMVC.Controllers
                     string userName = User.Identity.Name;
                     string userId = User.Identity.GetUserId();
                     var currentUser = manager.FindById(userId);
-                    if (userName == auction.OwnerName)
+                    if (userName == auction.Owner.Id)
                     {//если пользователь - владелец
                         BidSeller winner = new BidSeller();
-                        winner.Id = winProduct.OwnerId;
-                        winner.Name = winProduct.OwnerName;
+                        winner.Id = winProduct.Owner.Id;
+                        winner.Name = winProduct.Owner.UserName;
                         string phone = currentUser.PhoneNumber;
                         winner.Type = "Winner";
                         winner.Message = "Аукцион закончен, вам необходимо связаться с победителем! " + phone;
 
                         return Json(winner);
                     }
-                    else if (userName == winProduct.OwnerName)
+                    else if (userName == winProduct.Owner.UserName)
                     {//если пользователь - победитель
                         BidSeller owner = new BidSeller();
-                        owner.Id = auction.OwnerId;
-                        owner.Name = auction.OwnerName;
+                        owner.Id = auction.Owner.Id;
+                        owner.Name = auction.Owner.UserName;
                         string phone = currentUser.PhoneNumber;
                         owner.Type = "Owner";
 

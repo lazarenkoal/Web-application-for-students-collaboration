@@ -11,6 +11,7 @@ namespace CocktionMVC.Models.DAL
         {
             Auctions = new HashSet<Auction>();
             Posts = new HashSet<ForumPost>();
+            Inhabitants = new HashSet<AspNetUser>();
         }
 
         public House(string adress, string university, string faculty)
@@ -57,6 +58,8 @@ namespace CocktionMVC.Models.DAL
         /// </summary>
         public string University { get; set; }
 
+        public string Description { get; set; }
+
         /// <summary>
         /// Аукционы на этой площадке
         /// </summary>
@@ -66,5 +69,9 @@ namespace CocktionMVC.Models.DAL
         /// Сообщения для форума.
         /// </summary>
         public virtual ICollection<ForumPost> Posts { get; set; }
+
+        public virtual ICollection<AspNetUser> Inhabitants { get; set; }
+
+        public virtual Photo Portrait { get; set; }
     }
 }

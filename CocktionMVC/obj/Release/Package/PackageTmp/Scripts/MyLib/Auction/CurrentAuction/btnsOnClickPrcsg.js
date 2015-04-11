@@ -33,24 +33,61 @@ function finishAuction() {
     }
 };
 
-$('#addEggsBtn').click(function () {
+//посылает ставку яичную
+function makeEggBet() {
+    if (checkIfCanSendEggs()) {
+        $("#toteProgress").show();
+        $("#eggInfo").empty();
+        $("#eggsAmountTextbox").hide();
+        $("#sendEggsBtn").hide();
         var formData = new FormData();
-        var eggsAmnt = document.getElementById('eggsAmount').value;
+        var eggsAmnt = $('#eggsAmountTextbox').val();
         formData.append('eggsAmount', eggsAmnt);
         formData.append('auctionId', auctionId);
         formData.append('productId', nodeId);
         var req = new XMLHttpRequest();
-        req.open('POST', '/AuctionRealTime/AddRate');
-        req.send(formData);
-        req.onreadystatechange = function () {
+        req.onreadystatechange = function() {
             if (req.readyState == 4 && req.status == 200) {
                 var info = JSON.parse(req.responseText);
-                $('#eggInfo').append('<p>' + info.Status + '</p>');
-                $('#eggInfo').append('<p>' + info.UsersAmountOfEggs + '</p>');
+                sayResultOfAddingToteBet(info.Status, info.UsersAmountOfEggs);
+                $("#eggInfo").show();
+                $("#eggsAmountTextbox").val("");
+                $("#toteProgress").hide();
+                $("#eggsAmountTextbox").show();
+                $("#sendEggsBtn").show();
             };
         };
+
+        req.upload.onprogress = function(e) {
+            $('#toteBar').css('width', (e.loaded / e.total) * 100 + '%');
+        }
+
+        req.open('POST', '/AuctionRealTime/AddToteRate');
+        req.send(formData);
+    }
+}
+
+function eggsTextBoxOnChange() {
+    if ($("#eggsAmountTextbox").val().length != 0) {
+        $("#eggsAmountTextbox").css('border-color', 'rgb(204, 204, 204)');
+    }
+}
+
+function checkIfCanSendEggs() {
+    if ($("#eggsAmountTextbox").val().length == 0) {
+        $("#eggsAmountTextbox").css('border-color', 'red');
         return false;
-});
+    } 
+    return true;
+}
+
+function sayResultOfAddingToteBet(status, eggs) {
+    if (status == true) {
+        $("#eggInfo").append("<p>Ставка поставлена, осталось яиц: " + eggs + "</p>");
+    } else {
+        $("#eggInfo").append("<p>К сожалению, мне не хватило этого количества яиц для такой ставки (" + eggs + ")</p>");
+    }
+}
 
 //Показывает контейнер с товарами на аукционе
 function showProducts(btn, isOwner) {

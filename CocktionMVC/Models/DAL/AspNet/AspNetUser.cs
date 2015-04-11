@@ -4,13 +4,16 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CocktionMVC.Models.DAL
 {
-    public partial class AspNetUser
+    public class AspNetUser
     {
         public AspNetUser()
         {
             AspNetUserClaims = new HashSet<AspNetUserClaim>();
             AspNetUserLogins = new HashSet<AspNetUserLogin>();
             AspNetRoles = new HashSet<AspNetRole>();
+            HisAuctions = new HashSet<Auction>();
+            HisProducts = new HashSet<Product>();
+            SubHouses = new HashSet<House>();
         }
 
         public string Id { get; set; }
@@ -54,10 +57,17 @@ namespace CocktionMVC.Models.DAL
         public int? Rating { get; set; }
         public string StudyAdress { get; set; }
 
+        public virtual Photo Selfie {get; set; }
+        public virtual ICollection<House> SubHouses { get; set; } 
+        public virtual ICollection<Auction> HisAuctions { get; set; } 
+        public virtual ICollection<Product> HisProducts { get; set; } 
+
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
 
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
 
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
+
+        public virtual ICollection<Interest> Interests { get; set; } 
     }
 }

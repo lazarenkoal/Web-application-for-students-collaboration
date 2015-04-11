@@ -143,16 +143,13 @@ namespace CocktionMVC.Models.DAL
         /// <param name="userId">Айди пользователя</param>
         /// <param name="eggsAmount">Количество яиц</param>
         /// <param name="productId">Айдишник товара</param>
-        public async Task<bool> SetRateForUser(int auctionId, string userId, int eggsAmount, int productId, CocktionContext db)
+        public async Task<bool> SetRateForUser(int auctionId, AspNetUser user, int eggsAmount, int productId, CocktionContext db)
         {
-            //добавить проверку на хватит ли у пользователя яиц
-            AspNetUser user = db.AspNetUsers.Find(userId);
-
             if (IsEnoughEggs(user.Eggs, eggsAmount))
             {
                 Bids.Add(new ToteEntity
                 {
-                    UserId = userId,
+                    UserId = user.Id,
                     EggsAmount = eggsAmount,
                     ProductId = productId
                 });
@@ -162,10 +159,8 @@ namespace CocktionMVC.Models.DAL
                 await DbItemsAdder.SaveDb(db);
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            AuctionHub.UpdateToteBoard(auctionId, CountAllCoefficientsForProducts());
+            return false;
         }
 
         /// <summary>
@@ -178,7 +173,7 @@ namespace CocktionMVC.Models.DAL
         {
             if (userEggs >= rateEggs)
                 return true;
-            else return false;
+            return false;
         }
 
         /// <summary>

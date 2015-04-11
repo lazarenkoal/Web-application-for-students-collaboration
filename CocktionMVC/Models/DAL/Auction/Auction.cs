@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace CocktionMVC.Models.DAL
 {
-    public partial class Auction
+    public class Auction
     {
         public Auction()
         {
@@ -13,35 +12,24 @@ namespace CocktionMVC.Models.DAL
             UsersBids = new HashSet<BidCluster>();
         }
 
-        public Auction(bool isActive, string ownerId, string ownerName, Product product,
-            bool winnerChosen, ToteBoard tote)
+        public Auction(bool isActive, Product product,
+            bool winnerChosen, ToteBoard tote, AspNetUser user)
         {
             BidProducts = new HashSet<Product>();
             Houses = new HashSet<House>();
             UsersBids = new HashSet<BidCluster>();
             IsActive = isActive;
-            OwnerId = ownerId;
-            OwnerName = ownerName;
             SellProduct = product;
             WinnerChosen = winnerChosen;
             AuctionToteBoard = tote;
+            Owner = user;
         }
         
         public int Id { get; set; }
 
-        [Required]
-        public string OwnerId { get; set; }
-
         public DateTime EndTime { get; set; }
 
         public DateTime StartTime { get; set; }
-
-        [Required]
-        public string OwnerName { get; set; }
-
-        //public string WinProductId { get; set; }
-
-        ///public string WinProductName { get; set; }
 
         public bool IsActive { get; set; }
          
@@ -52,6 +40,7 @@ namespace CocktionMVC.Models.DAL
         public virtual ToteBoard AuctionToteBoard { get; set; }
 
         public virtual Product LeadProduct { get; set; }
+        public virtual AspNetUser Owner { get; set; }
 
         public virtual Product SellProduct { get; set; }
         public virtual ICollection<BidCluster> UsersBids { get; set; }

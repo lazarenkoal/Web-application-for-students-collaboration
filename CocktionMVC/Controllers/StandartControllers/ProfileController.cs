@@ -37,14 +37,6 @@ namespace CocktionMVC.Controllers.StandartControllers
                 //находим пользователя
                     user = db.AspNetUsers.Find(User.Identity.GetUserId());
 
-                //Cобираем имя и фамилию
-                string userName = user.UserRealName;
-                string userSurname = user.UserRealSurname;
-
-                //Собираем рейтинг, яйца, количество аукционов
-                int? userRating = user.Rating;
-                int userEggs = user.Eggs;
-
                 //TODO собираем количество побед
                 
 
@@ -59,14 +51,13 @@ namespace CocktionMVC.Controllers.StandartControllers
                 
 
                 //собираем его аукционы и их количество
-                List<Auction> auctions = db.Auctions.Where(x => x.OwnerId == user.Id).ToList();
-                int userAuctionsAmount = auctions.Count();
+                List<Auction> auctions = user.HisAuctions.ToList();
 
                 //Собираем все его отзывы
                 List<UsersFeedback> feeds = db.Feedbacks.Where(x => x.UsersId == user.Id).ToList();
 
-                ProfileViewModel model = new ProfileViewModel(userEggs, userAuctionsAmount, userBets,
-                    userSurname, userName, userRating, 56, auctions, User.Identity.GetUserId(), feeds);
+                ProfileViewModel model = new ProfileViewModel(user.Eggs, user.HisAuctions.Count, userBets,
+                    user.UserRealSurname, user.UserRealName, user.Rating, 56, auctions, user.Id, feeds);
 
                 return View(model);
             }

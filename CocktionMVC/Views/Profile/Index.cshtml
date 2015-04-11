@@ -90,67 +90,7 @@
 <div class="row" id="usersAuctions">
     <!--Аукционы пользователя-->
     <h3 id="auctionHeader">Владелец прекрасных аукционов</h3>
-    @{
-        if ((Model.AuctionsAmount) != 0)
-        {
-            int i1 = 0, i2 = 1, i3 = 2, i4 = 3;
-            <div class="col-md-3">
-                @while (i1 < Model.AuctionsAmount)
-                {
-                    <h4>@Model.HisAuctions[i1].SellProduct.Name</h4>
-                    <p>Описание: @Model.HisAuctions[i1].SellProduct.Description</p>
-                    <p>@Html.ActionLink("Заглянуть", "CurrentAuction", "Auction", new { id = Model.HisAuctions[i1].Id }, null)</p>
-                    <img src="http://cocktion.com/Images/Thumbnails/@Model.HisAuctions[i1].SellProduct.Photos.First().FileName"
-                         class="img-responsive" />
-                    <br />
-                    <br />
-                    i1 += 4;
-                }
-            </div>
-            <div class="col-md-3">
-                @while (i2 < Model.AuctionsAmount)
-                {
-                    <h4>@Model.HisAuctions[i2].SellProduct.Name</h4>
-                    <p>Описание: @Model.HisAuctions[i2].SellProduct.Description</p>
-                    <p>@Html.ActionLink("Заглянуть", "CurrentAuction", "Auction", new { id = Model.HisAuctions[i2].Id }, null)</p>
-    <img src="http://cocktion.com/Images/Thumbnails/@Model.HisAuctions[i2].SellProduct.Photos.First().FileName"
-         class="img-responsive" />
-                    <br />
-                    <br />
-                    i2 += 4;
-                }
-            </div>
-            <div class="col-md-3">
-                @while (i3 < Model.AuctionsAmount)
-                {
-                    <h4>@Model.HisAuctions[i3].SellProduct.Name</h4>
-                    <p>Описание: @Model.HisAuctions[i3].SellProduct.Description</p>
-                    <p>@Html.ActionLink("Заглянуть", "CurrentAuction", "Auction", new { id = Model.HisAuctions[i3].Id }, null)</p>
-    <img src="http://cocktion.com/Images/Thumbnails/@Model.HisAuctions[i3].SellProduct.Photos.First().FileName" class="img-responsive" />
-                    <br />
-                    <br />
-
-                    i3 += 4;
-                }
-            </div>
-            <div class="col-md-3">
-                @while (i4 < Model.AuctionsAmount)
-                {
-                    <h4>@Model.HisAuctions[i4].SellProduct.Name</h4>
-                    <p>Описание: @Model.HisAuctions[i4].SellProduct.Description</p>
-                    <p>@Html.ActionLink("Заглянуть", "CurrentAuction", "Auction", new { id = Model.HisAuctions[i4].Id }, null)</p>
-    <img src="http://cocktion.com/Images/Thumbnails/@Model.HisAuctions[i4].SellProduct.Photos.First().FileName" class="img-responsive" />
-                    <br />
-                    <br />
-                    i4 += 4;
-                }
-            </div>
-        }
-        else
-        {
-            <p>К сожалению, пока что вы ничего не продали :(</p>
-        }
-    }
+    
 </div>
 <br />
 <br/>
