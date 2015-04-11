@@ -49,19 +49,19 @@ namespace CocktionMVC.Functions
         /// <param name="name">Наименование товара</param>
         /// <param name="description">Описание товара</param>
         /// <param name="category">Категория, в которую товар плавненько попадает</param>
-        /// <param name="housesId">Айдишники домов, в которых торгуется данный товар</param>
-        /// <param name="minutes">Количество минут, которые будет длиться аукцион</param>
-        /// <param name="hours">Количество часов продолжительности аукциона</param>
+        /// <param name="timeBound">Временной промежуток, который вводит пользователь</param>
         public static void ReadCreateAuctionForm(HttpRequestBase request, out string name,
-            out string description, out string category, out string housesId, out string minutes,
-            out string hours)
+            out string description, out string category, out string timeBound)
         {
             name = request.Form.GetValues("name")[0].Trim();
             description = request.Form.GetValues("description")[0].Trim();
+            //если вдруг пользователь решил обойтись без описания
+            if (description == "")
+            {
+                description = "Слишком круто, чтобы описывать :)";
+            }
             category = request.Form.GetValues("category")[0].Trim();
-            housesId = request.Form.GetValues("housesId")[0].Trim('!');
-            minutes = request.Form.GetValues("minutes")[0].Trim();
-            hours = request.Form.GetValues("hours")[0].Trim();
+            timeBound = request.Form.GetValues("timeBound")[0].Trim();
         }
 
         /// <summary>

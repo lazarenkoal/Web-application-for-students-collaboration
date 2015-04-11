@@ -317,6 +317,7 @@
     </Content>
     <Content Include="bin\CocktionMVC.dll" />
     <Content Include="bin\CocktionMVC.pdb" />
+    <Content Include="Content\AuctionStyles\createAuctionStyle.css" />
     <Content Include="Content\AuctionStyles\currentAuctionStyle.css" />
     <Content Include="Content\AuctionStyles\indexStyle.css" />
     <Content Include="Content\BootstrapCss\bootstrap-responsive.css" />
@@ -336,6 +337,7 @@
     <Content Include="Content\SiteImages\hseBuilding.jpg" />
     <Content Include="Content\SiteImages\money.jpg" />
     <Content Include="Content\SiteImages\petuh6.jpg" />
+    <Content Include="Content\SiteImages\placeholder.jpg" />
     <Content Include="Content\SiteImages\Roosters-Playing-Football-Funny-Animals.jpg" />
     <Content Include="Content\SiteImages\ThanksCock.jpg" />
     <Content Include="Content\style.css" />
@@ -362,6 +364,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\Thumbnails\placeholder.jpg" />
     <Content Include="RecaptchaNet.ReadMe.txt" />
     <Content Include="Scripts\Bootstrap\bootstrap.js" />
     <Content Include="Scripts\Bootstrap\bootstrap.min.js" />
@@ -393,11 +396,8 @@
     <Content Include="Scripts\MyLib\AuctionHouse\GetCurrentAuctionHouse\addComment.js" />
     <Content Include="Scripts\MyLib\AuctionHouse\GetCurrentAuctionHouse\scroller.js" />
     <Content Include="Scripts\MyLib\AuctionHouse\GetUniversityHouses\printHousesInCells.js" />
-    <Content Include="Scripts\MyLib\Auction\Create\housePrinter.js" />
+    <Content Include="Scripts\MyLib\Auction\Create\createAuctionFormProcessor.js" />
     <Content Include="Scripts\MyLib\Auction\CurrentAuction\auctionEndLogic.js" />
-    <Content Include="Scripts\MyLib\Auction\Create\categoryOnClick.js" />
-    <Content Include="Scripts\MyLib\Auction\Create\creatorOnClick.js" />
-    <Content Include="Scripts\MyLib\Auction\Create\formValuesVerifier.js" />
     <Content Include="Scripts\MyLib\Auction\CurrentAuction\bidProcessor.js" />
     <Content Include="Scripts\MyLib\Auction\CurrentAuction\btnsOnClickPrcsg.js" />
     <Content Include="Scripts\MyLib\Auction\CurrentAuction\liderManager.js" />
@@ -482,7 +482,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\Photos\" />
-    <Folder Include="Images\Thumbnails\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201503092019139_sdfsdf.resx">

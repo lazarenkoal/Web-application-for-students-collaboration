@@ -46,5 +46,41 @@ namespace CocktionMVC.Functions
             auction.EndTime = auctionsEndTime;
             auction.StartTime = auctionStartTime;
         }
+
+        /// <summary>
+        /// Устанавливает время начала и окончания аукциона.
+        /// </summary>
+        /// <param name="auction">Аукцион, у которого надо установить временные границы</param>
+        /// <param name="timeBound">
+        /// На вход подается строка, которую сервер принимает с клиента
+        /// Возможны 3 варианта:
+        /// 1) 4hourTime - аукцион нужно завершить через 4 часа
+        /// 2) 1dayTime - аукцион нужно завершить через 1 день
+        /// 3) 1weekTime - аукцион нужно завершить через 1 неделю
+        /// </param>
+        public static void SetAuctionStartAndEndTime(Auction auction, string timeBound)
+        {
+            //получаем текущее время и устанавливаем время старта
+            DateTime auctionsEndTime = GetCurrentTime();
+            DateTime auctionStartTime = auctionsEndTime;
+
+            //Вычисляем время окончания аукциона
+            switch (timeBound)
+            {
+                case "4hoursTime":
+                    auctionsEndTime = auctionsEndTime.AddHours(4);
+                    break;
+                case "1dayTime":
+                    auctionsEndTime = auctionsEndTime.AddDays(1);
+                    break;
+                case "1weekTime":
+                    auctionsEndTime = auctionsEndTime.AddDays(7);
+                    break;
+            }
+
+            //устанавливаем время окончания и начала аукциона
+            auction.EndTime = auctionsEndTime;
+            auction.StartTime = auctionStartTime;
+        }
     }
 }

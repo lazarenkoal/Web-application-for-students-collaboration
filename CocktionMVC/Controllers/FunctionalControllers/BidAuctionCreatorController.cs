@@ -21,9 +21,9 @@ namespace CocktionMVC.Controllers
         public async Task<JsonResult> CreateAuction()
         {
             //Получаем информацию из формы
-            string name, description, category, housesId, minutes, hours;
+            string name, description, category, timeBound;
             RequestFormReader.ReadCreateAuctionForm(Request, out name, out description,
-                out category, out housesId, out minutes, out hours);
+                out category, out timeBound);
 
             //получаем информацию о пользователе
             string userId = User.Identity.GetUserId();
@@ -39,11 +39,14 @@ namespace CocktionMVC.Controllers
             Auction auction = new Auction(true, userId, userName, product, false, new ToteBoard());
 
             //добавляем все локации списочком к аукциону
-            int[] locIdsInt = DataFormatter.GetHouseIds(housesId);
-            Array.ForEach(locIdsInt, x => auction.Houses.Add(db.Houses.Find(x)));
+            //int[] locIdsInt = DataFormatter.GetHouseIds(housesId);
+            //Array.ForEach(locIdsInt, x => auction.Houses.Add(db.Houses.Find(x)));
+            //TODO сделать динамический выбор дома
+            auction.Houses.Add(db.Houses.Find(4));
 
             //задаем время окончания и начала аукциона
-            DateTimeManager.SetAuctionStartAndEndTime(auction, hours, minutes);
+           // DateTimeManager.SetAuctionStartAndEndTime(auction, hours, minutes);
+            DateTimeManager.SetAuctionStartAndEndTime(auction, timeBound);
 
             //добавление фотографии для товара
             Photo photo = new Photo();
@@ -54,10 +57,19 @@ namespace CocktionMVC.Controllers
             await DbItemsAdder.AddAuctionProductPhotoAsync(db, auction, product, photo);
 
             //апдейтим список c аукционами
-            AuctionListHub.UpdateList(product.Name, product.Description, product.Category, photo.FileName);
+            //AuctionListHub.UpdateList(product.Name, product.Description, product.Category, photo.FileName);
 
             //возвращаем статус
-            return Json("Успешно добавлено");
+            return Json(new IdContainer(auction.Id));
+        }
+
+        class IdContainer
+        {
+            public IdContainer(int id)
+            {
+                Id = id;
+            }
+            public int Id { get; set; }
         }
 
         /// <summary>

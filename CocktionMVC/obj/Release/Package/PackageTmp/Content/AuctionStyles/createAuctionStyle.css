@@ -1,0 +1,50 @@
+﻿/*Стили для формы для создания аукциона*/
+
+/*Контейнеры с чекбоксами*/
+#typeOfAuctionContainer, #timeContainer {
+    text-align: center;
+    font-size: medium;
+    border: dotted 1px lightgray;
+    border-radius: 3px;
+    padding-bottom: 3px;
+}
+
+h3,h4{
+    text-align: center;
+}
+
+#goToAuctionBtn {
+    float: right;
+}
+
+/*кнопка отправки и ввод файла*/
+#fileAndButtonContainer{
+    text-align: center;
+}
+
+/*Стили формы для ввода данных текстовых и радио батонов*/
+#inputs{
+    border-bottom: solid 1px lightgray;
+    border-left: solid 1px lightgray;
+    border-top: solid 1px lightgray;
+    background-color: #f5f5f5;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    padding-bottom: 10px;
+}
+
+/*Форма для стилей, которые получает форма для выбора домов*/
+#houses{
+    border-top: solid 1px lightgray;
+    border-bottom: solid 1px lightgray;
+    border-right: solid 1px lightgray;
+    border-left: solid 1px lightgray;
+    background-color: #f5f5f5;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    padding-bottom: 10px;
+    height: 401px;
+    overflow: scroll;
+    text-align: center;
+}
+

@@ -80,11 +80,12 @@ namespace CocktionMVC.Controllers.ApiControllers
             foreach (var bid in auction.BidProducts)
                 bidProducts.Add(new ProductInfoMobile
                     {
-                        ProductDescription = bid.Description.Trim(),
-                        ProductFileName = @"http://cocktion.com/Images/Thumbnails/" + bid.Photos.First().FileName,
-                        ProductName = bid.Name.Trim(),
-                        ProductCategory = bid.Category.Trim(),
-                        ProductId = bid.Id
+                        description = bid.Description.Trim(),
+                        photoPath = @"http://cocktion.com/Images/Thumbnails/" + bid.Photos.First().FileName,
+                        name = bid.Name.Trim(),
+                        category = bid.Category.Trim(),
+                        productId = bid.Id,
+                        leaderId = auction.LeadProduct == null ? -1 : auction.LeadProduct.Id
                     });
             return bidProducts;
         }

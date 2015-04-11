@@ -23,7 +23,6 @@ namespace CocktionMVC.Controllers
         /// </summary>
         /// <returns></returns>
         [AllowAnonymous]
-        [OutputCache(Duration = 10)]
         public ActionResult Index()
         {
             /*Сделать страничку с бесконечной прокруткой
@@ -54,9 +53,10 @@ namespace CocktionMVC.Controllers
         [HttpGet]
         public ActionResult Create() //метод для создания находится в контроллере FileSaver
         {
-            CocktionContext context = new CocktionContext();
-            var locations = context.Houses.ToList();
-            return View(locations);
+            //CocktionContext context = new CocktionContext();
+            //var locations = context.Houses.ToList();
+            //TODO сделать надо будет поиск по всей базе и потом вывод
+            return View();
         }//end of create
 
         /// <summary>

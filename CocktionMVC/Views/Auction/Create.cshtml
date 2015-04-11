@@ -1,138 +1,77 @@
-﻿@using WebGrease.Css.Ast.Selectors
-@model List<CocktionMVC.Models.DAL.House>
+﻿@model List<CocktionMVC.Models.DAL.House>
 @{
     ViewBag.Title = "Создать аукцион";
 }
 <script src="~/Scripts/Jquery/jquery-2.1.3.js"></script>
-<script src="~/Scripts/MyLib/Auction/Create/categoryOnClick.js"></script>
-<script src="~/Scripts/MyLib/Auction/Create/formValuesVerifier.js"></script>
-<script src="~/Scripts/MyLib/Auction/Create/creatorOnClick.js"></script>
-<script src="~/Scripts/MyLib/Auction/Create/housePrinter.js"></script>
-<style>
-    p {
-        font-family: monospace;
-    }
-</style>
-<div class="row">
-    <div id="formContainer" class="col-lg-3">
-        <h3>Создай свой аукцион!</h3>
-        <p>Имя</p>
-        <div id="nameErrorField"></div>
-        <input type="text" id="Name" name="Name" required />
-        <p>Описание</p>
-        <div id="descriptionErrorField"></div>
-        <input type="text" id="Description" name="Description" required />
-        <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                Выбрать категорию
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" id="category">
-                <li class="dropdown-submenu">
-                    <a tabindex="-1" href="#">Электроника</a>
-                    <ul class="dropdown-menu-right">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Фото и видеокамеры</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Телефоны</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Аудио и видеотехника</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Игровые приставки</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Просто очень крутая электронная штука</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown-submenu">
-                    <a tabindex="-1" href="#">Компьютеры</a>
-                    <ul class="dropdown-menu-right">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Аксессуары и расходники</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Комплектующие</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Накопители</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Периферийные устройства</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Игры и ПО</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Компы</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Оргтехника</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown-submenu">
-                    <a tabindex="-1" href="#">Бытовая техника</a>
-                    <ul class="dropdown-menu-right">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Климатическая техника</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Мелочи для кухни</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Техника для красоты</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Крупная техника для кухни</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Техника для дома</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown-submenu">
-                    <a tabindex="-1" href="#">Жизненное</a>
-                    <ul class="dropdown-menu-right">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Мелочи для жизни</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Всякие приколюхи</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Домашний хлам</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown-submenu">
-                    <a tabindex="-1" href="#">Шмотки</a>
-                    <ul class="dropdown-menu-right">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Одежда для милых дам</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Одежда для респектабельных господ</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Украшения для внешнего вида</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown-submenu">
-                    <a tabindex="-1" href="#">Прочее</a>
-                    <ul class="dropdown-menu-right">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" id="Прочее" href="#">Еда</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Напитки</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Услуги</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Люди</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Книги</a></li>
-                    </ul>
-                </li>
-            </ul>
+<script src="~/Scripts/MyLib/Auction/Create/createAuctionFormProcessor.js"></script>
+<link rel="stylesheet" href="~/Content/AuctionStyles/createAuctionStyle.css"/>
+<div id="createAuctionFormContainer" class="row">
+    <div class="col-md-2"><!--Для разметки --></div>
+    <div class="col-md-8" id="form" class="row">
+        <!--Контейнер для формы, создающей аукцион.-->
+        <h3>Создайте самый классный аукцион :)</h3>
+        <div class="col-md-6" id="inputs">
+            <!--Форма для внесения данных о товаре и аукционе-->
+            <h4>Что продаем?)</h4>
+            <input type="text" class="form-control" onchange="changeInputColor()"
+                   id="productName" placeholder="Название товара (обязательно поле)">
+            <br/>
+            <input type="text" class="form-control" id="descriptionName" placeholder="Описание">
+            <br/>
+            <div id="typeOfAuctionContainer">
+                <!--Чекбоксы для типов товара-->
+                <h5>Тип предмета</h5>
+                <label class="radio-inline">
+                    <input type="radio" id="bookRadio" onclick="auctionRadioCheckHandler(this)"> Книга
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" id="productRadio" onclick="auctionRadioCheckHandler(this)"> Вещь
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" id="serviceRadio" onclick="auctionRadioCheckHandler(this)"> Услуга
+                </label>
+            </div>
+            <br/>
+            <div id="timeContainer">
+                <!--Чекбоксы для временных ограничений -->
+                <!--4 часа / 1 день / 1 неделя -->
+                <h5>Длительность аукциона</h5>
+                <label class="radio-inline">
+                    <input type="radio" id="4hoursTime" onclick="auctionRadioCheckHandler(this)"> 4 часа
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" id="1dayTime" onclick="auctionRadioCheckHandler(this)"> 1 день
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" id="1weekTime" onclick="auctionRadioCheckHandler(this)"> 1 неделя
+                </label>
+            </div>
+            <br/>
+            <div id="fileAndButtonContainer">
+                <!--Контейнр для файла и кнопок -->
+                <input type="file" id="fileInput" accept="image/*">
+                <br />
+                <div class="progress" hidden="" id="progressBar">
+                    <!--Прогресс бар-->
+                    <div class="progress-bar progress-bar-success" id="bar" role="progressbar"
+                         aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                        <!--Здесь можно впендюрить текстовый индикатор процентов загрузки-->
+                    </div>
+                </div>
+                <div hidden="" id="readyInfo"></div>
+                <button id="createAuctionBtn" onclick=" sendData() " class="btn btn-default">Создать аукцион</button>
+            </div>
         </div>
-        <div id="infoErrorField"></div>
-        <div id="info"></div>
-        <p>Часов</p>
-        <div id="hoursErrorField"></div>
-        <input type="number" min="0" id="Hours" name="Hours" required />
-        <p>Минут</p>
-        <div id="minutesErrorField"></div>
-        <input type="number" min="1" id="Minutes" name="Minutes" required />
-        <p>Файлик</p>
-        <input type="file" id="file" />
-        <input type="button" id="creator" onclick="creatorOnClick()" class="btn btn-default" value="Создать аукцион" title="Кокнуть!"/>
-        <div id="fileErrorField"></div>
-        <div id="checkboxInfo"></div>
-    </div>
-    <div id="locationsContainer" class="col-lg-5">
-        <h3>Выбери дом для него</h3>
-        @foreach (var item in Model)
-        { 
-            <script>
-                var q = {
-                    id: @item.Id,
-                    university: '@item.University',
-                    faculty: '@item.Faculty',
-                    adress: '@item.Adress'
-                    };
-                a.push(q);
-            </script>
-        }
-        <div class="btn-group">
-            <button type="button" class="btn btn-default" onclick=" printHouses(this) ">МГТУ</button>
-            <button type="button" class="btn btn-default" onclick=" printHouses(this) ">МФТИ</button>
-            <button type="button" class="btn btn-default" onclick=" printHouses(this) ">НИУ ВШЭ</button>
-            <button type="button" class="btn btn-default" onclick=" printHouses(this) ">МГУ</button>
-            <button type="button" class="btn btn-default" onclick=" printHouses(this) ">НИЯУ МИФИ</button>
+        <div class="col-md-6" id="houses">
+            <!-- Контейнер для выбора домов -->
+            <h4>Где продаем?)</h4>
+            <input type="text" class="form-control" placeholder="Университет">
+            <br/>
+            <input type="text" class="form-control" placeholder="Факультет">
+            <p>То, что будет выведено после поиска</p>
         </div>
-        <div id="houses">
-        </div>
-        <div id="housesErrorField"></div>
-         
     </div>
-    <div id="infoForm" class="col-lg-4">
-        <h3>Привет, друг</h3>
-        <p>Добавляй свой хит! Стопудов крутой!</p>
-        <img src="~/Content/SiteImages/petuh6.jpg" height="100%" width="100%" title="COOOOOCK!" /> 
-    </div>
+    <div class="col-md-2"><!--Для разметки --></div>
 </div>
 
 @section Scripts {
