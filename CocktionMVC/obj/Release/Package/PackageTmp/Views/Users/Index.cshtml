@@ -4,15 +4,13 @@
 }
 @using CocktionMVC.Models.DAL
 @model List<CocktionMVC.Models.DAL.AspNetUser>
-<h3>Cocktioneers</h3>
+<h3>Пользователи</h3>
 <link rel="stylesheet" href="~/Content/usersStyle.css"/>
 <script src="~/Scripts/MyLib/Data/userPrinter.js"></script>
 <div class="row">
-    <div class="col-md-3">
-        <!--Контейнер для чего-то -->
-        <p>Что-то еще...</p>
-    </div>
-    <div class="col-md-6" id="usersHere">
+    <div class="col-md-1"></div>
+
+    <div class="col-md-7" id="usersHere">
         <!--Контейнер для информации о пользователе -->
         @{
             int amountOfUsers = Model.Count;
@@ -34,11 +32,29 @@
                     </script>
                 }
             }
-}
+        }
     </div>
-    <div class="col-md-3">
-        <p>Выбери по критериям</p>
+    <div class="col-md-3" id="filterContainer">
+        <p>Отфильтруйте :)</p>
         <!--Контейнер для фильтра-->
-
+        <div class="userFilters">
+            <input type="text" id="city" class="form-control" placeholder="Город">
+            <br/>
+            <input type="text" id="university" class="form-control" placeholder="Университет">
+            <br/>
+            <input type="text" id="faculty" class="form-control" placeholder="Факультет">
+            <h5>Пол</h5>
+            <label class="radio-inline">
+                <input type="radio" id="male" onclick=" sexCheckboxCheckedHandler(this) "> Мужской
+            </label>
+            <label class="radio-inline">
+                <input type="radio" id="female" onclick=" sexCheckboxCheckedHandler(this) "> Женский
+            </label>
+            <h5>Дома</h5>
+            <label class="checkbox-inline">
+                <input type="checkbox"> В тех же, где и я.
+            </label>
+        </div>
     </div>
+    <div class="col-md-1"></div>
 </div>

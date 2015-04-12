@@ -1,0 +1,51 @@
+﻿p {
+    font-family: monospace;
+}
+
+h3 {
+    text-align: center;
+    font-family: monospace;
+}
+
+#houseDescriptionContainer {
+    border: 1px solid black;
+    padding: 10px;
+    font-family: monospace;
+    border-radius: 3px;
+}
+
+#secondInfoColumn {
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 3px;
+}
+
+#messageContainer {
+    margin-bottom: 10px;
+}
+
+.author {
+    border-bottom: solid 1px lightgray;
+}
+
+.postContainer {
+    border: dotted 1px lightgray;
+    padding: 5px;
+    border-radius: 3px;
+    margin: 5px;
+}
+
+
+#messageEnterContainer {
+    border-top: 2px dotted black;
+    padding-top: 30px;
+}
+
+textarea {
+    width: 100%;
+    height: 100%;
+}
+
+#addCommentButton {
+    float: right;
+}
