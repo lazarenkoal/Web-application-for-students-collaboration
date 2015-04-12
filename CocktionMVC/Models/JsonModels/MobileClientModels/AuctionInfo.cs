@@ -9,33 +9,29 @@
         /// <summary>
         /// Описание аукциона
         /// </summary>
-        public string AuctionDescription { get; set; }
+        public string description { get; set; }
 
         /// <summary>
         /// Название аукциона
         /// </summary>
-        public string AuctionTitle { get; set; }
+        public string title { get; set; }
 
         /// <summary>
         /// Путь к картинке для аукциона
         /// </summary>
-        public string AuctionImage { get; set; }
-
-        /// <summary>
-        /// Категория, к которой относится товар на аукционе
-        /// </summary>
-        public string AuctionCategory { get; set; }
-
-       
+        public string photoPath { get; set; }
 
         /// <summary>
         /// Время окончания аукциона в минутах от текущего
         /// </summary>
-        public int AuctionEndTime { get; set; }
+        public int endTime { get; set; }
 
         /// <summary>
         /// Айдишник аукциона
         /// </summary>
-        public int AuctionId { get; set; }
+        public int auctionId { get; set; }
+
+        public int leaderId { get; set; }
+        public string сategory { get; set; }
     }
 }

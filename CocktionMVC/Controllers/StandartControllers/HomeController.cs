@@ -6,7 +6,12 @@ namespace CocktionMVC.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return View();
+            }
+            return View("Index2");
+            
         }
           
         public ActionResult About()

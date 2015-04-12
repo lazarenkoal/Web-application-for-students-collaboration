@@ -1,29 +1,179 @@
 ﻿@{
     ViewBag.Title = "Главная страничка";
 }
+<link rel="stylesheet" href="~/Content/indexAuthorizedStyle.css"/>
+<div class="row" id="topAuctions">
+    <div class="col-md-6" id="cocktionTop">
+        <h4>TOP-5 на cocktion.</h4>
 
-<div class="jumbotron">
-    <h2>Завалялось что-то ненужное? Обменяй свою вещь с молотка!</h2>
-    <p class="lead">Cocktion это бесплатные для продавцов и покупателей аукционы, на которых можно продать свою вещь за любой другой товар.</p>
-    <p><a href="@Url.Action("Create", "Auction")" class="btn btn-primary btn-lg">Начинай продавать! &raquo;</a></p>
-</div>
+        <div class="row auctionInfoContainer">
+            <div class="col-md-4">
+                <div class="photoContainer">
+                    <img class="img-circle" src="~/Content/SiteImages/allSmallProducts.jpg">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="infoContainer">
+                    <p><b>Крестный отец.</b>
+                    </p>
+                    <p>(Книга)</p>
+                    <p><b>Можно достать</b> еще 4 часа.
+                    </p>
+                </div>
+            </div>
+        </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Меняйся по-взрослому!</h2>
-        <p>
-            Cocktion предлагает тебе прекрасный сервис для обмена своих вещей как на деньги, так и на другие вещи. Начинай создавать свои собственные аукционы и стань самым крутым аукционистом;)
-        </p>
-        <p><a class="btn btn-default" href="@Url.Action("Create", "Auction")">Хочу выгодно избавиться от своей вещи! &raquo;</a></p>
+        <div class="row auctionInfoContainer">
+            <div class="col-md-4">
+                <div class="photoContainer">
+                    <img class="img-circle" src="~/Content/SiteImages/allSmallProducts.jpg">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="infoContainer">
+                    <p><b>Евгений Онегин.</b>
+                    </p>
+                    <p>(Книга)</p>
+                    <p><b>Можно достать</b> еще 2 часа.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row auctionInfoContainer">
+            <div class="col-md-4">
+                <div class="photoContainer">
+                    <img class="img-circle" src="~/Content/SiteImages/allSmallProducts.jpg">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="infoContainer">
+                    <p><b>Крестный отец.</b>
+                    </p>
+                    <p>(Книга)</p>
+                    <p><b>Можно достать</b> еще 4 часа.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row auctionInfoContainer">
+            <div class="col-md-4">
+                <div class="photoContainer">
+                    <img class="img-circle" src="~/Content/SiteImages/allSmallProducts.jpg">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="infoContainer">
+                    <p><b>Евгений Онегин.</b>
+                    </p>
+                    <p>(Книга)</p>
+                    <p><b>Можно достать</b> еще 2 часа.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row auctionInfoContainer">
+            <div class="col-md-4">
+                <div class="photoContainer">
+                    <img class="img-circle" src="~/Content/SiteImages/allSmallProducts.jpg">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="infoContainer">
+                    <p><b>Евгений Онегин.</b>
+                    </p>
+                    <p>(Книга)</p>
+                    <p><b>Можно достать</b> еще 2 часа.
+                    </p>
+                </div>
+            </div>
+        </div>
+
     </div>
-    <div class="col-md-4">
-        <h2>Выбирай крутые вещи и предлагай за них свои!</h2>
-        <p>На Cocktion'e ты можешь найти множество прекрасных вещей, которые можно приобрести практически бесплатно, достаточно просто отдать ненужную тебе вещь взамен.</p>
-        <p><a class="btn btn-default" href="@Url.Action("Index", "Auction")">Хочу посмотреть на то, что предлагают другие! &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Свобода в выборе цены для оплаты.</h2>
-        <p>Плати людям за товар хоть яйцами, хоть деньгами. Здесь можно все!</p>
-        <p><a class="btn btn-default" href="@Url.Action("Index", "Help")">Научи меня! &raquo;</a></p>
+    <div class="col-md-6" id="inMyHousesTop">
+        <h4>TOP-5 в вашем колхозе.</h4>
+        <div class="row auctionInfoContainer">
+            <div class="col-md-4">
+                <div class="photoContainer">
+                    <img class="img-circle" src="~/Content/SiteImages/allSmallProducts.jpg">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="infoContainer">
+                    <p><b>Мышка.</b>
+                    </p>
+                    <p>(Вещь)</p>
+                    <p><b>Можно достать</b> еще 2 дня.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row auctionInfoContainer">
+            <div class="col-md-4">
+                <div class="photoContainer">
+                    <img class="img-circle" src="~/Content/SiteImages/allSmallProducts.jpg">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="infoContainer">
+                    <p><b>Крестный отец.</b>
+                    </p>
+                    <p>(Книга)</p>
+                    <p><b>Можно достать</b> еще 4 часа.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row auctionInfoContainer">
+            <div class="col-md-4">
+                <div class="photoContainer">
+                    <img class="img-circle" src="~/Content/SiteImages/allSmallProducts.jpg">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="infoContainer">
+                    <p><b>Мышка.</b>
+                    </p>
+                    <p>(Вещь)</p>
+                    <p><b>Можно достать</b> еще 2 дня.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row auctionInfoContainer">
+            <div class="col-md-4">
+                <div class="photoContainer">
+                    <img class="img-circle" src="~/Content/SiteImages/allSmallProducts.jpg">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="infoContainer">
+                    <p><b>Крестный отец.</b>
+                    </p>
+                    <p>(Книга)</p>
+                    <p><b>Можно достать</b> еще 4 часа.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row auctionInfoContainer">
+            <div class="col-md-4">
+                <div class="photoContainer">
+                    <img class="img-circle" src="~/Content/SiteImages/allSmallProducts.jpg">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="infoContainer">
+                    <p><b>Крестный отец.</b>
+                    </p>
+                    <p>(Книга)</p>
+                    <p><b>Можно достать</b> еще 4 часа.
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+<!--Тут вставить его аукционы-->

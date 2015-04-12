@@ -46,12 +46,13 @@ namespace CocktionMVC.Controllers.ApiControllers
                 auctiInfo.Add(
                        new AuctionInfo
                        {
-                           AuctionCategory = auction.SellProduct.Category.Trim(),
-                           AuctionDescription = auction.SellProduct.Description.Trim(),
-                           AuctionEndTime = minutes,
-                           AuctionImage = @"http://cocktion.com/Images/Thumbnails/" + auction.SellProduct.Photos.First().FileName,
-                           AuctionTitle = auction.SellProduct.Name.Trim(),
-                           AuctionId = auction.Id
+                           description = auction.SellProduct.Description.Trim(),
+                           endTime = minutes,
+                           photoPath = @"http://cocktion.com/Images/Thumbnails/" + auction.SellProduct.Photos.First().FileName,
+                           title = auction.SellProduct.Name.Trim(),
+                           auctionId = auction.Id,
+                           leaderId = auction.LeadProduct == null ? -1 : auction.LeadProduct.Id,
+                           сategory = auction.SellProduct.Category.Trim()
                        }
                        );
             }//end of foreach
@@ -85,7 +86,6 @@ namespace CocktionMVC.Controllers.ApiControllers
                         name = bid.Name.Trim(),
                         category = bid.Category.Trim(),
                         productId = bid.Id,
-                        leaderId = auction.LeadProduct == null ? -1 : auction.LeadProduct.Id
                     });
             return bidProducts;
         }

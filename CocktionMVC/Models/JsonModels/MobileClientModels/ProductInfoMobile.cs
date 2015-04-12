@@ -31,6 +31,5 @@
         /// </summary>
         public string category { get; set; }
 
-        public int leaderId { get; set; }
     }
 }

@@ -6,13 +6,14 @@
 @model ProfileViewModel
 <link rel="stylesheet" href="~/Content/ProfileStyle/ProfileStyle.css" />
 <script src="~/Scripts/MyLib/Profile/opinionAdder.js"></script>
-<div class="row">
+<script src="~/Scripts/MyLib/Auction/Index/auctionAdder.js"></script>
+
+<div class="row" id="userFullInformation">
     <br />
     <!--Фотка и информация о пользователе-->
-    <div class="col-md-3" style="align-items:flex-start">
+    <div class="col-md-3" style="align-items: flex-start">
         <!--Контейнер для аватарки-->
         <img src="~/Content/SiteImages/anonPhoto.jpg" class="img-thumbnail" />
-        <p>Фотокарточка.</p>
     </div>
     <div class="col-md-2" id="userInformation">
         <!--Контейнер для информации-->
@@ -63,6 +64,7 @@
         </div>
     </div>
 </div>
+
 <br />
 <br />
 
@@ -72,92 +74,53 @@
     <div class="col-md-3">
         <p>Какой-то дом</p>
         <img src="~/Content/SiteImages/house1.jpg" class="img-responsive" />
+        <br />
     </div>
     <div class="col-md-3">
         <p>Какой-то дом</p>
         <img src="~/Content/SiteImages/house1.jpg" class="img-responsive" />
+        <br />
     </div>
     <div class="col-md-3">
         <p>Какой-то дом</p>
         <img src="~/Content/SiteImages/house1.jpg" class="img-responsive" />
+        <br />
     </div>
     <div class="col-md-3">
         <p>Какой-то дом</p>
         <img src="~/Content/SiteImages/house1.jpg" class="img-responsive" />
+        <br />
     </div>
 </div>
-
 <br />
 <br />
 
 <div class="row" id="usersAuctions">
     <!--Аукционы пользователя-->
     <h3 id="auctionHeader">Владелец прекрасных аукционов</h3>
-    @{
-        if ((Model.AuctionsAmount) != 0)
+</div>
+@{
+    if (Model.HisAuctions.Count != 0)
+    {
+        foreach (var auction in Model.HisAuctions)
         {
-            int i1 = 0, i2 = 1, i3 = 2, i4 = 3;
-            <div class="col-md-3">
-                @while (i1 < Model.AuctionsAmount)
-                {
-                    <h4>@Model.HisAuctions[i1].SellProduct.Name</h4>
-                    <p>Описание: @Model.HisAuctions[i1].SellProduct.Description</p>
-                    <p>@Html.ActionLink("Заглянуть", "CurrentAuction", "Auction", new { id = Model.HisAuctions[i1].Id }, null)</p>
-                    <img src="http://cocktion.com/Images/Thumbnails/@Model.HisAuctions[i1].SellProduct.Photos.First().FileName"
-                         class="img-responsive" />
-                    <br />
-                    <br />
-                    i1 += 4;
-                }
-            </div>
-            <div class="col-md-3">
-                @while (i2 < Model.AuctionsAmount)
-                {
-                    <h4>@Model.HisAuctions[i2].SellProduct.Name</h4>
-                    <p>Описание: @Model.HisAuctions[i2].SellProduct.Description</p>
-                    <p>@Html.ActionLink("Заглянуть", "CurrentAuction", "Auction", new { id = Model.HisAuctions[i2].Id }, null)</p>
-                    <img src="http://cocktion.com/Images/Thumbnails/@Model.HisAuctions[i2].SellProduct.Photos.First().FileName"
-                         class="img-responsive" />
-                    <br />
-                    <br />
-                    i2 += 4;
-                }
-            </div>
-            <div class="col-md-3">
-                @while (i3 < Model.AuctionsAmount)
-                {
-                    <h4>@Model.HisAuctions[i3].SellProduct.Name</h4>
-                    <p>Описание: @Model.HisAuctions[i3].SellProduct.Description</p>
-                    <p>@Html.ActionLink("Заглянуть", "CurrentAuction", "Auction", new { id = Model.HisAuctions[i3].Id }, null)</p>
-                    <img src="http://cocktion.com/Images/Thumbnails/@Model.HisAuctions[i3].SellProduct.Photos.First().FileName" class="img-responsive" />
-                    <br />
-                    <br />
-
-                    i3 += 4;
-                }
-            </div>
-            <div class="col-md-3">
-                @while (i4 < Model.AuctionsAmount)
-                {
-                    <h4>@Model.HisAuctions[i4].SellProduct.Name</h4>
-                    <p>Описание: @Model.HisAuctions[i4].SellProduct.Description</p>
-                    <p>@Html.ActionLink("Заглянуть", "CurrentAuction", "Auction", new { id = Model.HisAuctions[i4].Id }, null)</p>
-                    <img src="http://cocktion.com/Images/Thumbnails/@Model.HisAuctions[i4].SellProduct.Photos.First().FileName" class="img-responsive" />
-                    <br />
-                    <br />
-                    i4 += 4;
-                }
-            </div>
-        }
-        else
-        {
-            <p>К сожалению, пока что вы ничего не продали :(</p>
+            <script>
+                addCellToTheGrid('usersAuctions', '@auction.SellProduct.Name', '@auction.SellProduct.Description',
+                    '@auction.EndTime', 'http://cocktion.com/Images/Thumbnails/@auction.SellProduct.Photos.First().FileName',
+                    'http://cocktion.com/Auction/CurrentAuction/@auction.Id');
+            </script>
         }
     }
-</div>
-<br />
-<br />
+    else
+    {
+        <script>
+            sayThatEmpty('usersAuctions');
+        </script>
+    }
+}
 
+<br />
+<br />
 <div class="row" id="usersFeedback">
     <!--Отзывы о пользователе-->
     <div class="col-md-3" id="feedbackDescription">
@@ -204,7 +167,5 @@
         </div>
     </div>
     <div class="col-md-3">
-        <p>Не надо стесняяяться!</p>
-        <button>Наверх</button>
     </div>
 </div>

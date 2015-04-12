@@ -353,11 +353,15 @@
     <Content Include="Content\BootstrapCss\bootstrap.min.css" />
     <Content Include="Content\getCurrentAuctionHouseStyle.css" />
     <Content Include="Content\hiddenButtons.css" />
+    <Content Include="Content\indexAuthorizedStyle.css" />
     <Content Include="Content\ProfileStyle\ProfileStyle.css" />
     <Content Include="Content\SiteImages\allProducts.jpg" />
+    <Content Include="Content\SiteImages\allSmallProducts.jpg" />
     <Content Include="Content\SiteImages\anonPhoto.jpg" />
     <Content Include="Content\SiteImages\blackjack.jpg" />
+    <Content Include="Content\SiteImages\book.jpg" />
     <Content Include="Content\SiteImages\car.jpg" />
+    <Content Include="Content\SiteImages\cocky.jpg" />
     <Content Include="Content\SiteImages\finishedAuctions.jpg" />
     <Content Include="Content\SiteImages\girl.jpg" />
     <Content Include="Content\SiteImages\house1.jpg" />
@@ -367,8 +371,11 @@
     <Content Include="Content\SiteImages\petuh6.jpg" />
     <Content Include="Content\SiteImages\placeholder.jpg" />
     <Content Include="Content\SiteImages\Roosters-Playing-Football-Funny-Animals.jpg" />
+    <Content Include="Content\SiteImages\service.jpg" />
+    <Content Include="Content\SiteImages\stuff.png" />
     <Content Include="Content\SiteImages\ThanksCock.jpg" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\unauthMainStyle.css" />
     <Content Include="Content\universityHousesStyle.css" />
     <Content Include="Content\UniversityLogos\1medLogo.jpg" />
     <Content Include="Content\UniversityLogos\finashkaLogo.jpg" />
@@ -438,6 +445,7 @@
     <Content Include="Scripts\MyLib\EditHouses\formVerifier.js" />
     <Content Include="Scripts\MyLib\EditHouses\housesSender.js" />
     <Content Include="Scripts\MyLib\Profile\opinionAdder.js" />
+    <Content Include="Scripts\MyLib\unauthMainScripts.js" />
     <Content Include="Scripts\MyLib\Vis\vis.js" />
     <Content Include="Scripts\MyLib\Vis\vis.min.js" />
     <Content Include="Web.config">
@@ -501,6 +509,7 @@
     <Content Include="Views\AuctionShower\ShowActiveAuctions.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\User.cshtml" />
+    <Content Include="Views\Shared\Index2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
