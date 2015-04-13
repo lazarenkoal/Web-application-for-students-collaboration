@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
+using CocktionMVC.Functions;
 using CocktionMVC.Models.DAL;
 using CocktionMVC.Models.JsonModels;
 
@@ -16,7 +18,6 @@ namespace CocktionMVC.Controllers
         /// Выводит пользователя на страницу со списком всех домов
         /// </summary>
         /// <returns>страницу со списком</returns>
-        [OutputCache(Duration = 1000)]
         public ActionResult Index()
         {
             //Мб добавим потом тут какой-то код для связи с БД
@@ -58,28 +59,38 @@ namespace CocktionMVC.Controllers
         /// Добавляет комментарий на форум
         /// </summary>
         /// <returns>Джейсончик со статусом и именем автора</returns>
-        public JsonResult AddComment()
+        public async Task<JsonResult> AddComment()
         {
             try
-            {//пробуем добавить сообщение
-                //Получаем информацию с формы
-                string message = Request.Form.GetValues("message")[0].Trim();
-                int houseId = int.Parse(Request.Form.GetValues("houseId")[0].Trim());
+            {
+                var strings = Request.Form.GetValues("message"); //получаем значения поля message в форме
+                if (strings != null)
+                {//если значение в порядке
+                    string message = strings[0].Trim();
+                    var values = Request.Form.GetValues("houseId"); //получаем значение поля houseId
+                    if (values != null)
+                    {//если все ок
+                        int houseId = int.Parse(values[0].Trim());
 
-                //Подключаемся к базе данных
-                CocktionContext db = new CocktionContext();
+                        //Подключаемся к базе данных
+                        CocktionContext db = new CocktionContext();
 
-                //находим дом
-                var house = db.Houses.Find(houseId);
+                        //находим дом
+                        var house = db.Houses.Find(houseId);
                 
-                //Создаем пост и добавляем в дом
-                ForumPost post = new ForumPost(message, User.Identity.Name);
-                post.HostHouse = house;
-                house.Posts.Add(post);
-                db.SaveChanges();
+                        //Создаем пост и добавляем в дом
+                        ForumPost post = new ForumPost(message, User.Identity.Name) {HostHouse = house};
+                        house.Posts.Add(post);
 
-                //возвращаем успех
-                return Json(new ForumRespond("Success", User.Identity.Name));
+                        //сохранение значений в базу
+                        await DbItemsAdder.SaveDb(db);
+
+                        //возвращаем успех
+                        return Json(new ForumRespond("Success", User.Identity.Name));
+                    }
+                }
+                //если в какой-то из форм не было значения - ничего не добавляем
+                return Json(new ForumRespond("Failed"));
             }
             catch
             {//если произошла какая-то ошибка

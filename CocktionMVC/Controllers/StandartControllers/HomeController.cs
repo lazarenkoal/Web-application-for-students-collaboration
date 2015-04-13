@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 
+// ReSharper disable once CheckNamespace
 namespace CocktionMVC.Controllers
 {
     public class HomeController : Controller

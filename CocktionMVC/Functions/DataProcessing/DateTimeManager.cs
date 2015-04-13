@@ -1,6 +1,7 @@
 ﻿using System;
 using CocktionMVC.Models.DAL;
 
+// ReSharper disable once CheckNamespace
 namespace CocktionMVC.Functions
 {
     /// <summary>

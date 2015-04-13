@@ -1,4 +1,5 @@
-﻿function sendHouseToServer() {
+﻿//Посылает новый дом на сервак
+function sendHouseToServer() {
     if (verifyForm()) {
         var confirmString = "ВУЗ: " + $("#university").val() + "\n" + "Факультет: " + $("#faculty").val() +
            "\n" + "Aдрес: " + $("#adress").val() + "\n" + "Все окей? Добавляю?";

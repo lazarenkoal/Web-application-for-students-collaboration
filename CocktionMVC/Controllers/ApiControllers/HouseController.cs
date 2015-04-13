@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using CocktionMVC.Models.DAL;
@@ -26,7 +23,6 @@ namespace CocktionMVC.Controllers.ApiControllers
         public List<Guild> GetGuilds()
         {
             List<Guild> guilds = new List<Guild>();
-            CocktionContext db = new CocktionContext();
 
             //TODO сделать в базе данных несколько другую модель с этим добром
             guilds.Add(new Guild("МГИМО", @"http://cocktion.com/Content/UniversityLogos/" + "mgimoLogo.jpg", 0));
@@ -59,43 +55,52 @@ namespace CocktionMVC.Controllers.ApiControllers
             }
             return guildsHouses;
         }
-    
+
+        public class GuildNum
+        {
+            public int guildId { get; set; }
+        }
+
         /// <summary>
         /// Посылает на мобилку коллекцию с домами хаусхолдера
         /// </summary>
         /// <returns>Коллекцию</returns>
         [HttpPost]
         [Authorize]
-        public List<GuildsHouse> GetGuildsHouses()
+        public List<GuildsHouse> GetGuildsHouses(GuildNum gn)
         {
             //TODO сделать нормальную версию, когда можно будет дома добавить
             List<GuildsHouse> houses = new List<GuildsHouse>();
             CocktionContext db = new CocktionContext();
 
             //обработка guildId из формы
-            string guildId = HttpContext.Current.Request.Form.GetValues("guildId")[0];
-            switch (guildId)
+            switch (gn.guildId)
             {
-                case ("0"):
+                case (0):
                     houses = BuildHouseForMobile(db, "МГИМО");
                     break;
-                case ("1"):
+                case (1):
                     houses = BuildHouseForMobile(db, "МФТИ");
                     break;
-                case ("2"):
+                case (2):
                     houses = BuildHouseForMobile(db, "НИУ ВШЭ");
                     break;
-                case ("3"):
+                case (3):
                     houses = BuildHouseForMobile(db, "МГУ");
                     break;
-                case ("4"):
+                case (4):
                     houses = BuildHouseForMobile(db, "НИЯУ МИФИ");
                     break;
-                case ("5"):
+                case (5):
                     houses = BuildHouseForMobile(db, "МГТУ");
                     break;
             }
             return houses;
+        }
+
+        public class HouseNum
+        {
+            public int houseId { get; set; }
         }
 
         /// <summary>
@@ -104,14 +109,13 @@ namespace CocktionMVC.Controllers.ApiControllers
         /// <returns>Класс с инфой о доме</returns>
         [HttpPost]
         [Authorize]
-        public HouseMobile GetHouse()
+        public HouseMobile GetHouse(HouseNum hsNum)
         {
             //TODO добавить везде проверки
             CocktionContext db = new CocktionContext();
 
             //обработка guildId из формы
-            string houseId = HttpContext.Current.Request.Form.GetValues("houseId")[0];
-            House house = db.Houses.Find(int.Parse(houseId));
+            House house = db.Houses.Find(hsNum.houseId);
             HouseMobile mobileHouse = new HouseMobile(@"http://cocktion.com/Content/SiteImages/house1.jpg", house.Likes,
                 0, house.Rating, 10, house.Auctions.Count, "Крутой дом");
 
@@ -138,28 +142,33 @@ namespace CocktionMVC.Controllers.ApiControllers
             return posts;
         }
 
+        public class Message
+        {
+            public string message { get; set; }
+            public int houseId { get; set; }
+        }
+
+
         /// <summary>
         /// Добавляет пост на форум конкретного дома
         /// </summary>
         /// <returns>Статус удалось или нет</returns>
         [HttpPost]
         [Authorize]
-        public StatusHolder SendPost()
+        public StatusHolder SendPost(Message msg)
         {
             try
             {
                 CocktionContext db = new CocktionContext();
                 
                 //Получаем информацию для постав
-                string houseId = HttpContext.Current.Request.Form.GetValues("houseId")[0];
-                string message = HttpContext.Current.Request.Form.GetValues("message")[0];
                 string authorName = User.Identity.Name;
 
                 //Находим дом
-                var house = db.Houses.Find(int.Parse(houseId));
+                var house = db.Houses.Find(msg.houseId);
 
                 //добавляем пост
-                house.Posts.Add(new ForumPost(message, authorName));
+                house.Posts.Add(new ForumPost(msg.message, authorName));
                 db.SaveChanges();
 
                 //возвращаем статус

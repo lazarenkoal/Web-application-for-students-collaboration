@@ -6,6 +6,7 @@ using CocktionMVC.Functions;
 using CocktionMVC.Models.DAL;
 using Microsoft.AspNet.Identity;
 
+// ReSharper disable once CheckNamespace
 namespace CocktionMVC.Controllers
 {
     /// <summary>
@@ -25,7 +26,7 @@ namespace CocktionMVC.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
-            /*Сделать страничку с бесконечной прокруткой
+            /*TODO Сделать страничку с бесконечной прокруткой
              * где будут отображаться все аукционы 
              * 
              * Подумать насчет фильтров (как их лучше прифигачить)
@@ -38,8 +39,8 @@ namespace CocktionMVC.Controllers
 
             //Получаем все активные в данный момент аукционы
             var auctions = (from x in db.Auctions
-                            where ((x.EndTime > controlTime) && (x.IsActive))
-                            select x).ToList<Auction>();
+                where ((x.EndTime > controlTime) && (x.IsActive))
+                select x).ToList<Auction>();
 
             return View(auctions);
         }
@@ -53,11 +54,9 @@ namespace CocktionMVC.Controllers
         [HttpGet]
         public ActionResult Create() //метод для создания находится в контроллере FileSaver
         {
-            //CocktionContext context = new CocktionContext();
-            //var locations = context.Houses.ToList();
-            //TODO сделать надо будет поиск по всей базе и потом вывод
+            //TODO сделать фильтр по универам
             return View();
-        }//end of create
+        } //end of create
 
         /// <summary>
         /// Выводит страничку, которая показывает
@@ -71,11 +70,10 @@ namespace CocktionMVC.Controllers
             string userId = User.Identity.GetUserId();
             var user = db.AspNetUsers.Find(userId);
 
-            //Получаем все аукционы, у которых владелец == данный пользватель
             List<Auction> auctions = user.HisAuctions.ToList();
 
             return View("MyAuctions", auctions);
-        }//end of ShowMyAuctions()
+        }
 
         /// <summary>
         /// Выводит страничку, где показан
@@ -98,6 +96,6 @@ namespace CocktionMVC.Controllers
             {
                 return View("PageNotFound");
             }
-        }//end of CurrentAuction
-    }//end of AuctionController
+        }
+    }
 }

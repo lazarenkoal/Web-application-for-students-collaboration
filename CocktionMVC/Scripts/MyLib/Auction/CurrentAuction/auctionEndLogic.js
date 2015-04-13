@@ -1,44 +1,30 @@
-﻿//функция будет посылать в таймер информацию о
-//результатах аукциона
+﻿/*Печатает на экране пользователя результаты аукциона,
+в зависимости от типа пользователя.
+*/
 function printAuctionResults(obj) {
     if (obj.Type == 'Owner') {
-        //необходимо связаться с продавцом
-        //печатаем в таймер сообщение
         $('#auctionInfoContainer').empty();
         $('#auctionInfoContainer').append(obj.Message);
         $("#showAuctionInfoBtn").click();
-        //открываем окно для чата
-        //вызываем метод, кот будет рассылать
-        //сообщения
     }//end of if
     else if (obj.Type == 'Winner') {
-        //необходимо связаться с победителем
-
-        //Печатаем в таймер сообщение, затем
         $('#auctionInfoContainer').empty();
         $('#auctionInfoContainer').append(obj.Message);
         $("#showAuctionInfoBtn").click();
-        //открываем окно для чата
-        //вызываем метод, который будет рассылать
-        //собшения
     }//end of if
     else if (obj.Type == 'Info') {
-        //вставляем в таймер информацию
         $('#timer').append(obj.Message);
     }
     else if (obj.Type == 'Looser') {
-        //пока что только выводим информацию
-        //из сообщения в таймер
         $('#timer').append(obj.Message);
     }
     else if (obj.Type == 'Owner_undfnd') {
-        //случай, в котором хозяин не выбрал лидера
-        //пока что только выводим сообщения в таймер.
         $('#timer').append(obj.Message);
     }
 }
 
-//функция вовзвращает название победившего продукта
+/*Запрашивает с сервера результаты аукциона
+*/
 function getAuctionResults() {
     var winnerNameRequest = new XMLHttpRequest();
     var idSender = new FormData();
@@ -50,13 +36,12 @@ function getAuctionResults() {
             var info = JSON.parse(winnerNameRequest.responseText);
             $('#timer').empty();
             printAuctionResults(info);
-м        };
+        };
     };
     return false;
 };
 
-//функция, которая включается, когда таймер заканчивает
-//работу
+/*Запускается, когда таймер заканчивает работу*/
 function sayThatFinished() {
     chat.server.finishAuction(auctionId);
 };

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Policy;
-using System.Web;
-
-namespace CocktionMVC.Models.JsonModels.MobileClientModels
+﻿namespace CocktionMVC.Models.JsonModels.MobileClientModels
 {
     /// <summary>
     /// Для просмотра инфы о пользователе с мобилки

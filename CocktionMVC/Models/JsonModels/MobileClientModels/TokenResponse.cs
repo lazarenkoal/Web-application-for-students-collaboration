@@ -1,4 +1,4 @@
-﻿namespace CocktionMVC.Models.JsonModels
+﻿namespace CocktionMVC.Models.JsonModels.MobileClientModels
 {
     /// <summary>
     /// Контейнер для токена для мобильника

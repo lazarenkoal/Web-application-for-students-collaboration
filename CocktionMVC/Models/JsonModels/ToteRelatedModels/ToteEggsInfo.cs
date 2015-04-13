@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace CocktionMVC.Models.JsonModels
+﻿namespace CocktionMVC.Models.JsonModels.ToteRelatedModels
 {
     /// <summary>
     ///  Контейнер для информации о яйцах

@@ -30,7 +30,7 @@ namespace CocktionMVC.Controllers.ApiControllers
         /// <param name="data">Данные для регистрации</param>
         /// <returns>Результат регистрации</returns>
         [HttpPost]
-        public async Task<RegisterUserRespond> Registrate(RegisterUserData data)
+        public async Task<StatusHolder> Registrate(RegisterUserData data)
         {
             var user = new ApplicationUser
             {
@@ -45,9 +45,9 @@ namespace CocktionMVC.Controllers.ApiControllers
             var resultOfRegistration = await UserManager.CreateAsync(user, data.Password);
             if (resultOfRegistration.Succeeded)
             {
-                return new RegisterUserRespond("Success");
+                return new StatusHolder(true);
             }
-            return new RegisterUserRespond("Failure");
+            return new StatusHolder(false);
         }
 
         /// <summary>

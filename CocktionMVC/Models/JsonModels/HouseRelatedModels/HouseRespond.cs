@@ -1,4 +1,5 @@
-﻿namespace CocktionMVC.Models.JsonModels
+﻿ // ReSharper disable once CheckNamespace
+namespace CocktionMVC.Models.JsonModels
 {
     /// <summary>
     /// Моделирует дом, который вернется создателю дома (пока что админу)

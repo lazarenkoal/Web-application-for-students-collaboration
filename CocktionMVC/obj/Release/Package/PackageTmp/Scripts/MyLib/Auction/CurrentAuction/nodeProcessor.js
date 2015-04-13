@@ -26,6 +26,8 @@ function getNodeInfo(nodeId) {
     }
 };
 
+
+
 //если выбран какой-то из товаров
 function nodeSelected(properties) {
     nodeId = properties.nodes[0];
@@ -73,3 +75,31 @@ function addExtraNode(fileName, name, parentId, childId) {
     nodes.add([{ id: childId, label: name.trim(), shape: 'circularImage', image: 'http://cocktion.com/Images/Thumbnails/' + fileName }]);
     edges.add([{ from: parentId, to: childId }]);
 };
+
+
+var edges = new vis.DataSet();
+var nodes = new vis.DataSet();
+//если выбран победитель аукциона
+var nodeId;
+
+function initialiseNetwork(sellProductName, sellProductPhotoName) {
+    // create an array with nodes
+   // var nodes = new vis.DataSet();
+    nodes.add([
+        { id: i, label: sellProductName.trim(), shape: 'circularImage', image: 'http://cocktion.com/Images/Thumbnails/' + sellProductPhotoName}
+    ]);
+    // create an array with edges
+    //var edges = new vis.DataSet();
+    // create a network
+    var container = document.getElementById('mynetwork');
+    var data = {
+        nodes: nodes,
+        edges: edges,
+    };
+    var options = {
+        width: '100%',
+        height: '600px'
+    }
+    var network = new vis.Network(container, data, options);
+    network.on('select', nodeSelected);
+}

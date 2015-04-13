@@ -5,6 +5,7 @@ using CocktionMVC.Functions;
 using CocktionMVC.Models;
 using CocktionMVC.Models.DAL;
 using CocktionMVC.Models.JsonModels;
+using CocktionMVC.Models.JsonModels.ToteRelatedModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 

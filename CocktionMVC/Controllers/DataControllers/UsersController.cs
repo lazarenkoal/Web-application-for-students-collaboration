@@ -4,11 +4,16 @@ using System.Web.Mvc;
 using CocktionMVC.Models.DAL;
 using CocktionMVC.Models.ViewModels;
 
+// ReSharper disable once CheckNamespace
 namespace CocktionMVC.Controllers
 {
     public class UsersController : Controller
     {
-        // GET: Users
+        /// <summary>
+        /// Показывает страницу со всеми пользвателями
+        /// на кокшне
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             CocktionContext db = new CocktionContext();
@@ -16,12 +21,17 @@ namespace CocktionMVC.Controllers
             return View(users);
         }
 
+
+        /// <summary>
+        /// Показывает профиль конкретного пользователя
+        /// </summary>
+        /// <param name="id">Айдишник пользователя</param>
         public ActionResult User(string id)
         {
             CocktionContext db = new CocktionContext();
-            AspNetUser user;
+
             //находим пользователя
-            user = db.AspNetUsers.Find(id);
+            var user = db.AspNetUsers.Find(id);
 
             //Собираем рейтинг, яйца, количество аукционов
             int? userRating = user.Rating;
@@ -42,8 +52,9 @@ namespace CocktionMVC.Controllers
             //Собираем все его отзывы
             List<UsersFeedback> feeds = db.Feedbacks.Where(x => x.UsersId == user.Id).ToList();
 
+            //Формируем модель для вывода на вэб-страничке
             ProfileViewModel model = new ProfileViewModel(userEggs, user.HisAuctions.Count, userBets,
-                user.UserRealSurname, user.UserRealName, userRating, 56, user.HisAuctions.ToList<Auction>(), id, feeds);
+                user.UserRealSurname, user.UserRealName, userRating, 56, user.HisAuctions.ToList(), id, feeds);
 
             return View(model);
         }

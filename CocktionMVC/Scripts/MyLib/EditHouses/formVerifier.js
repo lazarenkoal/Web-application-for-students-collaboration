@@ -1,4 +1,5 @@
-﻿function verifyForm() {
+﻿//Проверяет для Даши форму для ввода нового дома
+function verifyForm() {
     if ($("#university").val().length == 0) {
         alert("Ты не ввела университет!");
         return false;

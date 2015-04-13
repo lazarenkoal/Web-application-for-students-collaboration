@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace CocktionMVC.Models.JsonModels.HouseRelatedModels
+﻿namespace CocktionMVC.Models.JsonModels.HouseRelatedModels
 {
     /// <summary>
     /// Контейнер для информации о дом-содержащей организации

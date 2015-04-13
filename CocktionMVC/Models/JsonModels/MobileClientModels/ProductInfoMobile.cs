@@ -1,10 +1,10 @@
-﻿namespace CocktionMVC.Models.JsonModels
+﻿namespace CocktionMVC.Models.JsonModels.MobileClientModels
 {
     /// <summary>
     /// Класс для вывода информации о продукте
     /// на мобильный клиент
     /// </summary>
-    public class ProductInfoMobile
+    public class  ProductInfoMobile
     {
         /// <summary>
         /// Наименование продукта

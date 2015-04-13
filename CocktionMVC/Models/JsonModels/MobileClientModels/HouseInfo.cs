@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace CocktionMVC.Models.JsonModels.MobileClientModels
+﻿namespace CocktionMVC.Models.JsonModels.MobileClientModels
 {
+    /// <summary>
+    /// Контейнер для информации о доме, которая посылается на мобильный клиент
+    /// </summary>
     public class HouseInfo
     {
         public string Faculty { get; set; }

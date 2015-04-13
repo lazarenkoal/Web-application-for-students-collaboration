@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Permissions;
-using System.Web;
-
-namespace CocktionMVC.Models.JsonModels.HouseRelatedModels
+﻿namespace CocktionMVC.Models.JsonModels.HouseRelatedModels
 {
     /// <summary>
     /// Контейнер для сообщений с форума

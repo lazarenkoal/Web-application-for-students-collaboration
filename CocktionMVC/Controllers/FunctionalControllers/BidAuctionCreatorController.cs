@@ -7,6 +7,7 @@ using CocktionMVC.Functions.DataProcessing;
 using CocktionMVC.Models.DAL;
 using Microsoft.AspNet.Identity;
 
+// ReSharper disable once CheckNamespace
 namespace CocktionMVC.Controllers
 {
     public class BidAuctionCreatorController : Controller
@@ -14,7 +15,6 @@ namespace CocktionMVC.Controllers
         /// <summary>
         /// Создает аукцион и записывает его в базу данных
         /// </summary>
-        /// <returns></returns>
         [Authorize]
         [HttpPost]
         public async Task<JsonResult> CreateAuction()
@@ -37,16 +37,10 @@ namespace CocktionMVC.Controllers
             //инициализация аукциона
             Auction auction = new Auction(true, product, false, new ToteBoard(), user);
 
-            
-
-            //добавляем все локации списочком к аукциону
-            //int[] locIdsInt = DataFormatter.GetHouseIds(housesId);
-            //Array.ForEach(locIdsInt, x => auction.Houses.Add(db.Houses.Find(x)));
             //TODO сделать динамический выбор дома
             auction.Houses.Add(db.Houses.Find(4));
 
             //задаем время окончания и начала аукциона
-           // DateTimeManager.SetAuctionStartAndEndTime(auction, hours, minutes);
             DateTimeManager.SetAuctionStartAndEndTime(auction, timeBound);
 
             //добавление фотографии для товара
@@ -56,7 +50,7 @@ namespace CocktionMVC.Controllers
 
             await DbItemsAdder.AddAuctionProductPhotoAsync(db, auction, product, photo, user);
 
-            //апдейтим список c аукционами
+            //TODO апдейтим список c аукционами
             //AuctionListHub.UpdateList(product.Name, product.Description, product.Category, photo.FileName);
 
             //возвращаем статус

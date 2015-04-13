@@ -1,4 +1,5 @@
-﻿function addComment(modelId) {
+﻿//Добавляет комментарий к аукционному дому
+function addComment(modelId) {
     if ($("#message").val().length != 0)
     {
         var formData = new FormData();

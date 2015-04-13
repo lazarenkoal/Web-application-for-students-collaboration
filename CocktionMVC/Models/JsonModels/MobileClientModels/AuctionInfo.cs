@@ -1,4 +1,4 @@
-﻿namespace CocktionMVC.Models.JsonModels
+﻿namespace CocktionMVC.Models.JsonModels.MobileClientModels
 {
     /// <summary>
     /// Класс для модели аукциона, которая будет отсылаться

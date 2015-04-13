@@ -64,6 +64,7 @@ namespace CocktionMVC.Functions
         /// <param name="auction">Аукцион, который необходимо добавить</param>
         /// <param name="product">Товар, который необходимо добавить</param>
         /// <param name="photo">фотка, которую надо добавить</param>
+        /// <param name="user"></param>
         public static async Task AddAuctionProductPhotoAsync(CocktionContext db, Auction auction,
             Product product, Photo photo, AspNetUser user)
         {
