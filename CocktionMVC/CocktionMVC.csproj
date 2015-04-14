@@ -43,6 +43,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AegisImplicitMail">
+      <HintPath>..\packages\AIM.1.0.2\lib\net45\AegisImplicitMail.dll</HintPath>
+    </Reference>
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
@@ -215,6 +218,7 @@
     <Compile Include="Functions\DataProcessing\DateTimeManager.cs" />
     <Compile Include="Functions\DataProcessing\PhotoProcessor.cs" />
     <Compile Include="Functions\DataProcessing\RequestFormReader.cs" />
+    <Compile Include="Functions\EmailSender.cs" />
     <Compile Include="Functions\ThumbnailGenerator.cs" />
     <Compile Include="Functions\DbItemsAdder.cs" />
     <Compile Include="Functions\ToteResultsManager.cs" />
@@ -300,7 +304,6 @@
     <Compile Include="Models\JsonModels\MobileClientModels\IsOwnerResponder.cs" />
     <Compile Include="Models\JsonModels\MobileClientModels\ProfileInfoMobile.cs" />
     <Compile Include="Models\JsonModels\MobileClientModels\RegisterUserData.cs" />
-    <Compile Include="Models\JsonModels\MobileClientModels\RegisterUserRespond.cs" />
     <Compile Include="Models\JsonModels\ProductInfo.cs" />
     <Compile Include="Models\JsonModels\StatusHolder.cs" />
     <Compile Include="Models\JsonModels\YaMapsModels\LocationInfo.cs" />
@@ -390,6 +393,7 @@
     <Content Include="Content\UniversityLogos\rgsuLogo.jpg" />
     <Content Include="Content\UniversityLogos\rudnLogo.jpg" />
     <Content Include="Content\UniversityLogos\sinergyLogo.jpg" />
+    <Content Include="Content\UsersRelatedStyles\registerStyle.css" />
     <Content Include="Content\UsersRelatedStyles\usersStyle.css" />
     <Content Include="Content\VisStyles\vis.css" />
     <Content Include="Content\VisStyles\vis.min.css" />
@@ -506,6 +510,7 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\User.cshtml" />
     <Content Include="Views\Shared\Index2.cshtml" />
+    <Content Include="Views\Home\VerifyEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

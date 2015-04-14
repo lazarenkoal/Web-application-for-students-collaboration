@@ -1,0 +1,12 @@
+﻿#formContainer {
+    background-color: whitesmoke;
+    border: solid 1px lightgray;
+    border-radius: 3px;
+    padding: 5px;
+    text-align: center;
+}
+
+h4 {
+    border-bottom: solid 1px lightgray;
+    margin-bottom: 5px;
+}

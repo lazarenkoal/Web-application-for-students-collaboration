@@ -382,3 +382,4 @@
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Release\CocktionMVC.Migrations.CncntBtwnUserAndHous.resources
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Release\CocktionMVC.Migrations.SelfieAddedToHouseAndUser.resources
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Release\CocktionMVC.Migrations.InterestsAndHouseSubscriptionsAdded.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\AegisImplicitMail.dll

@@ -58,14 +58,14 @@ namespace CocktionMVC.Models
     public class ForgotViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "Электро-почта")]
         public string Email { get; set; }
     }
 
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "Электро-почта")]
         [EmailAddress]
         public string Email { get; set; }
 
@@ -82,22 +82,10 @@ namespace CocktionMVC.Models
     {
         [Required(ErrorMessage = "Ну никак нельзя обойтись без почтового адреса!")]
         [EmailAddress(ErrorMessage = "Введенный имейл не действителен!")]
-        [Display(Name = "Email")]
+        [Display(Name = "Электро-почта")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Необходимо ввести свое имя!")]
-        [StringLength(25, ErrorMessage = "Странно, что ваше имя превышает 25 символов...")]
-        [Display(Name = "Ваше имя")]
-        public string UserRealName { get; set; }
-
-        [Required(ErrorMessage = "Необходимо ввести свою фамилию")]
-        [StringLength(25, ErrorMessage = "Странно, что ваша фамилия превышает 25 символов...")]
-        [Display(Name = "Ваша фамилия")]
-        public string UserRealSurname { get; set; }
-
-        [Required(ErrorMessage = "Необходимо ввести номер телефона!")]
-        [RegularExpression("^[0-9\\-\\+]{11,12}$", ErrorMessage = "Ваш номер телефона недействителен!")]
-        public string PhoneNumber { get; set; }
+        //регулярка для телефона "^[0-9\\-\\+]{11,12}$"
 
         [Required(ErrorMessage = "Необходимо придумать пароль")]
         [StringLength(100, ErrorMessage = "Пароль должен быть как минимум {2} значный.", MinimumLength = 6)]
@@ -107,7 +95,7 @@ namespace CocktionMVC.Models
 
         [Required(ErrorMessage="Необходимо подтвердить пароль!")]
         [DataType(DataType.Password)]
-        [Display(Name = "Подтвердите пароль")]
+        [Display(Name = "Пароль еще раз")]
         [Compare("Password", ErrorMessage = "Упс, пароли не совпадают.")]
         public string ConfirmPassword { get; set; }
     }
@@ -116,7 +104,7 @@ namespace CocktionMVC.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "Электро-почта")]
         public string Email { get; set; }
 
         [Required]
@@ -137,7 +125,7 @@ namespace CocktionMVC.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "Электро-почта")]
         public string Email { get; set; }
     }
 }

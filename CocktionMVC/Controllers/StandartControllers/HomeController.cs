@@ -28,5 +28,10 @@ namespace CocktionMVC.Controllers
 
             return View();
         }
+
+        public ActionResult VerifyEmail()
+        {
+            return View();
+        }
     }
 }

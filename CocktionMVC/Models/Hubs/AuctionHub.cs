@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using CocktionMVC.Functions;
 using CocktionMVC.Models.DAL;
 using Microsoft.AspNet.SignalR;
-using Microsoft.SqlServer.Server;
 
 namespace CocktionMVC
 {
@@ -79,6 +78,12 @@ namespace CocktionMVC
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<AuctionHub>();
             context.Clients.Group(auctionId.ToString()).showLeaderOnPage(leaderId, liderName);
         }
+
+        public async Task JoinRoom(int auctionId)
+        {
+            await Groups.Add(Context.ConnectionId, auctionId.ToString());
+        }
+
 
         /// <summary>
         /// Метод заканчивает аукцион

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using CocktionMVC.Functions;
 using CocktionMVC.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -178,24 +179,23 @@ namespace CocktionMVC.Controllers
                     {
                         UserName = model.Email,
                         Email = model.Email,
-                        UserRealName = model.UserRealName,
-                        UserRealSurname = model.UserRealSurname,
-                        PhoneNumber = model.PhoneNumber,
                         Eggs = 1000,
                         Rating = 1000
                     };
                     var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                         // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                         // Send an email with this link
-                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                        return RedirectToAction("Index", "Home");
+                        string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                        //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                       
+                        string message = EmailSender.VERIFY_EMAIL_MESSAGE+"\n" + "<a href=\"" + callbackUrl + "\">here</a>";
+                        EmailSender.SendEmail(message, EmailSender.VERIFY_EMAIL_SUBJECT, user.UserName);
+                        return RedirectToAction("VerifyEmail", "Home");
                     }
                     AddErrors(result);
                 }
@@ -240,15 +240,21 @@ namespace CocktionMVC.Controllers
                 if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
-                    return View("ForgotPasswordConfirmation");
+                    string whatsWithUser;
+                    whatsWithUser = user == null ? "Проверьте, пожалуйста, свой адрес :)" : "Вы не подтвердили свою электро-почту ;(";
+                    return View("ForgotPasswordConfirmation", "_Layout", whatsWithUser);
                 }
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
+               
+                
                 // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                string message = EmailSender.RESET_PASSWORD_MESSAGE + " " + " <a href=\"" + callbackUrl + "\">here</a>";
+                EmailSender.SendEmail(message, EmailSender.VERIFY_EMAIL_SUBJECT, model.Email);
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
@@ -260,7 +266,7 @@ namespace CocktionMVC.Controllers
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
         {
-            return View();
+            return View("ForgotPasswordConfirmation", "_Layout",  "Необходимо пройти по ссылке в вашем сообщении :)");
         }
 
         //
