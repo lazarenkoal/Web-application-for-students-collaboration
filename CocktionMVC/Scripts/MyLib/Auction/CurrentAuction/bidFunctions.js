@@ -1,11 +1,59 @@
-﻿//Скрипт, добавляющий ставку к аукциону.
+﻿function checkBidForm() {
+    if ($("#bidName").val().length == 0) {
+        $("#bidName").css('border-color', 'red');
+        return false;
+    } else {
+        $("#bidName").css('border-color', 'rgb(204, 204, 204)');
+        return true;
+    }
+}
+
+function checkCategory() {
+    if (category.length == 0) {
+        $("#typeOfAuctionContainer").css('border', 'solid 1px red');
+        return false;
+    } else {
+        $("#typeOfAuctionContainer").css('border', 'solid 1px rgb(204, 204, 204)');
+        return true;
+    }
+}
+
+var category = "";
+
+function radioProcessor(btn) {
+    switch (btn.id) {
+    case 'bookRadio':
+        $('#productRadio').prop('checked', false);
+        $('#serviceRadio').prop('checked', false);
+        category = 'Книга';
+        break;
+    case 'productRadio':
+        $('#bookRadio').prop('checked', false);
+        $('#serviceRadio').prop('checked', false);
+        category = 'Вещь';
+        break;
+    case 'serviceRadio':
+        $("#bookRadio").prop('checked', false);
+        $("#productRadio").prop('checked', false);
+        category = 'Услуга';
+        break;
+    }
+}
+
+//Скрипт, добавляющий ставку к аукциону.
 function addBid(auctionId) {
+    if (checkBidForm() & checkCategory()) {
         var formData = new FormData();
         $("#progressBar").show();
 
         //добавляю файл
+        //добавляю файл
         var fileInput = document.getElementById('fileInput');
-        formData.append(fileInput.files[0].name, fileInput.files[0]);
+        if (fileInput.files.length > 0) {
+            formData.append(fileInput.files[0].name, fileInput.files[0]);
+        }
+
+
         //добавляю поле с именем
         var bidName = document.getElementById('bidName').value;
         formData.append("name", bidName);
@@ -14,27 +62,25 @@ function addBid(auctionId) {
         var bidDescription = document.getElementById('bidDescription').value;
         formData.append("description", bidDescription);
 
-        //добавляю поле с категорией
-        var bidCategory = document.getElementById('bidCategory').value;
-        formData.append('category', bidCategory);
+        formData.append('category', category);
 
         //adding a field with auctionId
         formData.append('auctionId', auctionId);
 
         //создаю запрос
         var xhr = new XMLHttpRequest();
-        
-    //если все хорошо
-        xhr.upload.onprogress = function (e) {
+
+        //если все хорошо
+        xhr.upload.onprogress = function(e) {
             $('#bar').css('width', (e.loaded / e.total) * 100 + '%');
         }
-        
-        xhr.onreadystatechange = function () {
+
+        xhr.onreadystatechange = function() {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 //получение статуса с сервера при отправке
                 // document.getElementById('updater').outerText = 'успешно добавлено';
                 //TODO добавить код взаимодействия с пользователем
-                
+
                 //Зачистка полей
                 $('#bidName').val("");
                 $('#bidDescription').val("");
@@ -49,9 +95,10 @@ function addBid(auctionId) {
 
         xhr.open('POST', '/BidAuctionCreator/AddProductBet');
         xhr.send(formData); //отправка данных
-        
+
         return false;
     }
+}
 
 function addExtraBid(auctionId) {
     var formData = new FormData();

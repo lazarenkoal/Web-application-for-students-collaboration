@@ -9,29 +9,29 @@
 
         public GuildsHouse(string houseName, int houseId, string houseAdress, string housePhotoPath)
         {
-            HouseName = houseName;
-            HouseId = houseId;
-            HouseAdress = houseAdress;
-            HousePhotoPath = housePhotoPath;
+            name = houseName;
+            id = houseId;
+            adress = houseAdress;
+            photoPath = housePhotoPath;
         }
         /// <summary>
         /// Имя дома (факультет/общага)
         /// </summary>
-        public string HouseName { get; set; }
+        public string name { get; set; }
 
         /// <summary>
         /// Айдишник дома
         /// </summary>
-        public int HouseId { get; set; }
+        public int id { get; set; }
 
         /// <summary>
         /// Адрес дома
         /// </summary>
-        public string HouseAdress { get; set; }
+        public string adress { get; set; }
 
         /// <summary>
         /// Путь к фотке дома
         /// </summary>
-        public string HousePhotoPath { get; set; }
+        public string photoPath { get; set; }
     }
 }

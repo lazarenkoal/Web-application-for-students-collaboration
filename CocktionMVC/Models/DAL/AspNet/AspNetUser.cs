@@ -14,6 +14,7 @@ namespace CocktionMVC.Models.DAL
             HisAuctions = new HashSet<Auction>();
             HisProducts = new HashSet<Product>();
             SubHouses = new HashSet<House>();
+            Friends = new HashSet<AspNetUser>();
         }
 
         public string Id { get; set; }
@@ -49,15 +50,9 @@ namespace CocktionMVC.Models.DAL
 
         public string UserRealSurname { get; set; }
 
-        public string University { get; set; }
-
-        public string Faculty { get; set; }
-
-        public string Dormitory { get; set; }
         public int? Rating { get; set; }
-        public string StudyAdress { get; set; }
 
-        public virtual Photo Selfie {get; set; }
+        public virtual Picture Selfie {get; set; }
         public virtual ICollection<House> SubHouses { get; set; } 
         public virtual ICollection<Auction> HisAuctions { get; set; } 
         public virtual ICollection<Product> HisProducts { get; set; } 
@@ -68,6 +63,9 @@ namespace CocktionMVC.Models.DAL
 
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
 
+        public virtual ICollection<AspNetUser> Friends { get; set; } 
+
+        public virtual HouseHolder HisHouseHolder { get; set; } 
         public virtual ICollection<Interest> Interests { get; set; } 
     }
 }

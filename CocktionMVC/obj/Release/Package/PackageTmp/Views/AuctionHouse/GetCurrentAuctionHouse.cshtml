@@ -3,7 +3,7 @@
 }
 @using CocktionMVC.Models.DAL
 @model House
-<h3>Домик в @Model.University</h3>
+<h3>Домик в @Model.Holder.Name</h3>
 
 <script src="~/Scripts/Jquery/jquery-2.1.3.min.js"></script>
 <script src="~/Scripts/MyLib/AuctionHouse/GetCurrentAuctionHouse/addComment.js"></script>
@@ -15,7 +15,7 @@
     <div class="col-md-3">
         <!--Фотка и описание доам-->
         <!--Фотография-->
-        <img src="~/Content/SiteImages/hseBuilding.jpg" class="img-thumbnail" />
+        <img src="http://cocktion.com/Images/Thumbnails/@Model.Portrait.FileName" class="img-thumbnail" />
         <br/>
         <br/>
     </div>

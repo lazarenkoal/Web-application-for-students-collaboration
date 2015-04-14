@@ -28,10 +28,23 @@ namespace CocktionMVC.Models.DAL
 
         public virtual DbSet<Interest> Interests { get; set; }
 
+        public virtual DbSet<HouseHolder> HouseHolders { get; set; }
+
+        public virtual DbSet<Picture> Pictures { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Interest>()
                 .HasMany(e => e.Subscribers);
+
+            modelBuilder.Entity<AspNetUser>()
+                .HasMany(e => e.Friends);
+
+            modelBuilder.Entity<HouseHolder>()
+                .HasMany(e => e.Houses);
+
+            modelBuilder.Entity<HouseHolder>()
+                .HasMany(e => e.Users);
 
             modelBuilder.Entity<AspNetUser>()
                 .HasMany(e => e.Interests);

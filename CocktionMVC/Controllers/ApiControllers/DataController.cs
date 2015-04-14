@@ -18,14 +18,23 @@ namespace CocktionMVC.Controllers.ApiControllers
             {
                 houses.Add(new HouseInfo()
                 {
-                    Adress = house.Adress,
-                    Faculty = house.Faculty,
-                    Likes = house.Likes,
-                    Rating = house.Rating,
-                    University = house.University
+                    adress = house.Adress,
+                    faculty = house.Faculty,
+                    likes = house.Likes,
+                    rating = house.Rating,
                 });
             }
             return houses;
+        }
+
+        [HttpPost]
+        public void DeleteAll()
+        {
+            CocktionContext db = new CocktionContext();
+            db.HouseHolders.RemoveRange(db.HouseHolders);
+            db.Houses.RemoveRange(db.Houses);
+            db.AspNetUsers.RemoveRange(db.AspNetUsers);
+            
         }
     }
 }

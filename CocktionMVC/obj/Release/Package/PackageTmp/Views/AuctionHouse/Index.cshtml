@@ -1,77 +1,23 @@
 ﻿@{
     ViewBag.Title = "Дома, в которых живут самые крутые аукционы!";
 }
+@model List<CocktionMVC.Models.HouseHolder>
+<script src="~/Scripts/MyLib/AuctionHouse/printHolders.js"></script>
 <style>
-    P {
-        text-align : center
-    }
-    h3 {
-        text-align: center
-    }
+   #holdersContainer {
+       text-align: center;
+   }
 </style>
 <h3>Выбери свой любимый университет</h3>
-<div class="row">
-    <div class="col-md-2">
-        <p>МГИМО</p>
-        <a href="http://cocktion.com/AuctionHouse/GetUniversityHouses/МГИМО">
-        <img src="~/Content/UniversityLogos/mgimoLogo.jpg" class="img-responsive"/>
-        </a>
-    </div>
-    <div class="col-md-2">
-        <p>МФТИ</p>
-        <a href="http://cocktion.com/AuctionHouse/GetUniversityHouses/МФТИ">
-            <img src="~/Content/UniversityLogos/mftiLogo.jpg" class="img-responsive" />
-        </a>
-    </div>
-    <div class="col-md-2">
-        <p>НИУ ВШЭ</p>
-        <a href="http://cocktion.com/AuctionHouse/GetUniversityHouses/НИУ ВШЭ">
-            <img src="~/Content/UniversityLogos/hseLogo.jpg" class="img-responsive" />
-        </a>
-    </div>
-    <div class="col-md-2">
-        <p>МГУ</p>
-        <a href="http://cocktion.com/AuctionHouse/GetUniversityHouses/МГУ">
-            <img src="~/Content/UniversityLogos/msuLogo.jpg" class="img-responsive" />
-        </a>
-    </div>
-    <div class="col-md-2">
-        <p>НИЯУ МИФИ</p>
-        <a href="http://cocktion.com/AuctionHouse/GetUniversityHouses/НИЯУ МИФИ">
-            <img src="~/Content/UniversityLogos/mifiLogo.jpg" class="img-responsive" />
-        </a>
-    </div>
-    <div class="col-md-2">
-        <p>МГТУ</p>
-        <a href="http://cocktion.com/AuctionHouse/GetUniversityHouses/МГТУ">
-            <img src="~/Content/UniversityLogos/mgtuLogo.jpg" class="img-responsive" />
-        </a>
-    </div>
+<div id="holdersContainer">
 </div>
-<br/>
-<div class="row">
-    <div class="col-md-2">
-        <p>РАНХиГС</p>
-        <img src="~/Content/UniversityLogos/ranhigsLogo.jpg" class="img-responsive"/>
-    </div>
-    <div class="col-md-2">
-        <p>РЭУ</p>
-        <img src="~/Content/UniversityLogos/reuLogo.jpg" class="img-responsive"/>
-    </div>
-    <div class="col-md-2">
-        <p>РУДН</p>
-        <img src="~/Content/UniversityLogos/rudnLogo.jpg" class="img-responsive"/>
-    </div>
-    <div class="col-md-2">
-        <p>МФЮА</p>
-        <img src="~/Content/UniversityLogos/mfuaLogo.jpg" class="img-responsive"/>
-    </div>
-    <div class="col-md-2">
-        <p>ГУУ</p>
-        <img src="~/Content/UniversityLogos/guuLogo.jpg" class="img-responsive"/>
-    </div>
-    <div class="col-md-2">
-        <p>РГСУ</p>
-        <img src="~/Content/UniversityLogos/rgsuLogo.jpg" class="img-responsive"/>
-    </div>
-</div>
+
+@{
+    foreach (var holder in Model)
+    {
+        <script>
+            addHolderCell('holdersContainer', '@holder.Name',
+                'http://cocktion.com/AuctionHouse/GetUniversityHouses/@holder.Id', 'http://cocktion.com/Images/Thumbnails/@holder.PhotoCard.FileName');
+        </script>
+    }
+}

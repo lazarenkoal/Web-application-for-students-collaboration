@@ -10,7 +10,7 @@ namespace CocktionMVC.Models.DAL
         }
         public int Id { get; set; }
         public string Name { get; set; }
-        public virtual Photo Photocard { get; set; }
+        public virtual Picture Photocard { get; set; }
         public virtual ICollection<AspNetUser> Subscribers { get; set; }
     }
 }

@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web.Mvc;
 using CocktionMVC.Functions;
+using CocktionMVC.Functions.DataProcessing;
+using CocktionMVC.Models;
 using CocktionMVC.Models.DAL;
 using CocktionMVC.Models.JsonModels;
 
@@ -21,15 +25,16 @@ namespace CocktionMVC.Controllers.AdminControllers
         public ActionResult Index()
         {
             //Возвращаем разные вьюшки с правами, в зав-ти от пользователя
-            switch (User.Identity.Name)
+            if (User.Identity.Name == "darya-coo@cocktion.com" || User.Identity.Name == "lazarenko.ale@gmail.com")
             {
-                case "darya-coo@cocktion.com":
-                    CocktionContext db = new CocktionContext();
-                    var houses = db.Houses.ToList();
-                    return View(houses);
-                default :
-                    return View("PageNotFound");
+                CocktionContext db = new CocktionContext();
+                var houses = db.Houses.ToList();
+                var holders = db.HouseHolders.ToList();
+                Tuple<List<House>, List<HouseHolder>> tuple
+                    = new Tuple<List<House>, List<HouseHolder>>(houses, holders);
+                return View(tuple);
             }
+            return View("PageNotFound");
         }
 
         /// <summary>
@@ -40,22 +45,67 @@ namespace CocktionMVC.Controllers.AdminControllers
         public JsonResult AddHouse()
         {
             //Чтение из запроса с клиента данных о доме.
-            string university;
+            string holderId;
             string faculty;
             string adress;
-            RequestFormReader.ReadAddHouseForm(Request, out university, out faculty, out adress);
+            RequestFormReader.ReadAddHouseForm(Request, out faculty, out adress, out holderId);
 
-            //Добавляем дом в боазу данных
             CocktionContext db = new CocktionContext();
-            db.Houses.Add(new House(adress, university, faculty));
+            var holder = db.HouseHolders.Find(int.Parse(holderId));
+
+            //обработать фотку
+            Picture photo = new Picture();
+            PhotoProcessor.CreateAndSavePicture(photo, Request, 200, 200);
+                
+            //создать дом
+            House house = new House(adress, faculty, holder, photo);
+
+            //добавить дом в холдер
+            holder.Houses.Add(house);
+
+            //добавить дом в базу
+            db.Houses.Add(house);
+            db.Pictures.Add(photo);
             db.SaveChanges();
+            //вернуть статус
 
-            //Создаем ответ для сервера
-            HouseRespond resp = new HouseRespond();
-            resp.House = String.Format("ВУЗ: {0}, Факультет: {1}, Адрес: {2}", university,
-                faculty, adress);
+            return Json(new StatusHolder(true));
+        }
 
-            return Json(resp);
+        public class Q
+        {
+
+            public string Status { get; set; }
+
+        }
+
+        [HttpPost]
+        [Authorize]
+        public JsonResult AddHolder()
+        {
+            try
+            {
+                string holderName = Request.Form.GetValues("holderName")[0].Trim();
+
+                Picture photo = new Picture();
+                
+                PhotoProcessor.CreateAndSavePicture(photo, Request, 200, 200);
+
+                CocktionContext db = new CocktionContext();
+                db.Pictures.Add(photo);
+                db.HouseHolders.Add(new HouseHolder(holderName, photo));
+
+                db.SaveChanges();
+                return Json(new StatusHolder(true));
+            }
+            catch (Exception q)
+            {
+                return Json(new Q {Status = q.InnerException.InnerException.Message});
+            }
+
+
         }
     }
 }
+
+

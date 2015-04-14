@@ -98,6 +98,8 @@ namespace CocktionMVC.Functions
         {
             name = requestBase.Form.GetValues("name")[0].Trim();
             description = requestBase.Form.GetValues("description")[0].Trim();
+            if (description == "")
+                description = "Слишком круто, чтобы описывать!";
             category = requestBase.Form.GetValues("category")[0].Trim();
             auctionId = requestBase.Form.GetValues("auctionId")[0].Trim();
         }
@@ -119,10 +121,17 @@ namespace CocktionMVC.Functions
             auctionId = requestBase.Form.GetValues("auctionId")[0].Trim();
         }
 
-        public static void ReadAddHouseForm(HttpRequestBase requestBase, out string university,
-            out string faculty, out string adress)
+        /// <summary>
+        /// Cчитывает значения из формы, которая позволяет добавлять дома в базу данных
+        /// </summary>
+        /// <param name="requestBase">Запрос, в котором все поступает</param>
+        /// <param name="university"></param>
+        /// <param name="faculty"></param>
+        /// <param name="adress"></param>
+        public static void ReadAddHouseForm(HttpRequestBase requestBase,
+            out string faculty, out string adress, out string holderId)
         {
-            university = requestBase.Form.GetValues("university")[0].Trim();
+            holderId = requestBase.Form.GetValues("holderId")[0].Trim();
             faculty = requestBase.Form.GetValues("faculty")[0].Trim();
             adress = requestBase.Form.GetValues("adress")[0].Trim();
         }

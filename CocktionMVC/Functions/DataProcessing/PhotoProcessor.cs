@@ -10,9 +10,37 @@ namespace CocktionMVC.Functions.DataProcessing
     /// </summary>
     public class PhotoProcessor
     {
+        public static void CreateAndSavePicture(Picture picture, HttpRequestBase requestBase, int width, int height)
+        {
+            HttpPostedFileBase file = null;
+            if (requestBase.Files.Count != 0)
+            {
+                file = requestBase.Files[0];
+            }
+
+            if (file != null)
+            {
+                //Получаем информацию о том, откуда ж взялся файлик
+                //string fileName = Path.GetFileName(file.FileName); //имя файла
+                string extension = Path.GetExtension(file.FileName);
+                string fileName = Guid.NewGuid() + extension;
+
+                //создаем мини-картинку
+                string thumbNailPath = requestBase.MapPath("~/Images/Thumbnails/"); //путь на сервере для сохранения
+                picture.FileName = fileName;
+                picture.FilePath = thumbNailPath + fileName;
+                ThumbnailGenerator.ResizeImage(file, picture.FilePath, width, height);
+            }
+        }
+
+
+
         /// <summary>
         /// Получает фотку из запроса и создает к ней 
         /// миниатюрную
+        /// 
+        /// Cохраняется оригинальная фотография и формируется фамбнейл для 
+        /// нее (размеры указываются для него)
         /// </summary>
         /// <param name="photo">Существующий объект photo, который необходимо отредачить</param>
         /// <param name="requestBase">Запрос с инфой</param>

@@ -9,23 +9,24 @@
 
         public ForumPostMobile(string author, string message, int likes)
         {
-            AuthorName = author;
-            Message = message;
+            authorName = author;
+            this.message = message;
+            this.likes = likes;
         }
 
         /// <summary>
         /// Имя автора
         /// </summary>
-        public string AuthorName { get; set; }
+        public string authorName { get; set; }
 
         /// <summary>
         /// Сам сообщение
         /// </summary>
-        public string Message { get; set; }
+        public string message { get; set; }
 
         /// <summary>
         /// Количество лайков
         /// </summary>
-        public int Likes { get; set; }
+        public int likes { get; set; }
     }
 }

@@ -2,30 +2,66 @@
     ViewBag.Title = "Index";
 }
 @using CocktionMVC.Models.DAL
-@model List<House>
+@model Tuple<List<House>, List<CocktionMVC.Models.HouseHolder>>
 <script src="~/Scripts/Jquery/jquery-2.1.3.min.js"></script>
 <script src="~/Scripts/MyLib/EditHouses/formVerifier.js"></script>
-<script src="~/Scripts/MyLib/EditHouses/housesSender.js"></script>
+<script src="~/Scripts/MyLib/EditHouses/houseSender.js"></script>
+<script src="~/Scripts/MyLib/EditHouses/holderSender.js"></script>
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-3">
         <div id="addHouseForm">
             <h3>Добавить новый дом</h3>
-            Университет <br />
-            <input type="text" id="university" /> <br />
             Факультет <br />
             <input type="text" id="faculty" /> <br />
             Адрес <br />
-            <input type="text" id="adress" /> <br />
-            <button id="addHouseBtn" class="btn btn-default" onclick="sendHouseToServer()" title="Жги, детка!">Добавляю</button>
+            <input type="text" id="adress"/> <br/>
+            Описание <br/>
+            <input type="text" id="description"/><br/>
+            <input type="file" id="housePhoto"/>
+            <select id="selector">
+                <option value="-1">----</option>
+                @{
+                    foreach (var holder in Model.Item2)
+                    {
+                        <option value="@holder.Id">@holder.Name</option>
+                    }
+                }
+            </select>
+            <div class="progress">
+                <div class="progress-bar progress-bar-info" role="progressbar" id="houseBar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                </div>
+            </div>
+            <button id="addHouseBtn" class="btn btn-default" onclick="sendHouseToServer()" title="Жги, детка!">Добавить дом</button>
         </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-3">
         <h3>Существующие дома</h3>
         <div id="houseList">
-            @foreach (var item in Model)
+            @*@foreach (var item in Model.Item1)
             {
-                <p>ВУЗ: @item.University, Факультет: @item.Faculty, Адрес: @item.Adress</p>
-            }
+                <p>Холдер: @item.Holder.Name, Факультет: @item.Faculty, Адрес: @item.Adress</p>
+            }*@
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <h3>Существующие хаусхолдеры</h3>
+        @*@foreach (var item in Model.Item2)
+        {
+            <p>холдер: @item.Name</p>
+        }*@
+    </div>
+    <div class="col-lg-3">
+        <div id="addHouseHolder">
+            <h3>Добавить новый хаусхолдер</h3>
+            Название холдера <br/>
+            <input type="text" id="holderName"/><br/>
+            Фотка
+            <input type="file" id="holderPhoto"/><br/>
+            <div class="progress">
+                <div class="progress-bar" id="holderBar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                </div>
+            </div>
+            <button id="addHolderBtn" class="btn btn-default" onclick="sendHolderToServer()">Добавить холдера</button>
         </div>
     </div>
 </div>

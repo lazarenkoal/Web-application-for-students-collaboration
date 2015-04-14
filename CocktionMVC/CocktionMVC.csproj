@@ -20,10 +20,14 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -285,11 +289,61 @@
     <Compile Include="Migrations\201504112037288_InterestsAndHouseSubscriptionsAdded.Designer.cs">
       <DependentUpon>201504112037288_InterestsAndHouseSubscriptionsAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504141416501_UserCustomisedAndHouseHolderAdded.cs" />
+    <Compile Include="Migrations\201504141416501_UserCustomisedAndHouseHolderAdded.Designer.cs">
+      <DependentUpon>201504141416501_UserCustomisedAndHouseHolderAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504141429234_HouseEddited.cs" />
+    <Compile Include="Migrations\201504141429234_HouseEddited.Designer.cs">
+      <DependentUpon>201504141429234_HouseEddited.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504141600289_UserEddited.cs" />
+    <Compile Include="Migrations\201504141600289_UserEddited.Designer.cs">
+      <DependentUpon>201504141600289_UserEddited.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504141602535_UserIdentityMod.cs" />
+    <Compile Include="Migrations\201504141602535_UserIdentityMod.Designer.cs">
+      <DependentUpon>201504141602535_UserIdentityMod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504141614553_UsersFriends.cs" />
+    <Compile Include="Migrations\201504141614553_UsersFriends.Designer.cs">
+      <DependentUpon>201504141614553_UsersFriends.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504141722267_TryToGetBack.cs" />
+    <Compile Include="Migrations\201504141722267_TryToGetBack.Designer.cs">
+      <DependentUpon>201504141722267_TryToGetBack.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504141725084_TryToGetBack2.cs" />
+    <Compile Include="Migrations\201504141725084_TryToGetBack2.Designer.cs">
+      <DependentUpon>201504141725084_TryToGetBack2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504141727573_GoBackAgain.cs" />
+    <Compile Include="Migrations\201504141727573_GoBackAgain.Designer.cs">
+      <DependentUpon>201504141727573_GoBackAgain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504141734451_ds.cs" />
+    <Compile Include="Migrations\201504141734451_ds.Designer.cs">
+      <DependentUpon>201504141734451_ds.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504141744352_Fix2.cs" />
+    <Compile Include="Migrations\201504141744352_Fix2.Designer.cs">
+      <DependentUpon>201504141744352_Fix2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504141906525_NullProductIdOnPhoto.cs" />
+    <Compile Include="Migrations\201504141906525_NullProductIdOnPhoto.Designer.cs">
+      <DependentUpon>201504141906525_NullProductIdOnPhoto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504141931339_PictureAdded.cs" />
+    <Compile Include="Migrations\201504141931339_PictureAdded.Designer.cs">
+      <DependentUpon>201504141931339_PictureAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DAL\Auction\BidCluster.cs" />
     <Compile Include="Models\DAL\AuctionHouse\ForumPost.cs" />
     <Compile Include="Models\DAL\Interest.cs" />
+    <Compile Include="Models\DAL\Picture.cs" />
     <Compile Include="Models\DAL\UsersFeedback.cs" />
+    <Compile Include="Models\HouseHolder.cs" />
     <Compile Include="Models\JsonModels\HouseRelatedModels\ForumPostMobile.cs" />
     <Compile Include="Models\JsonModels\HouseRelatedModels\Guild.cs" />
     <Compile Include="Models\JsonModels\HouseRelatedModels\GuildsHouse.cs" />
@@ -433,6 +487,7 @@
     <Content Include="Scripts\MyLib\AuctionHouse\GetCurrentAuctionHouse\addComment.js" />
     <Content Include="Scripts\MyLib\AuctionHouse\GetCurrentAuctionHouse\scroller.js" />
     <Content Include="Scripts\MyLib\AuctionHouse\GetUniversityHouses\printHousesInCells.js" />
+    <Content Include="Scripts\MyLib\AuctionHouse\printHolders.js" />
     <Content Include="Scripts\MyLib\Auction\Create\createAuctionFormProcessor.js" />
     <Content Include="Scripts\MyLib\Auction\CurrentAuction\auctionEndLogic.js" />
     <Content Include="Scripts\MyLib\Auction\CurrentAuction\bidFunctions.js" />
@@ -443,7 +498,8 @@
     <Content Include="Scripts\MyLib\Auction\Index\hubConnection.js" />
     <Content Include="Scripts\MyLib\Data\userPrinter.js" />
     <Content Include="Scripts\MyLib\EditHouses\formVerifier.js" />
-    <Content Include="Scripts\MyLib\EditHouses\housesSender.js" />
+    <Content Include="Scripts\MyLib\EditHouses\holderSender.js" />
+    <Content Include="Scripts\MyLib\EditHouses\houseSender.js" />
     <Content Include="Scripts\MyLib\MainPage\unauthMainScripts.js" />
     <Content Include="Scripts\MyLib\Profile\opinionAdder.js" />
     <Content Include="Scripts\MyLib\Vis\vis.js" />
@@ -567,6 +623,42 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504112037288_InterestsAndHouseSubscriptionsAdded.resx">
       <DependentUpon>201504112037288_InterestsAndHouseSubscriptionsAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504141416501_UserCustomisedAndHouseHolderAdded.resx">
+      <DependentUpon>201504141416501_UserCustomisedAndHouseHolderAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504141429234_HouseEddited.resx">
+      <DependentUpon>201504141429234_HouseEddited.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504141600289_UserEddited.resx">
+      <DependentUpon>201504141600289_UserEddited.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504141602535_UserIdentityMod.resx">
+      <DependentUpon>201504141602535_UserIdentityMod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504141614553_UsersFriends.resx">
+      <DependentUpon>201504141614553_UsersFriends.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504141722267_TryToGetBack.resx">
+      <DependentUpon>201504141722267_TryToGetBack.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504141725084_TryToGetBack2.resx">
+      <DependentUpon>201504141725084_TryToGetBack2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504141727573_GoBackAgain.resx">
+      <DependentUpon>201504141727573_GoBackAgain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504141734451_ds.resx">
+      <DependentUpon>201504141734451_ds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504141744352_Fix2.resx">
+      <DependentUpon>201504141744352_Fix2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504141906525_NullProductIdOnPhoto.resx">
+      <DependentUpon>201504141906525_NullProductIdOnPhoto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504141931339_PictureAdded.resx">
+      <DependentUpon>201504141931339_PictureAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

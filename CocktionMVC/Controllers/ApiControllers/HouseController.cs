@@ -24,41 +24,24 @@ namespace CocktionMVC.Controllers.ApiControllers
         {
             List<Guild> guilds = new List<Guild>();
 
-            //TODO сделать в базе данных несколько другую модель с этим добром
-            guilds.Add(new Guild("МГИМО", @"http://cocktion.com/Content/UniversityLogos/" + "mgimoLogo.jpg", 0));
-            guilds.Add(new Guild("МФТИ", @"http://cocktion.com/Content/UniversityLogos/" + "mftiLogo.jpg", 1));
-            guilds.Add(new Guild("НИУ ВШЭ", @"http://cocktion.com/Content/UniversityLogos/" + "hseLogo.jpg", 2));
-            guilds.Add(new Guild("МГУ", @"http://cocktion.com/Content/UniversityLogos/" + "msuLogo.jpg", 3));
-            guilds.Add(new Guild("НИЯУ МИФИ", @"http://cocktion.com/Content/UniversityLogos/" + "mifiLogo.jpg", 4));
-            guilds.Add(new Guild("МГТУ", @"http://cocktion.com/Content/UniversityLogos/" + "mgtuLogo.jpg", 5));
+            CocktionContext db = new CocktionContext();
+
+            var holders = db.HouseHolders.ToList();
+            int amountOfHolders = holders.Count;
+
+            for (int i = 0; i < amountOfHolders; i++)
+            {
+                guilds.Add(new Guild(holders[i].Name, "http://cocktion.com/Images/Thumbnails/" + holders[i].PhotoCard.FileName,
+                    holders[i].Id));
+            }
 
             return guilds;
         }
 
-        /// <summary>
-        /// Делает коллекцию домов в мобило-читаемом виде
-        /// </summary>
-        /// <param name="db">База, из которой надо доставать эти значения</param>
-        /// <param name="universityName">Университет, который хаусхолдит</param>
-        /// <returns>Коллекцию, пригодную для отображения на телефоне</returns>
-        private List<GuildsHouse> BuildHouseForMobile(CocktionContext db, string universityName)
-        {
-            List<House> houses = (from x in db.Houses
-                where x.University == universityName
-                select x).ToList();   
-            int amountOfHouses = houses.Count;
-            List<GuildsHouse> guildsHouses = new List<GuildsHouse>();
-            for (int i = 0; i < amountOfHouses; i++)
-            {
-                guildsHouses.Add(new GuildsHouse(houses[i].Faculty, houses[i].Id, houses[i].Adress,
-                    @"http://cocktion.com/Content/SiteImages/house1.jpg"));
-            }
-            return guildsHouses;
-        }
 
-        public class GuildNum
+        public class IdContainer
         {
-            public int guildId { get; set; }
+            public int id { get; set; }
         }
 
         /// <summary>
@@ -67,41 +50,19 @@ namespace CocktionMVC.Controllers.ApiControllers
         /// <returns>Коллекцию</returns>
         [HttpPost]
         [Authorize]
-        public List<GuildsHouse> GetGuildsHouses(GuildNum gn)
+        public List<GuildsHouse> GetGuildsHouses(IdContainer gn)
         {
-            //TODO сделать нормальную версию, когда можно будет дома добавить
             List<GuildsHouse> houses = new List<GuildsHouse>();
             CocktionContext db = new CocktionContext();
-
-            //обработка guildId из формы
-            switch (gn.guildId)
+            var holders = db.HouseHolders.Find(gn.id).Houses.ToList();
+            foreach (var holder in holders)
             {
-                case (0):
-                    houses = BuildHouseForMobile(db, "МГИМО");
-                    break;
-                case (1):
-                    houses = BuildHouseForMobile(db, "МФТИ");
-                    break;
-                case (2):
-                    houses = BuildHouseForMobile(db, "НИУ ВШЭ");
-                    break;
-                case (3):
-                    houses = BuildHouseForMobile(db, "МГУ");
-                    break;
-                case (4):
-                    houses = BuildHouseForMobile(db, "НИЯУ МИФИ");
-                    break;
-                case (5):
-                    houses = BuildHouseForMobile(db, "МГТУ");
-                    break;
+                houses.Add(new GuildsHouse(holder.Holder.Name, holder.Id, holder.Adress,
+                    "http://cocktion.com/Images/Thumbnails/" + holder.Portrait.FileName));
             }
             return houses;
         }
 
-        public class HouseNum
-        {
-            public int houseId { get; set; }
-        }
 
         /// <summary>
         /// Посылает на мобилку информаию о доме
@@ -109,15 +70,15 @@ namespace CocktionMVC.Controllers.ApiControllers
         /// <returns>Класс с инфой о доме</returns>
         [HttpPost]
         [Authorize]
-        public HouseMobile GetHouse(HouseNum hsNum)
+        public HouseMobile GetHouse(IdContainer hsNum)
         {
             //TODO добавить везде проверки
             CocktionContext db = new CocktionContext();
 
             //обработка guildId из формы
-            House house = db.Houses.Find(hsNum.houseId);
-            HouseMobile mobileHouse = new HouseMobile(@"http://cocktion.com/Content/SiteImages/house1.jpg", house.Likes,
-                0, house.Rating, 10, house.Auctions.Count, "Крутой дом");
+            House house = db.Houses.Find(hsNum.id);
+            HouseMobile mobileHouse = new HouseMobile(@"http://cocktion.com/Images/Thumbnails" + house.Portrait.FileName, house.Likes,
+                0, house.Rating, house.Inhabitants.Count, house.Auctions.Count, house.Description);
 
             return mobileHouse;
         }
@@ -128,16 +89,13 @@ namespace CocktionMVC.Controllers.ApiControllers
         /// <returns>Коллекцию с постами для мобилки</returns>
         [HttpPost]
         [Authorize]
-        public List<ForumPostMobile> GetHouseForumPosts()
+        public List<ForumPostMobile> GetHouseForumPosts(IdContainer idContainer)
         {
-            string houseId = HttpContext.Current.Request.Form.GetValues("houseId")[0];
             CocktionContext db = new CocktionContext();
-            var forumPosts = db.Houses.Find(int.Parse(houseId)).Posts;
+            var forumPosts = db.Houses.Find(idContainer.id).Posts;
             List<ForumPostMobile> posts = new List<ForumPostMobile>(forumPosts.Count);
-            foreach (var post in forumPosts)
-            {
-                posts.Add(new ForumPostMobile(post.AuthorName, post.Message, post.Likes));
-            }
+            
+            posts.AddRange(forumPosts.Select(post => new ForumPostMobile(post.AuthorName, post.Message, post.Likes)));
 
             return posts;
         }

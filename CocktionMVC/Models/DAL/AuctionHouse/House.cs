@@ -14,15 +14,23 @@ namespace CocktionMVC.Models.DAL
             Inhabitants = new HashSet<AspNetUser>();
         }
 
-        public House(string adress, string university, string faculty)
+        /// <summary>
+        /// Конструирует дом по заданным параметрам
+        /// </summary>
+        /// <param name="adress">Адрес дома</param>
+        /// <param name="faculty">Факультет / обшага</param>
+        /// <param name="holder">Холдер, к которому принадлежит дом</param>
+        /// <param name="photo">Фоточка, которая нужна для дома</param>
+        public House(string adress, string faculty, HouseHolder holder, Picture photo)
         {
             Auctions = new HashSet<Auction>();
             Posts = new HashSet<ForumPost>();
             Adress = adress;
             Faculty = faculty;
-            University = university;
             Likes = 0;
             Rating = 0;
+            Holder = holder;
+            Portrait = photo;
         }
 
         /// <summary>
@@ -51,13 +59,6 @@ namespace CocktionMVC.Models.DAL
         /// </summary>
         public int Rating { get; set; }
 
-        /// <summary>
-        /// Университет, к которому привязана локация.
-        /// Конвенция: все указываем одинаково. 
-        /// ВШЭ/МГУ/МГТУ/МФТИ/РГТУ
-        /// </summary>
-        public string University { get; set; }
-
         public string Description { get; set; }
 
         /// <summary>
@@ -72,6 +73,8 @@ namespace CocktionMVC.Models.DAL
 
         public virtual ICollection<AspNetUser> Inhabitants { get; set; }
 
-        public virtual Photo Portrait { get; set; }
+        public virtual Picture Portrait { get; set; }
+
+        public virtual HouseHolder Holder { get; set; }
     }
 }

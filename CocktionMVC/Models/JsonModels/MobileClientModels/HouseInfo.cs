@@ -5,10 +5,9 @@
     /// </summary>
     public class HouseInfo
     {
-        public string Faculty { get; set; }
-        public string University { get; set; }
-        public string Adress { get; set; }
-        public int Rating { get; set; }
-        public int Likes { get; set; }
+        public string faculty { get; set; }
+        public string adress { get; set; }
+        public int rating { get; set; }
+        public int likes { get; set; }
     }
 }

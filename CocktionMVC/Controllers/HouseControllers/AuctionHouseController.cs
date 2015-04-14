@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity.Infrastructure.Interception;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -21,7 +22,9 @@ namespace CocktionMVC.Controllers
         public ActionResult Index()
         {
             //Мб добавим потом тут какой-то код для связи с БД
-            return View();
+            CocktionContext db = new CocktionContext();
+            var holders = db.HouseHolders.ToList();
+            return View(holders);
         }
 
         /// <summary>
@@ -30,15 +33,14 @@ namespace CocktionMVC.Controllers
         /// </summary>
         /// <param name="id">Университет, который надо добавить</param>
         /// <returns>страницу со списком</returns>
-        public ActionResult GetUniversityHouses(string id)
+        public ActionResult GetUniversityHouses(int id)
         {
             //подключаемся к базе
             CocktionContext db = new CocktionContext();
 
             //Выбираем все дома, относящиеся к данному ВУЗу
-            List<House> houses = (from x in db.Houses
-                where x.University == id
-                              select x).ToList();
+            var holder = db.HouseHolders.Find(id);
+            var houses = holder.Houses.ToList();
               
             return View(houses);
         }

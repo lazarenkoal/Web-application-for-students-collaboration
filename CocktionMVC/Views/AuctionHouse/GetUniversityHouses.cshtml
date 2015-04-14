@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Дома в " + Model[0].University;
+    ViewBag.Title = "Дома в " + Model[0].Holder.Name;
 }
 @model List<CocktionMVC.Models.DAL.House>
 <script src="~/Scripts/MyLib/AuctionHouse/GetUniversityHouses/printHousesInCells.js"></script>
@@ -7,7 +7,7 @@
 <div id="universityHousesControlPanel">
     <div class="row">
         <div class="col-md-4"><p>Какая-то опция</p></div>
-        <div class="col-md-4"><h4>Дома в Вышке</h4></div>
+        <div class="col-md-4"><h4>@Model[0].Holder.Name</h4></div>
         <div class="col-md-4"><p>Еще какая-то опция</p></div>
     </div>
 </div>
@@ -19,7 +19,7 @@
         <script>
             addHouseCell('universityHousesContainer', '@house.Faculty', '@house.Adress',
                 'http://cocktion.com/AuctionHouse/GetCurrentAuctionHouse/@house.Id',
-                'http://cocktion.com/Content/SiteImages/hseSmallBuilding.jpg');
+                'http://cocktion.com/Images/Thumbnails/@house.Portrait.FileName');
         </script>
   
     }

@@ -12,25 +12,25 @@
 
         public Guild(string name, string photoPath, int id)
         {
-            GuildName = name;
-            PhotoPath = photoPath;
-            GuildId = id;
+            this.name = name;
+            this.photoPath = photoPath;
+            this.id = id;
         }
 
         /// <summary>
         /// Название дома
         /// </summary>
-        public string GuildName { get; set; }
+        public string name { get; set; }
 
         /// <summary>
         /// Путь к фоточке
         /// </summary>
-        public string PhotoPath { get; set; }
+        public string photoPath { get; set; }
 
         /// <summary>
         /// Айдишник организации
         /// </summary>
-        public int GuildId { get; set; }
+        public int id { get; set; }
 
     }
 }

@@ -160,9 +160,20 @@
                         <input type="text" id="bidDescription" placeholder="Описание товара"
                                class="form-control">
                         <br />
-                        <input type="text" id="bidCategory" placeholder="Категория"
-                               class="form-control">
-                        <br />
+                        <div id="typeOfAuctionContainer">
+                            <!--Чекбоксы для типов товара-->
+                            <h5>Тип предмета</h5>
+                            <label class="radio-inline">
+                                <input type="radio" id="bookRadio" onclick="radioProcessor(this)"> Книга
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" id="productRadio" onclick="radioProcessor(this)"> Вещь
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" id="serviceRadio" onclick="radioProcessor(this)"> Услуга
+                            </label>
+                        </div>
+                        <br/>
                         <input type="file" name="docs" id="fileInput" />
                     </div>
                     <br/>

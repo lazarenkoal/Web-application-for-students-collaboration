@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using CocktionMVC.Models.DAL;
+using CocktionMVC.Models;
 
 namespace CocktionMVC
 {
@@ -17,8 +18,10 @@ namespace CocktionMVC
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            Database.SetInitializer<CocktionContext>(new DropCreateDatabaseIfModelChanges<CocktionContext>());
-            //Database.SetInitializer<ApplicationDbContext>(new DropCreateDatabaseIfModelChanges<ApplicationDbContext>());
+            Database.SetInitializer<CocktionContext>(null);
+           ///Database.SetInitializer<ApplicationDbContext>(new DropCreateDatabaseIfModelChanges<ApplicationDbContext>());
+            Database.SetInitializer<ApplicationDbContext>(null);
+
         }
     }
 }

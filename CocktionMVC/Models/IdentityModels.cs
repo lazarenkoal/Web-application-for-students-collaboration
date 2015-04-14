@@ -10,12 +10,10 @@ namespace CocktionMVC.Models
     {
         public string UserRealName { get; set; }
         public string UserRealSurname { get; set; }
-        public string University { get; set; }
-        public string Faculty { get; set; }
-        public string Dormitory { get; set; }
-        public string StudyAdress { get; set; }
         public string PhoneNumber { get; set; }
         public int Eggs { get; set; }
+
+       
 
         public int Rating { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
