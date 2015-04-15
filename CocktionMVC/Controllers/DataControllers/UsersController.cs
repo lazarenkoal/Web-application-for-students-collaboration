@@ -54,7 +54,8 @@ namespace CocktionMVC.Controllers
 
             //Формируем модель для вывода на вэб-страничке
             ProfileViewModel model = new ProfileViewModel(userEggs, user.HisAuctions.Count, userBets,
-                user.UserRealSurname, user.UserRealName, userRating, 56, user.HisAuctions.ToList(), id, feeds);
+                user.UserRealSurname, user.UserRealName, userRating, 56, user.HisAuctions.ToList(), id, feeds,
+                user.SubHouses.ToList());
 
             return View(model);
         }

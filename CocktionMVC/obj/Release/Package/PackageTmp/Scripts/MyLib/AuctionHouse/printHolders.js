@@ -1,21 +1,21 @@
 ﻿function addHolderCell(containerName, holderName, link, imgSrc) {
-    if (colCounter < 4) {
-        if (colCounter == 0) {
-            addRow(containerName, rowCounter);
-            appendHolderInfo(rowCounter, holderName, link, imgSrc);
-            colCounter++;
+    if (holderColCounter < 4) {
+        if (holderColCounter == 0) {
+            addHolderRow(containerName, holderRowCounter);
+            appendHolderInfo(holderRowCounter, holderName, link, imgSrc);
+            holderColCounter++;
         }
         else {
-            appendHolderInfo(rowCounter, holderName, link, imgSrc);
-            colCounter++;
+            appendHolderInfo(holderRowCounter, holderName, link, imgSrc);
+            holderColCounter++;
         }
     }
     else {
-        colCounter = 0;
-        ++rowCounter;
-        addRow(containerName, rowCounter);
-        appendHolderInfo(rowCounter, holderName, link, imgSrc);
-        colCounter++;
+        holderColCounter = 0;
+        ++holderRowCounter;
+        addHolderRow(containerName, holderRowCounter);
+        appendHolderInfo(holderRowCounter, holderName, link, imgSrc);
+        holderColCounter++;
     }
 }
 
@@ -35,9 +35,9 @@ function appendHolderInfo(nameOfRow, nameOfHolder, link, imgSrc) {
 //Добавляет новый div (class=row) на страничку, для того, чтобы в нее потом запихивать колонки
 //containerName - название контейнера, в который надо вставить
 //nameOfRow - название строчки, в которую надо вставить что-то
-function addRow(containerName, nameOfRow) {
+function addHolderRow(containerName, nameOfRow) {
     document.getElementById(containerName).innerHTML += "<div class=\"row\" id=\"" + nameOfRow + "\"></div></br>";
 }
 
-var rowCounter = 0;
-var colCounter = 0;
+var holderRowCounter = 0;
+var holderColCounter = 0;

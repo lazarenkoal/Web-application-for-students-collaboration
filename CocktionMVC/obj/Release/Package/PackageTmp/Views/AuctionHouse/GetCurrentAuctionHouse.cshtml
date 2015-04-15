@@ -2,12 +2,14 @@
     ViewBag.Title = "Конкретный дом";
 }
 @using CocktionMVC.Models.DAL
+@using Microsoft.AspNet.Identity
 @model House
 <h3>Домик в @Model.Holder.Name</h3>
 
-<script src="~/Scripts/Jquery/jquery-2.1.3.min.js"></script>
 <script src="~/Scripts/MyLib/AuctionHouse/GetCurrentAuctionHouse/addComment.js"></script>
 <script src="~/Scripts/MyLib/AuctionHouse/GetCurrentAuctionHouse/scroller.js"></script>
+<script src="~/Scripts/MyLib/AuctionHouse/GetCurrentAuctionHouse/subscriber.js"></script>
+
 <link rel="stylesheet" href="~/Content/HouseRelatedStyles/getCurrentAuctionHouseStyle.css"/>
 
 <div class="row" id ="top">
@@ -49,7 +51,23 @@
         <p><b>Жители:</b> @Model.Inhabitants.Count</p>
         <br />
         <p><b>Количество аукционов:</b> @Model.Auctions.Count</p>
-        <!--<button class="btn-xs" onclick="scrollToTheForum()">К форуму</button>-->
+        <div id="subscribe">
+            @{
+                if (User.Identity.IsAuthenticated)
+                {
+                    <script>
+                        checkSubscription(@Model.Id);
+                    </script>
+                }
+                else
+                {
+                    <script>
+                        document.getElementById('subscribe').innerHTML = "<p>Чтобы добавлять дома в свой колхоз, нужно быть авторизованным!</p>";
+                    </script>
+                }
+            }
+        </div>
+
     </div>
 </div>
 <div class="row">
@@ -62,6 +80,7 @@
         </p>
         <p><b>Адрес:</b> @Model.Adress
         </p>
+        <script>houseId = @Model.Id</script>
         <p><b>Факультет:</b> @Model.Faculty</p>
     </div>
     <div class="col-md-2"></div>
@@ -69,7 +88,15 @@
 
 <div class="row">
     <!--Здесь начинается форум-->
-    <div class="col-md-3"></div>
+    <div class="col-md-3">
+        <h3>Подписчики</h3>
+        <div id="subscribersList">
+            @foreach (var sub in Model.Inhabitants)
+            {
+                <p>@sub.UserName</p>
+            }
+        </div>
+    </div>
     <div id="forumContainer" class="col-md-6">
         <h3 style="text-align: center">Дискуссия</h3>
         <div id="messageContainer">

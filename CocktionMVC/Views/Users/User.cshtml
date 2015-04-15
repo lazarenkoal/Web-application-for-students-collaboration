@@ -4,9 +4,10 @@
 @using CocktionMVC.Models.DAL
 @using CocktionMVC.Models.ViewModels
 @model ProfileViewModel
-<link rel="stylesheet" href="~/Content/ProfileStyle/ProfileStyle.css" />
+<link rel="stylesheet" href="~/Content/UsersRelatedStyles/ProfileStyle.css" />
 <script src="~/Scripts/MyLib/Profile/opinionAdder.js"></script>
 <script src="~/Scripts/MyLib/Auction/Index/auctionAdder.js"></script>
+<script src="~/Scripts/MyLib/AuctionHouse/GetUniversityHouses/printHousesInCells.js"></script>
 
 <div class="row" id="userFullInformation">
     <br />
@@ -68,30 +69,29 @@
 <br />
 <br />
 
-<div class="row" id="subcribedHouses">
+<div class="row" id="subscribedHouses">
     <!--Дома, на которые подписан пользователь-->
     <h3 id="housesHeader">Житель следующих домов</h3>
-    <div class="col-md-3">
-        <p>Какой-то дом</p>
-        <img src="~/Content/SiteImages/house1.jpg" class="img-responsive" />
-        <br />
-    </div>
-    <div class="col-md-3">
-        <p>Какой-то дом</p>
-        <img src="~/Content/SiteImages/house1.jpg" class="img-responsive" />
-        <br />
-    </div>
-    <div class="col-md-3">
-        <p>Какой-то дом</p>
-        <img src="~/Content/SiteImages/house1.jpg" class="img-responsive" />
-        <br />
-    </div>
-    <div class="col-md-3">
-        <p>Какой-то дом</p>
-        <img src="~/Content/SiteImages/house1.jpg" class="img-responsive" />
-        <br />
-    </div>
 </div>
+
+@{
+    if (Model.Houses.Count != 0)
+    {
+        foreach (var house in Model.Houses)
+        {
+            <script>
+                addHouseCell('subscribedHouses', '@house.Faculty', '@house.Adress',
+                    'http://cocktion.com/AuctionHouse/GetCurrentAuctionHouse/@house.Id',
+                    'http://cocktion.com/Images/Thumbnails/@house.Portrait.FileName');
+            </script>
+        }
+    }
+    else
+    {
+        <script>$("#subscribedHouses").append("<p>К сожеланию, вы еще не подписались на дома ;(</p>")</script>
+    }
+}
+
 <br />
 <br />
 

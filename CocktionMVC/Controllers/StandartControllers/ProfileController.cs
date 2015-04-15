@@ -43,7 +43,7 @@ namespace CocktionMVC.Controllers.StandartControllers
                 List<UsersFeedback> feeds = db.Feedbacks.Where(x => x.UsersId == user.Id).ToList();
 
                 ProfileViewModel model = new ProfileViewModel(user.Eggs, user.HisAuctions.Count, userBets,
-                    user.UserRealSurname, user.UserRealName, user.Rating, 56, auctions, user.Id, feeds);
+                    user.UserRealSurname, user.UserRealName, user.Rating, 56, auctions, user.Id, feeds, user.SubHouses.ToList());
 
                 return View(model);
             }

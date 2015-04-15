@@ -6,23 +6,23 @@
 //imgSrc - путь к фотке аукциона
 //link - ссылка на этот аукцион
 function addCellToTheGrid(containerName, name, description, date, imgSrc, link) {
-    if (colCounter < 4) {
-        if (colCounter == 0) {
-            addRow(containerName, rowCounter);
-            appendAuctionInfo(rowCounter, name, description, date, imgSrc, link);
-            colCounter++;
+    if (auctionColCounter < 4) {
+        if (auctionColCounter == 0) {
+            addAuctionRow(containerName, auctionRowCounter);
+            appendAuctionInfo(auctionRowCounter, name, description, date, imgSrc, link);
+            auctionColCounter++;
         }
         else {
-            appendAuctionInfo(rowCounter, name, description, date, imgSrc, link);
-            colCounter++;
+            appendAuctionInfo(auctionRowCounter, name, description, date, imgSrc, link);
+            auctionColCounter++;
         }
     }
     else {
-        colCounter = 0;
-        ++rowCounter;
-        addRow(containerName, rowCounter);
-        appendAuctionInfo(rowCounter, name, description, date, imgSrc, link);
-        colCounter++;
+        auctionColCounter = 0;
+        ++auctionRowCounter;
+        addAuctionRow(containerName, auctionRowCounter);
+        appendAuctionInfo(auctionRowCounter, name, description, date, imgSrc, link);
+        auctionColCounter++;
     }
 }
 
@@ -33,7 +33,7 @@ function addCellToTheGrid(containerName, name, description, date, imgSrc, link) 
 //imgSrc - путь к фотке
 //link - ссылка на аукцион
 function appendAuctionInfo(nameOfRow, name, description, date, imgSrc, link) {
-    document.getElementById(nameOfRow).innerHTML += ("<div class=\"col-md-3\"><div class=\"auction\"> " +
+    document.getElementById('auction'+nameOfRow).innerHTML += ("<div class=\"col-md-3\"><div class=\"auction\"> " +
         "<img class=\"img-circle\" src=\"" + imgSrc + "\" >" +
     "<p><b>Продается: </b>" + name + "</p>" +
     "<p><b>Описание: </b>" + description + "</p>" +
@@ -43,13 +43,13 @@ function appendAuctionInfo(nameOfRow, name, description, date, imgSrc, link) {
 }
 
 //Добавляет новый div (class=row) на страничку, для того, чтобы в нее потом запихивать колонки
-function addRow(containerName, nameOfRow) {
+function addAuctionRow(containerName, nameOfRow) {
     //$("#panelContainer").append("<div class=\"row\" id=\"" + nameOfRow+"\">добавил!</div>");
-    document.getElementById(containerName).innerHTML += "<div class=\"row\" id=\"" + nameOfRow + "\"></div></br>";
+    document.getElementById(containerName).innerHTML += "<div class=\"row\" id=\"auction" + nameOfRow + "\"></div></br>";
 }
 
-var rowCounter = 0;
-var colCounter = 0;
+var auctionRowCounter = 0;
+var auctionColCounter = 0;
 
 //Вписывает в указанынй элемент информацию о том, что никто ничего на аукционе не продает
 //10.04.2015

@@ -208,6 +208,7 @@
     <Compile Include="Controllers\ApiControllers\ProfileController.cs" />
     <Compile Include="Controllers\DataControllers\AuctionShowerController.cs" />
     <Compile Include="Controllers\DataControllers\UsersController.cs" />
+    <Compile Include="Controllers\FunctionalControllers\SubscriptionController.cs" />
     <Compile Include="Controllers\HouseControllers\AuctionHouseController.cs" />
     <Compile Include="Controllers\StandartControllers\AccountController.cs" />
     <Compile Include="Controllers\AuctionControllers\AuctionController.cs" />
@@ -486,6 +487,7 @@
     <Content Include="Scripts\Jquery\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\MyLib\AuctionHouse\GetCurrentAuctionHouse\addComment.js" />
     <Content Include="Scripts\MyLib\AuctionHouse\GetCurrentAuctionHouse\scroller.js" />
+    <Content Include="Scripts\MyLib\AuctionHouse\GetCurrentAuctionHouse\subscriber.js" />
     <Content Include="Scripts\MyLib\AuctionHouse\GetUniversityHouses\printHousesInCells.js" />
     <Content Include="Scripts\MyLib\AuctionHouse\printHolders.js" />
     <Content Include="Scripts\MyLib\Auction\Create\createAuctionFormProcessor.js" />
@@ -577,6 +579,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\Photos\" />
+    <Folder Include="Views\Subscription\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201503092019139_sdfsdf.resx">

@@ -10,23 +10,23 @@
 //imgSrc - путь к фоточке
 //containerName - название контейнера, в который надо вставить
 function addHouseCell(containerName, nameOfFaculty, adress, link, imgSrc) {
-    if (colCounter < 4) {
-        if (colCounter == 0) {
-            addRow(containerName, rowCounter);
-            appendHouseInfo(rowCounter, nameOfFaculty, adress, link, imgSrc);
-            colCounter++;
+    if (housesColCounter < 4) {
+        if (housesColCounter == 0) {
+            addHouseRow(containerName, housesRowCounter);
+            appendHouseInfo(housesRowCounter, nameOfFaculty, adress, link, imgSrc);
+            housesColCounter++;
         }
         else {
-            appendHouseInfo(rowCounter, nameOfFaculty, adress, link, imgSrc);
-            colCounter++;
+            appendHouseInfo(housesRowCounter, nameOfFaculty, adress, link, imgSrc);
+            housesColCounter++;
         }
     }
     else {
-        colCounter = 0;
-        ++rowCounter;
-        addRow(containerName, rowCounter);
-        appendHouseInfo(rowCounter, nameOfFaculty, adress, link, imgSrc);
-        colCounter++;
+        housesColCounter = 0;
+        ++housesRowCounter;
+        addHouseRow(containerName, housesRowCounter);
+        appendHouseInfo(housesRowCounter, nameOfFaculty, adress, link, imgSrc);
+        housesColCounter++;
     }
 }
 
@@ -47,9 +47,9 @@ function appendHouseInfo(nameOfRow, nameOfFaculty, adress, link, imgSrc) {
 //Добавляет новый div (class=row) на страничку, для того, чтобы в нее потом запихивать колонки
 //containerName - название контейнера, в который надо вставить
 //nameOfRow - название строчки, в которую надо вставить что-то
-function addRow(containerName, nameOfRow) {
+function addHouseRow(containerName, nameOfRow) {
     document.getElementById(containerName).innerHTML += "<div class=\"row\" id=\"" + nameOfRow + "\"></div></br>";
 }
 
-var rowCounter = 0;
-var colCounter = 0;
+var housesRowCounter = 0;
+var housesColCounter = 0;

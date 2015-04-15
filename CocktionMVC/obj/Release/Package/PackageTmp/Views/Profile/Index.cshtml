@@ -6,6 +6,9 @@
 @model ProfileViewModel
 <link rel="stylesheet" href="~/Content/UsersRelatedStyles/ProfileStyle.css"/>
 <script src="~/Scripts/MyLib/Profile/opinionAdder.js"></script>
+<script src="~/Scripts/MyLib/AuctionHouse/GetUniversityHouses/printHousesInCells.js"></script>
+<script src="~/Scripts/MyLib/Auction/Index/auctionAdder.js"></script>
+
 <div class="row">
     <br/>
     <!--Фотка и информация о пользователе-->
@@ -63,26 +66,28 @@
 <br />
 <br />
 
-<div class="row" id="subcribedHouses">
+<div class="row" id="subscribedHouses">
     <!--Дома, на которые подписан пользователь-->
     <h3 id="housesHeader">Житель следующих домов</h3>
-    <div class="col-md-3">
-        <p>Какой-то дом</p>
-        <img src="~/Content/SiteImages/house1.jpg" class="img-responsive"/>
-    </div>
-    <div class="col-md-3">
-        <p>Какой-то дом</p>
-        <img src="~/Content/SiteImages/house1.jpg" class="img-responsive" />
-    </div>
-    <div class="col-md-3">
-        <p>Какой-то дом</p>
-        <img src="~/Content/SiteImages/house1.jpg" class="img-responsive" />
-    </div>
-    <div class="col-md-3">
-        <p>Какой-то дом</p>
-        <img src="~/Content/SiteImages/house1.jpg" class="img-responsive" />
-    </div>
 </div>
+
+@{
+    if (Model.Houses.Count != 0)
+    {
+        foreach (var house in Model.Houses)
+        {
+            <script>
+                addHouseCell('subscribedHouses', '@house.Faculty', '@house.Adress',
+                    'http://cocktion.com/AuctionHouse/GetCurrentAuctionHouse/@house.Id',
+                    'http://cocktion.com/Images/Thumbnails/@house.Portrait.FileName');
+            </script>
+        }
+    }
+    else
+    {
+        <script>$("#subscribedHouses").append("<p>К сожеланию, вы еще не подписались на дома ;(</p>")</script>
+    }
+}
 
 <br />
 <br/>
@@ -90,9 +95,27 @@
 <div class="row" id="usersAuctions">
     <!--Аукционы пользователя-->
     <h3 id="auctionHeader">Владелец прекрасных аукционов</h3>
-    
 </div>
-<br />
+@{
+    if (Model.HisAuctions.Count != 0)
+    {
+        foreach (var auction in Model.HisAuctions)
+        {
+            <script>
+                addCellToTheGrid('usersAuctions', '@auction.SellProduct.Name', '@auction.SellProduct.Description',
+                    '@auction.EndTime', 'http://cocktion.com/Images/Thumbnails/@auction.SellProduct.Photos.First().FileName',
+                    'http://cocktion.com/Auction/CurrentAuction/@auction.Id');
+            </script>
+        }
+    }
+    else
+    {
+        <script>
+            sayThatEmpty('usersAuctions');
+        </script>
+    }
+}
+<br/>
 <br/>
 
 <div class="row" id="usersFeedback">

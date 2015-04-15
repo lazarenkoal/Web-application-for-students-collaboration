@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using CocktionMVC.Models.DAL;
 
 namespace CocktionMVC.Models.ViewModels
@@ -17,7 +18,7 @@ namespace CocktionMVC.Models.ViewModels
 
         public ProfileViewModel(int eggsAmount, int auctionsAmount, int productsAmount,
             string surname, string name, int? rating, int daysWithUs, List<Auction> hisAuctions, string userId,
-            List<UsersFeedback> feeds)
+            List<UsersFeedback> feeds, List<House> houses)
         {
             EggsAmount = eggsAmount;
             AuctionsAmount = auctionsAmount;
@@ -29,8 +30,9 @@ namespace CocktionMVC.Models.ViewModels
             HisAuctions = hisAuctions;
             UserId = userId;
             Feeds = feeds;
+            Houses = houses;
         }
-
+        public List<House> Houses { get; set; }
         public List<UsersFeedback> Feeds { get; set; }
         public string UserId { get; set; }
         public int EggsAmount { get; set; }
