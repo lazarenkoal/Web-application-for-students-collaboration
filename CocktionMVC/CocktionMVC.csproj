@@ -407,6 +407,7 @@
     <Content Include="Content\BootstrapCss\bootstrap-theme.min.css" />
     <Content Include="Content\BootstrapCss\bootstrap.css" />
     <Content Include="Content\BootstrapCss\bootstrap.min.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\HouseRelatedStyles\getCurrentAuctionHouseStyle.css" />
     <Content Include="Content\HouseRelatedStyles\universityHousesStyle.css" />
     <Content Include="Content\MainPageStyles\indexAuthorizedStyle.css" />
@@ -453,19 +454,18 @@
     <Content Include="Content\VisStyles\vis.css" />
     <Content Include="Content\VisStyles\vis.min.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\Thumbnails\placeholder.jpg" />
     <Content Include="RecaptchaNet.ReadMe.txt" />
     <Content Include="Scripts\Bootstrap\bootstrap.js" />
     <Content Include="Scripts\Bootstrap\bootstrap.min.js" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\BootstrapCss\bootstrap-theme.css.map" />
     <Content Include="Content\BootstrapCss\bootstrap.css.map" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Properties\PublishProfiles\Cocktion_AWS2.pubxml" />
     <None Include="Scripts\Jquery\jquery-2.1.3.intellisense.js" />
     <None Include="Scripts\DefaultScripts\_references.js" />
@@ -504,6 +504,7 @@
     <Content Include="Scripts\MyLib\EditHouses\houseSender.js" />
     <Content Include="Scripts\MyLib\MainPage\unauthMainScripts.js" />
     <Content Include="Scripts\MyLib\Profile\opinionAdder.js" />
+    <Content Include="Scripts\MyLib\Profile\subscribeProcessor.js" />
     <Content Include="Scripts\MyLib\Vis\vis.js" />
     <Content Include="Scripts\MyLib\Vis\vis.min.js" />
     <Content Include="Web.config">
@@ -566,7 +567,7 @@
     <Content Include="Views\AuctionShower\ShowOldAuctions.cshtml" />
     <Content Include="Views\AuctionShower\ShowActiveAuctions.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\Users\User.cshtml" />
+    <Content Include="Views\Users\GetUser.cshtml" />
     <Content Include="Views\Shared\Index2.cshtml" />
     <Content Include="Views\Home\VerifyEmail.cshtml" />
   </ItemGroup>

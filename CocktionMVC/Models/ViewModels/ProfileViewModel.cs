@@ -31,7 +31,28 @@ namespace CocktionMVC.Models.ViewModels
             UserId = userId;
             Feeds = feeds;
             Houses = houses;
+            Users = new List<AspNetUser>();
         }
+
+        public ProfileViewModel(int eggsAmount, int auctionsAmount, int productsAmount,
+           string surname, string name, int? rating, int daysWithUs, List<Auction> hisAuctions, string userId,
+           List<UsersFeedback> feeds, List<House> houses, List<AspNetUser> friends)
+        {
+            EggsAmount = eggsAmount;
+            AuctionsAmount = auctionsAmount;
+            ProductsAmount = productsAmount;
+            Surname = surname;
+            Name = name;
+            Rating = rating;
+            DaysWithUsAmount = daysWithUs;
+            HisAuctions = hisAuctions;
+            UserId = userId;
+            Feeds = feeds;
+            Houses = houses;
+            Users = friends;
+        }
+
+        public List<AspNetUser> Users { get; set; } 
         public List<House> Houses { get; set; }
         public List<UsersFeedback> Feeds { get; set; }
         public string UserId { get; set; }

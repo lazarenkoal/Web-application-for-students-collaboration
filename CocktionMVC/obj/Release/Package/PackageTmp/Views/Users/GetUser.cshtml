@@ -8,13 +8,20 @@
 <script src="~/Scripts/MyLib/Profile/opinionAdder.js"></script>
 <script src="~/Scripts/MyLib/Auction/Index/auctionAdder.js"></script>
 <script src="~/Scripts/MyLib/AuctionHouse/GetUniversityHouses/printHousesInCells.js"></script>
+<script src="~/Scripts/MyLib/Profile/subscribeProcessor.js"></script>
 
 <div class="row" id="userFullInformation">
     <br />
     <!--Фотка и информация о пользователе-->
     <div class="col-md-3" style="align-items: flex-start">
         <!--Контейнер для аватарки-->
-        <img src="~/Content/SiteImages/anonPhoto.jpg" class="img-thumbnail" />
+        <img src="~/Content/SiteImages/anonPhoto.jpg" class="img-thumbnail"/>
+        <div id="subscribe">
+
+        </div>
+        <script>
+            checkSubscription("@Model.UserId.ToString()");
+        </script>
     </div>
     <div class="col-md-2" id="userInformation">
         <!--Контейнер для информации-->

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using CocktionMVC.Models.DAL;
 using CocktionMVC.Models.ViewModels;
+using Microsoft.AspNet.Identity;
 
 // ReSharper disable once CheckNamespace
 namespace CocktionMVC.Controllers
@@ -16,9 +17,21 @@ namespace CocktionMVC.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            CocktionContext db = new CocktionContext();
-            List<AspNetUser> users = db.AspNetUsers.ToList();
-            return View(users);
+            if (User.Identity.IsAuthenticated)
+            {
+                CocktionContext db = new CocktionContext();
+                string userId = User.Identity.GetUserId();
+                List<AspNetUser> users = (from x in db.AspNetUsers
+                    where x.Id != userId
+                    select x).ToList();
+                return View(users);
+            }
+            else
+            {
+                CocktionContext db = new CocktionContext();
+                List<AspNetUser> users = db.AspNetUsers.ToList();
+                return View(users);
+            }
         }
 
 
@@ -26,7 +39,7 @@ namespace CocktionMVC.Controllers
         /// Показывает профиль конкретного пользователя
         /// </summary>
         /// <param name="id">Айдишник пользователя</param>
-        public ActionResult User(string id)
+        public ActionResult GetUser(string id)
         {
             CocktionContext db = new CocktionContext();
 

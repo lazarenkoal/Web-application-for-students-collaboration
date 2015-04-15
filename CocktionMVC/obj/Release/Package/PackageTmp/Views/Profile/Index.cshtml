@@ -118,6 +118,20 @@
 <br/>
 <br/>
 
+<div class="row" id="usersSubs">
+    <h4 style="text-align: center">Ваши подписки</h4>
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        @{
+            foreach (var user in Model.Users)
+            {
+                <p>@user.UserName</p>
+            }
+        }
+    </div>
+    <div id="col-md-4"></div>
+</div>
+
 <div class="row" id="usersFeedback">
     <!--Отзывы о пользователе-->
     <div class="col-md-3" id="feedbackDescription">
