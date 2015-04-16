@@ -163,6 +163,9 @@ function sendData() {
         var typeOfProductToSend = getProductType(productType);
         formData.append('category', typeOfProductToSend);
 
+        createStringOfHouses();
+        formData.append('housesIds', ids);
+
         //создаю запрос
         var xhr = new XMLHttpRequest();
        

@@ -13,6 +13,10 @@ h3,h4{
     text-align: center;
 }
 
+#facultyToChoose {
+    text-align: left;
+}
+
 #goToAuctionBtn {
     float: right;
 }

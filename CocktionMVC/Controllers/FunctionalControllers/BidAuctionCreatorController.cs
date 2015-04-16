@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
 using CocktionMVC.Functions;
 using CocktionMVC.Functions.DataProcessing;
 using CocktionMVC.Models.DAL;
@@ -20,9 +22,9 @@ namespace CocktionMVC.Controllers
         public async Task<JsonResult> CreateAuction()
         {
             //Получаем информацию из формы
-            string name, description, category, timeBound;
+            string name, description, category, timeBound, housesIds;
             RequestFormReader.ReadCreateAuctionForm(Request, out name, out description,
-                out category, out timeBound);
+                out category, out timeBound, out housesIds);
 
             //получаем информацию о пользователе
             string userId = User.Identity.GetUserId();
@@ -38,7 +40,18 @@ namespace CocktionMVC.Controllers
             Auction auction = new Auction(true, product, false, new ToteBoard(), user);
 
             //TODO сделать динамический выбор дома
-            auction.Houses.Add(db.Houses.Find(4));
+            if (housesIds[0] != '?')
+            {
+                var houses = (from x in db.Houses
+                    where x.Holder.Name == housesIds
+                    select x).ToList();
+                houses.ForEach(x => auction.Houses.Add(x));
+            }
+            else
+            {
+                int[] ids = HouseSerializer.TakeHouseIdsFromString(housesIds);
+                Array.ForEach(ids, x => auction.Houses.Add(db.Houses.Find(x)));
+            }
 
             //задаем время окончания и начала аукциона
             DateTimeManager.SetAuctionStartAndEndTime(auction, timeBound);
@@ -56,6 +69,8 @@ namespace CocktionMVC.Controllers
             //возвращаем статус
             return Json(new IdContainer(auction.Id));
         }
+
+        
 
         class IdContainer
         {

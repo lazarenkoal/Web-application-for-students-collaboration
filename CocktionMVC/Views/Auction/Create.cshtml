@@ -2,9 +2,10 @@
 @{
     ViewBag.Title = "Создать аукцион";
 }
-<script src="~/Scripts/Jquery/jquery-2.1.3.js"></script>
 <script src="~/Scripts/MyLib/Auction/Create/createAuctionFormProcessor.js"></script>
+<script src ="/Scripts/MyLib/Auction/Create/search.js"></script>
 <link rel="stylesheet" href="~/Content/AuctionStyles/createAuctionStyle.css"/>
+
 <div id="createAuctionFormContainer" class="row">
     <div class="col-md-2"><!--Для разметки --></div>
     <div class="col-md-8" id="form" class="row">
@@ -65,10 +66,20 @@
         <div class="col-md-6" id="houses">
             <!-- Контейнер для выбора домов -->
             <h4>Где продаем?)</h4>
-            <input type="text" class="form-control" placeholder="Университет">
-            <br/>
-            <input type="text" class="form-control" placeholder="Факультет">
-            <p>То, что будет выведено после поиска</p>
+            <div id="universitySearchContainer">
+                <input type="text" oninput="searchUniversity()" id="universitySearch" class="form-control" placeholder="Университет">
+            </div>
+            <div id="universitySearchResults">
+            </div>
+            <div id="facultyToChoose">
+
+            </div>
+            <label class="radio-inline">
+                <input type="radio" id="allFacultyRadio" onclick="facultyRadioCheckHandler(this)"> На всех факультетах
+            </label>
+            <label class="radio-inline">
+                <input type="radio" id="chooseFacultyRadio" onclick=" facultyRadioCheckHandler(this) " /> Выбрать факультеты
+            </label>
         </div>
     </div>
     <div class="col-md-2"><!--Для разметки --></div>

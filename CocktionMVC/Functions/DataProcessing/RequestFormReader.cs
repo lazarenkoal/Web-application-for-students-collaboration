@@ -51,7 +51,7 @@ namespace CocktionMVC.Functions
         /// <param name="category">Категория, в которую товар плавненько попадает</param>
         /// <param name="timeBound">Временной промежуток, который вводит пользователь</param>
         public static void ReadCreateAuctionForm(HttpRequestBase request, out string name,
-            out string description, out string category, out string timeBound)
+            out string description, out string category, out string timeBound, out string housesIds)
         {
             name = request.Form.GetValues("name")[0].Trim();
             description = request.Form.GetValues("description")[0].Trim();
@@ -62,6 +62,7 @@ namespace CocktionMVC.Functions
             }
             category = request.Form.GetValues("category")[0].Trim();
             timeBound = request.Form.GetValues("timeBound")[0].Trim();
+            housesIds = request.Form.GetValues("housesIds")[0].Trim();
         }
 
         /// <summary>

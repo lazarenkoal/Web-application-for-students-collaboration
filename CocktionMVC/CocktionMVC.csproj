@@ -207,6 +207,7 @@
     <Compile Include="Controllers\ApiControllers\HouseController.cs" />
     <Compile Include="Controllers\ApiControllers\ProfileController.cs" />
     <Compile Include="Controllers\DataControllers\AuctionShowerController.cs" />
+    <Compile Include="Controllers\DataControllers\SearchController.cs" />
     <Compile Include="Controllers\DataControllers\UsersController.cs" />
     <Compile Include="Controllers\FunctionalControllers\SubscriptionController.cs" />
     <Compile Include="Controllers\HouseControllers\AuctionHouseController.cs" />
@@ -221,6 +222,7 @@
     <Compile Include="Controllers\StandartControllers\ProfileController.cs" />
     <Compile Include="Functions\DataProcessing\DataFormatter.cs" />
     <Compile Include="Functions\DataProcessing\DateTimeManager.cs" />
+    <Compile Include="Functions\DataProcessing\HouseSerializer.cs" />
     <Compile Include="Functions\DataProcessing\PhotoProcessor.cs" />
     <Compile Include="Functions\DataProcessing\RequestFormReader.cs" />
     <Compile Include="Functions\EmailSender.cs" />
@@ -491,6 +493,7 @@
     <Content Include="Scripts\MyLib\AuctionHouse\GetUniversityHouses\printHousesInCells.js" />
     <Content Include="Scripts\MyLib\AuctionHouse\printHolders.js" />
     <Content Include="Scripts\MyLib\Auction\Create\createAuctionFormProcessor.js" />
+    <Content Include="Scripts\MyLib\Auction\Create\search.js" />
     <Content Include="Scripts\MyLib\Auction\CurrentAuction\auctionEndLogic.js" />
     <Content Include="Scripts\MyLib\Auction\CurrentAuction\bidFunctions.js" />
     <Content Include="Scripts\MyLib\Auction\CurrentAuction\btnsOnClickHandlers.js" />
@@ -580,6 +583,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\Photos\" />
+    <Folder Include="Views\Search\" />
     <Folder Include="Views\Subscription\" />
   </ItemGroup>
   <ItemGroup>
