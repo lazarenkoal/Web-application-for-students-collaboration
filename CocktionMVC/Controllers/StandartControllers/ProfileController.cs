@@ -88,7 +88,7 @@ namespace CocktionMVC.Controllers.StandartControllers
                 CocktionContext db = new CocktionContext();
                 var user = db.AspNetUsers.Find(userId);
                 Picture selfie = new Picture();
-                PhotoProcessor.CreateAndSavePicture(selfie, Request, 200, 200);
+                PhotoProcessor.CreateAndSavePicture(selfie, Request, 200);
                 user.Selfie = selfie;
                 db.SaveChanges();
                 return Json(new SelfieRespond(user.Selfie.FileName, true));

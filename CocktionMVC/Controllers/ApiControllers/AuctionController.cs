@@ -134,7 +134,7 @@ namespace CocktionMVC.Controllers.ApiControllers
             ThumbnailSet thumbNail = new ThumbnailSet();
             thumbNail.FileName = fileName;
             thumbNail.FilePath = thumbNailPath + fileName;
-            ThumbnailGenerator.ResizeImage(postedFile, thumbNail.FilePath, 90, 90);
+            ThumbnailGenerator.ResizeImage(postedFile, thumbNail.FilePath, 90);
 
             //получаем информацию о пользователе
             string userId = User.Identity.GetUserId();
@@ -309,7 +309,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                 ThumbnailSet thumbNail = new ThumbnailSet();
                 thumbNail.FileName = fileName;
                 thumbNail.FilePath = thumbNailPath + fileName;
-                ThumbnailGenerator.ResizeImage(postedFile, thumbNail.FilePath, 60, 60);
+                ThumbnailGenerator.ResizeImage(postedFile, thumbNail.FilePath, 60);
 
                 //получаем информацию о пользователе
                 string userId = User.Identity.GetUserId();

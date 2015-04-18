@@ -54,7 +54,7 @@ namespace CocktionMVC.Controllers.AdminControllers
 
             //обработать фотку
             Picture photo = new Picture();
-            PhotoProcessor.CreateAndSavePicture(photo, Request, 200, 200);
+            PhotoProcessor.CreateAndSavePicture(photo, Request, 200);
                 
             //создать дом
             House house = new House(adress, faculty, holder, photo);
@@ -88,7 +88,7 @@ namespace CocktionMVC.Controllers.AdminControllers
 
                 Picture photo = new Picture();
                 
-                PhotoProcessor.CreateAndSavePicture(photo, Request, 200, 200);
+                PhotoProcessor.CreateAndSavePicture(photo, Request, 200);
 
                 CocktionContext db = new CocktionContext();
                 db.Pictures.Add(photo);

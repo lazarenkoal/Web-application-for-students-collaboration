@@ -67,7 +67,7 @@ namespace CocktionMVC.Controllers
 
             //добавление фотографии для товара
             Photo photo = new Photo();
-            PhotoProcessor.CreateAndSavePhoto(photo, Request, 90, 90);
+            PhotoProcessor.CreateAndSavePhoto(photo, Request, 90);
             photo.Product = product;
 
             auction.Rating = (int)(user.Rating * 0.4);
@@ -107,7 +107,7 @@ namespace CocktionMVC.Controllers
 
             //Инициализируем и добавляем фоточку
             Photo photo = new Photo();
-            PhotoProcessor.CreateAndSavePhoto(photo, Request, 60, 60);
+            PhotoProcessor.CreateAndSavePhoto(photo, Request, 60);
 
             //обработка данных из формы
             string bidName, bidDescription, bidCategory, auctionId;
@@ -165,7 +165,7 @@ namespace CocktionMVC.Controllers
 
             //Инициализируем фоточку
             Photo photo = new Photo();
-            PhotoProcessor.CreateAndSavePhoto(photo, Request, 60, 60);
+            PhotoProcessor.CreateAndSavePhoto(photo, Request, 60);
            
             //Создаем товар для базы данных
             Product product = new Product(bidName, bidDescription, bidCategory, user);

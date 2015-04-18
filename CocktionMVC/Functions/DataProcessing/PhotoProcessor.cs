@@ -10,7 +10,7 @@ namespace CocktionMVC.Functions.DataProcessing
     /// </summary>
     public class PhotoProcessor
     {
-        public static void CreateAndSavePicture(Picture picture, HttpRequestBase requestBase, int width, int height)
+        public static void CreateAndSavePicture(Picture picture, HttpRequestBase requestBase, int height)
         {
             HttpPostedFileBase file = null;
             if (requestBase.Files.Count != 0)
@@ -29,7 +29,7 @@ namespace CocktionMVC.Functions.DataProcessing
                 string thumbNailPath = requestBase.MapPath("~/Images/Thumbnails/"); //путь на сервере для сохранения
                 picture.FileName = fileName;
                 picture.FilePath = thumbNailPath + fileName;
-                ThumbnailGenerator.ResizeImage(file, picture.FilePath, width, height);
+                ThumbnailGenerator.ResizeImage(file, picture.FilePath, height);
             }
         }
 
@@ -46,7 +46,7 @@ namespace CocktionMVC.Functions.DataProcessing
         /// <param name="requestBase">Запрос с инфой</param>
         /// <param name="width">Ширина фамбнейлика</param>
         /// <param name="height">Высота фамбнейлика</param>
-        public static void CreateAndSavePhoto(Photo photo, HttpRequestBase requestBase, int width, int height)
+        public static void CreateAndSavePhoto(Photo photo, HttpRequestBase requestBase, int height)
         {
             //получаем файл
             HttpPostedFileBase file = null;
@@ -71,7 +71,7 @@ namespace CocktionMVC.Functions.DataProcessing
                 ThumbnailSet thumbNail = new ThumbnailSet();
                 thumbNail.FileName = fileName;
                 thumbNail.FilePath = thumbNailPath + fileName;
-                ThumbnailGenerator.ResizeImage(file, thumbNail.FilePath, width, height);
+                ThumbnailGenerator.ResizeImage(file, thumbNail.FilePath, height);
                 //переделываем размер картиночки
 
                 //забиваем данные о фотке

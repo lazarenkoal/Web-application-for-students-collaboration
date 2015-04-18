@@ -34,7 +34,7 @@ namespace CocktionMVC.Controllers.AdminControllers
 
                 Picture photo = new Picture();
 
-                PhotoProcessor.CreateAndSavePicture(photo, Request, 200, 200);
+                PhotoProcessor.CreateAndSavePicture(photo, Request, 200);
 
                 CocktionContext db = new CocktionContext();
                 db.Pictures.Add(photo);
