@@ -63,6 +63,15 @@
                     <p>
                         <b>Дом: </b>красивый и классный
                     </p>
+                    @{
+
+                        <p><b>Рейтинг: </b>@Model.Rating</p>
+
+                        if (!Model.Owner.EmailConfirmed)
+                        {
+                            <p><b>Статус владельца: </b>не подтвердил себя</p>
+                        }
+}
                     <div id="auctionEnderHidden" hidden="">
                         <button class="btn btn-danger" onclick="finishAuction()" id="endAuctionBtn">Закончить аукцион</button>
                     </div>

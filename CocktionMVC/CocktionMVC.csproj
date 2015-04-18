@@ -201,6 +201,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminControllers\EditHousesController.cs" />
+    <Compile Include="Controllers\AdminControllers\EditInterestsController.cs" />
     <Compile Include="Controllers\ApiControllers\AccountController.cs" />
     <Compile Include="Controllers\ApiControllers\AuctionController.cs" />
     <Compile Include="Controllers\ApiControllers\DataController.cs" />
@@ -218,7 +219,6 @@
     <Compile Include="Controllers\StandartControllers\HelpController.cs" />
     <Compile Include="Controllers\StandartControllers\HomeController.cs" />
     <Compile Include="Controllers\StandartControllers\ManageController.cs" />
-    <Compile Include="Controllers\FunctionalControllers\TestController.cs" />
     <Compile Include="Controllers\StandartControllers\ProfileController.cs" />
     <Compile Include="Functions\DataProcessing\DataFormatter.cs" />
     <Compile Include="Functions\DataProcessing\DateTimeManager.cs" />
@@ -226,6 +226,7 @@
     <Compile Include="Functions\DataProcessing\PhotoProcessor.cs" />
     <Compile Include="Functions\DataProcessing\RequestFormReader.cs" />
     <Compile Include="Functions\EmailSender.cs" />
+    <Compile Include="Functions\RatingManager.cs" />
     <Compile Include="Functions\ThumbnailGenerator.cs" />
     <Compile Include="Functions\DbItemsAdder.cs" />
     <Compile Include="Functions\ToteResultsManager.cs" />
@@ -340,6 +341,18 @@
     <Compile Include="Migrations\201504141931339_PictureAdded.Designer.cs">
       <DependentUpon>201504141931339_PictureAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504181012264_societyAddedToUser.cs" />
+    <Compile Include="Migrations\201504181012264_societyAddedToUser.Designer.cs">
+      <DependentUpon>201504181012264_societyAddedToUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504181401253_CityAddedToHolder.cs" />
+    <Compile Include="Migrations\201504181401253_CityAddedToHolder.Designer.cs">
+      <DependentUpon>201504181401253_CityAddedToHolder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504181542191_RatingAddedToAuction.cs" />
+    <Compile Include="Migrations\201504181542191_RatingAddedToAuction.Designer.cs">
+      <DependentUpon>201504181542191_RatingAddedToAuction.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DAL\Auction\BidCluster.cs" />
     <Compile Include="Models\DAL\AuctionHouse\ForumPost.cs" />
@@ -410,6 +423,7 @@
     <Content Include="Content\BootstrapCss\bootstrap.css" />
     <Content Include="Content\BootstrapCss\bootstrap.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\globalSearch.css" />
     <Content Include="Content\HouseRelatedStyles\getCurrentAuctionHouseStyle.css" />
     <Content Include="Content\HouseRelatedStyles\universityHousesStyle.css" />
     <Content Include="Content\MainPageStyles\indexAuthorizedStyle.css" />
@@ -501,13 +515,19 @@
     <Content Include="Scripts\MyLib\Auction\CurrentAuction\nodeProcessor.js" />
     <Content Include="Scripts\MyLib\Auction\Index\auctionAdder.js" />
     <Content Include="Scripts\MyLib\Auction\Index\hubConnection.js" />
-    <Content Include="Scripts\MyLib\Data\userPrinter.js" />
     <Content Include="Scripts\MyLib\EditHouses\formVerifier.js" />
     <Content Include="Scripts\MyLib\EditHouses\holderSender.js" />
     <Content Include="Scripts\MyLib\EditHouses\houseSender.js" />
+    <Content Include="Scripts\MyLib\EditInterests\EditInterests.js" />
+    <Content Include="Scripts\MyLib\globalSearchFunctions.js" />
+    <Content Include="Scripts\MyLib\layoutFunctions.js" />
     <Content Include="Scripts\MyLib\MainPage\unauthMainScripts.js" />
+    <Content Include="Scripts\MyLib\Profile\addInformation.js" />
+    <Content Include="Scripts\MyLib\Profile\addPhoto.js" />
     <Content Include="Scripts\MyLib\Profile\opinionAdder.js" />
     <Content Include="Scripts\MyLib\Profile\subscribeProcessor.js" />
+    <Content Include="Scripts\MyLib\Users\subscriptionProcessor.js" />
+    <Content Include="Scripts\MyLib\Users\userPrinter.js" />
     <Content Include="Scripts\MyLib\Vis\vis.js" />
     <Content Include="Scripts\MyLib\Vis\vis.min.js" />
     <Content Include="Web.config">
@@ -573,6 +593,8 @@
     <Content Include="Views\Users\GetUser.cshtml" />
     <Content Include="Views\Shared\Index2.cshtml" />
     <Content Include="Views\Home\VerifyEmail.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\EditInterests\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -583,7 +605,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\Photos\" />
-    <Folder Include="Views\Search\" />
+    <Folder Include="Scripts\MyLib\Data\" />
     <Folder Include="Views\Subscription\" />
   </ItemGroup>
   <ItemGroup>
@@ -667,6 +689,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504141931339_PictureAdded.resx">
       <DependentUpon>201504141931339_PictureAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504181012264_societyAddedToUser.resx">
+      <DependentUpon>201504181012264_societyAddedToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504181401253_CityAddedToHolder.resx">
+      <DependentUpon>201504181401253_CityAddedToHolder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504181542191_RatingAddedToAuction.resx">
+      <DependentUpon>201504181542191_RatingAddedToAuction.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

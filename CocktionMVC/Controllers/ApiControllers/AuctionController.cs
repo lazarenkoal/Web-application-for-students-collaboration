@@ -149,6 +149,8 @@ namespace CocktionMVC.Controllers.ApiControllers
             //инициализация аукциона
             Auction auction = new Auction(true, product, false, new ToteBoard(), user);
 
+            auction.Rating = (int)(user.Rating*0.4);
+
             //Совершаем манипуляции со временем
             DateTimeManager.SetAuctionStartAndEndTime(auction, hoursString, minutesString);
 
@@ -158,6 +160,9 @@ namespace CocktionMVC.Controllers.ApiControllers
             photo.FilePath = filePath;
             photo.Product = product;
             photo.ThumbnailSets.Add(thumbNail);
+
+            //увеличиваем рейтинг пользователя
+            RatingManager.IncreaseRating(user, "userMadeAuction");
 
             //все в базу добавляем
             await DbItemsAdder.AddAuctionProductPhotoAsync(db, auction, product, photo, user);
@@ -333,6 +338,13 @@ namespace CocktionMVC.Controllers.ApiControllers
                 bidCluster.UserId = userId;
                 bidCluster.HostAuction = db.Auctions.Find(id);
                 bidCluster.Products.Add(product);
+
+                //обновляем рейтинг аукциона
+                RatingManager.IncreaseRating(db.Auctions.Find(id), user, "userBeted");
+
+                //обновляем рейтинг пользователя
+                RatingManager.IncreaseRating(user, "userPlacedBet");
+
 
                 //сохраняем все в базу
                 await DbItemsAdder.AddProduct(db, product, photo, bidCluster);

@@ -36,7 +36,7 @@ namespace CocktionMVC.Models.DAL
         public bool WinnerChosen { get; set; }
 
         public int SellProductId { get; set; }
-
+        public int Rating { get; set; }
         public virtual ToteBoard AuctionToteBoard { get; set; }
 
         public virtual Product LeadProduct { get; set; }

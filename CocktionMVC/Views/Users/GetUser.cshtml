@@ -3,7 +3,7 @@
 }
 @using CocktionMVC.Models.DAL
 @using CocktionMVC.Models.ViewModels
-@model ProfileViewModel
+@model AspNetUser
 <link rel="stylesheet" href="~/Content/UsersRelatedStyles/ProfileStyle.css" />
 <script src="~/Scripts/MyLib/Profile/opinionAdder.js"></script>
 <script src="~/Scripts/MyLib/Auction/Index/auctionAdder.js"></script>
@@ -15,60 +15,72 @@
     <!--Фотка и информация о пользователе-->
     <div class="col-md-3" style="align-items: flex-start">
         <!--Контейнер для аватарки-->
-        <img src="~/Content/SiteImages/anonPhoto.jpg" class="img-thumbnail"/>
+        @{
+            if (Model.Selfie == null)
+            {
+                <img src="~/Content/SiteImages/anonPhoto.jpg" class="img-thumbnail" />
+            }
+            else
+            {
+                <img src="http://cocktion.com/Images/Thumbnails/@Model.Selfie.FileName" class="img-thumbnail" />
+            }
+        }
         <div id="subscribe">
 
         </div>
         <script>
-            checkSubscription("@Model.UserId.ToString()");
+            checkSubscription("@Model.Id");
         </script>
     </div>
     <div class="col-md-2" id="userInformation">
         <!--Контейнер для информации-->
         <div id="userName">
             <!--Контейнер для имени пользователя-->
-            <h4>@Model.Name @Model.Surname</h4>
+            @{
+                if (!string.IsNullOrEmpty(Model.UserRealSurname) && !string.IsNullOrEmpty(Model.UserRealName))
+                {
+                    <h4>@Model.UserRealSurname @Model.UserRealName</h4>
+                }
+                else
+                {
+                    <h4>@Model.UserName</h4>
+                }
+            }
         </div>
         <br />
         <div id="userRates">
             <!--Контейнер для информации о пользователе-->
             <p><b>Рейтинг:</b> @Model.Rating</p>
-            <p><b>Яиц: </b> @Model.EggsAmount</p>
-            <p><b>Аукционов сделал:</b> @Model.AuctionsAmount</p>
+            <p><b>Яиц: </b> @Model.Eggs</p>
+            <p><b>Аукционов сделал:</b> @Model.HisAuctions.Count</p>
             <p>
-                <b>Победил </b> 40 раз
+                <b>Ставок сделал: </b> @Model.HisProducts.Count штук
             </p>
-            <p>
-                <b>Ставок сделал: </b> @Model.ProductsAmount штук
-            </p>
-            <p>
-                <b>Вместе с нами: </b> @Model.DaysWithUsAmount дней
-            </p>
+            @{
+                if (Model.SocietyName != null)
+                {
+                    <p><b>Общество: </b>@Model.SocietyName</p>
+                }
+            }
         </div>
     </div>
     <div class="col-md-7" id="userLifePos">
         <h4>Жизненная позиция пользователя</h4>
         <div class="row" id="interests">
-            <div class="col-md-3">
-                <h4>Интерес #1</h4>
-                <p>Тачки</p>
-                <img src="~/Content/SiteImages/car.jpg" class="img-thumbnail" />
-            </div>
-            <div class="col-md-3">
-                <h4>Интерес #2</h4>
-                <p>Бабки</p>
-                <img src="~/Content/SiteImages/money.jpg" class="img-thumbnail" />
-            </div>
-            <div class="col-md-3">
-                <h4>Интерес #3</h4>
-                <p>Девушки</p>
-                <img src="~/Content/SiteImages/girl.jpg" class="img-thumbnail" />
-            </div>
-            <div class="col-md-3">
-                <h4>Интерес #4</h4>
-                <p>Блэкджек</p>
-                <img src="~/Content/SiteImages/blackjack.jpg" class="img-thumbnail" />
-            </div>
+            <h4>Интересы</h4>
+            @{
+                if (Model.Interests.Count == 0)
+                {
+                    <p>Пользователь еще не определился с интересами</p>
+                }
+                else
+                {
+                    foreach (var interest in Model.Interests)
+                    {
+                        <p>@interest.Name</p>
+                    }
+                }
+            }
         </div>
     </div>
 </div>
@@ -82,9 +94,9 @@
 </div>
 
 @{
-    if (Model.Houses.Count != 0)
+    if (Model.SubHouses.Count != 0)
     {
-        foreach (var house in Model.Houses)
+        foreach (var house in Model.SubHouses)
         {
             <script>
                 addHouseCell('subscribedHouses', '@house.Faculty', '@house.Adress',
@@ -142,9 +154,15 @@
         <h5 id="oppinionHeader">Мнения</h5>
         <div id="feedbackPosts">
             <!--Контейнер для сообщений -->
-            @if (Model.Feeds.Count != 0)
+            @{
+                CocktionContext db = new CocktionContext();
+                var feeds = (from x in db.Feedbacks
+                    where x.UsersId == Model.Id
+                    select x).ToList();   
+            }
+            @if (feeds.Count != 0)
             {
-                foreach (UsersFeedback feed in Model.Feeds)
+                foreach (UsersFeedback feed in feeds)
                 {
                     <div class="feedbackPost">
                         <p class="postAuthor">
@@ -170,7 +188,7 @@
             <!--Контейнер с формой для отправки своего мнения-->
             <h5>Напиши своё</h5>
             <textarea id="writeFeedbackTextarea"></textarea>
-            <button class="btn btn-success" onclick="addOpinion('@Model.UserId')" id="sendFeedbackBtn">Отправить отзыв</button>
+            <button class="btn btn-success" onclick="addOpinion('@Model.Id')" id="sendFeedbackBtn">Отправить отзыв</button>
         </div>
     </div>
     <div class="col-md-3">

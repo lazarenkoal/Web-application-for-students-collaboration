@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+@model List<CocktionMVC.Models.DAL.Interest>
+<script src="~/Scripts/MyLib/EditInterests/EditInterests.js"></script>
+<h3>Редактирование интересов</h3>
+<div class="row">
+    <div class="col-md-3">
+        <h4>Добавить новый</h4>
+        <div class="input-group">
+            <input type="text" id="name" class="form-control" placeholder="Название интереса">
+            <br />
+            <input type="file" id="fileInput"/>
+            <div class="progress">
+                <div class="progress-bar progress-bar-info" role="progressbar" id="interestBar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                </div>
+            </div>
+            <br/>
+            <button onclick="sendInterest()" class="btn btn-default">Добавить интерес</button>
+        </div>
+    </div>
+    <div class="col-md-3">
+        @{
+            foreach (var interest in Model)
+            {
+                <p>@interest.Name</p>
+                <img src="http://cocktion.com/Images/Thumbnails/@interest.Photocard.FileName">
+                <br/>
+            }
+        }
+    </div>
+    <div class="col-md-3"></div>
+    <div class="col-md-3"></div>
+</div>

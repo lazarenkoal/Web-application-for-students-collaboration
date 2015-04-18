@@ -1,6 +1,5 @@
-﻿using CocktionMVC.Models.DAL;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using CocktionMVC.Models.DAL;
 
 namespace CocktionMVC.Models
 {
@@ -34,6 +33,11 @@ namespace CocktionMVC.Models
         /// Название холдера
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Город, в котором нахоидтся холдер
+        /// </summary>
+        public string City { get; set; }
 
         /// <summary>
         /// Дома, которые находятся в этом хаусхолдере

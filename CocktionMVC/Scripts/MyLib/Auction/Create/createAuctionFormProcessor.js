@@ -129,11 +129,24 @@ function checkInput() {
     }
 }
 
+function checkUniversity() {
+    if (ids.length > 1) {
+        $("#universitySearch").css('border-color', 'rgb(204, 204, 204)');
+        return true;
+    } else {
+        $("#universitySearch").css('border-color', 'red');
+        return false;
+    }
+}
+
+
 /**
  * Отправляет данные на севрер. Проверяет все поля на корректность.
  */
 function sendData() {
     var canSend = checkRadio() & checkInput();
+    createStringOfHouses();
+    canSend = canSend & checkUniversity();
     if (canSend) {
         //TODO проверить дома, когда будут
         //отправить все на сервер
@@ -163,7 +176,6 @@ function sendData() {
         var typeOfProductToSend = getProductType(productType);
         formData.append('category', typeOfProductToSend);
 
-        createStringOfHouses();
         formData.append('housesIds', ids);
 
         //создаю запрос

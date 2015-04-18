@@ -45,12 +45,21 @@ namespace CocktionMVC.Controllers
                 var houses = (from x in db.Houses
                     where x.Holder.Name == housesIds
                     select x).ToList();
-                houses.ForEach(x => auction.Houses.Add(x));
+                houses.ForEach(x =>
+                {
+                    auction.Houses.Add(x);
+                    RatingManager.IncreaseRating(x, "auctionAdded");
+                });
             }
             else
             {
                 int[] ids = HouseSerializer.TakeHouseIdsFromString(housesIds);
-                Array.ForEach(ids, x => auction.Houses.Add(db.Houses.Find(x)));
+                Array.ForEach(ids, x =>
+                {
+                    var house = db.Houses.Find(x);
+                    auction.Houses.Add(house);
+                    RatingManager.IncreaseRating(house, "auctionAdded");
+                });
             }
 
             //задаем время окончания и начала аукциона
@@ -60,6 +69,11 @@ namespace CocktionMVC.Controllers
             Photo photo = new Photo();
             PhotoProcessor.CreateAndSavePhoto(photo, Request, 90, 90);
             photo.Product = product;
+
+            auction.Rating = (int)(user.Rating * 0.4);
+
+            //добавляем пользователю немного рейтинга
+            RatingManager.IncreaseRating(user, "userMadeAuction");
 
             await DbItemsAdder.AddAuctionProductPhotoAsync(db, auction, product, photo, user);
 
@@ -175,6 +189,10 @@ namespace CocktionMVC.Controllers
             bidCluster.UserId = User.Identity.GetUserId();
             bidCluster.HostAuction = db.Auctions.Find(id);
             bidCluster.Products.Add(product);
+
+            //добавляем рейтинг пользователю и аукциону
+            RatingManager.IncreaseRating(user, "userPlacedBet");
+            RatingManager.IncreaseRating(db.Auctions.Find(id), user, "userBeted");
 
             //сохраняем все в базу
             await DbItemsAdder.AddProduct(db, product, photo, bidCluster);

@@ -87,6 +87,7 @@ namespace CocktionMVC.Controllers
             {
                 var db = new CocktionContext();
                 Auction auction = db.Auctions.Find(id);
+                //TODO надо добавить рейтинг за вход на него пользователя
 
                 //Если не удалось найти аукцион - кидаем эксепшн
                 if (auction == null && id == null) throw new Exception();

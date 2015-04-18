@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using CocktionMVC.Functions;
 using CocktionMVC.Models.DAL;
 using CocktionMVC.Models.JsonModels;
 using Microsoft.AspNet.Identity;
@@ -20,6 +21,12 @@ namespace CocktionMVC.Controllers.FunctionalControllers
                 var user = db.AspNetUsers.Find(User.Identity.GetUserId());
                 user.SubHouses.Add(house);
                 house.Inhabitants.Add(user);
+                if (user.SocietyName == null)
+                    user.SocietyName = house.Holder.Name;
+                
+                //добавляем дому немного рейтинга
+                RatingManager.IncreaseRating(house, "subscriberAdded");
+
                 db.SaveChanges();
                 return Json(new StatusHolder(true));
             }
@@ -59,6 +66,10 @@ namespace CocktionMVC.Controllers.FunctionalControllers
                 var userToAdd = db.AspNetUsers.Find(userId);
                 var currentUser = db.AspNetUsers.Find(currentUserId);
                 currentUser.Friends.Add(userToAdd);
+
+                //добавляем рейтиг пользовтелю
+                RatingManager.IncreaseRating(currentUser, "userGotSubscriber");
+
                 db.SaveChanges();
                 return Json(new StatusHolder(true));
             }

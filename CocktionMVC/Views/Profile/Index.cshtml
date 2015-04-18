@@ -1,64 +1,120 @@
 ﻿@{
     ViewBag.Title = "Index";
+    CocktionContext db = new CocktionContext();
 }
 @using CocktionMVC.Models.DAL
 @using CocktionMVC.Models.ViewModels
-@model ProfileViewModel
+@using Microsoft.AspNet.Identity
+@model AspNetUser
 <link rel="stylesheet" href="~/Content/UsersRelatedStyles/ProfileStyle.css"/>
-<script src="~/Scripts/MyLib/Profile/opinionAdder.js"></script>
 <script src="~/Scripts/MyLib/AuctionHouse/GetUniversityHouses/printHousesInCells.js"></script>
 <script src="~/Scripts/MyLib/Auction/Index/auctionAdder.js"></script>
-
+<script src="~/Scripts/MyLib/Profile/addPhoto.js"></script>
+<script src="~/Scripts/MyLib/Profile/addInformation.js"></script>
 <div class="row">
     <br/>
     <!--Фотка и информация о пользователе-->
     <div class="col-md-3" style="align-items:flex-start">
         <!--Контейнер для аватарки-->
-        <img src="~/Content/SiteImages/anonPhoto.jpg" class="img-thumbnail"/>
-        <p>Ваша фотокарточка.</p>
+        @{
+            if (Model.Selfie == null)
+            {
+                <img id="avatar" src="~/Content/SiteImages/anonPhoto.jpg" class="img-thumbnail" />
+            }
+            else
+            {
+                <img id="avatar" src="~/Images/Thumbnails/@Model.Selfie.FileName" class="img-thumbnail" />
+            }
+        }
+        <p><button class="btn btn-default" onclick="showPhotoForm() ">Добавить аватарку</button>
+        </p>
+        <p><button class="btn btn-default" onclick="showEditInfoForm()">Добавить информацию о себе</button>
+        </p>
+        <div id="editInformationContainer" hidden="">
+            <input type="text" oninput="handleInfoChange()" id="name" class="form-control" placeholder="Имя">
+            <br />
+            <input type="text" oninput="handleInfoChange()" id="surname" class="form-control" placeholder="Фамилия">
+            <br />
+            <input type="text" oninput="handleInfoChange()" id="school" class="form-control" placeholder="Университет/школа">
+            <div id="errorField" hidden=""></div>
+            <button id="editInfoBtn" onclick=" sendInfo() ">Добавить инфу</button>
+            <div class="progress" id="infoBarContainer" hidden="">
+                <div class="progress-bar" id="infoBar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                </div>
+            </div>
+        </div>
+        <div id="addPhotoContainer" hidden="">
+            <input type="file" onchange="showAddPhotoButton()" id="usersPhoto"/>
+            <button class="btn btn-default" id="addPhotoBtn" onclick="addPhoto() " disabled="">Сменить фотку</button>
+            <div class="progress" id="progressBarContainer" hidden="">
+                <div class="progress-bar" id="bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                </div>
+            </div>
+        </div>
     </div>
     <div class="col-md-2" id="userInformation">
         <!--Контейнер для информации-->
         <div id="userName">
             <!--Контейнер для имени пользователя-->
-            <h4>@Model.Name @Model.Surname</h4>
+            @{
+                if (!string.IsNullOrEmpty(Model.UserRealSurname) && !string.IsNullOrEmpty(Model.UserRealName))
+                {
+                    <h4>@Model.UserRealSurname @Model.UserRealName</h4>
+                }
+                else
+                {
+                    <h4>@Model.UserName</h4>
+                }
+            }
         </div>
         <br/>
         <div id="userRates">
             <!--Контейнер для информации о пользователе-->
             <p><b>Рейтинг:</b> @Model.Rating</p>
-            <p><b>Яиц: </b> @Model.EggsAmount</p>
-            <p><b>Аукционов сделал:</b> @Model.AuctionsAmount</p>
-            <p><b>Победил </b> 40 раз
-            </p>
-            <p><b>Ставок сделал: </b> @Model.ProductsAmount штук
-            </p>
-            <p><b>Вместе с нами: </b> @Model.DaysWithUsAmount дней
-            </p>
+            <p><b>Яиц: </b> @Model.Eggs</p>
+            <p><b>Аукционов сделал:</b> @Model.HisAuctions.Count</p>
+            @{
+                if (!string.IsNullOrEmpty(Model.SocietyName))
+                {
+                    <p><b>Общество: </b>@Model.SocietyName</p>
+                }
+            }
         </div>
     </div>
     <div class="col-md-7" id="userLifePos">
         <h4>Жизненная позиция пользователя</h4>
         <div class="row" id="interests">
-            <div class="col-md-3">
-                <h4>Интерес #1</h4>
-                <p>Тачки</p>
-                <img src="~/Content/SiteImages/car.jpg" class="img-thumbnail"/>
-            </div>
-            <div class="col-md-3">
-                <h4>Интерес #2</h4>
-                <p>Бабки</p>
-                <img src="~/Content/SiteImages/money.jpg" class="img-thumbnail" />
-            </div>
-            <div class="col-md-3">
-                <h4>Интерес #3</h4>
-                <p>Девушки</p>
-                <img src="~/Content/SiteImages/girl.jpg" class="img-thumbnail" />
-            </div>
-            <div class="col-md-3">
-                <h4>Интерес #4</h4>
-                <p>Блэкджек</p>
-                <img src="~/Content/SiteImages/blackjack.jpg" class="img-thumbnail" />
+            @{
+                if (Model.Interests.Count != 0)
+                {
+                    <h3>Ваши интересы</h3>
+                    foreach (var i in Model.Interests.ToList())
+                    {
+                        <p>@i.Name</p>
+                    }
+                }
+}
+            <p><button id="showInterestsFormBtn" onclick="showInterestsForm()">Добавить интересы</button></p>
+            <div id="interestsToChoose" hidden="">
+                @if (Model.Interests.Count != db.Interests.Count())
+                {
+                    foreach (var i in db.Interests.ToList())
+                    {
+                        if (!Model.Interests.Contains(i))
+                        {
+                            <p><input type="checkbox" id="int_@i.Id" onclick=" addId(this) "/>@i.Name</p>
+                        }
+                    }
+                }
+                else
+                {
+                    <p>Больше нечего добавлять!</p>
+                }
+                <div class="progress" id="interestsBarContainer" hidden="">
+                    <div class="progress-bar" id="interestsBar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                    </div>
+                </div>
+                <button id="sendInterestsBtn" onclick=" sendInt() " hidden="">Добавить еще интересов</button>
             </div>
         </div>
     </div>
@@ -72,9 +128,9 @@
 </div>
 
 @{
-    if (Model.Houses.Count != 0)
+    if (Model.SubHouses.Count != 0)
     {
-        foreach (var house in Model.Houses)
+        foreach (var house in Model.SubHouses)
         {
             <script>
                 addHouseCell('subscribedHouses', '@house.Faculty', '@house.Adress',
@@ -123,7 +179,7 @@
     <div class="col-md-4"></div>
     <div class="col-md-4">
         @{
-            foreach (var user in Model.Users)
+            foreach (var user in Model.Friends)
             {
                 <p>@user.UserName</p>
             }
@@ -145,9 +201,14 @@
     <div class="col-md-6" id="feedbackFormContainer">
         <h5 id="oppinionHeader">Мнения</h5>
         <div id="feedbackPosts"><!--Контейнер для сообщений -->
-            @if (Model.Feeds.Count != 0)
+            @{
+                var feeds = (from x in db.Feedbacks
+                    where x.UsersId == Model.Id
+                    select x).ToList();
+            }
+            @if (feeds.Count != 0)
             {
-                foreach (UsersFeedback feed in Model.Feeds)
+                foreach (UsersFeedback feed in feeds)
                 {
                     <div class="feedbackPost">
                         <p class="postAuthor"><b>@feed.AuthorsName @feed.AuthorsSurname</b> cказал

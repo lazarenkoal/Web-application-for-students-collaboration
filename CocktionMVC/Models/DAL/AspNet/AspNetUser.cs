@@ -50,6 +50,8 @@ namespace CocktionMVC.Models.DAL
 
         public string UserRealSurname { get; set; }
 
+        public string SocietyName { get; set; }
+
         public int? Rating { get; set; }
 
         public virtual Picture Selfie {get; set; }

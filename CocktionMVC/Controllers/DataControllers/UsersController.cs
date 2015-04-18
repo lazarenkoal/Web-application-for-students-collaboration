@@ -45,16 +45,7 @@ namespace CocktionMVC.Controllers
 
             //находим пользователя
             var user = db.AspNetUsers.Find(id);
-
-            //Собираем рейтинг, яйца, количество аукционов
-            int? userRating = user.Rating;
-            int userEggs = user.Eggs;
-
             //TODO собираем количество побед
-
-
-            //собираем колчество ставок
-            int userBets = db.AuctionBids.Count(x => x.UserId == user.Id);
 
             //TODO интересы
 
@@ -62,15 +53,7 @@ namespace CocktionMVC.Controllers
 
             //TODO количество дней с нами
 
-            //Собираем все его отзывы
-            List<UsersFeedback> feeds = db.Feedbacks.Where(x => x.UsersId == user.Id).ToList();
-
-            //Формируем модель для вывода на вэб-страничке
-            ProfileViewModel model = new ProfileViewModel(userEggs, user.HisAuctions.Count, userBets,
-                user.UserRealSurname, user.UserRealName, userRating, 56, user.HisAuctions.ToList(), id, feeds,
-                user.SubHouses.ToList());
-
-            return View(model);
+            return View(user);
         }
     }
 }

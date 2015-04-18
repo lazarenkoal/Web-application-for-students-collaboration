@@ -8,6 +8,13 @@ namespace CocktionMVC.Models.DAL
         {
             Subscribers = new List<AspNetUser>();
         }
+
+        public Interest(string name, Picture photoCard)
+        {
+            Subscribers = new List<AspNetUser>();
+            Name = name;
+            Photocard = photoCard;
+        }
         public int Id { get; set; }
         public string Name { get; set; }
         public virtual Picture Photocard { get; set; }

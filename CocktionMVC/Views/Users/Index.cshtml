@@ -3,10 +3,12 @@
     ViewBag.Title = "Cocktioneers";
 }
 @using CocktionMVC.Models.DAL
+@using Microsoft.AspNet.Identity
 @model List<CocktionMVC.Models.DAL.AspNetUser>
 <h3>Пользователи</h3>
 <link rel="stylesheet" href="~/Content/UsersRelatedStyles/usersStyle.css"/>
-<script src="~/Scripts/MyLib/Data/userPrinter.js"></script>
+<script src="~/Scripts/MyLib/Users/userPrinter.js"></script>
+<script src="~/Scripts/MyLib/Users/subscriptionProcessor.js"></script>
 <div class="row">
     <div class="col-md-1"></div>
 
@@ -14,25 +16,90 @@
         <!--Контейнер для информации о пользователе -->
         @{
             int amountOfUsers = Model.Count;
+            CocktionContext db = new CocktionContext();
+            var user = db.AspNetUsers.Find(User.Identity.GetUserId());
             int stopIndex = amountOfUsers - 1;
-            for (int i = 0; i < amountOfUsers; i++)
+            if (User.Identity.IsAuthenticated)
             {
-                if (i == stopIndex)
+                for (int i = 0; i < amountOfUsers; i++)
                 {
-                    <script>
-                        addUser('@Model[i].UserRealName', '@Model[i].UserRealSurname','@Model[i].Id', 'Content/SiteImages/anonPhoto.jpg',
-                            '@Model[i].Rating', '@Model[i].Eggs', '150', true)
-                    </script>
-                }
-                else
-                {
-                    <script>
-    addUser('@Model[i].UserRealName', '@Model[i].UserRealSurname','@Model[i].Id', 'Content/SiteImages/anonPhoto.jpg',
-                            '@Model[i].Rating', '@Model[i].Eggs', '150', false)
-                    </script>
+                    if (i == stopIndex)
+                    {
+                        if (Model[i].Selfie == null)
+                        {
+                            <script>
+                                addUser('@Model[i].UserRealName', '@Model[i].UserRealSurname', '@Model[i].Id', 'Content/SiteImages/anonPhoto.jpg',
+                                    '@Model[i].Rating', '@Model[i].Eggs', '150', true, '@user.Friends.Contains(db.AspNetUsers.Find(Model[i].Id))');
+                            </script>
+                        }
+                        else
+                        {
+                            <script>
+                                addUser('@Model[i].UserRealName', '@Model[i].UserRealSurname', '@Model[i].Id', 'http://cocktion.com/Images/Thumbnails/@Model[i].Selfie.FileName',
+                                    '@Model[i].Rating', '@Model[i].Eggs', '150', true, '@user.Friends.Contains(db.AspNetUsers.Find(Model[i].Id))');
+                            </script>
+                        }
+                    }
+                    else
+                    {
+                        if (Model[i].Selfie == null)
+                        {
+                            <script>
+                                addUser('@Model[i].UserRealName', '@Model[i].UserRealSurname', '@Model[i].Id', 'Content/SiteImages/anonPhoto.jpg',
+                                    '@Model[i].Rating', '@Model[i].Eggs', '150', false, '@user.Friends.Contains(db.AspNetUsers.Find(Model[i].Id))');
+                            </script>
+                        }
+                        else
+                        {
+                            <script>
+                                addUser('@Model[i].UserRealName', '@Model[i].UserRealSurname', '@Model[i].Id', 'http://cocktion.com/Images/Thumbnails/@Model[i].Selfie.FileName',
+                                    '@Model[i].Rating', '@Model[i].Eggs', '150', false, '@user.Friends.Contains(db.AspNetUsers.Find(Model[i].Id))');
+                            </script>
+                        }
+                    }
                 }
             }
-        }
+            else
+            {
+                for (int i = 0; i < amountOfUsers; i++)
+                {
+                    if (i == stopIndex)
+                    {
+                        if (Model[i].Selfie == null)
+                        {
+                            <script>
+                                addUser('@Model[i].UserRealName', '@Model[i].UserRealSurname', '@Model[i].Id', 'Content/SiteImages/anonPhoto.jpg',
+                                    '@Model[i].Rating', '@Model[i].Eggs', '150', true, 'False');
+                            </script>
+                        }
+                        else
+                        {
+                            <script>
+                                addUser('@Model[i].UserRealName', '@Model[i].UserRealSurname', '@Model[i].Id', 'http://cocktion.com/Images/Thumbnails/@Model[i].Selfie.FileName',
+                                    '@Model[i].Rating', '@Model[i].Eggs', '150', true, 'False');
+                            </script>
+                        }
+                    }
+                    else
+                    {
+                        if (Model[i].Selfie == null)
+                        {
+                            <script>
+                                addUser('@Model[i].UserRealName', '@Model[i].UserRealSurname', '@Model[i].Id', 'Content/SiteImages/anonPhoto.jpg',
+                                    '@Model[i].Rating', '@Model[i].Eggs', '150', false, 'False');
+                            </script>
+                        }
+                        else
+                        {
+                            <script>
+                                addUser('@Model[i].UserRealName', '@Model[i].UserRealSurname', '@Model[i].Id', 'http://cocktion.com/Images/Thumbnails/@Model[i].Selfie.FileName',
+                                    '@Model[i].Rating', '@Model[i].Eggs', '150', false, 'False');
+                            </script>
+                        }
+                    }
+                }
+            }
+}
     </div>
     <div class="col-md-3" id="filterContainer">
         <p>Отфильтруйте :)</p>
@@ -43,13 +110,6 @@
             <input type="text" id="university" class="form-control" placeholder="Университет">
             <br/>
             <input type="text" id="faculty" class="form-control" placeholder="Факультет">
-            <h5>Пол</h5>
-            <label class="radio-inline">
-                <input type="radio" id="male" onclick=" sexCheckboxCheckedHandler(this) "> Мужской
-            </label>
-            <label class="radio-inline">
-                <input type="radio" id="female" onclick=" sexCheckboxCheckedHandler(this) "> Женский
-            </label>
             <h5>Дома</h5>
             <label class="checkbox-inline">
                 <input type="checkbox"> В тех же, где и я.

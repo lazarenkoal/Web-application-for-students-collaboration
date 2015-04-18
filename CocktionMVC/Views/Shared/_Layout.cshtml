@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="~/Content/Site.css"/>
     <link rel="stylesheet" href="~/Content/style.css" />
     <link rel="stylesheet" href="~/Content/BootstrapCss/bootstrap.min.css" />
-
+    <script src="~/Scripts/MyLib/layoutFunctions.js"></script>
 
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
@@ -34,10 +34,8 @@
                     <li>@Html.ActionLink("Продать", "Create", "Auction")</li>
                     <li>@Html.ActionLink("Дома", "Index", "AuctionHouse")</li>
                     <li>@Html.ActionLink("Люди", "Index", "Users")</li>
+                    <li>@Html.ActionLink("Поиск", "Index", "Search")</li>
                 </ul>
-                <form class="navbar-form navbar-right">
-                    <input type="text" class="form-control col-lg-8" placeholder="Поиск">
-                </form>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>

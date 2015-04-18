@@ -550,3 +550,6 @@
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.NullProductIdOnPhoto.resources
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.csprojResolveAssemblyReference.cache
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.PictureAdded.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.societyAddedToUser.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.CityAddedToHolder.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.RatingAddedToAuction.resources

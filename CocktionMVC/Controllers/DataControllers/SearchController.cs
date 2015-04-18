@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Web;
 using System.Web.Mvc;
 using CocktionMVC.Models.DAL;
 
@@ -77,6 +74,59 @@ namespace CocktionMVC.Controllers.DataControllers
                 }
                 return Json(new FacultyList(names, ids, false));
             }
+        }
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public JsonResult SearchEverywhere()
+        {
+            string searchString = Request.Form.GetValues("searchString")[0];
+            
+            CocktionContext db = new CocktionContext();
+            var auS = (from x in db.Auctions
+                where x.IsActive & x.SellProduct.Name.Contains(searchString)
+                select x).ToArray();
+            Info[] auctions = new Info[auS.Length];
+            int i = 0;
+            Array.ForEach(auS, x =>
+            {
+                auctions[i++] = new Info(x.SellProduct.Name, x.Id, x.SellProduct.Photos.First().FileName,
+                    x.SellProduct.Description);
+            });
+            if (auctions.Length == 0)
+            {
+                return Json(new GlobalSearchResults(null, true));
+            }
+            return Json(new GlobalSearchResults(auctions, false));
+        }
+
+        public class Info
+        {
+            public Info(string name, int id, string photo, string description)
+            {
+                Name = name;
+                Id = id;
+                Photo = photo;
+                Description = description;
+            }
+            public string Name { get; set; }
+            public int Id { get; set; }
+            public string Photo { get; set; }
+            public string Description { get; set; }
+        }
+
+        public class GlobalSearchResults
+        {
+            public GlobalSearchResults(Info[] auctions, bool isEmpty)
+            {
+                Auctions = auctions;
+                IsEmpty = isEmpty;
+            }
+            public Info[] Auctions { get; set; }
+            public bool IsEmpty { get; set; }
         }
     }
 }

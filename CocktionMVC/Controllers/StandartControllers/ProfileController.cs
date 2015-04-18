@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using CocktionMVC.Functions;
+using CocktionMVC.Functions.DataProcessing;
 using CocktionMVC.Models.DAL;
-using CocktionMVC.Models.ViewModels;
+using CocktionMVC.Models.JsonModels;
 using Microsoft.AspNet.Identity;
 
 namespace CocktionMVC.Controllers.StandartControllers
@@ -20,33 +20,9 @@ namespace CocktionMVC.Controllers.StandartControllers
             {//если пользватель авторизован
                 CocktionContext db = new CocktionContext();
 
-                //находим пользователя
-                    var user = db.AspNetUsers.Find(User.Identity.GetUserId());
+                var user = db.AspNetUsers.Find(User.Identity.GetUserId());
 
-                //TODO собираем количество побед
-                
-
-                //собираем колчество ставок
-                int userBets = db.AuctionBids.Count(x => x.UserId == user.Id);
-
-                //TODO интересы
-
-                //TODO подписки
-
-                //TODO количество дней с нами
-                
-
-                //собираем его аукционы и их количество
-                List<Auction> auctions = user.HisAuctions.ToList();
-
-                //Собираем все его отзывы
-                List<UsersFeedback> feeds = db.Feedbacks.Where(x => x.UsersId == user.Id).ToList();
-
-                ProfileViewModel model = new ProfileViewModel(user.Eggs, user.HisAuctions.Count, userBets,
-                    user.UserRealSurname, user.UserRealName, user.Rating, 56, auctions, user.Id, feeds, user.SubHouses.ToList(),
-                    user.Friends.ToList());
-
-                return View(model);
+                return View(user);
             }
 
             //если пользователь не авторизован
@@ -95,6 +71,34 @@ namespace CocktionMVC.Controllers.StandartControllers
             }
         }
 
+        public class SelfieRespond : StatusHolder
+        {
+            public SelfieRespond(string fileName, bool isOk) : base(isOk)
+            {
+                FileName = fileName;
+            }
+            public string FileName { get; set; }
+        }
+
+        public JsonResult AddPhotoToUser()
+        {
+            try
+            {
+                var userId = User.Identity.GetUserId();
+                CocktionContext db = new CocktionContext();
+                var user = db.AspNetUsers.Find(userId);
+                Picture selfie = new Picture();
+                PhotoProcessor.CreateAndSavePicture(selfie, Request, 200, 200);
+                user.Selfie = selfie;
+                db.SaveChanges();
+                return Json(new SelfieRespond(user.Selfie.FileName, true));
+            }
+            catch
+            {
+                return Json(new SelfieRespond(null, false));
+            }
+        }
+
         class FeedBackRespond
         {
             public string Name { get; set; }
@@ -116,6 +120,65 @@ namespace CocktionMVC.Controllers.StandartControllers
         {
             //TODO сделать эту страниу
             return View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public JsonResult AddInterests()
+        {
+            try
+            {
+                string ids = Request.Form.GetValues("ids")[0];
+                string[] sep = {"int_"};
+                string[] idcont = ids.Split(sep, StringSplitOptions.RemoveEmptyEntries);
+                int i = 0;
+                int[] idint = new int[idcont.Length];
+                Array.ForEach(idcont, x => idint[i++] = int.Parse(x));
+                CocktionContext db = new CocktionContext();
+                var user = db.AspNetUsers.Find(User.Identity.GetUserId());
+                for (int j = 0; j < idint.Length; j++)
+                {
+                    user.Interests.Add(db.Interests.Find(idint[j]));
+                }
+                db.SaveChanges();
+                return Json(new StatusHolder(true));
+            }
+            catch
+            {
+                return Json(new StatusHolder(false));
+            }
+        }
+
+        public JsonResult EditProfileInformation()
+        {
+            try
+            {
+                string name = Request.Form.GetValues("name")[0];
+                string surname = Request.Form.GetValues("surname")[0];
+                string school = Request.Form.GetValues("school")[0];
+
+                CocktionContext db = new CocktionContext();
+                var user = db.AspNetUsers.Find(User.Identity.GetUserId());
+
+                if (name.Length != 0)
+                {
+                    user.UserRealName = name;
+                }
+                if (surname.Length != 0)
+                {
+                    user.UserRealSurname = surname;
+                }
+                if (school.Length != 0)
+                {
+                    user.SocietyName = school;
+                }
+                db.SaveChanges();
+                return Json(new StatusHolder(true));
+            }
+            catch
+            {
+                return Json(new StatusHolder(false));
+            }
         }
 
      }
