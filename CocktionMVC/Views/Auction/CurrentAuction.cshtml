@@ -263,10 +263,8 @@
             $("#auctionEnderHidden").show();
             $("#addToteBetContainer").hide();
         }
-
         initialiseNetwork('@Model.SellProduct.Name', '@Model.SellProduct.Photos.First().FileName');
         initialiseHub('@Model.Id', '@User.Identity.IsAuthenticated', '@User.Identity.Name');
-
     });
 
     </script>

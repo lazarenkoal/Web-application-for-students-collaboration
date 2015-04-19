@@ -173,17 +173,13 @@ namespace CocktionMVC.Controllers
                         owner.Name = userName;
                         owner.Type = "Owner_undfnd";
                         owner.Message = "Необходимо выбрать лидера!!!";
-
                         return Json(owner);
                     }
-                    else
-                    {//если любой другой
-                        BidSeller person = new BidSeller();
-                        person.Type = "Info";
-                        person.Message = "Создатель аукциона совсем не смог выбрать :(";
-
-                        return Json(person);
-                    }
+                    //если любой другой
+                    BidSeller person = new BidSeller();
+                    person.Type = "Info";
+                    person.Message = "Создатель аукциона совсем не смог выбрать :(";
+                    return Json(person);
                 }
                 else
                 {//если пользователь не авторизован
@@ -196,35 +192,32 @@ namespace CocktionMVC.Controllers
             }
             else
             {//если победитель выбран
-
                 //Ищем продукт - победиель
-                Product winProduct = auction.LeadProduct;
-                
-                //получаем доступ к пользовательским полям
-                var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-                
+                Product winProduct = auction.LeadProduct;                
                 if (User.Identity.IsAuthenticated)
                 {//если пользователь авторизован
                     string userName = User.Identity.Name;
                     string userId = User.Identity.GetUserId();
-                    var currentUser = manager.FindById(userId);
-                    if (userName == auction.Owner.Id)
+                    var currentUser = db.AspNetUsers.Find(userId);
+                    if (currentUser == auction.Owner)
                     {//если пользователь - владелец
                         BidSeller winner = new BidSeller();
+
                         winner.Id = winProduct.Owner.Id;
                         winner.Name = winProduct.Owner.UserName;
-                        string phone = currentUser.PhoneNumber;
+                        string phone = winProduct.Owner.PhoneNumber == null
+                            ? "Телефона нет ;("
+                            : winProduct.Owner.PhoneNumber == "" ? "Телефона нет" : winProduct.Owner.PhoneNumber;
                         winner.Type = "Winner";
                         winner.Message = "Аукцион закончен, вам необходимо связаться с победителем! " + phone;
-
                         return Json(winner);
                     }
-                    else if (userName == winProduct.Owner.UserName)
+                    else if (currentUser == winProduct.Owner)
                     {//если пользователь - победитель
                         BidSeller owner = new BidSeller();
                         owner.Id = auction.Owner.Id;
                         owner.Name = auction.Owner.UserName;
-                        string phone = currentUser.PhoneNumber;
+                        string phone = auction.Owner.PhoneNumber;
                         owner.Type = "Owner";
 
                         //Получаем результаты тотализатора

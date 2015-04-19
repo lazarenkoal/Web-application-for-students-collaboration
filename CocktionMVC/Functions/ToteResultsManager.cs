@@ -24,7 +24,7 @@ namespace CocktionMVC.Functions
         /// <param name="currentUser">Текущий пользователь</param>
         /// <param name="winProductName">Название продукта - победителя аукциона</param>
         public static void GetToteResults(Auction auction, string userId, BidSeller currentBidseller,
-            ApplicationUser currentUser, string winProductName)
+            AspNetUser currentUser, string winProductName)
         {
             //Выбираем результаты тотализатора этого пользователя
             var q = (from x in auction.AuctionToteBoard.ToteResultsForUsers
@@ -57,7 +57,7 @@ namespace CocktionMVC.Functions
         /// <param name="phone">Телефон владельца аукциона</param>
         /// <param name="currentUser">Текущий пользователь</param>
         public static void GetToteResults(Auction auction, string userId, BidSeller owner, string phone,
-            ApplicationUser currentUser)
+            AspNetUser currentUser)
         {
             //Выбираем результаты тотализатора этого пользователя
             var q = (from x in auction.AuctionToteBoard.ToteResultsForUsers

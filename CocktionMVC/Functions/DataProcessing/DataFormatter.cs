@@ -17,19 +17,26 @@ namespace CocktionMVC.Functions
         /// <returns>Массив типа string с данными</returns>
         public static string DictionaryConverter(Dictionary<string, double> data)
         {
+            string result ="";
             int dictLength = data.Count;
-            string result = "";
-
-            //Достаем все ключи и значения из словаря
-            string[] key = data.Select(x => x.Key).ToArray();
-            double[] value = data.Select(x => x.Value).ToArray();
-
-            //Формируем результирующий массив данных
-            for (int i = 0; i < dictLength; i++)
+            if (dictLength == 0)
             {
-                result += String.Format("Товар {0} с коэффициентом {1:f2} \n", key[i], value[i]);
+                result = "Еще никто из пользователей не поставил ставки на аукционе";
             }
+            else
+            {
+                //Достаем все ключи и значения из словаря
+                string[] key = data.Select(x => x.Key).ToArray();
+                double[] value = data.Select(x => x.Value).ToArray();
 
+                //Формируем результирующий массив данных
+                for (int i = 0; i < dictLength; i++)
+                {
+                    result += (String.Format("{0} => {1:f2} \n", key[i], value[i]));
+                }
+
+            }
+            
             //возвращаем результат
             return result;
         }

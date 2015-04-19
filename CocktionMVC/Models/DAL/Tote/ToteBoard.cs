@@ -127,7 +127,7 @@ namespace CocktionMVC.Models.DAL
         /// Формирует cловарь, содержащий имя каждого продукта
         /// и расчет коэффициента для него.
         /// </summary>
-        private Dictionary<string, double> CountAllCoefficientsForProducts()
+        public Dictionary<string, double> CountAllCoefficientsForProducts()
         {
             Dictionary<string, double> data = new Dictionary<string, double>();
             foreach (var i in ToteAuction.BidProducts)

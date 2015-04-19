@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using CocktionMVC.Functions;
 using CocktionMVC.Models.DAL;
 using Microsoft.AspNet.SignalR;
+using WebGrease.Extensions;
 
 namespace CocktionMVC
 {
@@ -121,6 +122,22 @@ namespace CocktionMVC
             string respond;
             respond = DataFormatter.DictionaryConverter(data);
             context.Clients.Group(auctionId.ToString()).updateToteBoard(respond);
+        }
+
+        class ToteString 
+        {
+            public ToteString(string[] text)
+            {
+                Text = text;
+            }
+            public string[] Text { get; set; }
+        }
+
+        public void GetTote(int auctionId)
+        {
+            CocktionContext db = new CocktionContext();
+            var auction = db.Auctions.Find(auctionId);
+            UpdateToteBoard(auctionId, auction.AuctionToteBoard.CountAllCoefficientsForProducts());
         }
         
     }

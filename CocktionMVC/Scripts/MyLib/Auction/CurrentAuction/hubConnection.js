@@ -10,8 +10,7 @@
     chat.client.updateToteBoard = function(data)
     {
         $('#coefficientsTable').empty();
-        $('#coefficientsTable').append(data);
-
+        $('#coefficientsTable').append("<p>"+data + "</p>");
     };
 
     chat.client.addExtraNodesToPages = function (fileName, name, parentProductId, childProductId) {
@@ -42,6 +41,7 @@
 
     $.connection.hub.start().done(function () {
         chat.server.addNewRoom(modelId);
+        chat.server.getTote(modelId);
         $('#sendMessageBtn').click(function() {
             if (isUseAuth == 'True') {
                 chat.server.send(userIdentityName, $("#enterMessageTextBox").val(), modelId);
