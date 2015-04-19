@@ -31,17 +31,17 @@ namespace CocktionMVC.Controllers.ApiControllers
         public void DeleteAll()
         {
             CocktionContext db = new CocktionContext();
-            db.HouseHolders.RemoveRange(db.HouseHolders);
+            //db.HouseHolders.RemoveRange(db.HouseHolders);
             //db.Houses.RemoveRange(db.Houses);
-            //db.AspNetUsers.RemoveRange(db.AspNetUsers);
-            //db.Auctions.RemoveRange(db.Auctions);
-            //db.Products.RemoveRange(db.Products);
-            //db.Photos.RemoveRange(db.Photos);
+            db.AspNetUsers.RemoveRange(db.AspNetUsers.ToList());
+            //db.Auctions.RemoveRange(db.Auctions.ToList());
+           // db.Products.RemoveRange(db.Products.ToList());
+            //db.Photos.RemoveRange(db.Photos.ToList());
             //db.Houses.RemoveRange(db.Houses);
-            //db.AuctionBids.RemoveRange(db.AuctionBids);
-            //db.Feedbacks.RemoveRange(db.Feedbacks);
+            //db.AuctionBids.RemoveRange(db.AuctionBids.ToList());
+            //db.Feedbacks.RemoveRange(db.Feedbacks.ToList());
             //db.
-            //db.Interests.RemoveRange(db.Interests);
+            //db.Interests.RemoveRange(db.Interests.ToList());
             db.SaveChanges();
         }
     }

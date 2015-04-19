@@ -501,7 +501,7 @@
     <Content Include="Scripts\Jquery\jquery.validate.min.js" />
     <Content Include="Scripts\Jquery\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\Jquery\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\MyLib\AuctionHouse\GetCurrentAuctionHouse\addComment.js" />
+    <Content Include="Scripts\MyLib\AuctionHouse\GetCurrentAuctionHouse\commenter.js" />
     <Content Include="Scripts\MyLib\AuctionHouse\GetCurrentAuctionHouse\scroller.js" />
     <Content Include="Scripts\MyLib\AuctionHouse\GetCurrentAuctionHouse\subscriber.js" />
     <Content Include="Scripts\MyLib\AuctionHouse\GetUniversityHouses\printHousesInCells.js" />

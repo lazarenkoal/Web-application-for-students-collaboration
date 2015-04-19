@@ -6,7 +6,7 @@
 @model House
 <h3>Домик в @Model.Holder.Name</h3>
 
-<script src="~/Scripts/MyLib/AuctionHouse/GetCurrentAuctionHouse/addComment.js"></script>
+<script src="~/Scripts/MyLib/AuctionHouse/GetCurrentAuctionHouse/commenter.js"></script>
 <script src="~/Scripts/MyLib/AuctionHouse/GetCurrentAuctionHouse/scroller.js"></script>
 <script src="~/Scripts/MyLib/AuctionHouse/GetCurrentAuctionHouse/subscriber.js"></script>
 
@@ -128,7 +128,7 @@
                     <b>Написать коммент</b>
                 </p>
                 <textarea rows="3" id="message"> </textarea>
-                <button id="addCommentButton" onclick="addСomment(@Model.Id)" title=" аррррр!!!!" class="btn btn-default">Царапнуть</button>
+                <button id="addCommentButton" onclick="сomment(@Model.Id)" title=" аррррр!!!!" class="btn btn-default">Царапнуть</button>
             </div>
         </div>
     </div>
