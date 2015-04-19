@@ -49,6 +49,7 @@ namespace CocktionMVC.Controllers.AdminControllers
             string holderId;
             string faculty;
             string adress;
+            string description;
             RequestFormReader.ReadAddHouseForm(Request, out faculty, out adress, out holderId);
 
             CocktionContext db = new CocktionContext();
@@ -60,6 +61,8 @@ namespace CocktionMVC.Controllers.AdminControllers
                 
             //создать дом
             House house = new House(adress, faculty, holder, photo);
+            description = Request.Form.GetValues("description")[0].Trim();
+            house.Description = description;
 
             //добавить дом в холдер
             holder.Houses.Add(house);

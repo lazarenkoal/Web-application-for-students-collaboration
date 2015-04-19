@@ -15,6 +15,7 @@ namespace CocktionMVC.Models.DAL
             HisProducts = new HashSet<Product>();
             SubHouses = new HashSet<House>();
             Friends = new HashSet<AspNetUser>();
+            ChatMessages = new HashSet<PrivateMessage>();
         }
 
         public string Id { get; set; }
@@ -68,6 +69,8 @@ namespace CocktionMVC.Models.DAL
         public virtual ICollection<AspNetUser> Friends { get; set; } 
 
         public virtual HouseHolder HisHouseHolder { get; set; } 
-        public virtual ICollection<Interest> Interests { get; set; } 
+        public virtual ICollection<Interest> Interests { get; set; }
+
+        public virtual ICollection<PrivateMessage> ChatMessages { get; set; } 
     }
 }

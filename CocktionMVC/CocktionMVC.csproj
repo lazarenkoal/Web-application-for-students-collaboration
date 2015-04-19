@@ -353,13 +353,23 @@
     <Compile Include="Migrations\201504181542191_RatingAddedToAuction.Designer.cs">
       <DependentUpon>201504181542191_RatingAddedToAuction.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504191828026_PrivateMessageEntityAdded.cs" />
+    <Compile Include="Migrations\201504191828026_PrivateMessageEntityAdded.Designer.cs">
+      <DependentUpon>201504191828026_PrivateMessageEntityAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504191955446_MakingEasierMessageModel.cs" />
+    <Compile Include="Migrations\201504191955446_MakingEasierMessageModel.Designer.cs">
+      <DependentUpon>201504191955446_MakingEasierMessageModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DAL\Auction\BidCluster.cs" />
     <Compile Include="Models\DAL\AuctionHouse\ForumPost.cs" />
     <Compile Include="Models\DAL\Interest.cs" />
     <Compile Include="Models\DAL\Picture.cs" />
+    <Compile Include="Models\DAL\PrivateMessage.cs" />
     <Compile Include="Models\DAL\UsersFeedback.cs" />
-    <Compile Include="Models\HouseHolder.cs" />
+    <Compile Include="Models\DAL\HouseHolder.cs" />
+    <Compile Include="Models\Hubs\MessageHub.cs" />
     <Compile Include="Models\JsonModels\HouseRelatedModels\ForumPostMobile.cs" />
     <Compile Include="Models\JsonModels\HouseRelatedModels\Guild.cs" />
     <Compile Include="Models\JsonModels\HouseRelatedModels\GuildsHouse.cs" />
@@ -699,6 +709,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504181542191_RatingAddedToAuction.resx">
       <DependentUpon>201504181542191_RatingAddedToAuction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504191828026_PrivateMessageEntityAdded.resx">
+      <DependentUpon>201504191828026_PrivateMessageEntityAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504191955446_MakingEasierMessageModel.resx">
+      <DependentUpon>201504191955446_MakingEasierMessageModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

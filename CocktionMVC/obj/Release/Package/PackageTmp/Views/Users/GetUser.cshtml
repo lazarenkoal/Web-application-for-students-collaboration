@@ -3,12 +3,16 @@
 }
 @using CocktionMVC.Models.DAL
 @using CocktionMVC.Models.ViewModels
+@using Microsoft.AspNet.Identity
 @model AspNetUser
 <link rel="stylesheet" href="~/Content/UsersRelatedStyles/ProfileStyle.css" />
 <script src="~/Scripts/MyLib/Profile/opinionAdder.js"></script>
 <script src="~/Scripts/MyLib/Auction/Index/auctionAdder.js"></script>
 <script src="~/Scripts/MyLib/AuctionHouse/GetUniversityHouses/printHousesInCells.js"></script>
 <script src="~/Scripts/MyLib/Profile/subscribeProcessor.js"></script>
+<script src="~/Scripts/Jquery/jquery.signalR-2.2.0.min.js"></script>
+<script src="~/signalr/hubs"></script>
+
 
 <div class="row" id="userFullInformation">
     <br />
@@ -87,6 +91,47 @@
 
 <br />
 <br />
+<div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-6">
+        <div id="chatMessagesContainer"></div>
+        <input type="text" class="form-group" id="inputMessage"/><br/>
+        <button id="sendMessageBtn">Отправить</button>
+    </div>
+    <div class="col-lg-4"></div>
+</div>
+
+<style>
+    #chatMessagesContainer {
+        border: solid 1px lightgray;
+    }
+</style>
+
+<script>
+    var chat = $.connection.messageHub;
+    chat.client.addNewMessageToPage = function (author, message) {
+        var textToAppend = '<p><b>' + author + ': </b>' + message + '</p>';
+        $("#chatMessagesContainer").append(textToAppend);
+    };
+
+    $.connection.hub.start().done(function () {
+        chat.server.addNewRoom('@User.Identity.GetUserName()');
+        $('#sendMessageBtn').click(function () {
+            var textToAppend = '<p><b>' + '@User.Identity.GetUserName()' + ': </b>' + $("#inputMessage").val() + '</p>';
+            $("#chatMessagesContainer").append(textToAppend);
+            //1ый параметр - сам текст сообщений
+            //2ой - имя автора сообщения
+            //3ий - имя пользователя, которому надо отправить
+            //айдишник текущего
+            //айдишник того, которому надо отправить
+            chat.server.send($("#inputMessage").val(), '@User.Identity.GetUserName()', '@Model.UserName', 
+                '@User.Identity.GetUserId()', '@Model.Id');
+            $("#inputMessage").val("");
+        });
+    });
+</script>
+
+
 
 <div class="row" id="subscribedHouses">
     <!--Дома, на которые подписан пользователь-->

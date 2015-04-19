@@ -32,6 +32,8 @@ namespace CocktionMVC.Models.DAL
 
         public virtual DbSet<Picture> Pictures { get; set; }
 
+        public virtual DbSet<PrivateMessage> Messages { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Interest>()
@@ -48,6 +50,9 @@ namespace CocktionMVC.Models.DAL
 
             modelBuilder.Entity<AspNetUser>()
                 .HasMany(e => e.Interests);
+
+            modelBuilder.Entity<AspNetUser>()
+                .HasMany(e => e.ChatMessages);
 
             modelBuilder.Entity<House>()
                 .HasMany(e => e.Auctions);
