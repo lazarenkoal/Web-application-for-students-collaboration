@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.WebPages;
 using CocktionMVC.Functions;
 using CocktionMVC.Functions.DataProcessing;
 using CocktionMVC.Models;
 using CocktionMVC.Models.DAL;
 using CocktionMVC.Models.JsonModels;
+using Microsoft.Owin.Security.Twitter.Messages;
 
 namespace CocktionMVC.Controllers.AdminControllers
 {
@@ -71,6 +73,28 @@ namespace CocktionMVC.Controllers.AdminControllers
             return Json(new StatusHolder(true));
         }
 
+        [HttpPost]
+        public JsonResult DeleteHouse()
+        {
+            string houseId = Request.Form.GetValues("houseId")[0].Trim();
+            int id = int.Parse(houseId);
+            CocktionContext db = new CocktionContext();
+            db.Houses.Remove(db.Houses.Find(id));
+            db.SaveChanges();
+            return Json(new StatusHolder(true));
+        }
+
+        [HttpPost]
+        public JsonResult DeleteHolder()
+        {
+            string holderId = Request.Form.GetValues("holderId")[0].Trim();
+            int id = int.Parse(holderId);
+            CocktionContext db = new CocktionContext();
+            db.HouseHolders.Remove(db.HouseHolders.Find(id));
+            db.SaveChanges();
+            return Json(new StatusHolder(true));
+        }
+
         public class Q
         {
 
@@ -80,19 +104,95 @@ namespace CocktionMVC.Controllers.AdminControllers
 
         [HttpPost]
         [Authorize]
+        public JsonResult EditHolder()
+        {
+            Picture selfie = new Picture();
+            if (Request.Files.Count != 0)
+            {
+                PhotoProcessor.CreateAndSavePicture(selfie, Request, 200);
+            }
+
+            CocktionContext db = new CocktionContext();
+            string holderId = Request.Form.GetValues("holderId")[0].Trim();
+            string holderName = Request.Form.GetValues("holderName")[0].Trim();
+            string holderCity = Request.Form.GetValues("holderCity")[0].Trim();
+
+            var holder = db.HouseHolders.Find(int.Parse(holderId));
+            if (!selfie.FileName.IsEmpty())
+            {
+                holder.PhotoCard = selfie;
+            }
+
+            if (!holderName.IsEmpty())
+            {
+                holder.Name = holderName;
+            }
+
+            if (!holderCity.IsEmpty())
+            {
+                holder.City = holderCity;
+            }
+
+            db.SaveChanges();
+            return Json(new StatusHolder(true));
+        }
+
+        [HttpPost]
+        [Authorize]
+        public JsonResult EditHouse()
+        {
+            Picture selfie = new Picture();
+            if (Request.Files.Count != 0)
+            {
+                PhotoProcessor.CreateAndSavePicture(selfie, Request, 200);
+            }
+            
+            CocktionContext db = new CocktionContext();
+            string houseId = Request.Form.GetValues("houseId")[0].Trim();
+            string houseName = Request.Form.GetValues("houseName")[0].Trim();
+            string houseDescription = Request.Form.GetValues("houseDescription")[0].Trim();
+            string houseAdress = Request.Form.GetValues("houseAdress")[0].Trim();
+
+            var house = db.Houses.Find(int.Parse(houseId));
+            if (!selfie.FileName.IsEmpty())
+            {
+                house.Portrait = selfie;
+            }
+
+            if (!houseName.IsEmpty())
+            {
+                house.Faculty = houseName;
+            }
+
+            if (!houseDescription.IsEmpty())
+            {
+                house.Description = houseDescription;
+            }
+
+            if (!houseAdress.IsEmpty())
+            {
+                house.Adress = houseAdress;
+            }
+
+            db.SaveChanges();
+            return Json(new StatusHolder(true));
+        }
+
+        [HttpPost]
+        [Authorize]
         public JsonResult AddHolder()
         {
             try
             {
                 string holderName = Request.Form.GetValues("holderName")[0].Trim();
-
+                string holderCity = Request.Form.GetValues("holderCity")[0].Trim();
                 Picture photo = new Picture();
                 
                 PhotoProcessor.CreateAndSavePicture(photo, Request, 200);
 
                 CocktionContext db = new CocktionContext();
                 db.Pictures.Add(photo);
-                db.HouseHolders.Add(new HouseHolder(holderName, photo));
+                db.HouseHolders.Add(new HouseHolder(holderName,holderCity, photo));
 
                 db.SaveChanges();
                 return Json(new StatusHolder(true));
@@ -101,8 +201,6 @@ namespace CocktionMVC.Controllers.AdminControllers
             {
                 return Json(new Q {Status = q.InnerException.InnerException.Message});
             }
-
-
         }
     }
 }

@@ -37,31 +37,95 @@
     <div class="col-lg-3">
         <h3>Существующие дома</h3>
         <div id="houseList">
-            @*@foreach (var item in Model.Item1)
-            {
-                <p>Холдер: @item.Holder.Name, Факультет: @item.Faculty, Адрес: @item.Adress</p>
-            }*@
+            @{
+                if (Model.Item1.Count > 0)
+                {
+                    foreach (var item in Model.Item1)
+                    {
+                        if (item.Holder != null)
+                        {
+                            <div class="house" style="border: solid 1px black">
+                                <img src="~/Images/Thumbnails/@item.Portrait.FileName" class="img-thumbnail" />
+                                <p>Холдер: @item.Holder.Name</p>
+                                <p>Факультет: @item.Faculty</p>
+                                <p>Адрес: @item.Adress</p>
+                                <p>Описание: @item.Description</p>
+                                <a  onclick="deleteHouse('@item.Id', '@item.Faculty') ">Удалить</a><br/>
+                                <a onclick="showEditHouseForm('@item.Id')">Редактировать</a>
+                                <div id="house_@item.Id" hidden="">
+                                    <p>Если нужно обновить только одно поле - вписывай одно нужное, остальные
+                                        можно оставить пустыми</p>
+                                    Факультет <br />
+                                    <input type="text" id="faculty_@item.Id" /> <br />
+                                    Адрес <br />
+                                    <input type="text" id="adress_@item.Id" /> <br />
+                                    Описание <br />
+                                    <input type="text" id="description_@item.Id"/><br/>
+                                    <input type="file" id="housePhoto_@item.Id" />
+                                    <button onclick="editHouse('@item.Id')">Изменить данные</button>
+                                </div>
+                            </div>
+                            <br/>
+                        }
+                        @*else
+                        {
+                            <script>deleteHouse('@item.Id', '@item.Faculty')</script>
+                        }*@
+                    }
+                }
+                else
+                {
+                    <p>Нет домов</p>
+                }
+            }
         </div>
     </div>
     <div class="col-lg-3">
         <h3>Существующие хаусхолдеры</h3>
-        @*@foreach (var item in Model.Item2)
-        {
-            <p>холдер: @item.Name</p>
-        }*@
+        @{
+            if (Model.Item2.Count > 0)
+            {
+                foreach (var item in Model.Item2)
+                {
+                    <div class="holder" style="border: solid 1px black">
+                        <img src="~/Images/Thumbnails/@item.PhotoCard.FileName" class="img-thumbnail"/>
+                        <p>Холдер: @item.Name, Город: @item.City</p>
+                        <a onclick=" deleteHolder('@item.Id', '@item.Name') ">Удалить</a>
+                        <a onclick="showEditHolderPanel('@item.Id')">Редактировать</a>
+                        <div id="holder_@item.Id" hidden="">
+                            Название <br />
+                            <input type="text" id="holderName_@item.Id"/><br/>
+                            Город <br />
+                            <input type="text" id="holderCity_@item.Id"/><br/>
+                            Фотка <br />
+                            <input type="file" id="holderPhoto_@item.Id"/>
+                            <button onclick="editHolder('@item.Id') ">Изменить данные</button>
+                        </div>
+                    </div>
+                    <br/>
+                }
+            }
+            else
+            {
+                <p>Нет холдеров</p>
+            }
+        }
+
     </div>
     <div class="col-lg-3">
         <div id="addHouseHolder">
             <h3>Добавить новый хаусхолдер</h3>
             Название холдера <br/>
             <input type="text" id="holderName"/><br/>
-            Фотка
+            Город<br />
+            <input type="text" id="holderCity"/><br />
+            Фотка<br />
             <input type="file" id="holderPhoto"/><br/>
             <div class="progress">
                 <div class="progress-bar" id="holderBar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                 </div>
             </div>
-            <button id="addHolderBtn" class="btn btn-default" onclick="sendHolderToServer()">Добавить холдера</button>
+            <button id="addHolderBtn" class="btn btn-default" onclick="sendHolderToServer()">Добавить холдер</button>
         </div>
     </div>
 </div>

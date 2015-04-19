@@ -606,6 +606,7 @@
   <ItemGroup>
     <Folder Include="Images\Photos\" />
     <Folder Include="Scripts\MyLib\Data\" />
+    <Folder Include="Views\DeleteHouses\" />
     <Folder Include="Views\Subscription\" />
   </ItemGroup>
   <ItemGroup>

@@ -32,9 +32,17 @@ namespace CocktionMVC.Controllers.ApiControllers
         {
             CocktionContext db = new CocktionContext();
             db.HouseHolders.RemoveRange(db.HouseHolders);
-            db.Houses.RemoveRange(db.Houses);
-            db.AspNetUsers.RemoveRange(db.AspNetUsers);
-            
+            //db.Houses.RemoveRange(db.Houses);
+            //db.AspNetUsers.RemoveRange(db.AspNetUsers);
+            //db.Auctions.RemoveRange(db.Auctions);
+            //db.Products.RemoveRange(db.Products);
+            //db.Photos.RemoveRange(db.Photos);
+            //db.Houses.RemoveRange(db.Houses);
+            //db.AuctionBids.RemoveRange(db.AuctionBids);
+            //db.Feedbacks.RemoveRange(db.Feedbacks);
+            //db.
+            //db.Interests.RemoveRange(db.Interests);
+            db.SaveChanges();
         }
     }
 }

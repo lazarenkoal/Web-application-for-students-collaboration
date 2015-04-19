@@ -16,12 +16,13 @@ namespace CocktionMVC.Models
             Users = new HashSet<AspNetUser>();
         }
 
-        public HouseHolder(string name, Picture photo)
+        public HouseHolder(string name, string city, Picture photo)
         {
             Houses = new HashSet<House>();
             Users = new HashSet<AspNetUser>();
             Name = name;
             PhotoCard = photo;
+            City = city;
         }
 
         /// <summary>

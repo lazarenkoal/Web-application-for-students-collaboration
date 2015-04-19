@@ -28,6 +28,9 @@ function verifyHolderForm() {
     } else if ($("#holderPhoto").val().length == 0) {
         alert('Не введена фотография дома');
         return false;
+    } else if ($("#holderCity").val().length == 0) {
+        alert('Не введен город ');
+        return false;
     }
     else
         return true;

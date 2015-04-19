@@ -40,3 +40,127 @@ function sendHouseToServer() {
         }//end of if(confirm...
     }//enf of of(verify..
 }//end of sendHouse...
+
+function deleteHouse(id, houseName) {
+
+    var confirmString = "Удалить дом " + houseName + "?";
+    if (confirm(confirmString)) {
+        var formData = new FormData();
+        formData.append("houseId", id);
+        var xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var respond = JSON.parse(xhr.responseText);
+                if (respond.Status == "Success") {
+                    alert("Дом " + houseName + " успешно удален");
+                } else {
+                    alert("Произошла какая-то ошибка при удалении");
+                }
+            } //end of if
+        } //end of onreadystatechange
+
+        xhr.open("POST", "/EditHouses/DeleteHouse");
+        xhr.send(formData);
+    }
+}
+
+function deleteHolder(id, holderName) {
+    var confirmString = "Удалить холдер " + holderName + "?";
+    if (confirm(confirmString)) {
+        var formData = new FormData();
+        formData.append("holderId", id);
+        var xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var respond = JSON.parse(xhr.responseText);
+                if (respond.Status == "Success") {
+                    alert("Холдер " + holderName + " успешно удален!");
+                } else {
+                    alert("Произошла какая-то ошибка при удалении");
+                }
+            } //end of if
+        } //end of onreadystatechange
+
+        xhr.open("POST", "/EditHouses/DeleteHolder");
+        xhr.send(formData);
+    }
+}
+
+function showEditHouseForm(id) {
+    $("#house_" + id).show();
+}
+
+function editHouse(id) {
+    var houseName = $("#faculty_" + id).val();
+    var houseAdress = $("#adress_" + id).val();
+    var houseDescription = $("#description_" + id).val();
+    var confirmString = "Измениить дом?";
+
+    if (confirm(confirmString)) {
+        var formData = new FormData();
+
+        var fileInput = document.getElementById('housePhoto_' + id);
+        if (fileInput.files.length > 0) {
+            formData.append(fileInput.files[0].name, fileInput.files[0]);
+        }
+
+        formData.append("houseName", houseName);
+        formData.append("houseAdress", houseAdress);
+        formData.append("houseDescription", houseDescription);
+        formData.append("houseId", id);
+        var xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var respond = JSON.parse(xhr.responseText);
+                if (respond.Status == "Success") {
+                    alert("Дом успешно изменен!");
+                } else {
+                    alert("Произошла какая-то ошибка при изменении");
+                }
+            } //end of if
+        } //end of onreadystatechange
+
+        xhr.open("POST", "/EditHouses/EditHouse");
+        xhr.send(formData);
+    }
+}
+
+function showEditHolderPanel(id) {
+    $("#holder_" + id).show();
+}
+
+function editHolder(id) {
+    var holderName = $("#holderName_" + id).val();
+    var holderCity = $("#holderCity_" + id).val();
+    var confirmString = "Измениить холдер?";
+
+    if (confirm(confirmString)) {
+        var formData = new FormData();
+
+        var fileInput = document.getElementById('holderPhoto_' + id);
+        if (fileInput.files.length > 0) {
+            formData.append(fileInput.files[0].name, fileInput.files[0]);
+        }
+
+        formData.append("holderName", holderName);
+        formData.append("holderCity", holderCity);
+        formData.append("holderId", id);
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var respond = JSON.parse(xhr.responseText);
+                if (respond.Status == "Success") {
+                    alert("Холдер успешно изменен!");
+                } else {
+                    alert("Произошла какая-то ошибка при изменении");
+                }
+            } //end of if
+        } //end of onreadystatechange
+
+        xhr.open("POST", "/EditHouses/EditHolder");
+        xhr.send(formData);
+    }
+}
