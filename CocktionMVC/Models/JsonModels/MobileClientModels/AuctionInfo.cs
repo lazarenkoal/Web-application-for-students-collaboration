@@ -6,6 +6,11 @@
     /// </summary>
     public class AuctionInfo
     {
+        public override bool Equals(object obj)
+        {
+            return this.auctionId == ((AuctionInfo) obj).auctionId;
+        }
+
         /// <summary>
         /// Описание аукциона
         /// </summary>
@@ -33,5 +38,21 @@
 
         public int leaderId { get; set; }
         public string сategory { get; set; }
+
+        public AuctionInfo(string description, int endTime, string photoPath, string title,
+            int auctionId, int leaderId, string category)
+        {
+            this.description = description;
+            this.endTime = endTime;
+            this.photoPath = photoPath;
+            this.title = title;
+            this.auctionId = auctionId;
+            this.leaderId = leaderId;
+            this.сategory = category;
+        }
+
+        public AuctionInfo()
+        {
+        }
     }
 }

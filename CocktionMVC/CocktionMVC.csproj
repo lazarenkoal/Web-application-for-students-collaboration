@@ -361,6 +361,10 @@
     <Compile Include="Migrations\201504191955446_MakingEasierMessageModel.Designer.cs">
       <DependentUpon>201504191955446_MakingEasierMessageModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504201938490_CheckDb.cs" />
+    <Compile Include="Migrations\201504201938490_CheckDb.Designer.cs">
+      <DependentUpon>201504201938490_CheckDb.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DAL\Auction\BidCluster.cs" />
     <Compile Include="Models\DAL\AuctionHouse\ForumPost.cs" />
@@ -715,6 +719,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504191955446_MakingEasierMessageModel.resx">
       <DependentUpon>201504191955446_MakingEasierMessageModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504201938490_CheckDb.resx">
+      <DependentUpon>201504201938490_CheckDb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

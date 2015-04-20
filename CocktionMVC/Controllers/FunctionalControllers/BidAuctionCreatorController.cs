@@ -170,6 +170,7 @@ namespace CocktionMVC.Controllers
             //Создаем товар для базы данных
             Product product = new Product(bidName, bidDescription, bidCategory, user);
             product.Photos.Add(photo);
+            product.IsOnAuctionAsALot = false;
             photo.Product = product;
 
             if (user.HisProducts == null)
@@ -177,12 +178,14 @@ namespace CocktionMVC.Controllers
                 user.HisProducts = new HashSet<Product>();
             }
 
-            user.HisProducts.Add(product);
             
             //добавляем продукт
             //Коннектимся к базе
             int id = int.Parse(auctionId);
-            db.Auctions.Find(id).BidProducts.Add(product);
+            var auction = db.Auctions.Find(id);
+            auction.BidProducts.Add(product);
+            product.Auctions.Add(auction);
+            user.HisProducts.Add(product);
 
             //находи кластер
             BidCluster bidCluster = new BidCluster();

@@ -320,7 +320,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                 var user = db.AspNetUsers.Find(userId);
 
                 //создаем продукт и сохраняем информацию о нем.
-                Product product = new Product(name, description, category, true, user);
+                Product product = new Product(name, description, category, false, user);
                 //забиваем данные о фотке
                 Photo photo = new Photo();
                 photo.FileName = fileName;
@@ -331,7 +331,9 @@ namespace CocktionMVC.Controllers.ApiControllers
                 //добавляем продукт
                 //Коннектимся к базе
                 int id = int.Parse(auctionId);
-                db.Auctions.Find(id).BidProducts.Add(product);
+                var auction = db.Auctions.Find(id);
+                auction.BidProducts.Add(product);
+                product.Auctions.Add(auction);
 
                 //находи кластер
                 BidCluster bidCluster = new BidCluster();

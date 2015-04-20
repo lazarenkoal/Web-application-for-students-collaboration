@@ -27,22 +27,6 @@ namespace CocktionMVC.Controllers.ApiControllers
             return houses;
         }
 
-        [HttpPost]
-        public void DeleteAll()
-        {
-            CocktionContext db = new CocktionContext();
-            //db.HouseHolders.RemoveRange(db.HouseHolders);
-            //db.Houses.RemoveRange(db.Houses);
-            db.AspNetUsers.RemoveRange(db.AspNetUsers.ToList());
-            //db.Auctions.RemoveRange(db.Auctions.ToList());
-           // db.Products.RemoveRange(db.Products.ToList());
-            //db.Photos.RemoveRange(db.Photos.ToList());
-            //db.Houses.RemoveRange(db.Houses);
-            //db.AuctionBids.RemoveRange(db.AuctionBids.ToList());
-            //db.Feedbacks.RemoveRange(db.Feedbacks.ToList());
-            //db.
-            //db.Interests.RemoveRange(db.Interests.ToList());
-            db.SaveChanges();
-        }
+        
     }
 }
