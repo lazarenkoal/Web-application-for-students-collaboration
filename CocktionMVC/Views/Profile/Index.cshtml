@@ -21,15 +21,34 @@
     var responderName = "";
     var thisUserName = '@Model.UserName';
     var responderId = null;
-    chat.client.addNewMessageToPage = function (author, message, receiverId) {
-        var textToAppend = '<p><b>' + author + ': </b>' + message + '</p>';
-        responderName = author;
-        responderId = receiverId;
-        $("#messages").append(textToAppend);
+    chat.client.addNewMessageToPage = function (author, message,date, receiverId) {
+        
+        //если в табличке есть пользователь с именм author, но 
+        //responderName != authorName, то тогда мы его хайлайтим
+        if ($("div[value='" + author + "']").length > 0) {
+            if (responderName != author) { //не открыто окно с сообщениями от этого пользователя
+                $n = $("div[value='" + author + "']")[0];
+                $n.style.backgroundColor = 'darkturquoise';
+            } else { //открыто окно с сообщениями от этого автора
+                responderId = receiverId;
+                $("#messages").append(generateMessageString(author, message, date));
+                $("#messages").animate({ scrollTop: $("#messages")[0].scrollHeight }, 100);
+            }
+        } else if(thisUserName != author) {
+            addUserToList(author, 'dfd');
+            $n = $("div[value='" + author + "']")[0];
+            $n.style.backgroundColor = 'darkturquoise';
+        }
     };
 
-    chat.client.addAuthors = function(author, id) {
-        addUserToList(author,id, 'Тип фоточка');
+    chat.client.appendMessageToPage = function (author, message,date, receiverId) {
+        responderId = receiverId;
+        $("#messages").append(generateMessageString(author, message, date));
+        $("#messages").animate({ scrollTop: $("#messages")[0].scrollHeight }, 100);
+    };
+
+    chat.client.addAuthors = function(author) {
+        addUserToList(author, 'Тип фоточка');
     };
     
     $.connection.hub.start().done(function () {
@@ -37,16 +56,24 @@
         chat.server.getListOfReceivers('@Model.UserName');
         $('#sendMessageBtn').click(function () {
             if (responderName.length > 0) {
-                var textToAppend = '<p><b>' + '@Model.UserName' + ': </b>' + $("#messageContainer").val() + '</p>';
+                var textToAppend = '<p><b>' + '@Model.UserName' + ': </b>' + $("#messageContainer").val() + " " +Date().toString()+'</p>';
                 $("#messages").append(textToAppend);
                 chat.server.send($("#messageContainer").val(), '@Model.UserName', responderName, '@User.Identity.GetUserId()',
                     responderId);
                 $("#messageContainer").val("");
+                $("#messages").animate({ scrollTop: $("#messages")[0].scrollHeight }, 100);
             }
         });
     });
 </script>
-
+<script>
+    $(document).ready(function () {
+        $('#messageContainer').keypress(function (e) {
+            if (e.keyCode == 13)
+                $('#sendMessageBtn').click();
+        });
+    });
+</script>
 
 <div id="chatFormContainer">
     <div class="row">

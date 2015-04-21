@@ -25,7 +25,7 @@ namespace CocktionMVC.Models.Hubs
         public async Task Send(string message, string author, string userName,
             string authorId, string receiverId)
         {
-            Clients.Group(userName).addNewMessageToPage(author, message, receiverId);
+            Clients.Group(userName).addNewMessageToPage(author, message,DateTime.Now.ToShortDateString() ,receiverId);
             CocktionContext db = new CocktionContext();
             var userA = db.AspNetUsers.Find(authorId);
             var userB = db.AspNetUsers.Find(receiverId);
@@ -60,7 +60,7 @@ namespace CocktionMVC.Models.Hubs
                     authors.Add(message);
             }
             int i = 0;
-            authors.ForEach(x => Clients.Group(userName).addAuthors(x, "i"+(i++).ToString()));
+            authors.ForEach(x => Clients.Group(userName).addAuthors(x));
 
         }
 
@@ -79,7 +79,7 @@ namespace CocktionMVC.Models.Hubs
             foreach (var message in msg)
             {
                // Clients.Group(userName).addNewMessageToPage(author, message, receiverId);
-                Clients.Group(thisUserName).addNewMessageToPage(message.AuthorName, message.Content,
+                Clients.Group(thisUserName).appendMessageToPage(message.AuthorName, message.Content, message.DateOfPublishing.ToShortDateString(),
                     userToSend.Id);
             }
         }

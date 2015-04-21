@@ -38,7 +38,7 @@ function addHouseCell(containerName, nameOfFaculty, adress, link, imgSrc) {
 //imgSrc - путь к фоточке
 function appendHouseInfo(nameOfRow, nameOfFaculty, adress, link, imgSrc) {
     document.getElementById(nameOfRow).innerHTML += ("<div class=\"col-md-3\"><div class=\"house\"> " +
-    "<img src=\"" + imgSrc + "\" class= \"img-circle\">" + //вставляем фотографию
+    "<img src=\"" + imgSrc + "\" class= \"img-thumbnail\">" + //вставляем фотографию
     "<p><b>Факультет: </b>" + nameOfFaculty + "</p>" +    //название факультета
     "<p><b>Адрес: </b>" + adress + "</p>" + //адрес факультета
     "<p><a href=\"" + link + "\">Заглянуть</a></p></div></div>"); //ссылочка
