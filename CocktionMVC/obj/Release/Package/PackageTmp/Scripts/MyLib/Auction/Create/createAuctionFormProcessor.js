@@ -192,12 +192,14 @@ function sendData() {
                 clearForm(); //очищаем форму
                 var auction = JSON.parse(xhr.responseText); //парсим ответ от сервера
                 link = 'http://cocktion.com/Auction/CurrentAuction/' + auction.Id; //фигачим ссылочку
-
-                //показываем кнопки
-                //$("#goToAuctionBtn").show();
                 $("#readyInfo").show();
                 $("#readyInfo").append("<a href=\"" + link + "\">" + 'Перейти на аукцион!' + "</a><br/>");
                 $("#createAuctionBtn").show();
+                $("#universitySearch").val("");
+                $("#universitySearchResults").empty();
+                $("#facultyToChoose").empty();
+                $('#chooseFacultyRadio').prop('checked', false);
+                $('#allFacultyRadio').prop('checked', false);
             };
         }
 
