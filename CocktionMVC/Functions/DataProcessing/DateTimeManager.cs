@@ -71,6 +71,9 @@ namespace CocktionMVC.Functions
                 case "4hoursTime":
                     auctionsEndTime = auctionsEndTime.AddHours(4);
                     break;
+                case "12hoursTime":
+                    auctionsEndTime = auctionsEndTime.AddHours(12);
+                    break;
                 case "1dayTime":
                     auctionsEndTime = auctionsEndTime.AddDays(1);
                     break;

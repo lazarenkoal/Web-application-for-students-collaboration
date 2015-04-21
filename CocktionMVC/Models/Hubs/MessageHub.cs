@@ -67,10 +67,12 @@ namespace CocktionMVC.Models.Hubs
         public void GetMessages(string userName, string thisUserName)
         {
             CocktionContext db = new CocktionContext();
+
             var msg = (from x in db.Messages
                        where (x.AuthorName == thisUserName && x.ReceiverName == userName) ||
                        (x.AuthorName == userName && x.ReceiverName == thisUserName)
                        select x).ToList();
+
             var userToSend = (from x in db.AspNetUsers
                 where x.UserName == userName
                 select x).First();

@@ -37,7 +37,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                             select x).ToList<Auction>();
 
             List<AuctionInfo> auctiInfo = new List<AuctionInfo>();
-            
+
             //формируем список в том формате, который нужен для отображения в приложении
             foreach (var auction in auctions)
             {
@@ -90,89 +90,87 @@ namespace CocktionMVC.Controllers.ApiControllers
             return bidProducts;
         }
 
+        public class CreateAuctionInfo
+        {
+            public string name { get; set; }
+
+            public string description { get; set; }
+            public string category { get; set; }
+            public int photoId { get; set; }
+            public string timeBound { get; set; }
+        }
+
         /// <summary>
         /// Создание аукциона с мобильного клиента
         /// </summary>
         [Authorize]
         [HttpPost]
-        public async Task<AuctionApiRespondModels.AuctionCreateStatus> CreateAuction()
+        public async Task<AuctionApiRespondModels.AuctionCreateStatus> CreateAuction(CreateAuctionInfo auctionInfo)
         {
-            //Получаем данные из запроса
-            string minutesString, hoursString, name, description, category;
-            RequestFormReader.ReadCreateAuctionFormMobile(HttpContext.Current.Request, out name, out description,
-                out category, out minutesString, out hoursString);
-
             //Заводим возвращалку статуса
             AuctionApiRespondModels.AuctionCreateStatus info =
                 new AuctionApiRespondModels.AuctionCreateStatus();
-
-            //получаем файлик
-            string filePath = "";
-            string fileName = "";
-            HttpPostedFile postedFile = null;
-            var httpRequest = HttpContext.Current.Request;
-            if (httpRequest.Files.Count > 0)
+            try
             {
-                foreach (string file in httpRequest.Files)
+                //получаем информацию о пользователе
+                string userId = User.Identity.GetUserId();
+
+                //подключаемся к базе данных
+                CocktionContext db = new CocktionContext();
+                var user = db.AspNetUsers.Find(userId);
+
+                //создаем продукт и сохраняем информацию о нем.
+                Product product = new Product(auctionInfo.name, auctionInfo.description,
+                    auctionInfo.category, true, user);
+
+                //инициализация аукциона
+                Auction auction = new Auction(true, product, false, new ToteBoard(), user);
+
+                auction.Rating = (int)(user.Rating * 0.4);
+                auction.Owner = user;
+                //Совершаем манипуляции со временем
+                DateTimeManager.SetAuctionStartAndEndTime(auction, auctionInfo.timeBound);
+
+                //увеличиваем рейтинг пользователя
+                RatingManager.IncreaseRating(user, "userMadeAuction");
+                Photo photo;
+                //забиваем данные о фотке
+                if (auctionInfo.photoId != -1)
                 {
-                    postedFile = httpRequest.Files[file];
-                    string extension = Path.GetExtension(postedFile.FileName);
-                    fileName = Guid.NewGuid().ToString() + extension; //генерируем новое имя для фотки
-                    filePath = HttpContext.Current.Server.MapPath("~/Images/Photos/" + fileName);
-                    postedFile.SaveAs(filePath);
-
+                    photo = db.Photos.Find(auctionInfo.photoId);
                 }
+                else
+                {
+                    photo = new Photo();
+                    const string placeHolderName = "placeholder.jpg";
+                    photo.FileName = placeHolderName;
+                    string path = Path.Combine(
+                        HttpContext.Current.Request.MapPath("~/Content/SiteImages"), placeHolderName);
+                    photo.FilePath = path;
+
+                    ThumbnailSet thumbNail = new ThumbnailSet();
+                    thumbNail.FileName = placeHolderName;
+                    thumbNail.FilePath = path;
+                    photo.ThumbnailSets.Add(thumbNail);
+                }
+
+                product.Photos.Add(photo);
+                //все в базу добавляем
+                await DbItemsAdder.AddAuctionProductPhotoAsync(db, auction, product, photo, user);
+
+                //обновляем список аукционов
+                AuctionListHub.UpdateList(product.Name, product.Description, product.Category, photo.FileName);
+
+                //шлем ссылочку на фотку
+                info.PhotoPath = "http://cocktion.com/Images/Thumbnails/" + photo.FileName;
                 info.Status = "Success";
+
             }
-            else
+            catch
             {
+                info.PhotoPath = null;
                 info.Status = "Failure";
             }
-
-            //добавляем фоточку и фабмнейл
-            string thumbNailPath = HttpContext.Current.Server.MapPath("~/Images/Thumbnails/"); //путь на сервере для сохранения
-            ThumbnailSet thumbNail = new ThumbnailSet();
-            thumbNail.FileName = fileName;
-            thumbNail.FilePath = thumbNailPath + fileName;
-            ThumbnailGenerator.ResizeImage(postedFile, thumbNail.FilePath, 90);
-
-            //получаем информацию о пользователе
-            string userId = User.Identity.GetUserId();
-
-            //подключаемся к базе данных
-            CocktionContext db = new CocktionContext();
-            var user = db.AspNetUsers.Find(userId);
-
-            //создаем продукт и сохраняем информацию о нем.
-            Product product = new Product(name, description, category,  true, user);
-
-            //инициализация аукциона
-            Auction auction = new Auction(true, product, false, new ToteBoard(), user);
-
-            auction.Rating = (int)(user.Rating*0.4);
-
-            //Совершаем манипуляции со временем
-            DateTimeManager.SetAuctionStartAndEndTime(auction, hoursString, minutesString);
-
-            //забиваем данные о фотке
-            Photo photo = new Photo();
-            photo.FileName = fileName;
-            photo.FilePath = filePath;
-            photo.Product = product;
-            photo.ThumbnailSets.Add(thumbNail);
-
-            //увеличиваем рейтинг пользователя
-            RatingManager.IncreaseRating(user, "userMadeAuction");
-
-            //все в базу добавляем
-            await DbItemsAdder.AddAuctionProductPhotoAsync(db, auction, product, photo, user);
-
-            //обновляем список аукционов
-            AuctionListHub.UpdateList(product.Name, product.Description, product.Category, photo.FileName);
-
-            //шлем ссылочку на фотку
-            info.PhotoPath = "http://cocktion.com/Images/Thumbnails/" + fileName;
-
             return info;
         }
 
@@ -196,7 +194,7 @@ namespace CocktionMVC.Controllers.ApiControllers
             {
                 var auction = db.Auctions.Find(leader.auctionId);
                 var product = db.Products.Find(leader.productId);
-                
+
                 if (userId != auction.Owner.Id)
                     throw new Exception();
                 auction.LeadProduct = product;
@@ -207,7 +205,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                 AuctionHub.SetLider(leader.productId.ToString(), leader.auctionId, product.Name);
                 return new StatusHolder(true);
             }
-            catch 
+            catch
             {
                 return new StatusHolder(false);
             }
@@ -239,7 +237,7 @@ namespace CocktionMVC.Controllers.ApiControllers
 
                 return new IsOwnerResponder(isOwner);
             }
-            catch 
+            catch
             {
                 return new IsOwnerResponder(null);
             }
@@ -280,37 +278,25 @@ namespace CocktionMVC.Controllers.ApiControllers
 
         }
 
+        public class prI
+        {
+            public string name { get; set; }
+
+            public string description { get; set; }
+
+            public string category { get; set; }
+
+            public int auctionId { get; set; }
+
+            public int photoId { get; set; }
+        }
+
         [HttpPost]
         [Authorize]
-        public async Task<StatusHolder> AddBid()
+        public async Task<StatusHolder> AddBid(prI info)
         {
-                string name, description, category, auctionId;
-                RequestFormReader.ReadAddProductBetForm(HttpContext.Current.Request, out name,
-                    out auctionId, out category, out description);
-
-                //получаем файлик
-                string filePath = "";
-                string fileName = "";
-                HttpPostedFile postedFile = null;
-                var httpRequest = HttpContext.Current.Request;
-                if (httpRequest.Files.Count > 0)
-                {
-                    foreach (string file in httpRequest.Files)
-                    {
-                        postedFile = httpRequest.Files[file];
-                        string extension = Path.GetExtension(postedFile.FileName);
-                        fileName = Guid.NewGuid().ToString() + extension; //генерируем новое имя для фотки
-                        filePath = HttpContext.Current.Server.MapPath("~/Images/Photos/" + fileName);
-                        postedFile.SaveAs(filePath);
-                    }
-                }
-
-                string thumbNailPath = HttpContext.Current.Server.MapPath("~/Images/Thumbnails/"); //путь на сервере для сохранения
-                ThumbnailSet thumbNail = new ThumbnailSet();
-                thumbNail.FileName = fileName;
-                thumbNail.FilePath = thumbNailPath + fileName;
-                ThumbnailGenerator.ResizeImage(postedFile, thumbNail.FilePath, 60);
-
+            try
+            {
                 //получаем информацию о пользователе
                 string userId = User.Identity.GetUserId();
 
@@ -320,41 +306,59 @@ namespace CocktionMVC.Controllers.ApiControllers
                 var user = db.AspNetUsers.Find(userId);
 
                 //создаем продукт и сохраняем информацию о нем.
-                Product product = new Product(name, description, category, false, user);
-                //забиваем данные о фотке
-                Photo photo = new Photo();
-                photo.FileName = fileName;
-                photo.FilePath = filePath;
-                photo.Product = product;
-                photo.ThumbnailSets.Add(thumbNail);
+                Product product = new Product(info.name, info.description, info.category, false, user);
 
+                Photo photo;
+                //забиваем данные о фотке
+                if (info.photoId != -1)
+                {
+                    photo = db.Photos.Find(info.photoId);
+                }
+                else
+                {
+                    photo = new Photo();
+                    const string placeHolderName = "placeholder.jpg";
+                    photo.FileName = placeHolderName;
+                    string path = Path.Combine(
+                        HttpContext.Current.Request.MapPath("~/Content/SiteImages"), placeHolderName);
+                    photo.FilePath = path;
+
+                    ThumbnailSet thumbNail = new ThumbnailSet();
+                    thumbNail.FileName = placeHolderName;
+                    thumbNail.FilePath = path;
+                    photo.ThumbnailSets.Add(thumbNail);
+                }
                 //добавляем продукт
                 //Коннектимся к базе
-                int id = int.Parse(auctionId);
-                var auction = db.Auctions.Find(id);
+                var auction = db.Auctions.Find(info.auctionId);
                 auction.BidProducts.Add(product);
                 product.Auctions.Add(auction);
 
                 //находи кластер
                 BidCluster bidCluster = new BidCluster();
                 bidCluster.UserId = userId;
-                bidCluster.HostAuction = db.Auctions.Find(id);
+                bidCluster.HostAuction = auction;
                 bidCluster.Products.Add(product);
 
                 //обновляем рейтинг аукциона
-                RatingManager.IncreaseRating(db.Auctions.Find(id), user, "userBeted");
+                RatingManager.IncreaseRating(auction, user, "userBeted");
 
                 //обновляем рейтинг пользователя
                 RatingManager.IncreaseRating(user, "userPlacedBet");
-
 
                 //сохраняем все в базу
                 await DbItemsAdder.AddProduct(db, product, photo, bidCluster);
 
                 //добавляем нодики на клиенты
-                AuctionHub.AddNodesToClients(name, photo.FileName, id, product.Id);
+                AuctionHub.AddNodesToClients(info.name, photo.FileName, info.auctionId, product.Id);
 
                 return new StatusHolder(true);
+            }
+            catch
+            {
+                return new StatusHolder(false);
+            }
+            
         }
     }
 }

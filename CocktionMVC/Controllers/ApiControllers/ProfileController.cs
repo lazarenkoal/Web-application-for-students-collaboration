@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using CocktionMVC.Functions;
 using CocktionMVC.Models.DAL;
+using CocktionMVC.Models.JsonModels;
 using CocktionMVC.Models.JsonModels.MobileClientModels;
 using Microsoft.AspNet.Identity;
 
@@ -168,6 +172,48 @@ namespace CocktionMVC.Controllers.ApiControllers
             }
             
             return new UsersAuctionsHouses(myActive, myFinished, inHisHouses, myBetsAuctions);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<StatusHolder> UploadProfilePhoto()
+        {
+            try
+            {
+                //получаем файлик
+                string fileName = "";
+                HttpPostedFile postedFile = null;
+                var httpRequest = HttpContext.Current.Request;
+                if (httpRequest.Files.Count > 0)
+                {
+                    foreach (string file in httpRequest.Files)
+                    {
+                        postedFile = httpRequest.Files[file];
+                        string extension = Path.GetExtension(postedFile.FileName);
+                        fileName = Guid.NewGuid() + extension; //генерируем новое имя для фотки
+                    }
+                }
+
+                //добавляем фоточку и фабмнейл
+                string thumbNailPath = HttpContext.Current.Server.MapPath("~/Images/Thumbnails/"); //путь на сервере для сохранения
+                ThumbnailGenerator.ResizeImage(postedFile, thumbNailPath + fileName, 90);
+
+                string userId = User.Identity.GetUserId();
+                CocktionContext db = new CocktionContext();
+                var user = db.AspNetUsers.Find(userId);
+                Picture picture = new Picture();
+                picture.FileName = fileName;
+                picture.FilePath = thumbNailPath;
+                db.Pictures.Add(picture);
+                user.Selfie = picture;
+                await DbItemsAdder.SaveDb(db);
+                return new StatusHolder(true);
+            }
+            catch
+            {
+                return new StatusHolder(false);
+            }
+            
         }
     }
 }
