@@ -538,6 +538,7 @@
     <Content Include="Scripts\MyLib\MainPage\unauthMainScripts.js" />
     <Content Include="Scripts\MyLib\Profile\addInformation.js" />
     <Content Include="Scripts\MyLib\Profile\addPhoto.js" />
+    <Content Include="Scripts\MyLib\Profile\chatLogic.js" />
     <Content Include="Scripts\MyLib\Profile\opinionAdder.js" />
     <Content Include="Scripts\MyLib\Profile\subscribeProcessor.js" />
     <Content Include="Scripts\MyLib\Users\subscriptionProcessor.js" />
@@ -621,6 +622,7 @@
     <Folder Include="Images\Photos\" />
     <Folder Include="Scripts\MyLib\Data\" />
     <Folder Include="Views\DeleteHouses\" />
+    <Folder Include="Views\PrivateMessaging\" />
     <Folder Include="Views\Subscription\" />
   </ItemGroup>
   <ItemGroup>

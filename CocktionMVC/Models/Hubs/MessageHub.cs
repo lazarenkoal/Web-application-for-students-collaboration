@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Helpers;
+using System.Web.Http.Results;
 using CocktionMVC.Functions;
 using CocktionMVC.Models.DAL;
 using Microsoft.AspNet.SignalR;
+using Newtonsoft.Json;
 
 namespace CocktionMVC.Models.Hubs
 {
@@ -21,6 +25,7 @@ namespace CocktionMVC.Models.Hubs
         public async Task Send(string message, string author, string userName,
             string authorId, string receiverId)
         {
+            Clients.Group(userName).addNewMessageToPage(author, message, receiverId);
             CocktionContext db = new CocktionContext();
             var userA = db.AspNetUsers.Find(authorId);
             var userB = db.AspNetUsers.Find(receiverId);
@@ -30,7 +35,6 @@ namespace CocktionMVC.Models.Hubs
             //userB.ChatMessages.Add(privateMessage);
             db.Messages.Add(privateMessage);
             await DbItemsAdder.SaveDb(db);
-            Clients.Group(userName).addNewMessageToPage(author, message, receiverId);
         }
 
         /// <summary>
@@ -41,6 +45,41 @@ namespace CocktionMVC.Models.Hubs
         public void AddNewRoom(string userName)
         {
             Groups.Add(Context.ConnectionId, userName);
+        }
+
+        public void GetListOfReceivers(string userName)
+        {
+            CocktionContext db = new CocktionContext();
+            var msg = (from x in db.Messages
+                where x.AuthorName == userName || x.ReceiverName == userName
+                select x.AuthorName == userName ? x.ReceiverName : x.AuthorName).ToList();        
+            List<string> authors = new List<string>();
+            foreach (var message in msg)
+            {
+                if (!authors.Contains(message) && message != userName)
+                    authors.Add(message);
+            }
+            int i = 0;
+            authors.ForEach(x => Clients.Group(userName).addAuthors(x, "i"+(i++).ToString()));
+
+        }
+
+        public void GetMessages(string userName, string thisUserName)
+        {
+            CocktionContext db = new CocktionContext();
+            var msg = (from x in db.Messages
+                       where (x.AuthorName == thisUserName && x.ReceiverName == userName) ||
+                       (x.AuthorName == userName && x.ReceiverName == thisUserName)
+                       select x).ToList();
+            var userToSend = (from x in db.AspNetUsers
+                where x.UserName == userName
+                select x).First();
+            foreach (var message in msg)
+            {
+               // Clients.Group(userName).addNewMessageToPage(author, message, receiverId);
+                Clients.Group(thisUserName).addNewMessageToPage(message.AuthorName, message.Content,
+                    userToSend.Id);
+            }
         }
     }
 }

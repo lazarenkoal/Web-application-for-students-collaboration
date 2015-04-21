@@ -14,68 +14,62 @@
 <script src="~/Scripts/MyLib/Profile/addInformation.js"></script>
 <script src="~/Scripts/Jquery/jquery.signalR-2.2.0.min.js"></script>
 <script src="~/signalr/hubs"></script>
+<script src="~/Scripts/MyLib/Profile/chatLogic.js"></script>
 
 <script>
     var chat = $.connection.messageHub;
-    var responderName;
+    var responderName = "";
+    var thisUserName = '@Model.UserName';
     var responderId = null;
     chat.client.addNewMessageToPage = function (author, message, receiverId) {
         var textToAppend = '<p><b>' + author + ': </b>' + message + '</p>';
         responderName = author;
         responderId = receiverId;
-        $("#chatMessagesContainer").append(textToAppend);
+        $("#messages").append(textToAppend);
     };
 
+    chat.client.addAuthors = function(author, id) {
+        addUserToList(author,id, 'Тип фоточка');
+    };
+    
     $.connection.hub.start().done(function () {
         chat.server.addNewRoom('@Model.UserName');
+        chat.server.getListOfReceivers('@Model.UserName');
         $('#sendMessageBtn').click(function () {
-            if (responderId != null) {
-                var textToAppend = '<p><b>' + '@Model.UserName' + ': </b>' + $("#inputMessage").val() + '</p>';
-                $("#chatMessagesContainer").append(textToAppend);
-                chat.server.send($("#inputMessage").val(), '@Model.UserName', responderName, '@User.Identity.GetUserId()',
+            if (responderName.length > 0) {
+                var textToAppend = '<p><b>' + '@Model.UserName' + ': </b>' + $("#messageContainer").val() + '</p>';
+                $("#messages").append(textToAppend);
+                chat.server.send($("#messageContainer").val(), '@Model.UserName', responderName, '@User.Identity.GetUserId()',
                     responderId);
-                $("#inputMessage").val("");
+                $("#messageContainer").val("");
             }
         });
     });
 </script>
-<style>
-    #chatMessagesContainer {
-        max-height: 300px;
-        max-width: 400px;
-        height: 100%;
-        width: 100%;
-        overflow: scroll;
-        border: solid 1px lightgray;
-        padding: 5px;
-    }
-</style>
 
-<div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-6">
-        <div id="chatMessagesContainer">
-            @{
-                var houses = (from x in db.Messages
-                              where (x.AuthorName == Model.UserName || x.ReceiverName == Model.UserName)
-                              select x).ToArray();
-                if (houses.Count() == 0)
-                {
-                    <p>У вас не было приватных переписок</p>
-                }
-                else
-                {
-                    foreach (var message in houses)
-                    {
-                        <p><b>Отправил  @message.AuthorName: </b>@message.Content to @message.ReceiverName</p>
-                    }
-                }
-            }
+
+<div id="chatFormContainer">
+    <div class="row">
+        <div class="col-md-5" id="usersList">
+            <!--Тут будет список людей, с которыми ты можешь общаться-->
+            <!--Сделать запрос на сервер, чтобы получить список всех пользователей, с которыми он в диалоге-->
         </div>
-        <input type="text" class="form-group" id="inputMessage"/><br/>
-        <button id="sendMessageBtn">Отправить</button>
+        <div class="col-md-7" id="messagesWindow">
+            <!--Здесь будет непосредственно контейнер для сообщений-->
+            <h4 id="userHeader">Диалог с </h4>
+            <div id="messages">
+            </div>
+            <div id="inputMessageForm">
+                <!--Группа для ввода сообщения-->
+                <div class="input-group">
+                    <input type="text" class="form-control" id="messageContainer">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" id="sendMessageBtn" type="button">Отправить</button>
+                    </span>
+                </div><!-- /input-group -->
+            </div>
+        </div>
     </div>
-    <div class="col-md-4"></div>
 </div>
 
 <div class="row"> <!--Верхняя часть страницы, имя, рейтинг, фотка и интересы-->
@@ -224,7 +218,7 @@
         foreach (var auction in Model.HisAuctions)
         {
             <script>
-                addCellToTheGrid('usersAuctions', '@auction.SellProduct.Name', '@auction.SellProduct.Description',
+                addCellToTheGrid('usersAuctions', '@auction.SellProduct.Name.Replace("\n", " ")', '@auction.SellProduct.Description.Replace("\n", " ")',
                     '@auction.EndTime', 'http://cocktion.com/Images/Thumbnails/@auction.SellProduct.Photos.First().FileName',
                     'http://cocktion.com/Auction/CurrentAuction/@auction.Id');
             </script>

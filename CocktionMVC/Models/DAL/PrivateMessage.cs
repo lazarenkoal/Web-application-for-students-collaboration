@@ -22,7 +22,7 @@ namespace CocktionMVC.Models.DAL
 
         public PrivateMessage()
         {
-            
+
         }
     }
 }

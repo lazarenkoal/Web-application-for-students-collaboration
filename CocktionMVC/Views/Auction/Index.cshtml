@@ -31,7 +31,7 @@
         foreach (var auction in Model)
         {
             <script>
-                addCellToTheGrid('auctionPanel', '@auction.SellProduct.Name', '@auction.SellProduct.Description',
+                addCellToTheGrid('auctionPanel', '@auction.SellProduct.Name.Trim().Replace("\n", " ")', '@auction.SellProduct.Description.Trim().Replace("\n", " ")',
                     '@auction.EndTime', 'http://cocktion.com/Images/Thumbnails/@auction.SellProduct.Photos.First().FileName',
                     'http://cocktion.com/Auction/CurrentAuction/@auction.Id');
             </script>

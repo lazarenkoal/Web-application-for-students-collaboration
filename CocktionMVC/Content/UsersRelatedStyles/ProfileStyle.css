@@ -88,4 +88,38 @@ textarea{
 }
 
 
+/*Вся форма с сообщениями целиком */
+#messagesWindow{
+    border-right: 1px solid lightgray;
+    border-top:  1px solid lightgray;
+    border-bottom:  1px solid lightgray;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+#inputMessageForm{
+    margin-bottom: 5px;
+}
+
+/*Контейнер, в котором находятся текстовые сообщение*/
+#messages{
+    background-color: #ffffff;
+    border: 1px solid lightgray;
+    margin-top: 5px;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    max-height: 300px;
+    overflow-y: scroll;
+    overflow-wrap: break-word;
+    height: 385px;
+    padding: 10px;
+}
+
+#usersList{
+    border: 1px solid lightgray;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    overflow-y: scroll;
+    height: 385px;
+}
 

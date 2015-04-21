@@ -61,13 +61,20 @@ namespace CocktionMVC.Controllers.ApiControllers
             }
         }
 
+        /// <summary>
+        /// Позволяет получать информацию о различных аукционов для данного пользователя
+        /// 1)Активные аукционы пользователя
+        /// 2)Завершенные аукционы пользователя
+        /// 3)Аукционы в колхозе пользователя
+        /// 4)Аукцион
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         [Authorize]
         public UsersAuctionsHouses GetMyAuctions()
         {
             CocktionContext db = new CocktionContext();
             var user = db.AspNetUsers.Find(User.Identity.GetUserId());
-            
             //Конвертация времени из ютс в местное
             DateTime controlTime = DateTimeManager.GetCurrentTime();
 

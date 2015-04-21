@@ -36,7 +36,7 @@ function appendAuctionInfo(nameOfRow, name, description, date, imgSrc, link) {
     document.getElementById('auction'+nameOfRow).innerHTML += ("<div class=\"col-md-3\"><div class=\"auction\"> " +
         "<img class=\"img-circle\" src=\"" + imgSrc + "\" >" +
     "<p><b>Продается: </b>" + name + "</p>" +
-    "<p><b>Описание: </b>" + description + "</p>" +
+    "<p><b>Описание: </b>" + description.trim() + "</p>" +
     "<p><b>Кончится: </b>" + date + "</p>" +
     "<p id=\"auctionLink\"><a href=\"" + link + "\">Заглянуть</a></p>" +
     "</div></div>");
