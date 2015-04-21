@@ -47,6 +47,11 @@ namespace CocktionMVC.Models.Hubs
             Groups.Add(Context.ConnectionId, userName);
         }
 
+        /// <summary>
+        /// Получает список людей, которые когда-либо общались
+        /// с данным пользователем
+        /// </summary>
+        /// <param name="userName">Имя пользователя, для которого надо все найти</param>
         public void GetListOfReceivers(string userName)
         {
             CocktionContext db = new CocktionContext();
@@ -59,11 +64,15 @@ namespace CocktionMVC.Models.Hubs
                 if (!authors.Contains(message) && message != userName)
                     authors.Add(message);
             }
-            int i = 0;
             authors.ForEach(x => Clients.Group(userName).addAuthors(x));
 
         }
 
+        /// <summary>
+        /// Получает сообщения чата, в котором участвует данный пользователь
+        /// </summary>
+        /// <param name="userName">Имя пользователя, с которым общение происходит</param>
+        /// <param name="thisUserName">Имя данного пользователя</param>
         public void GetMessages(string userName, string thisUserName)
         {
             CocktionContext db = new CocktionContext();
@@ -78,7 +87,6 @@ namespace CocktionMVC.Models.Hubs
                 select x).First();
             foreach (var message in msg)
             {
-               // Clients.Group(userName).addNewMessageToPage(author, message, receiverId);
                 Clients.Group(thisUserName).appendMessageToPage(message.AuthorName, message.Content, message.DateOfPublishing.ToShortDateString(),
                     userToSend.Id);
             }

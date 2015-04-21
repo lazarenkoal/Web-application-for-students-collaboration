@@ -21,6 +21,8 @@
     var responderName = "";
     var thisUserName = '@Model.UserName';
     var responderId = null;
+
+    //Функция используется для передачи сообщений, которые посылаются людьми
     chat.client.addNewMessageToPage = function (author, message,date, receiverId) {
         
         //если в табличке есть пользователь с именм author, но 
@@ -41,19 +43,27 @@
         }
     };
 
+    //функция вставляет сообщения, которые приходят с сервера
     chat.client.appendMessageToPage = function (author, message,date, receiverId) {
         responderId = receiverId;
         $("#messages").append(generateMessageString(author, message, date));
         $("#messages").animate({ scrollTop: $("#messages")[0].scrollHeight }, 100);
     };
 
+    //добавляет авторов в колонку справа
     chat.client.addAuthors = function(author) {
         addUserToList(author, 'Тип фоточка');
     };
     
     $.connection.hub.start().done(function () {
+
+        //добавляем комнату
         chat.server.addNewRoom('@Model.UserName');
+
+        //получаем список получателей
         chat.server.getListOfReceivers('@Model.UserName');
+
+        //обрабатываем клик мышкой
         $('#sendMessageBtn').click(function () {
             if (responderName.length > 0) {
                 var textToAppend = '<p><b>' + '@Model.UserName' + ': </b>' + $("#messageContainer").val() + " " +Date().toString()+'</p>';
@@ -63,14 +73,6 @@
                 $("#messageContainer").val("");
                 $("#messages").animate({ scrollTop: $("#messages")[0].scrollHeight }, 100);
             }
-        });
-    });
-</script>
-<script>
-    $(document).ready(function () {
-        $('#messageContainer').keypress(function (e) {
-            if (e.keyCode == 13)
-                $('#sendMessageBtn').click();
         });
     });
 </script>
