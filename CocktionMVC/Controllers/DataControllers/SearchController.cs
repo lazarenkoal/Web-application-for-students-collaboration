@@ -93,7 +93,7 @@ namespace CocktionMVC.Controllers.DataControllers
             int i = 0;
             Array.ForEach(auS, x =>
             {
-                auctions[i++] = new Info(x.SellProduct.Name, x.Id, x.SellProduct.Photos.First().FileName,
+                auctions[i++] = new Info(x.SellProduct.Name, x.Id, x.SellProduct.Photo.FileName,
                     x.SellProduct.Description);
             });
             if (auctions.Length == 0)

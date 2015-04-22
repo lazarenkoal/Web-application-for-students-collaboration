@@ -80,7 +80,7 @@
                 <div id="productsContainer" hidden="">
                     <div class="row">
                         <div class="col-md-5" id="productPhotoContainer">
-                            <img class="img-thumbnail" src="http://cocktion.com/Images/Thumbnails/@Model.SellProduct.Photos.First().FileName">
+                            <img class="img-thumbnail" src="http://cocktion.com/Images/Thumbnails/@Model.SellProduct.Photo.FileName">
                             <p>Фотокарточка</p>
                         </div>
                         <div class="col-md-5" id="productInfoContainer">
@@ -263,7 +263,7 @@
             $("#auctionEnderHidden").show();
             $("#addToteBetContainer").hide();
         }
-        initialiseNetwork('@Model.SellProduct.Name', '@Model.SellProduct.Photos.First().FileName');
+        initialiseNetwork('@Model.SellProduct.Name', '@Model.SellProduct.Photo.FileName');
         initialiseHub('@Model.Id', '@User.Identity.IsAuthenticated', '@User.Identity.Name');
     });
 
@@ -276,7 +276,7 @@
             foreach (var i in Model.BidProducts)
             {
                 <script>
-                    addNode('@i.Photos.First().FileName, '@i.Name', '@i.Id');
+                    addNode('@i.Photo.FileName', '@i.Name', '@i.Id');
                 </script>
             }
         }

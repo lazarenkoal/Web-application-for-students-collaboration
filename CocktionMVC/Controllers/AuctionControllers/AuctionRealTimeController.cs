@@ -139,7 +139,7 @@ namespace CocktionMVC.Controllers
             {
                 Name = product.Name,
                 Description = product.Description,
-                FileName = product.Photos.First().FileName,
+                FileName = product.Photo.FileName,
                 Category = product.Category
             };
             return Json(info);

@@ -16,14 +16,11 @@ namespace CocktionMVC.Models.DAL
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Auction> Auctions { get; set; }
-        public virtual DbSet<Photo> Photos { get; set; }
         public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<ThumbnailSet> ThumbnailSets { get; set; }
         public virtual DbSet<BidCluster> AuctionBids { get; set; }
         public virtual DbSet<ToteEntity> ToteEntities { get; set; }
         public virtual DbSet<ToteResult> ToteResults { get; set; }
         public virtual DbSet<House> Houses { get; set; }
-
         public virtual DbSet<ForumPost> Posts { get; set; }
 
         public virtual DbSet<Interest> Interests { get; set; }
@@ -90,14 +87,15 @@ namespace CocktionMVC.Models.DAL
             modelBuilder.Entity<AspNetUser>()
                 .HasMany(e => e.SubHouses);
 
-            modelBuilder.Entity<Auction>() 
-                .HasMany(e => e.BidProducts)  //Products1 ---> BidProducts 
-                .WithMany(e => e.BidAuctions)   //Auctions2 ---> BidAuctions
-                .Map(m => m.ToTable("ProductAuction1").MapLeftKey("BidAuctions_Id").MapRightKey("BidProducts_Id"));
+            //modelBuilder.Entity<Auction>() 
+            //    .HasMany(e => e.BidProducts)  //Products1 ---> BidProducts 
+            //    .WithMany(e => e.BidAuctions)   //Auctions2 ---> BidAuctions
+            //    .Map(m => m.ToTable("ProductAuction1").MapLeftKey("BidAuctions_Id").MapRightKey("BidProducts_Id"));
+
+
 
             modelBuilder.Entity<Auction>()
-                .HasMany(e => e.UsersBids)
-                .WithRequired(e => e.HostAuction);
+                .HasMany(e => e.UsersBids);
 
             modelBuilder.Entity<PrivateMessage>()
                .HasMany(e => e.Talkers);
@@ -110,12 +108,6 @@ namespace CocktionMVC.Models.DAL
 
             modelBuilder.Entity<Product>()
                 .HasMany(e => e.BidClusters);
-
-            modelBuilder.Entity<Photo>()
-                .HasMany(e => e.ThumbnailSets)
-                .WithRequired(e => e.Photo)
-                .HasForeignKey(e => e.Photo_Id)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Product>()
                 .Property(e => e.Name)
@@ -138,17 +130,26 @@ namespace CocktionMVC.Models.DAL
             modelBuilder.Entity<ToteBoard>()
                 .HasMany(e => e.ToteResultsForUsers);
 
-            modelBuilder.Entity<Product>()
-                .HasMany(e => e.Auctions)
-                .WithRequired(e => e.SellProduct)
-                .HasForeignKey(e => e.SellProductId)
-                .WillCascadeOnDelete(false);
+            //modelBuilder.Entity<Auction>()
+            //    .HasMany(e => e.BidProducts)
+            //    .WithRequired(e => e.SelfAuction)
+            //    .WillCascadeOnDelete(true);
 
-            modelBuilder.Entity<Product>()
-                .HasMany(e => e.Photos);
-                //.WithRequired(e => e.Product)
-                //.HasForeignKey(e => e.Product_Id)
-                //.WillCascadeOnDelete(false);
+            modelBuilder.Entity<Auction>()
+                .HasMany(e => e.BidProducts);
+
+            //modelBuilder.Entity<Product>()
+            //    .HasRequired(e => e.SelfAuction)
+            //    .WithMany(e => e.BidProducts)
+            //    .WillCascadeOnDelete(true);
+
+            //modelBuilder.Entity<Product>()
+            //    .HasMany(e => e.Auctions)
+            //    .WithRequired(e => e.SellProduct)
+            //    .HasForeignKey(e => e.SellProductId)
+            //    .WillCascadeOnDelete(false);
+
+           
         }
     }
 }

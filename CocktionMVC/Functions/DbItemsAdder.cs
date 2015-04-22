@@ -18,10 +18,10 @@ namespace CocktionMVC.Functions
         /// <param name="photo">Фото, которое надо добваить</param>
         /// <param name ="cluster">Хранилище ставок, в которое надо вставить данный продукт</param>
         /// <returns></returns>
-        public static async Task AddProduct(CocktionContext db, Product product, Photo photo, BidCluster cluster)
+        public static async Task AddProduct(CocktionContext db, Product product, Picture photo, BidCluster cluster)
         {
             db.Products.Add(product);
-            db.Photos.Add(photo);
+            db.Pictures.Add(photo);
             db.AuctionBids.Add(cluster);
             await Task.Run(() => db.SaveChangesAsync());
         }
@@ -66,11 +66,11 @@ namespace CocktionMVC.Functions
         /// <param name="photo">фотка, которую надо добавить</param>
         /// <param name="user"></param>
         public static async Task AddAuctionProductPhotoAsync(CocktionContext db, Auction auction,
-            Product product, Photo photo, AspNetUser user)
+            Product product, Picture photo, AspNetUser user)
         {
             db.Auctions.Add(auction);
             db.Products.Add(product);
-            db.Photos.Add(photo);
+            db.Pictures.Add(photo);
             user.HisAuctions.Add(auction);
             user.HisProducts.Add(product);
             await Task.Run(() => db.SaveChangesAsync());

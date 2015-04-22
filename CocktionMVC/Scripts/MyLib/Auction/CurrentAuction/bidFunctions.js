@@ -53,7 +53,6 @@ function addBid(auctionId) {
             formData.append(fileInput.files[0].name, fileInput.files[0]);
         }
 
-
         //добавляю поле с именем
         var bidName = document.getElementById('bidName').value;
         formData.append("name", bidName);

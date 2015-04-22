@@ -48,7 +48,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                        {
                            description = auction.SellProduct.Description.Trim(),
                            endTime = minutes,
-                           photoPath = @"http://cocktion.com/Images/Thumbnails/" + auction.SellProduct.Photos.First().FileName,
+                           photoPath = @"http://cocktion.com/Images/Thumbnails/" + auction.SellProduct.Photo.FileName,
                            title = auction.SellProduct.Name.Trim(),
                            auctionId = auction.Id,
                            leaderId = auction.LeadProduct == null ? -1 : auction.LeadProduct.Id,
@@ -82,7 +82,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                 bidProducts.Add(new ProductInfoMobile
                     {
                         description = bid.Description.Trim(),
-                        photoPath = @"http://cocktion.com/Images/Thumbnails/" + bid.Photos.First().FileName,
+                        photoPath = @"http://cocktion.com/Images/Thumbnails/" + bid.Photo.FileName,
                         name = bid.Name.Trim(),
                         category = bid.Category.Trim(),
                         productId = bid.Id,
@@ -133,28 +133,23 @@ namespace CocktionMVC.Controllers.ApiControllers
 
                 //увеличиваем рейтинг пользователя
                 RatingManager.IncreaseRating(user, "userMadeAuction");
-                Photo photo;
+                Picture photo;
                 //забиваем данные о фотке
                 if (auctionInfo.photoId != -1)
                 {
-                    photo = db.Photos.Find(auctionInfo.photoId);
+                    photo = db.Pictures.Find(auctionInfo.photoId);
                 }
                 else
                 {
-                    photo = new Photo();
+                    photo = new Picture();
                     const string placeHolderName = "placeholder.jpg";
                     photo.FileName = placeHolderName;
                     string path = Path.Combine(
                         HttpContext.Current.Request.MapPath("~/Content/SiteImages"), placeHolderName);
                     photo.FilePath = path;
-
-                    ThumbnailSet thumbNail = new ThumbnailSet();
-                    thumbNail.FileName = placeHolderName;
-                    thumbNail.FilePath = path;
-                    photo.ThumbnailSets.Add(thumbNail);
                 }
 
-                product.Photos.Add(photo);
+                product.Photo = photo;
                 //все в базу добавляем
                 await DbItemsAdder.AddAuctionProductPhotoAsync(db, auction, product, photo, user);
 
@@ -308,31 +303,26 @@ namespace CocktionMVC.Controllers.ApiControllers
                 //создаем продукт и сохраняем информацию о нем.
                 Product product = new Product(info.name, info.description, info.category, false, user);
 
-                Photo photo;
+                Picture photo;
                 //забиваем данные о фотке
                 if (info.photoId != -1)
                 {
-                    photo = db.Photos.Find(info.photoId);
+                    photo = db.Pictures.Find(info.photoId);
                 }
                 else
                 {
-                    photo = new Photo();
+                    photo = new Picture();
                     const string placeHolderName = "placeholder.jpg";
                     photo.FileName = placeHolderName;
                     string path = Path.Combine(
                         HttpContext.Current.Request.MapPath("~/Content/SiteImages"), placeHolderName);
                     photo.FilePath = path;
-
-                    ThumbnailSet thumbNail = new ThumbnailSet();
-                    thumbNail.FileName = placeHolderName;
-                    thumbNail.FilePath = path;
-                    photo.ThumbnailSets.Add(thumbNail);
                 }
                 //добавляем продукт
                 //Коннектимся к базе
                 var auction = db.Auctions.Find(info.auctionId);
                 auction.BidProducts.Add(product);
-                product.Auctions.Add(auction);
+              //  product.SelfAuction = auction;
 
                 //находи кластер
                 BidCluster bidCluster = new BidCluster();

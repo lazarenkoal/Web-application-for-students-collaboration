@@ -91,7 +91,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                             where x.IsActive
                             select new AuctionInfo(x.SellProduct.Description,
                                 (int)x.EndTime.Subtract(controlTime).TotalMinutes,
-                                @"http://cocktion.com/Images/Thumbnails/" + x.SellProduct.Photos.First().FileName,
+                                @"http://cocktion.com/Images/Thumbnails/" + x.SellProduct.Photo.FileName,
                                 x.SellProduct.Name.Trim(), x.Id, x.LeadProduct == null ? -1 : x.LeadProduct.Id,
                                 x.SellProduct.Category.Trim())).ToList();
             }
@@ -108,7 +108,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                               where x.IsActive == false
                               select new AuctionInfo(x.SellProduct.Description,
                                   (int)x.EndTime.Subtract(controlTime).TotalMinutes,
-                                  @"http://cocktion.com/Images/Thumbnails/" + x.SellProduct.Photos.First().FileName,
+                                  @"http://cocktion.com/Images/Thumbnails/" + x.SellProduct.Photo.FileName,
                                   x.SellProduct.Name.Trim(), x.Id, x.LeadProduct == null ? -1 : x.LeadProduct.Id,
                                   x.SellProduct.Category.Trim())).ToList();
             }
@@ -128,7 +128,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                                       where x.IsActive
                                       select new AuctionInfo(x.SellProduct.Description,
                                           (int)x.EndTime.Subtract(controlTime).TotalMinutes,
-                                          @"http://cocktion.com/Images/Thumbnails/" + x.SellProduct.Photos.First().FileName,
+                                          @"http://cocktion.com/Images/Thumbnails/" + x.SellProduct.Photo.FileName,
                                           x.SellProduct.Name.Trim(), x.Id, x.LeadProduct == null ? -1 : x.LeadProduct.Id,
                                           x.SellProduct.Category.Trim())).ToList();
 
@@ -157,7 +157,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                     var auction = bet.HostAuction;
                     var aI = new AuctionInfo(auction.SellProduct.Description,
                         (int) auction.EndTime.Subtract(controlTime).TotalMinutes,
-                        @"http://cocktion.com/Images/Thumbnails/" + auction.SellProduct.Photos.First().FileName,
+                        @"http://cocktion.com/Images/Thumbnails/" + auction.SellProduct.Photo.FileName,
                         auction.SellProduct.Name.Trim(), auction.Id,
                         auction.LeadProduct == null ? -1 : auction.LeadProduct.Id,
                         auction.SellProduct.Category.Trim());

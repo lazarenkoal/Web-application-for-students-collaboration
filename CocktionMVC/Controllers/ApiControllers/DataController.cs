@@ -87,32 +87,33 @@ namespace CocktionMVC.Controllers.ApiControllers
 
                 //добавляем фоточку и фабмнейл
                 string thumbNailPath = HttpContext.Current.Server.MapPath("~/Images/Thumbnails/"); //путь на сервере для сохранения
-                ThumbnailSet thumbNail = new ThumbnailSet();
-                thumbNail.FileName = fileName;
-                thumbNail.FilePath = thumbNailPath + fileName;
+               // ThumbnailSet thumbNail = new ThumbnailSet();
+               //humbNail.FileName = fileName;
+               // thumbNail.FilePath = thumbNailPath + fileName;
+                string thumbNailFilePath = thumbNailPath + fileName;
 
                 if (type == "auction")
                 {
-                    ThumbnailGenerator.ResizeImage(postedFile, thumbNail.FilePath, 90);
+                    ThumbnailGenerator.ResizeImage(postedFile, thumbNailFilePath, 90);
                 }
                 else if (type == "product")
                 {
-                    ThumbnailGenerator.ResizeImage(postedFile, thumbNail.FilePath, 60);
+                    ThumbnailGenerator.ResizeImage(postedFile, thumbNailFilePath, 60);
                 }
 
-                //забиваем данные о фотке
-                Photo photo = new Photo();
-                photo.FileName = fileName;
-                photo.FilePath = filePath;
-                photo.ThumbnailSets.Add(thumbNail);
-
                 CocktionContext db = new CocktionContext();
-                db.ThumbnailSets.Add(thumbNail);
-                db.Photos.Add(photo);
+
+                Picture picture = new Picture();
+                picture.FileName = fileName;
+                picture.FilePath = thumbNailPath;
+                db.Pictures.Add(picture);
+
+                //db.ThumbnailSets.Add(thumbNail);
+                //db.Photos.Add(photo);
 
                 await DbItemsAdder.SaveDb(db);
 
-                return new PhotoId(photo.Id);
+                return new PhotoId(picture.Id);
             }
             catch 
             {

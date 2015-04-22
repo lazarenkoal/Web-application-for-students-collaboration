@@ -7,18 +7,16 @@ namespace CocktionMVC.Models.DAL
     {
         public Product()
         {
-            Auctions = new HashSet<Auction>();
-            Photos = new HashSet<Photo>();
-            BidAuctions = new HashSet<Auction>();
+           // Auctions = new HashSet<Auction>();
+            //BidAuctions = new HashSet<Auction>();
             BidClusters = new HashSet<BidCluster>();
         }
 
         public Product(string name, string description, string category,
              bool isOnAuctionAsALot, AspNetUser user)
         {
-            Auctions = new HashSet<Auction>();
-            Photos = new HashSet<Photo>();
-            BidAuctions = new HashSet<Auction>();
+            //Auctions = new HashSet<Auction>();
+            //BidAuctions = new HashSet<Auction>();
             BidClusters = new HashSet<BidCluster>();
             Name = name;
             Description = description;
@@ -29,9 +27,8 @@ namespace CocktionMVC.Models.DAL
 
         public Product(string name, string description, string category, AspNetUser user)
         {
-            Auctions = new HashSet<Auction>();
-            Photos = new HashSet<Photo>();
-            BidAuctions = new HashSet<Auction>();
+            //Auctions = new HashSet<Auction>();
+            //BidAuctions = new HashSet<Auction>();
             BidClusters = new HashSet<BidCluster>();
             Description = description;
             Name = name;
@@ -57,11 +54,13 @@ namespace CocktionMVC.Models.DAL
 
         public virtual AspNetUser Owner { get; set; }
 
-        public virtual ICollection<Auction> Auctions { get; set; }
-
-        public virtual ICollection<Photo> Photos { get; set; }
-        public virtual ICollection<Auction> BidAuctions { get; set; }
+       // public virtual ICollection<Auction> Auctions { get; set; }
+        //public virtual ICollection<Auction> BidAuctions { get; set; }
 
         public virtual ICollection<BidCluster> BidClusters { get; set; }
+
+        public virtual Picture Photo { get; set; }
+
+        //public virtual Auction SelfAuction { get; set; }
     }
 }

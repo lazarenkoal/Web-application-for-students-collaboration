@@ -8,7 +8,7 @@ namespace CocktionMVC.Models.DAL
         {
             Subscribers = new List<AspNetUser>();
         }
-
+        
         public Interest(string name, Picture photoCard)
         {
             Subscribers = new List<AspNetUser>();

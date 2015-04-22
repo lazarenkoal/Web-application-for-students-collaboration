@@ -373,6 +373,14 @@
     <Compile Include="Migrations\201504221022251_PhotoDontNeedProduct.Designer.cs">
       <DependentUpon>201504221022251_PhotoDontNeedProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504221130585_PhotoAndThumbnailsDeleted.cs" />
+    <Compile Include="Migrations\201504221130585_PhotoAndThumbnailsDeleted.Designer.cs">
+      <DependentUpon>201504221130585_PhotoAndThumbnailsDeleted.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504221313160_ProductAuction.cs" />
+    <Compile Include="Migrations\201504221313160_ProductAuction.Designer.cs">
+      <DependentUpon>201504221313160_ProductAuction.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DAL\Auction\BidCluster.cs" />
     <Compile Include="Models\DAL\AuctionHouse\ForumPost.cs" />
@@ -409,19 +417,15 @@
     <Compile Include="Models\DAL\Auction\Auction.cs" />
     <Compile Include="Models\DAL\CocktionContext.cs" />
     <Compile Include="Models\DAL\AspNet\C__MigrationHistory.cs" />
-    <Compile Include="Models\DAL\Auction\Photo.cs" />
     <Compile Include="Models\DAL\Auction\Product.cs" />
-    <Compile Include="Models\DAL\Auction\ThumbnailSet.cs" />
     <Compile Include="Models\DAL\Tote\ToteBoard.cs" />
     <Compile Include="Models\DAL\Tote\ToteEntity.cs" />
     <Compile Include="Models\DAL\Tote\ToteResult.cs" />
     <Compile Include="Models\JsonModels\BidRelatedModels\BidSeller.cs" />
     <Compile Include="Models\JsonModels\MobileClientModels\ProductInfoMobile.cs" />
     <Compile Include="Models\JsonModels\ToteRelatedModels\ToteEggsInfo.cs" />
-    <Compile Include="Models\ViewModels\AuctionViewModels.cs" />
     <Compile Include="Models\Hubs\AuctionListHub.cs" />
     <Compile Include="Models\Hubs\AuctionHub.cs" />
-    <Compile Include="Models\Hubs\ProductAddHub.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\ViewModels\ProfileViewModel.cs" />
@@ -494,7 +498,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Images\Thumbnails\placeholder.jpg" />
+    <Content Include="Functions\Images\Thumbnails\placeholder.jpg" />
     <Content Include="RecaptchaNet.ReadMe.txt" />
     <Content Include="Scripts\Bootstrap\bootstrap.js" />
     <Content Include="Scripts\Bootstrap\bootstrap.min.js" />
@@ -596,14 +600,11 @@
     <Content Include="Views\Auction\Create.cshtml">
       <BrowseToURL>~/Auction/CreateAuction</BrowseToURL>
     </Content>
-    <Content Include="Views\Auction\AuctionAdded.cshtml" />
     <Content Include="Views\Auction\MyAuctions.cshtml" />
     <Content Include="Views\Auction\CurrentAuction.cshtml" />
-    <Content Include="Views\BidAuctionCreator\ShowProducts.cshtml" />
     <Content Include="Views\Help\Index.cshtml" />
     <Content Include="Views\Shared\PageNotFound.cshtml" />
     <Content Include="Views\Mobile\Test.cshtml" />
-    <Content Include="Views\Test\Index.cshtml" />
     <Content Include="Views\Profile\HowItCouldBe.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\AuctionHouse\Index.cshtml" />
@@ -627,11 +628,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\Photos\" />
+    <Folder Include="Functions\Images\Photos\" />
     <Folder Include="Scripts\MyLib\Data\" />
-    <Folder Include="Views\DeleteHouses\" />
-    <Folder Include="Views\PrivateMessaging\" />
-    <Folder Include="Views\Subscription\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201503092019139_sdfsdf.resx">
@@ -738,6 +736,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504221022251_PhotoDontNeedProduct.resx">
       <DependentUpon>201504221022251_PhotoDontNeedProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504221130585_PhotoAndThumbnailsDeleted.resx">
+      <DependentUpon>201504221130585_PhotoAndThumbnailsDeleted.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504221313160_ProductAuction.resx">
+      <DependentUpon>201504221313160_ProductAuction.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
