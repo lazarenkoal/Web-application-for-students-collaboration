@@ -381,6 +381,10 @@
     <Compile Include="Migrations\201504221313160_ProductAuction.Designer.cs">
       <DependentUpon>201504221313160_ProductAuction.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504222211035_AuctionAddedToProduct.cs" />
+    <Compile Include="Migrations\201504222211035_AuctionAddedToProduct.Designer.cs">
+      <DependentUpon>201504222211035_AuctionAddedToProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DAL\Auction\BidCluster.cs" />
     <Compile Include="Models\DAL\AuctionHouse\ForumPost.cs" />
@@ -742,6 +746,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504221313160_ProductAuction.resx">
       <DependentUpon>201504221313160_ProductAuction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504222211035_AuctionAddedToProduct.resx">
+      <DependentUpon>201504222211035_AuctionAddedToProduct.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -196,12 +196,14 @@ namespace CocktionMVC.Controllers
             //добавляем рейтинг пользователю и аукциону
             RatingManager.IncreaseRating(user, "userPlacedBet");
             RatingManager.IncreaseRating(db.Auctions.Find(id), user, "userBeted");
+            product.SelfAuction = db.Auctions.Find(id);
 
             //сохраняем все в базу
             //await DbItemsAdder.AddProduct(db, product, photo, bidCluster);
 
             db.Products.Add(product);
             db.Pictures.Add(photo);
+            db.AuctionBids.Add(bidCluster);
             db.SaveChanges();
 
             //добавляем нодики на клиенты

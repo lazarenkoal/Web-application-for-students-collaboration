@@ -331,6 +331,9 @@ namespace CocktionMVC.Controllers.ApiControllers
                 bidCluster.UserId = userId;
                 bidCluster.HostAuction = auction;
                 bidCluster.Products.Add(product);
+                product.SelfAuction = auction;
+
+                user.HisProducts.Add(product);
 
                 //обновляем рейтинг аукциона
                 RatingManager.IncreaseRating(auction, user, "userBeted");

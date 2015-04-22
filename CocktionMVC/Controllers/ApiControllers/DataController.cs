@@ -53,6 +53,7 @@ namespace CocktionMVC.Controllers.ApiControllers
         {
             CocktionContext db = new CocktionContext();
             db.Auctions.RemoveRange(db.Auctions.ToList());
+            //db.Products.RemoveRange(db.Products.ToList());
             db.SaveChanges();
         }
 

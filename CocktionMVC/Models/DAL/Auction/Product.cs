@@ -61,6 +61,6 @@ namespace CocktionMVC.Models.DAL
 
         public virtual Picture Photo { get; set; }
 
-        //public virtual Auction SelfAuction { get; set; }
+        public virtual Auction SelfAuction { get; set; }
     }
 }
