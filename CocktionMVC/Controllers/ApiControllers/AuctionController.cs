@@ -154,7 +154,9 @@ namespace CocktionMVC.Controllers.ApiControllers
                 await DbItemsAdder.AddAuctionProductPhotoAsync(db, auction, product, photo, user);
 
                 //обновляем список аукционов
-                AuctionListHub.UpdateList(product.Name, product.Description, product.Category, photo.FileName);
+                AuctionListHub.UpdateList(product.Name, product.Description, product.Category, auction.EndTime,
+                photo.FileName, auction.Id);
+
 
                 //шлем ссылочку на фотку
                 info.PhotoPath = "http://cocktion.com/Images/Thumbnails/" + photo.FileName;

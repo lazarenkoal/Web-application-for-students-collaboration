@@ -8,6 +8,7 @@ using CocktionMVC.Functions;
 using CocktionMVC.Functions.DataProcessing;
 using CocktionMVC.Models.DAL;
 using Microsoft.AspNet.Identity;
+using CocktionMVC.Models.Hubs;
 
 // ReSharper disable once CheckNamespace
 namespace CocktionMVC.Controllers
@@ -84,7 +85,8 @@ namespace CocktionMVC.Controllers
             user.HisProducts.Add(product);
             db.SaveChanges();
             //TODO апдейтим список c аукционами
-            //AuctionListHub.UpdateList(product.Name, product.Description, product.Category, photo.FileName);
+            AuctionListHub.UpdateList(product.Name, product.Description, product.Category,auction.EndTime,
+                photo.FileName, auction.Id);
 
             //возвращаем статус
             return Json(new IdContainer(auction.Id));
