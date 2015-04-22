@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.UI.WebControls;
 
 namespace CocktionMVC.Models.DAL
@@ -24,5 +25,7 @@ namespace CocktionMVC.Models.DAL
         {
 
         }
+
+        public virtual ICollection<AspNetUser> Talkers { get; set; }
     }
 }

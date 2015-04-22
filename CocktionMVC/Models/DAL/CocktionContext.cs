@@ -99,6 +99,9 @@ namespace CocktionMVC.Models.DAL
                 .HasMany(e => e.UsersBids)
                 .WithRequired(e => e.HostAuction);
 
+            modelBuilder.Entity<PrivateMessage>()
+               .HasMany(e => e.Talkers);
+
             modelBuilder.Entity<BidCluster>()
                 .HasRequired(e => e.HostAuction);
 
@@ -142,10 +145,10 @@ namespace CocktionMVC.Models.DAL
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Product>()
-                .HasMany(e => e.Photos)
-                .WithRequired(e => e.Product)
-                .HasForeignKey(e => e.Product_Id)
-                .WillCascadeOnDelete(false);
+                .HasMany(e => e.Photos);
+                //.WithRequired(e => e.Product)
+                //.HasForeignKey(e => e.Product_Id)
+                //.WillCascadeOnDelete(false);
         }
     }
 }

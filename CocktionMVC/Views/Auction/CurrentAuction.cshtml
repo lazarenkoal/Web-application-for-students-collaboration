@@ -273,27 +273,11 @@
 
         if (Model.BidProducts != null)
         {
-            foreach (var i in Model.UsersBids)
+            foreach (var i in Model.BidProducts)
             {
-                if (i.Products.Count == 1)
-                {
-                    <script>
-                        addNode('@i.Products.First().Photos.First().FileName', '@i.Products.First().Name', @i.Products.First().Id);
-                    </script>
-                }
-                else
-                {
-                    var parentId = i.Products.First().Id;
-                    foreach (var product in i.Products)
-                    {
-                        if (product.Id != parentId)
-                        {
-                            <script>
-                                addExtraNode('@product.Photos.First().FileName', '@product.Name', @parentId, @product.Id);
-                            </script>
-                        }
-                    }
-                }
+                <script>
+                    addNode('@i.Photos.First().FileName, '@i.Name', '@i.Id');
+                </script>
             }
         }
     }

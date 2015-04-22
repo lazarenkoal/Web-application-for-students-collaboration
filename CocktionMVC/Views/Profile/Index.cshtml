@@ -21,7 +21,7 @@
     var responderName = "";
     var thisUserName = '@Model.UserName';
     var responderId = null;
-
+    var thisUserId = '@Model.Id';
     //Функция используется для передачи сообщений, которые посылаются людьми
     chat.client.addNewMessageToPage = function (author, message,date, receiverId) {
         
@@ -61,12 +61,12 @@
         chat.server.addNewRoom('@Model.UserName');
 
         //получаем список получателей
-        chat.server.getListOfReceivers('@Model.UserName');
+        chat.server.getListOfReceivers('@Model.Id');
 
         //обрабатываем клик мышкой
         $('#sendMessageBtn').click(function () {
             if (responderName.length > 0) {
-                var textToAppend = '<p><b>' + '@Model.UserName' + ': </b>' + $("#messageContainer").val() + " " +Date().toString()+'</p>';
+                var textToAppend = '<p><b>' + '@Model.UserName' + ': </b>' + $("#messageContainer").val() + "@DateTime.Now.ToShortDateString()"+'</p>';
                 $("#messages").append(textToAppend);
                 chat.server.send($("#messageContainer").val(), '@Model.UserName', responderName, '@User.Identity.GetUserId()',
                     responderId);
@@ -76,7 +76,25 @@
         });
     });
 </script>
-
+<script>//отпавка по кнопке энтер
+    $(document).ready(function () {
+        $('#messageContainer').keypress(function (e) {
+            if (e.keyCode == 13)
+                $('#sendMessageBtn').click();
+        });
+    });
+    //подгружает с сервера сообщения пользователя
+    //надо бы эту функцию умнее сделать!!!
+    function showHisMessages(divelem) {
+        var name = divelem.getAttribute('value');
+        responderName = name;
+        $("#messages").empty();
+        $("#userHeader").empty();
+        $("#userHeader").append(name);
+        chat.server.getMessages(name, thisUserId);
+        $("#messages").animate({ scrollTop: $("#messages")[0].scrollHeight }, 100);
+    }
+    </script>
 <div id="chatFormContainer">
     <div class="row">
         <div class="col-md-5" id="usersList">

@@ -365,6 +365,14 @@
     <Compile Include="Migrations\201504201938490_CheckDb.Designer.cs">
       <DependentUpon>201504201938490_CheckDb.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504220919370_UpdateOfPrivateMessage.cs" />
+    <Compile Include="Migrations\201504220919370_UpdateOfPrivateMessage.Designer.cs">
+      <DependentUpon>201504220919370_UpdateOfPrivateMessage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504221022251_PhotoDontNeedProduct.cs" />
+    <Compile Include="Migrations\201504221022251_PhotoDontNeedProduct.Designer.cs">
+      <DependentUpon>201504221022251_PhotoDontNeedProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DAL\Auction\BidCluster.cs" />
     <Compile Include="Models\DAL\AuctionHouse\ForumPost.cs" />
@@ -724,6 +732,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504201938490_CheckDb.resx">
       <DependentUpon>201504201938490_CheckDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504220919370_UpdateOfPrivateMessage.resx">
+      <DependentUpon>201504220919370_UpdateOfPrivateMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504221022251_PhotoDontNeedProduct.resx">
+      <DependentUpon>201504221022251_PhotoDontNeedProduct.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

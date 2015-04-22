@@ -25,16 +25,23 @@ namespace CocktionMVC.Models.Hubs
         public async Task Send(string message, string author, string userName,
             string authorId, string receiverId)
         {
-            Clients.Group(userName).addNewMessageToPage(author, message,DateTime.Now.ToShortDateString() ,receiverId);
-            CocktionContext db = new CocktionContext();
-            var userA = db.AspNetUsers.Find(authorId);
-            var userB = db.AspNetUsers.Find(receiverId);
-            PrivateMessage privateMessage = new PrivateMessage(message, userA.UserName, userB.UserName,
-                DateTime.Now);
-            //userA.ChatMessages.Add(privateMessage);
-            //userB.ChatMessages.Add(privateMessage);
-            db.Messages.Add(privateMessage);
-            await DbItemsAdder.SaveDb(db);
+            try
+            {
+                Clients.Group(userName).addNewMessageToPage(author, message, DateTime.Now.ToShortDateString(), receiverId);
+                CocktionContext db = new CocktionContext();
+                var userA = db.AspNetUsers.Find(authorId);
+                var userB = db.AspNetUsers.Find(receiverId);
+                PrivateMessage privateMessage = new PrivateMessage(message, userA.UserName, userB.UserName,
+                    DateTime.Now);
+                userA.ChatMessages.Add(privateMessage);
+                userB.ChatMessages.Add(privateMessage);
+                db.Messages.Add(privateMessage);
+                await DbItemsAdder.SaveDb(db);
+            }
+            catch 
+            {
+            }
+            
         }
 
         /// <summary>
@@ -52,19 +59,19 @@ namespace CocktionMVC.Models.Hubs
         /// с данным пользователем
         /// </summary>
         /// <param name="userName">Имя пользователя, для которого надо все найти</param>
-        public void GetListOfReceivers(string userName)
+        public void GetListOfReceivers(string userId)
         {
             CocktionContext db = new CocktionContext();
-            var msg = (from x in db.Messages
-                where x.AuthorName == userName || x.ReceiverName == userName
-                select x.AuthorName == userName ? x.ReceiverName : x.AuthorName).ToList();        
+            var user = db.AspNetUsers.Find(userId);
+            var msg = (from x in user.ChatMessages
+                    select x.AuthorName == user.UserName ? x.ReceiverName : x.AuthorName).ToList();        
             List<string> authors = new List<string>();
             foreach (var message in msg)
             {
-                if (!authors.Contains(message) && message != userName)
+                if (!authors.Contains(message) && message != user.UserName)
                     authors.Add(message);
             }
-            authors.ForEach(x => Clients.Group(userName).addAuthors(x));
+            authors.ForEach(x => Clients.Group(user.UserName).addAuthors(x));
 
         }
 
@@ -73,22 +80,20 @@ namespace CocktionMVC.Models.Hubs
         /// </summary>
         /// <param name="userName">Имя пользователя, с которым общение происходит</param>
         /// <param name="thisUserName">Имя данного пользователя</param>
-        public void GetMessages(string userName, string thisUserName)
+        public void GetMessages(string responderName, string thisUserId)
         {
             CocktionContext db = new CocktionContext();
-
-            var msg = (from x in db.Messages
-                       where (x.AuthorName == thisUserName && x.ReceiverName == userName) ||
-                       (x.AuthorName == userName && x.ReceiverName == thisUserName)
+            var user = db.AspNetUsers.Find(thisUserId);
+            var userB = db.AspNetUsers.First(x => x.UserName == responderName);
+            var msg = (from x in user.ChatMessages
+                       where (x.AuthorName == user.UserName && x.ReceiverName == userB.UserName) ||
+                       (x.AuthorName == userB.UserName && x.ReceiverName == user.UserName)
                        select x).ToList();
 
-            var userToSend = (from x in db.AspNetUsers
-                where x.UserName == userName
-                select x).First();
             foreach (var message in msg)
             {
-                Clients.Group(thisUserName).appendMessageToPage(message.AuthorName, message.Content, message.DateOfPublishing.ToShortDateString(),
-                    userToSend.Id);
+                Clients.Group(user.UserName).appendMessageToPage(message.AuthorName, message.Content, message.DateOfPublishing.ToShortDateString(),
+                    userB.Id);
             }
         }
     }
