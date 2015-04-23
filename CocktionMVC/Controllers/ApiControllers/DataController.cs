@@ -33,6 +33,40 @@ namespace CocktionMVC.Controllers.ApiControllers
             return houses;
         }
 
+        public class SearchString
+        {
+            public string name { get; set; }
+        }
+
+        [Authorize]
+        [HttpPost]
+        public List<AuctionInfo> FindAuctions(SearchString searchString)
+        {
+            CocktionContext db = new CocktionContext();
+            DateTime controlTime = DateTimeManager.GetCurrentTime();
+            List<Auction> aciveAuctions;
+            aciveAuctions = (from x in db.Auctions
+                            where (x.SellProduct.Name.Contains(searchString.name) || 
+                            x.SellProduct.Description.Contains(searchString.name) ||
+                            x.SellProduct.Category.Contains(searchString.name))
+                            select x).ToList();
+            List<AuctionInfo> auctis = new List<AuctionInfo>();
+            foreach (var x in aciveAuctions)
+            {
+                if (x.Owner != null)
+                {
+                    auctis.Add(new AuctionInfo(x.SellProduct.Description,
+                                (int)x.EndTime.Subtract(controlTime).TotalMinutes,
+                                @"http://cocktion.com/Images/Thumbnails/" + x.SellProduct.Photo.FileName,
+                                x.SellProduct.Name.Trim(), x.Id, x.LeadProduct == null ? -1 : x.LeadProduct.Id,
+                                x.SellProduct.Category.Trim(), new ownerInfo(x.Owner.Id, x.Owner.UserName, x.Owner.Selfie.FileName),
+                                (x.IsActive && (controlTime < x.EndTime))));
+                }
+            }
+            return auctis;
+        }
+
+
         public class PhotoId
         {
             public int id { get; set; }
@@ -108,9 +142,6 @@ namespace CocktionMVC.Controllers.ApiControllers
                 picture.FileName = fileName;
                 picture.FilePath = thumbNailPath;
                 db.Pictures.Add(picture);
-
-                //db.ThumbnailSets.Add(thumbNail);
-                //db.Photos.Add(photo);
 
                 await DbItemsAdder.SaveDb(db);
 

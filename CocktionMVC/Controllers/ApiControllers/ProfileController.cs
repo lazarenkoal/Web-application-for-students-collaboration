@@ -131,7 +131,7 @@ namespace CocktionMVC.Controllers.ApiControllers
             try
             {
                 myActive = (from x in user.HisAuctions
-                            where (x.IsActive && x.EndTime > DateTime.Now)
+                            where (x.IsActive && x.EndTime > controlTime)
                             select new AuctionInfo(x.SellProduct.Description,
                                 (int)x.EndTime.Subtract(controlTime).TotalMinutes,
                                 @"http://cocktion.com/Images/Thumbnails/" + x.SellProduct.Photo.FileName,
@@ -149,7 +149,7 @@ namespace CocktionMVC.Controllers.ApiControllers
             try
             {
                 myFinished = (from x in user.HisAuctions
-                              where (x.IsActive == false || x.EndTime < DateTime.Now)
+                              where (x.IsActive == false || x.EndTime < controlTime)
                               select new AuctionInfo(x.SellProduct.Description,
                                   (int)x.EndTime.Subtract(controlTime).TotalMinutes,
                                   @"http://cocktion.com/Images/Thumbnails/" + x.SellProduct.Photo.FileName,
@@ -220,7 +220,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                         var auction = bet.SelfAuction;
                         if (auction != null)
                         {
-                            bool isActive = (auction.IsActive && auction.EndTime > DateTime.Now);
+                            bool isActive = (auction.IsActive && auction.EndTime > controlTime);
                             try
                             {
                                 AuctionInfo aI = new AuctionInfo(auction.SellProduct.Description,
