@@ -55,6 +55,8 @@ namespace CocktionMVC.Models.DAL
 
         public int? Rating { get; set; }
 
+        public string City { get; set; }
+
         public virtual Picture Selfie {get; set; }
         public virtual ICollection<House> SubHouses { get; set; } 
         public virtual ICollection<Auction> HisAuctions { get; set; } 

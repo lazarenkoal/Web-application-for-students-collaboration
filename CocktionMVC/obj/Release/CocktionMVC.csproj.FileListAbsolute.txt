@@ -406,3 +406,4 @@
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Release\CocktionMVC.Migrations.PhotoAndThumbnailsDeleted.resources
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Release\CocktionMVC.Migrations.ProductAuction.resources
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Release\CocktionMVC.Migrations.AuctionAddedToProduct.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Release\CocktionMVC.Migrations.CityAddedToUser.resources

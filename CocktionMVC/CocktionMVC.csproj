@@ -385,6 +385,10 @@
     <Compile Include="Migrations\201504222211035_AuctionAddedToProduct.Designer.cs">
       <DependentUpon>201504222211035_AuctionAddedToProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504231831022_CityAddedToUser.cs" />
+    <Compile Include="Migrations\201504231831022_CityAddedToUser.Designer.cs">
+      <DependentUpon>201504231831022_CityAddedToUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DAL\Auction\BidCluster.cs" />
     <Compile Include="Models\DAL\AuctionHouse\ForumPost.cs" />
@@ -406,7 +410,6 @@
     <Compile Include="Models\JsonModels\HouseRelatedModels\HouseRespond.cs" />
     <Compile Include="Models\JsonModels\MobileClientModels\HouseInfo.cs" />
     <Compile Include="Models\JsonModels\MobileClientModels\IsOwnerResponder.cs" />
-    <Compile Include="Models\JsonModels\MobileClientModels\ProfileInfoMobile.cs" />
     <Compile Include="Models\JsonModels\MobileClientModels\RegisterUserData.cs" />
     <Compile Include="Models\JsonModels\ProductInfo.cs" />
     <Compile Include="Models\JsonModels\StatusHolder.cs" />
@@ -749,6 +752,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504222211035_AuctionAddedToProduct.resx">
       <DependentUpon>201504222211035_AuctionAddedToProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504231831022_CityAddedToUser.resx">
+      <DependentUpon>201504231831022_CityAddedToUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

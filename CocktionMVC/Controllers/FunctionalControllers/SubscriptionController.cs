@@ -23,6 +23,9 @@ namespace CocktionMVC.Controllers.FunctionalControllers
                 house.Inhabitants.Add(user);
                 if (user.SocietyName == null)
                     user.SocietyName = house.Holder.Name;
+
+                if (user.City == null)
+                    user.City = house.Holder.City;
                 
                 //добавляем дому немного рейтинга
                 RatingManager.IncreaseRating(house, "subscriberAdded");

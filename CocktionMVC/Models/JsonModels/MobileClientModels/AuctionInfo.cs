@@ -34,11 +34,11 @@
 
         public int leaderId { get; set; }
         public string сategory { get; set; }
-
+        public bool isActive { get; set; }
         public ownerInfo owner { get; set; }
 
         public AuctionInfo(string description, int endTime, string photoPath, string title,
-            int auctionId, int leaderId, string category, ownerInfo info)
+            int auctionId, int leaderId, string category, ownerInfo info, bool isActive)
         {
             this.description = description;
             this.endTime = endTime;
@@ -48,6 +48,7 @@
             this.leaderId = leaderId;
             this.сategory = category;
             this.owner = info;
+            this.isActive = isActive;
         }
 
         public AuctionInfo()

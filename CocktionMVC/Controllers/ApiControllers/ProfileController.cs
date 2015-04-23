@@ -19,31 +19,74 @@ namespace CocktionMVC.Controllers.ApiControllers
         {
             public string profileId { get; set; }
         }
+
         [HttpPost]
         [Authorize]
-        public ProfileInfoMobile GetInfo(ProfileInfo profInf)
+        public ProfileData GetInfo(ProfileInfo profInf)
         {
             CocktionContext db = new CocktionContext();
+            AspNetUser user;
             if (profInf.profileId == "self")
             {
                 string userId = User.Identity.GetUserId();
-                var userProfile = db.AspNetUsers.Find(userId);
-                ProfileInfoMobile info = new ProfileInfoMobile(@"http://cocktion.com/Content/SiteImages/anonPhoto.jpg",
-                    userProfile.UserRealName, userProfile.UserRealSurname, userProfile.Eggs, 100, "Шлюхи",
-                    @"http://cocktion.com/Content/SiteImages/girl.jpg", "Тачки", @"http://cocktion.com/Content/SiteImages/car.jpg",
-                    "Блэкджек", @"http://cocktion.com/Content/SiteImages/blackjack.jpg", "Бабло", @"http://cocktion.com/Content/SiteImages/money.jpg");
-                return info;
+                user = db.AspNetUsers.Find(userId);
             }
             else
             {
-                var userProfile = db.AspNetUsers.Find(profInf.profileId);
-                ProfileInfoMobile info = new ProfileInfoMobile(@"http://cocktion.com/Content/SiteImages/anonPhoto.jpg",
-                    userProfile.UserRealName, userProfile.UserRealSurname, userProfile.Eggs, 100, "Шлюхи",
-                    @"http://cocktion.com/Content/SiteImages/girl.jpg", "Тачки", @"http://cocktion.com/Content/SiteImages/car.jpg",
-                    "Блэкджек", @"http://cocktion.com/Content/SiteImages/blackjack.jpg", "Бабло", @"http://cocktion.com/Content/SiteImages/money.jpg");
-                return info;
+                user = db.AspNetUsers.Find(profInf.profileId);
+            }
+            string name = user.UserRealName ?? "none";
+            string surname = user.UserRealSurname ?? "none";
+            string city = String.IsNullOrEmpty(user.City) ? "none" : user.City;
+            string society = String.IsNullOrEmpty(user.SocietyName) ? "none" : user.SocietyName;
+
+            ProfileData data = new ProfileData(name, surname, user.UserName,
+                user.Rating, user.Eggs, user.HisAuctions.Count, user.HisProducts.Count, city,
+                society, @"http://cocktion.com/Images/Thumbnails/"+user.Selfie.FileName);
+            return data;
+
+        }
+
+        public class ShortHouseData
+        {
+            public ShortHouseData(int id, string holderName, string houseName)
+            {
+                this.id = id;
+                this.holderName = holderName;
+                this.houseName = houseName;
+            }
+            public int id { get; set; }
+            public string holderName { get; set; }
+            public string houseName { get; set; }
+        }
+        public class ProfileData
+        {
+            public string name { get; set; }
+            public string surname { get; set; }
+            public string login { get; set; }
+            public int? rating { get; set; }
+            public int eggs { get; set; }
+            public int auctionsAmount { get; set; }
+            public int productsAmount { get; set; }
+            public string city { get; set; }
+            public string society { get; set; }
+            public string photoPath { get; set; }
+            public ProfileData(string name, string surname, string login, int? rating,
+                int eggs, int auctionsAmount, int productsAmount, string city, string society, string photoPath)
+            {
+                this.name = name;
+                this.surname = surname;
+                this.login = login;
+                this.rating = rating;
+                this.eggs = eggs;
+                this.auctionsAmount = auctionsAmount;
+                this.productsAmount = productsAmount;
+                this.city = city;
+                this.society = society;
+                this.photoPath = photoPath;
             }
         }
+
 
         public class UsersAuctionsHouses
         {
@@ -93,7 +136,8 @@ namespace CocktionMVC.Controllers.ApiControllers
                                 (int)x.EndTime.Subtract(controlTime).TotalMinutes,
                                 @"http://cocktion.com/Images/Thumbnails/" + x.SellProduct.Photo.FileName,
                                 x.SellProduct.Name.Trim(), x.Id, x.LeadProduct == null ? -1 : x.LeadProduct.Id,
-                                x.SellProduct.Category.Trim(), new ownerInfo(x.Owner.Id, x.Owner.UserName, x.Owner.Selfie.FileName))).ToList();
+                                x.SellProduct.Category.Trim(), new ownerInfo(x.Owner.Id, x.Owner.UserName, x.Owner.Selfie.FileName),
+                                isActive: true)).ToList();
             }
             catch
             {
@@ -110,7 +154,8 @@ namespace CocktionMVC.Controllers.ApiControllers
                                   (int)x.EndTime.Subtract(controlTime).TotalMinutes,
                                   @"http://cocktion.com/Images/Thumbnails/" + x.SellProduct.Photo.FileName,
                                   x.SellProduct.Name.Trim(), x.Id, x.LeadProduct == null ? -1 : x.LeadProduct.Id,
-                                  x.SellProduct.Category.Trim(), new ownerInfo(x.Owner.Id, x.Owner.UserName, x.Owner.Selfie.FileName))).ToList();
+                                  x.SellProduct.Category.Trim(), new ownerInfo(x.Owner.Id, x.Owner.UserName, x.Owner.Selfie.FileName),
+                                  isActive: false)).ToList();
             }
             catch
             {
@@ -137,7 +182,8 @@ namespace CocktionMVC.Controllers.ApiControllers
                                      @"http://cocktion.com/Images/Thumbnails/" + hI.SellProduct.Photo.FileName,
                                      hI.SellProduct.Name.Trim(), hI.Id, hI.LeadProduct == null ? -1 : hI.LeadProduct.Id,
                                      hI.SellProduct.Category.Trim(),
-                                    new ownerInfo(thisOwner.Id, thisOwner.UserName, thisOwner.Selfie.FileName));
+                                    new ownerInfo(thisOwner.Id, thisOwner.UserName, thisOwner.Selfie.FileName),
+                                    isActive: true);
                         if (auctInfo != null)
                         {
                             if (!inHisHouses.Any(x => x.auctionId == auctInfo.auctionId))
@@ -152,7 +198,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                                      @"http://cocktion.com/Images/Thumbnails/" + hI.SellProduct.Photo.FileName,
                                      hI.SellProduct.Name.Trim(), hI.Id, hI.LeadProduct == null ? -1 : hI.LeadProduct.Id,
                                      hI.SellProduct.Category.Trim(),
-                                    null);
+                                    null, isActive: true);
                         if (auctInfo != null)
                         {
                             if (!inHisHouses.Any(x => x.auctionId == auctInfo.auctionId))
@@ -174,6 +220,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                         var auction = bet.SelfAuction;
                         if (auction != null)
                         {
+                            bool isActive = (auction.IsActive && auction.EndTime > DateTime.Now);
                             try
                             {
                                 AuctionInfo aI = new AuctionInfo(auction.SellProduct.Description,
@@ -182,7 +229,8 @@ namespace CocktionMVC.Controllers.ApiControllers
                                  auction.SellProduct.Name.Trim(), auction.Id,
                                 auction.LeadProduct == null ? -1 : auction.LeadProduct.Id,
                                 auction.SellProduct.Category.Trim(),
-                                new ownerInfo(auction.Owner.Id, auction.Owner.UserName, auction.Owner.Selfie.FileName));
+                                new ownerInfo(auction.Owner.Id, auction.Owner.UserName, auction.Owner.Selfie.FileName),
+                                isActive);
                                 if (!myBetsAuctions.Any(x => x.auctionId == aI.auctionId))
                                     myBetsAuctions.Add(aI);
                             }
@@ -194,7 +242,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                                 auction.SellProduct.Name.Trim(), auction.Id,
                                 auction.LeadProduct == null ? -1 : auction.LeadProduct.Id,
                                 auction.SellProduct.Category.Trim(),
-                                null);
+                                null, isActive);
 
                                 if (!myBetsAuctions.Any(x => x.auctionId == aI.auctionId))
                                     myBetsAuctions.Add(aI);
@@ -204,9 +252,8 @@ namespace CocktionMVC.Controllers.ApiControllers
                     }
                 }
             }
-            catch (Exception e)
+            catch 
             {
-                myBetsAuctions = new List<AuctionInfo> { new AuctionInfo(e.Message, 3, "", "", 2, 3, "", null) };
             }
 
             return new UsersAuctionsHouses(myActive, myFinished, inHisHouses, myBetsAuctions);
@@ -252,6 +299,45 @@ namespace CocktionMVC.Controllers.ApiControllers
                 return new StatusHolder(false);
             }
 
+        }
+
+        public class ShortProfile
+        {
+            public string name { get; set; }
+            public string surname { get; set; }
+            public string society { get; set; }
+            public string city { get; set; }
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<StatusHolder> EditProfile(ShortProfile editInfo)
+        {
+            try
+            {
+                CocktionContext db = new CocktionContext();
+                var user = db.AspNetUsers.Find(User.Identity.GetUserId());
+
+                if (!String.IsNullOrEmpty(editInfo.name))
+                    user.UserRealName = editInfo.name;
+
+                if (!String.IsNullOrEmpty(editInfo.surname))
+                    user.UserRealSurname = editInfo.surname;
+
+                if (!String.IsNullOrEmpty(editInfo.society))
+                    user.SocietyName = editInfo.society;
+
+                if (!String.IsNullOrEmpty(editInfo.city))
+                    user.City = editInfo.city;
+
+                db.SaveChanges();
+                return new StatusHolder(true);
+            }
+            catch
+            {
+                return new StatusHolder(false);
+            }
+            
         }
     }
 }
