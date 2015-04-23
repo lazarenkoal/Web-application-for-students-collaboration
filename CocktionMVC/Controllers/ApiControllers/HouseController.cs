@@ -5,6 +5,7 @@ using System.Web.Http;
 using CocktionMVC.Models.DAL;
 using CocktionMVC.Models.JsonModels;
 using CocktionMVC.Models.JsonModels.HouseRelatedModels;
+using Microsoft.AspNet.Identity;
 
 namespace CocktionMVC.Controllers.ApiControllers
 {
@@ -106,6 +107,51 @@ namespace CocktionMVC.Controllers.ApiControllers
             public int houseId { get; set; }
         }
 
+        [HttpPost]
+        [Authorize]
+        public StatusHolder UnsubscribeFromHouse(IdContainer id)
+        {
+            try
+            {
+                CocktionContext db = new CocktionContext();
+                var user = db.AspNetUsers.Find(User.Identity.GetUserId());
+                var house = db.Houses.Find(id.id);
+                if (user.SubHouses.Contains(house))
+                {
+                    user.SubHouses.Remove(house);
+                    db.SaveChanges();
+                }
+                return new StatusHolder(true);
+            }
+            catch
+            {
+                return new StatusHolder(false);
+            }
+        }
+
+
+        [HttpPost]
+        [Authorize]
+        public StatusHolder SubscribeOnHouse(IdContainer id)
+        {
+            try
+            {
+                CocktionContext db = new CocktionContext();
+                var user = db.AspNetUsers.Find(User.Identity.GetUserId());
+                var house = db.Houses.Find(id.id);
+                if (!user.SubHouses.Contains(house))
+                {
+                    user.SubHouses.Add(house);
+                    db.SaveChanges();
+                }
+                return new StatusHolder(true);
+            }
+            catch
+            {
+                return new StatusHolder(false);
+            }
+            
+        }
 
         /// <summary>
         /// Добавляет пост на форум конкретного дома

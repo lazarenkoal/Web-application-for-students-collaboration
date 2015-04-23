@@ -49,15 +49,18 @@ namespace CocktionMVC.Controllers.ApiControllers
 
         public class ShortHouseData
         {
-            public ShortHouseData(int id, string holderName, string houseName)
+            public ShortHouseData(int id, string holderName, string houseName, string photoPath)
             {
                 this.id = id;
                 this.holderName = holderName;
                 this.houseName = houseName;
+                this.photoPath = @"http://cocktion.com/Images/Thumbnails/" + photoPath;
             }
             public int id { get; set; }
             public string holderName { get; set; }
             public string houseName { get; set; }
+
+            public string photoPath {get; set;}
         }
         public class ProfileData
         {
@@ -87,6 +90,18 @@ namespace CocktionMVC.Controllers.ApiControllers
             }
         }
 
+
+        [HttpPost]
+        [Authorize]
+        public List<ShortHouseData> GetMyHouses()
+        {
+            CocktionContext db = new CocktionContext();
+            var user = db.AspNetUsers.Find(User.Identity.GetUserId());
+            List<ShortHouseData> data = (from x in user.SubHouses
+                                         select new ShortHouseData(x.Id, x.Holder.Name,
+                                             x.Faculty, x.Portrait.FileName)).ToList();
+            return data;
+        }
 
         public class UsersAuctionsHouses
         {
