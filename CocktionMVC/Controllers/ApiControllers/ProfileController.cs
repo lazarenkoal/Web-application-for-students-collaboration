@@ -49,13 +49,13 @@ namespace CocktionMVC.Controllers.ApiControllers
         {
             public List<AuctionInfo> active { get; set; }
 
-            public List<AuctionInfo> finished { get; set; } 
+            public List<AuctionInfo> finished { get; set; }
 
             public List<AuctionInfo> houses { get; set; }
 
-            public List<AuctionInfo> products { get; set; } 
+            public List<AuctionInfo> products { get; set; }
 
-            public UsersAuctionsHouses(List<AuctionInfo> active, List<AuctionInfo> finished, 
+            public UsersAuctionsHouses(List<AuctionInfo> active, List<AuctionInfo> finished,
                 List<AuctionInfo> inHouse, List<AuctionInfo> inProducts)
             {
                 this.active = active;
@@ -93,7 +93,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                                 (int)x.EndTime.Subtract(controlTime).TotalMinutes,
                                 @"http://cocktion.com/Images/Thumbnails/" + x.SellProduct.Photo.FileName,
                                 x.SellProduct.Name.Trim(), x.Id, x.LeadProduct == null ? -1 : x.LeadProduct.Id,
-                                x.SellProduct.Category.Trim())).ToList();
+                                x.SellProduct.Category.Trim(), new ownerInfo(x.Owner.Id, x.Owner.UserName, x.Owner.Selfie.FileName))).ToList();
             }
             catch
             {
@@ -110,72 +110,105 @@ namespace CocktionMVC.Controllers.ApiControllers
                                   (int)x.EndTime.Subtract(controlTime).TotalMinutes,
                                   @"http://cocktion.com/Images/Thumbnails/" + x.SellProduct.Photo.FileName,
                                   x.SellProduct.Name.Trim(), x.Id, x.LeadProduct == null ? -1 : x.LeadProduct.Id,
-                                  x.SellProduct.Category.Trim())).ToList();
+                                  x.SellProduct.Category.Trim(), new ownerInfo(x.Owner.Id, x.Owner.UserName, x.Owner.Selfie.FileName))).ToList();
             }
             catch
             {
                 myFinished = null;
             }
-            
+
 
             //Выборка всех в его домах
             List<AuctionInfo> inHisHouses = new List<AuctionInfo>();
-            try
+            foreach (var house in user.SubHouses)
             {
-                foreach (var house in user.SubHouses)
-                {
-                    var housesInfo = (from x in house.Auctions
-                                      where (x.IsActive && x.EndTime > DateTime.Now)
-                                      select new AuctionInfo(x.SellProduct.Description,
-                                          (int)x.EndTime.Subtract(controlTime).TotalMinutes,
-                                          @"http://cocktion.com/Images/Thumbnails/" + x.SellProduct.Photo.FileName,
-                                          x.SellProduct.Name.Trim(), x.Id, x.LeadProduct == null ? -1 : x.LeadProduct.Id,
-                                          x.SellProduct.Category.Trim())).ToList();
+                var housesInfo = (from x in house.Auctions
+                                  where (x.IsActive && x.EndTime > DateTime.Now)
+                                  select x).ToList();
 
-                    foreach (var hI in housesInfo)
+                foreach (var hI in housesInfo)
+                {
+                    AspNetUser thisOwner;
+                    try
                     {
-                        if (!inHisHouses.Contains(hI))
-                            inHisHouses.Add(hI);
+                        thisOwner = hI.Owner;
+                        var auctInfo = new AuctionInfo(hI.SellProduct.Description,
+                                     (int)hI.EndTime.Subtract(controlTime).TotalMinutes,
+                                     @"http://cocktion.com/Images/Thumbnails/" + hI.SellProduct.Photo.FileName,
+                                     hI.SellProduct.Name.Trim(), hI.Id, hI.LeadProduct == null ? -1 : hI.LeadProduct.Id,
+                                     hI.SellProduct.Category.Trim(),
+                                    new ownerInfo(thisOwner.Id, thisOwner.UserName, thisOwner.Selfie.FileName));
+                        if (auctInfo != null)
+                        {
+                            if (!inHisHouses.Any(x => x.auctionId == auctInfo.auctionId))
+                                inHisHouses.Add(auctInfo);
+                        }
+
                     }
+                    catch
+                    {
+                        var auctInfo = new AuctionInfo(hI.SellProduct.Description,
+                                     (int)hI.EndTime.Subtract(controlTime).TotalMinutes,
+                                     @"http://cocktion.com/Images/Thumbnails/" + hI.SellProduct.Photo.FileName,
+                                     hI.SellProduct.Name.Trim(), hI.Id, hI.LeadProduct == null ? -1 : hI.LeadProduct.Id,
+                                     hI.SellProduct.Category.Trim(),
+                                    null);
+                        if (auctInfo != null)
+                        {
+                            if (!inHisHouses.Any(x => x.auctionId == auctInfo.auctionId))
+                                inHisHouses.Add(auctInfo);
+                        }
+                    }
+
                 }
             }
-            catch
-            {
-                inHisHouses = null;
-            }
-            
 
             //Выборка аукционов по всем его ставкам
             List<AuctionInfo> myBetsAuctions = new List<AuctionInfo>();
             try
             {
-                
                 foreach (var bet in user.HisProducts)
                 {
-                    if (!bet.IsOnAuctionAsALot)
+                    if (bet.IsOnAuctionAsALot == false)
                     {
                         var auction = bet.SelfAuction;
                         if (auction != null)
                         {
-                            var aI = new AuctionInfo(auction.SellProduct.Description,
-                           (int)auction.EndTime.Subtract(controlTime).TotalMinutes,
-                           @"http://cocktion.com/Images/Thumbnails/" + auction.SellProduct.Photo.FileName,
-                           auction.SellProduct.Name.Trim(), auction.Id,
-                           auction.LeadProduct == null ? -1 : auction.LeadProduct.Id,
-                           auction.SellProduct.Category.Trim());
+                            try
+                            {
+                                AuctionInfo aI = new AuctionInfo(auction.SellProduct.Description,
+                                (int)auction.EndTime.Subtract(controlTime).TotalMinutes,
+                                @"http://cocktion.com/Images/Thumbnails/" + auction.SellProduct.Photo.FileName,
+                                 auction.SellProduct.Name.Trim(), auction.Id,
+                                auction.LeadProduct == null ? -1 : auction.LeadProduct.Id,
+                                auction.SellProduct.Category.Trim(),
+                                new ownerInfo(auction.Owner.Id, auction.Owner.UserName, auction.Owner.Selfie.FileName));
+                                if (!myBetsAuctions.Any(x => x.auctionId == aI.auctionId))
+                                    myBetsAuctions.Add(aI);
+                            }
+                            catch
+                            {
+                                AuctionInfo aI = new AuctionInfo(auction.SellProduct.Description,
+                                (int)auction.EndTime.Subtract(controlTime).TotalMinutes,
+                                @"http://cocktion.com/Images/Thumbnails/" + auction.SellProduct.Photo.FileName,
+                                auction.SellProduct.Name.Trim(), auction.Id,
+                                auction.LeadProduct == null ? -1 : auction.LeadProduct.Id,
+                                auction.SellProduct.Category.Trim(),
+                                null);
 
-                            if (!myBetsAuctions.Contains(aI))
-                                myBetsAuctions.Add(aI);
+                                if (!myBetsAuctions.Any(x => x.auctionId == aI.auctionId))
+                                    myBetsAuctions.Add(aI);
+                            }
+
                         }
-                       
                     }
                 }
             }
-            catch
+            catch (Exception e)
             {
-                myBetsAuctions = null;
+                myBetsAuctions = new List<AuctionInfo> { new AuctionInfo(e.Message, 3, "", "", 2, 3, "", null) };
             }
-            
+
             return new UsersAuctionsHouses(myActive, myFinished, inHisHouses, myBetsAuctions);
         }
 
@@ -218,7 +251,7 @@ namespace CocktionMVC.Controllers.ApiControllers
             {
                 return new StatusHolder(false);
             }
-            
+
         }
     }
 }

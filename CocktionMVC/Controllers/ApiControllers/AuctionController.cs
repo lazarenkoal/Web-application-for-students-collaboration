@@ -324,7 +324,9 @@ namespace CocktionMVC.Controllers.ApiControllers
                 //Коннектимся к базе
                 var auction = db.Auctions.Find(info.auctionId);
                 auction.BidProducts.Add(product);
-              //  product.SelfAuction = auction;
+                product.SelfAuction = auction;
+
+                product.Photo = photo;
 
                 //находи кластер
                 BidCluster bidCluster = new BidCluster();
