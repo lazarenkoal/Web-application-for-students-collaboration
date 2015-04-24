@@ -35,10 +35,10 @@
         public int leaderId { get; set; }
         public string сategory { get; set; }
         public bool isActive { get; set; }
-        public ownerInfo owner { get; set; }
+        public UserInfo owner { get; set; }
 
         public AuctionInfo(string description, int endTime, string photoPath, string title,
-            int auctionId, int leaderId, string category, ownerInfo info, bool isActive)
+            int auctionId, int leaderId, string category, UserInfo info, bool isActive)
         {
             this.description = description;
             this.endTime = endTime;
@@ -53,21 +53,6 @@
 
         public AuctionInfo()
         {
-        }
-    }
-
-    public class ownerInfo
-    {
-        public string id { get; set; }
-        public string name { get; set; }
-
-        public string photoPath { get; set; }
-
-        public ownerInfo(string id, string name, string photoPath)
-        {
-            this.id = id;
-            this.name = name;
-            this.photoPath = @"http://cocktion.com/Images/Thumbnails/" + photoPath;
         }
     }
 }

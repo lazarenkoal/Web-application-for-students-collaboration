@@ -11,7 +11,6 @@ using CocktionMVC.Models.Hubs;
 using CocktionMVC.Models.JsonModels;
 using CocktionMVC.Models.JsonModels.MobileClientModels;
 using Microsoft.AspNet.Identity;
-
 namespace CocktionMVC.Controllers.ApiControllers
 {
     public class AuctionController : ApiController
@@ -69,17 +68,17 @@ namespace CocktionMVC.Controllers.ApiControllers
         /// <returns>Лист с информацией о продуктах</returns>
         [Authorize]
         [HttpPost]
-        public List<ProductInfoMobile> GetAuctionBids(int id)
+        public List<ProductInfo> GetAuctionBids(int id)
         {
             CocktionContext db = new CocktionContext();
 
             //находим аукцион по айди
             Auction auction = db.Auctions.Find(id);
-            List<ProductInfoMobile> bidProducts = new List<ProductInfoMobile>();
+            List<ProductInfo> bidProducts = new List<ProductInfo>();
 
             //добавляем все в коллекцию
             foreach (var bid in auction.BidProducts)
-                bidProducts.Add(new ProductInfoMobile
+                bidProducts.Add(new ProductInfo
                     {
                         description = bid.Description.Trim(),
                         photoPath = @"http://cocktion.com/Images/Thumbnails/" + bid.Photo.FileName,
@@ -105,11 +104,11 @@ namespace CocktionMVC.Controllers.ApiControllers
         /// </summary>
         [Authorize]
         [HttpPost]
-        public async Task<AuctionApiRespondModels.AuctionCreateStatus> CreateAuction(CreateAuctionInfo auctionInfo)
+        public async Task<StatusAndPhotoPath> CreateAuction(CreateAuctionInfo auctionInfo)
         {
             //Заводим возвращалку статуса
-            AuctionApiRespondModels.AuctionCreateStatus info =
-                new AuctionApiRespondModels.AuctionCreateStatus();
+            StatusAndPhotoPath info =
+                new StatusAndPhotoPath();
             try
             {
                 //получаем информацию о пользователе
@@ -213,32 +212,6 @@ namespace CocktionMVC.Controllers.ApiControllers
             public int auctionId { get; set; }
         }
 
-        /// <summary>
-        /// Проверялка на то, является ли пользователь владельцем аукциона
-        /// </summary>
-        /// <returns>логический статус</returns>
-        [HttpPost]
-        [Authorize]
-        public IsOwnerResponder CheckIfOwner(AuctionId auctId)
-        {
-            try
-            {
-                CocktionContext db = new CocktionContext();
-
-                //находим аукцион и пользователя
-                var auction = db.Auctions.Find(auctId.auctionId);
-                string currentUserId = User.Identity.GetUserId();
-
-                //проверяем является ли пользователь владельцем
-                bool isOwner = auction.Owner.Id == currentUserId ? true : false;
-
-                return new IsOwnerResponder(isOwner);
-            }
-            catch
-            {
-                return new IsOwnerResponder(null);
-            }
-        }
 
         /// <summary>
         /// Завершает аукцион с мобильника

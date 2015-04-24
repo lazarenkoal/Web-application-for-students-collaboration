@@ -3,7 +3,7 @@
     /// <summary>
     /// Контейнер для информации о товаре
     /// </summary>
-    public class ProductInfo
+    public class ProductMVCInfo
     {
         /// <summary>
         /// Наименование продукта

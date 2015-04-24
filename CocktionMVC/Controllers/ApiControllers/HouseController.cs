@@ -107,6 +107,11 @@ namespace CocktionMVC.Controllers.ApiControllers
             public int houseId { get; set; }
         }
 
+        /// <summary>
+        /// Позволяет отписываться от дома.
+        /// </summary>
+        /// <param name="id">Айдишник дома, от которого надо отписаться</param>
+        /// <returns>Стандартный ответ</returns>
         [HttpPost]
         [Authorize]
         public StatusHolder UnsubscribeFromHouse(IdContainer id)
@@ -129,7 +134,11 @@ namespace CocktionMVC.Controllers.ApiControllers
             }
         }
 
-
+        /// <summary>
+        /// Позволяет подписаться на дом
+        /// </summary>
+        /// <param name="id">Айдишник дома, на который надо подписаться</param>
+        /// <returns>Стандартный ответ</returns>
         [HttpPost]
         [Authorize]
         public StatusHolder SubscribeOnHouse(IdContainer id)

@@ -10,7 +10,6 @@ using CocktionMVC.Models.DAL;
 using Microsoft.AspNet.Identity;
 using CocktionMVC.Models.Hubs;
 
-// ReSharper disable once CheckNamespace
 namespace CocktionMVC.Controllers
 {
     public class BidAuctionCreatorController : Controller
@@ -69,22 +68,17 @@ namespace CocktionMVC.Controllers
             //добавление фотографии для товара
             Picture photo = new Picture();
             PhotoProcessor.CreateAndSavePicture(photo, Request, 90);
+            product.Photo = photo;
+
 
             auction.Rating = (int)(user.Rating * 0.4);
 
             //добавляем пользователю немного рейтинга
             RatingManager.IncreaseRating(user, "userMadeAuction");
 
-            product.Photo = photo;
 
-            //await DbItemsAdder.AddAuctionProductPhotoAsync(db, auction, product, photo, user);
-            db.Auctions.Add(auction);
-            db.Products.Add(product);
-            db.Pictures.Add(photo);
-            user.HisAuctions.Add(auction);
-            user.HisProducts.Add(product);
-            db.SaveChanges();
-            //TODO апдейтим список c аукционами
+            await DbItemsAdder.AddAuctionProductPhotoAsync(db, auction, product, photo, user);
+
             AuctionListHub.UpdateList(product.Name, product.Description, product.Category,auction.EndTime,
                 photo.FileName, auction.Id);
 
@@ -125,7 +119,7 @@ namespace CocktionMVC.Controllers
             int id = int.Parse(auctionId);
 
             //Создаем товар для базы данных
-            Product product = new Product(bidName, bidDescription, bidCategory, user);
+            Product product = new Product(bidName, bidDescription, bidCategory, false, user);
 
             product.Photo = photo;
 
@@ -174,37 +168,28 @@ namespace CocktionMVC.Controllers
             //Инициализируем фоточку
             Picture photo = new Picture();
             PhotoProcessor.CreateAndSavePicture(photo, Request, 60);
-           
-            //Создаем товар для базы данных
-            Product product = new Product(bidName, bidDescription, bidCategory, user);
-            product.Photo = photo;
-            product.IsOnAuctionAsALot = false;
 
             //добавляем продукт
             //Коннектимся к базе
             int id = int.Parse(auctionId);
-            db.Auctions.Find(id).BidProducts.Add(product);
-          //  product.SelfAuction = db.Auctions.Find(id);
-            user.HisProducts.Add(product);
-
-            //находи кластер
-            BidCluster bidCluster = new BidCluster();
-            bidCluster.UserId = User.Identity.GetUserId();
-            bidCluster.HostAuction = db.Auctions.Find(id);
-            bidCluster.Products.Add(product);
+            Auction auction = db.Auctions.Find(id);
 
             //добавляем рейтинг пользователю и аукциону
             RatingManager.IncreaseRating(user, "userPlacedBet");
             RatingManager.IncreaseRating(db.Auctions.Find(id), user, "userBeted");
-            product.SelfAuction = db.Auctions.Find(id);
+
+            //Создаем товар для базы данных
+            Product product = new Product(bidName, bidDescription, bidCategory, false, photo, user,
+                auction);
+            
+            //находи кластер
+            BidCluster bidCluster = new BidCluster(User.Identity.GetUserId(), auction);
+            bidCluster.Products.Add(product);
+            auction.BidProducts.Add(product);
+            user.HisProducts.Add(product);
 
             //сохраняем все в базу
-            //await DbItemsAdder.AddProduct(db, product, photo, bidCluster);
-
-            db.Products.Add(product);
-            db.Pictures.Add(photo);
-            db.AuctionBids.Add(bidCluster);
-            db.SaveChanges();
+            await DbItemsAdder.AddProduct(db, product, photo, bidCluster);
 
             //добавляем нодики на клиенты
             AuctionHub.AddNodesToClients(bidName, photo.FileName, id, product.Id);

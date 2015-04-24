@@ -3,7 +3,7 @@
     /// <summary>
     /// Логин/Пароль контейнер для мобильника
     /// </summary>
-    public class MobileUserLogin
+    public class LoginCredentials
     {
         /// <summary>
         /// Почтовый адрес, он же - логин

@@ -8,7 +8,10 @@ function  checkSubscription(modelId) {
         if (xhr.readyState == 4 && xhr.status == 200) {
             response = JSON.parse(xhr.responseText);
             if (response.Status == "Success") {
-                document.getElementById('subscribe').innerHTML = "<p>В вашем колхозе  <span class=\"glyphicon glyphicon-ok\"></span></p>";
+                document.getElementById('subscribe').innerHTML = "<p>В вашем колхозе  <span class=\"glyphicon glyphicon-ok\"></span></p>" +
+                    "<p>Удалить из колхоза<button class=\"btn btn-default\" onclick=\"unsubscribeFromHouse()\">" +
+                    "<span class=\"glyphicon glyphicon-remove\"></span></button></p>"
+                
             } else {
                 document.getElementById('subscribe').innerHTML = "<p>Добавить в колхоз " + "<button class=\"btn btn-default\" onclick=\"subscribeOnHouse()\">" +
                 "<span class=\"glyphicon glyphicon-plus\"></span></button></p>";
@@ -19,6 +22,28 @@ function  checkSubscription(modelId) {
     xhr.open('POST', '/Subscription/CheckHouseSubscription');
     xhr.send(formData); //отправка данных
 }
+
+function unsubscribeFromHouse() {
+    var formData = new FormData();
+    formData.append('houseId', houseId);
+    
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var response = JSON.parse(xhr.responseText);
+            if (response.Status) {
+                document.getElementById('subscribe').innerHTML = "<p>Удален из колхоза! <span class=\"glyphicon glyphicon-ok\"></span></p>";
+            } else {
+                document.getElementById('subscribe').innerHTML = "<p>Попробуйте еще раз ;(</p>";
+            }
+        };
+    }
+
+    xhr.open('POST', '/Subscription/UsubscribeFromHouse');
+    xhr.send(formData); //отправка данных
+}
+
 
 var houseId;
 function subscribeOnHouse() {

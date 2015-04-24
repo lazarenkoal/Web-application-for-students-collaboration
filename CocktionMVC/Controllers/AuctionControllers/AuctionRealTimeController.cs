@@ -135,7 +135,7 @@ namespace CocktionMVC.Controllers
             string productId = Request.Form.GetValues("Id")[0];
             var db = new CocktionContext();
             Product product = await db.Products.FindAsync(int.Parse(productId));
-            ProductInfo info = new ProductInfo
+            ProductMVCInfo info = new ProductMVCInfo
             {
                 Name = product.Name,
                 Description = product.Description,

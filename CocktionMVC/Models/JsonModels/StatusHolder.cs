@@ -1,5 +1,9 @@
 ﻿namespace CocktionMVC.Models.JsonModels
 {
+    /// <summary>
+    /// Контенер для стандартного ответа
+    /// сервера
+    /// </summary>
     public class StatusHolder
     {
         public StatusHolder() { }
@@ -11,7 +15,6 @@
             else
                 Status = "Failure";
         }
-
         public string Status { get; set; }
     }
 }

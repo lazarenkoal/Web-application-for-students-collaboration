@@ -2,7 +2,6 @@
 using System.Web.Mvc;
 using CocktionMVC.Models.DAL;
 
-// ReSharper disable once CheckNamespace
 namespace CocktionMVC.Controllers
 {
     public class AuctionShowerController : Controller

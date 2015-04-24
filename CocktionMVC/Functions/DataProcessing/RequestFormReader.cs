@@ -30,6 +30,22 @@ namespace CocktionMVC.Functions
         }
 
         /// <summary>
+        /// Читает данные из формы с изменением информации профиля пользователя
+        /// </summary>
+        /// <param name="request">Запрос с формой</param>
+        /// <param name="name">Имя пользователя</param>
+        /// <param name="surname">Фамилия пользователя</param>
+        /// <param name="school">Универ/школа пользователя</param>
+        public static void ReadEditUserInfo(HttpRequestBase request, out string name,
+            out string surname, out string school)
+        {
+            name = request.Form.GetValues("name")[0];
+            surname = request.Form.GetValues("surname")[0];
+            school = request.Form.GetValues("school")[0];
+        }
+
+
+        /// <summary>
         /// Читает данные из формы с добавлением лидера аукциона
         /// </summary>
         /// <param name="request">Запрос, который содержит форму с информацией о лидере</param>

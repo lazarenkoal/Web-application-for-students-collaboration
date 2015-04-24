@@ -4,7 +4,7 @@
     /// Класс для вывода информации о продукте
     /// на мобильный клиент
     /// </summary>
-    public class  ProductInfoMobile
+    public class  ProductInfo
     {
         /// <summary>
         /// Наименование продукта

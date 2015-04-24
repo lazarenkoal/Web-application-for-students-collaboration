@@ -207,6 +207,7 @@
     <Compile Include="Controllers\ApiControllers\DataController.cs" />
     <Compile Include="Controllers\ApiControllers\HouseController.cs" />
     <Compile Include="Controllers\ApiControllers\ProfileController.cs" />
+    <Compile Include="Controllers\ApiControllers\UsersController.cs" />
     <Compile Include="Controllers\DataControllers\AuctionShowerController.cs" />
     <Compile Include="Controllers\DataControllers\SearchController.cs" />
     <Compile Include="Controllers\DataControllers\UsersController.cs" />
@@ -227,7 +228,7 @@
     <Compile Include="Functions\DataProcessing\RequestFormReader.cs" />
     <Compile Include="Functions\EmailSender.cs" />
     <Compile Include="Functions\RatingManager.cs" />
-    <Compile Include="Functions\ThumbnailGenerator.cs" />
+    <Compile Include="Functions\DataProcessing\ThumbnailGenerator.cs" />
     <Compile Include="Functions\DbItemsAdder.cs" />
     <Compile Include="Functions\ToteResultsManager.cs" />
     <Compile Include="Global.asax.cs">
@@ -391,31 +392,30 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DAL\Auction\BidCluster.cs" />
-    <Compile Include="Models\DAL\AuctionHouse\ForumPost.cs" />
-    <Compile Include="Models\DAL\Interest.cs" />
-    <Compile Include="Models\DAL\Picture.cs" />
-    <Compile Include="Models\DAL\PrivateMessage.cs" />
-    <Compile Include="Models\DAL\UsersFeedback.cs" />
-    <Compile Include="Models\DAL\HouseHolder.cs" />
+    <Compile Include="Models\DAL\Houses\ForumPost.cs" />
+    <Compile Include="Models\DAL\ExtraData\Interest.cs" />
+    <Compile Include="Models\DAL\ExtraData\Picture.cs" />
+    <Compile Include="Models\DAL\ExtraData\PrivateMessage.cs" />
+    <Compile Include="Models\DAL\ExtraData\UsersFeedback.cs" />
+    <Compile Include="Models\DAL\Houses\HouseHolder.cs" />
     <Compile Include="Models\Hubs\MessageHub.cs" />
     <Compile Include="Models\JsonModels\HouseRelatedModels\ForumPostMobile.cs" />
     <Compile Include="Models\JsonModels\HouseRelatedModels\Guild.cs" />
     <Compile Include="Models\JsonModels\HouseRelatedModels\GuildsHouse.cs" />
     <Compile Include="Models\JsonModels\HouseRelatedModels\HouseMobile.cs" />
-    <Compile Include="Models\JsonModels\MobileClientModels\AuctionApiRespondModels.cs" />
-    <Compile Include="Models\JsonModels\MobileClientModels\AuctionInfo.cs" />
-    <Compile Include="Models\DAL\AuctionHouse\House.cs" />
+    <Compile Include="Models\JsonModels\MobileModels\StatusAndPhotoPath.cs" />
+    <Compile Include="Models\JsonModels\MobileModels\AuctionInfo.cs" />
+    <Compile Include="Models\DAL\Houses\House.cs" />
     <Compile Include="Models\JsonModels\BidRelatedModels\BidChecker.cs" />
     <Compile Include="Models\JsonModels\HouseRelatedModels\ForumRespond.cs" />
     <Compile Include="Models\JsonModels\HouseRelatedModels\HouseRespond.cs" />
-    <Compile Include="Models\JsonModels\MobileClientModels\HouseInfo.cs" />
-    <Compile Include="Models\JsonModels\MobileClientModels\IsOwnerResponder.cs" />
-    <Compile Include="Models\JsonModels\MobileClientModels\RegisterUserData.cs" />
-    <Compile Include="Models\JsonModels\ProductInfo.cs" />
+    <Compile Include="Models\JsonModels\MobileModels\HouseInfo.cs" />
+    <Compile Include="Models\JsonModels\MobileModels\RegisterData.cs" />
+    <Compile Include="Models\JsonModels\MobileModels\UserInfo.cs" />
+    <Compile Include="Models\JsonModels\ProductMVCInfo.cs" />
     <Compile Include="Models\JsonModels\StatusHolder.cs" />
-    <Compile Include="Models\JsonModels\YaMapsModels\LocationInfo.cs" />
-    <Compile Include="Models\JsonModels\MobileClientModels\MobileUserLogin.cs" />
-    <Compile Include="Models\JsonModels\MobileClientModels\TokenResponse.cs" />
+    <Compile Include="Models\JsonModels\MobileModels\LoginCredentials.cs" />
+    <Compile Include="Models\JsonModels\MobileModels\TokenResponse.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\DAL\AspNet\AspNetRole.cs" />
     <Compile Include="Models\DAL\AspNet\AspNetUser.cs" />
@@ -429,7 +429,7 @@
     <Compile Include="Models\DAL\Tote\ToteEntity.cs" />
     <Compile Include="Models\DAL\Tote\ToteResult.cs" />
     <Compile Include="Models\JsonModels\BidRelatedModels\BidSeller.cs" />
-    <Compile Include="Models\JsonModels\MobileClientModels\ProductInfoMobile.cs" />
+    <Compile Include="Models\JsonModels\MobileModels\ProductInfo.cs" />
     <Compile Include="Models\JsonModels\ToteRelatedModels\ToteEggsInfo.cs" />
     <Compile Include="Models\Hubs\AuctionListHub.cs" />
     <Compile Include="Models\Hubs\AuctionHub.cs" />
@@ -505,7 +505,6 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Functions\Images\Thumbnails\placeholder.jpg" />
     <Content Include="RecaptchaNet.ReadMe.txt" />
     <Content Include="Scripts\Bootstrap\bootstrap.js" />
     <Content Include="Scripts\Bootstrap\bootstrap.min.js" />
@@ -635,7 +634,6 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Functions\Images\Photos\" />
     <Folder Include="Scripts\MyLib\Data\" />
   </ItemGroup>
   <ItemGroup>

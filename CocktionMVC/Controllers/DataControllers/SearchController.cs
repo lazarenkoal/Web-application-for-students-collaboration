@@ -5,8 +5,16 @@ using CocktionMVC.Models.DAL;
 
 namespace CocktionMVC.Controllers.DataControllers
 {
+    /// <summary>
+    /// Содержит методы, используемые для поиска
+    /// университетов, аукционов и т.д.
+    /// </summary>
     public class SearchController : Controller
     {
+        /// <summary>
+        /// Контейнер для информации, которую поиск
+        /// хочет рассказать пользователю.
+        /// </summary>
         class SearchResults
         {
              public string[] Names { get; set; }
@@ -19,6 +27,10 @@ namespace CocktionMVC.Controllers.DataControllers
             }
         }
 
+        /// <summary>
+        /// Позволяет искать университет
+        /// </summary>
+        /// <returns>Ответ с информацией о том, нашел или нет.</returns>
         [HttpPost]
         [Authorize]
         public JsonResult SearchUniversity()
@@ -35,6 +47,10 @@ namespace CocktionMVC.Controllers.DataControllers
             return Json(new SearchResults(names, false));
         }
 
+        /// <summary>
+        /// Контейнер для выдачи поиском информации о 
+        /// факультете.
+        /// </summary>
         class FacultyList
         {
             public string[] Names { get; set; }
@@ -50,6 +66,11 @@ namespace CocktionMVC.Controllers.DataControllers
 
         }
 
+        /// <summary>
+        /// Позволяет получить список факультетов, которые находятся
+        /// в данном вузе
+        /// </summary>
+        /// <returns>Джейсон с факультетами</returns>
         [HttpPost]
         [Authorize]
         public JsonResult GetFacultyList()
@@ -76,11 +97,18 @@ namespace CocktionMVC.Controllers.DataControllers
             }
         }
 
+        /// <summary>
+        /// Главная поисковая страница
+        /// </summary>
         public ActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// Ищет по всем-всем аукционам
+        /// </summary>
+        /// <returns>Аукционы, найденные по строке поиска</returns>
         public JsonResult SearchEverywhere()
         {
             string searchString = Request.Form.GetValues("searchString")[0];
@@ -103,6 +131,10 @@ namespace CocktionMVC.Controllers.DataControllers
             return Json(new GlobalSearchResults(auctions, false));
         }
 
+        /// <summary>
+        /// Контейнер для информации об аукционе,
+        /// который находится поиском
+        /// </summary>
         public class Info
         {
             public Info(string name, int id, string photo, string description)
@@ -118,6 +150,9 @@ namespace CocktionMVC.Controllers.DataControllers
             public string Description { get; set; }
         }
 
+        /// <summary>
+        /// Контейнер для результатов поиска по всем аукционам
+        /// </summary>
         public class GlobalSearchResults
         {
             public GlobalSearchResults(Info[] auctions, bool isEmpty)

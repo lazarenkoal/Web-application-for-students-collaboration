@@ -7,32 +7,24 @@ namespace CocktionMVC.Models.DAL
     {
         public Product()
         {
-           // Auctions = new HashSet<Auction>();
-            //BidAuctions = new HashSet<Auction>();
             BidClusters = new HashSet<BidCluster>();
         }
 
         public Product(string name, string description, string category,
-             bool isOnAuctionAsALot, AspNetUser user)
+             bool isOnAuctionAsALot, Picture photo, AspNetUser user, Auction auction) 
+            : this(name,description, category, isOnAuctionAsALot, user)
         {
-            //Auctions = new HashSet<Auction>();
-            //BidAuctions = new HashSet<Auction>();
-            BidClusters = new HashSet<BidCluster>();
+            Photo = photo;
+            SelfAuction = auction;
+        }
+
+        public Product(string name, string description, string category,
+             bool isOnAuctionAsALot, AspNetUser user) : this()
+        {
             Name = name;
             Description = description;
             Category = category;
             IsOnAuctionAsALot = isOnAuctionAsALot;
-            Owner = user;
-        }
-
-        public Product(string name, string description, string category, AspNetUser user)
-        {
-            //Auctions = new HashSet<Auction>();
-            //BidAuctions = new HashSet<Auction>();
-            BidClusters = new HashSet<BidCluster>();
-            Description = description;
-            Name = name;
-            Category = category;
             Owner = user;
         }
 
@@ -53,9 +45,6 @@ namespace CocktionMVC.Models.DAL
         public bool IsOnAuctionAsALot { get; set; }
 
         public virtual AspNetUser Owner { get; set; }
-
-       // public virtual ICollection<Auction> Auctions { get; set; }
-        //public virtual ICollection<Auction> BidAuctions { get; set; }
 
         public virtual ICollection<BidCluster> BidClusters { get; set; }
 

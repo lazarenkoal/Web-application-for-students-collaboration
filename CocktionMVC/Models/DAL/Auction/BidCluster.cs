@@ -10,6 +10,11 @@ namespace CocktionMVC.Models.DAL
     /// </summary>
     public class BidCluster
     {
+        public BidCluster(string userId, Auction auction) : this()
+        {
+            UserId = userId;
+            HostAuction = auction;
+        }
 
         public BidCluster()
         {

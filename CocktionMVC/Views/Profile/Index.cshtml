@@ -187,6 +187,7 @@
                     <p><b>Общество: </b>@Model.SocietyName</p>
                 }
             }
+            <p><b>Ставок сделал: </b>@Model.HisProducts.Count</p>
         </div>
     </div>
     <div class="col-md-7" id="userLifePos">
@@ -282,6 +283,29 @@
 <br/>
 <br/>
 
+<script>
+    function unsubscribeFromUser(userId) {
+        var formData = new FormData();
+        formData.append('userId', userId);
+        var xhr = new XMLHttpRequest();
+        var response;
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                response = JSON.parse(xhr.responseText);
+                if (response.Status == "Success") {
+                    document.getElementById("id_"+userId).innerHTML = "<p>Удален</p>";
+                } else {
+                    document.getElementById("id_" + userId).innerHTML = "<p>Попробуйте еще раз, пожалуйста... <span class=\"glyphicon glyphicon-ok\"></span></p>";
+
+                }
+            };
+        }
+
+        xhr.open('POST', '/Subscription/UnsubscribeFromUser');
+        xhr.send(formData); //отправка данных
+    }
+</script>
+
 <div class="row" id="usersSubs"> <!--Подписки пользователя на людей-->
     <h4 style="text-align: center">Ваши подписки</h4>
     <div class="col-md-4"></div>
@@ -289,7 +313,7 @@
         @{
             foreach (var user in Model.Friends)
             {
-                <p>@user.UserName</p>
+                <p id="id_@user.Id">@user.UserName <button onclick="unsubscribeFromUser('@user.Id')">Удалить</button></p>
             }
         }
     </div>

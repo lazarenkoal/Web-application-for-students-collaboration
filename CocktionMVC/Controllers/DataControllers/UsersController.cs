@@ -42,16 +42,8 @@ namespace CocktionMVC.Controllers
         public ActionResult GetUser(string id)
         {
             CocktionContext db = new CocktionContext();
-
             //находим пользователя
             var user = db.AspNetUsers.Find(id);
-            //TODO собираем количество побед
-
-            //TODO интересы
-
-            //TODO подписки
-
-            //TODO количество дней с нами
 
             return View(user);
         }

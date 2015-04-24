@@ -76,6 +76,10 @@ namespace CocktionMVC.Controllers.AdminControllers
             return Json(new StatusHolder(true));
         }
 
+        /// <summary>
+        /// Удаляет дом, указанный в айдишнике
+        /// </summary>
+        /// <returns>Стандартный ответ</returns>
         [HttpPost]
         public JsonResult DeleteHouse()
         {
@@ -87,6 +91,10 @@ namespace CocktionMVC.Controllers.AdminControllers
             return Json(new StatusHolder(true));
         }
 
+        /// <summary>
+        /// Удаляет указанный в айдишнике холдер
+        /// </summary>
+        /// <returns>стандартный ответ</returns>
         [HttpPost]
         public JsonResult DeleteHolder()
         {
@@ -105,6 +113,11 @@ namespace CocktionMVC.Controllers.AdminControllers
 
         }
 
+        /// <summary>
+        /// Позволяет редактировать холдер,
+        /// указанный в айдишнике 
+        /// </summary>
+        /// <returns>Стандартный ответ</returns>
         [HttpPost]
         [Authorize]
         public JsonResult EditHolder()
@@ -140,6 +153,10 @@ namespace CocktionMVC.Controllers.AdminControllers
             return Json(new StatusHolder(true));
         }
 
+        /// <summary>
+        /// Позволяет редактировать нужный дом
+        /// </summary>
+        /// <returns>Стандартный ответ</returns>
         [HttpPost]
         [Authorize]
         public JsonResult EditHouse()
@@ -181,6 +198,10 @@ namespace CocktionMVC.Controllers.AdminControllers
             return Json(new StatusHolder(true));
         }
 
+        /// <summary>
+        /// Добавляет холдера
+        /// </summary>
+        /// <returns>Стандартный ответ</returns>
         [HttpPost]
         [Authorize]
         public JsonResult AddHolder()

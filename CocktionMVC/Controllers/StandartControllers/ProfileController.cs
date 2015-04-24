@@ -80,17 +80,25 @@ namespace CocktionMVC.Controllers.StandartControllers
             public string FileName { get; set; }
         }
 
+        /// <summary>
+        /// Добавляет пользователю аватарку
+        /// </summary>
+        /// <returns>Ответ с путем к аватарке и инфой получилось или нет</returns>
         public JsonResult AddPhotoToUser()
         {
             try
             {
                 var userId = User.Identity.GetUserId();
                 CocktionContext db = new CocktionContext();
+
                 var user = db.AspNetUsers.Find(userId);
+
                 Picture selfie = new Picture();
                 PhotoProcessor.CreateAndSavePicture(selfie, Request, 200);
+
                 user.Selfie = selfie;
                 db.SaveChanges();
+                
                 return Json(new SelfieRespond(user.Selfie.FileName, true));
             }
             catch
@@ -122,6 +130,10 @@ namespace CocktionMVC.Controllers.StandartControllers
             return View();
         }
 
+        /// <summary>
+        /// Добавляет интересы пользователя 
+        /// </summary>
+        /// <returns>Стандартный ответ сервака</returns>
         [HttpPost]
         [Authorize]
         public JsonResult AddInterests()
@@ -131,10 +143,12 @@ namespace CocktionMVC.Controllers.StandartControllers
                 string ids = Request.Form.GetValues("ids")[0];
                 string[] sep = {"int_"};
                 string[] idcont = ids.Split(sep, StringSplitOptions.RemoveEmptyEntries);
+
                 int i = 0;
                 int[] idint = new int[idcont.Length];
                 Array.ForEach(idcont, x => idint[i++] = int.Parse(x));
                 CocktionContext db = new CocktionContext();
+
                 var user = db.AspNetUsers.Find(User.Identity.GetUserId());
                 for (int j = 0; j < idint.Length; j++)
                 {
@@ -149,29 +163,32 @@ namespace CocktionMVC.Controllers.StandartControllers
             }
         }
 
+        /// <summary>
+        /// Позволяет редактировать информацию пользователя
+        /// </summary>
+        /// <returns></returns>
         public JsonResult EditProfileInformation()
         {
             try
             {
-                string name = Request.Form.GetValues("name")[0];
-                string surname = Request.Form.GetValues("surname")[0];
-                string school = Request.Form.GetValues("school")[0];
+                string name;
+                string surname;
+                string school;
+
+                RequestFormReader.ReadEditUserInfo(Request, out name, out surname, out school);
 
                 CocktionContext db = new CocktionContext();
                 var user = db.AspNetUsers.Find(User.Identity.GetUserId());
 
                 if (name.Length != 0)
-                {
                     user.UserRealName = name;
-                }
+
                 if (surname.Length != 0)
-                {
                     user.UserRealSurname = surname;
-                }
+                
                 if (school.Length != 0)
-                {
                     user.SocietyName = school;
-                }
+
                 db.SaveChanges();
                 return Json(new StatusHolder(true));
             }

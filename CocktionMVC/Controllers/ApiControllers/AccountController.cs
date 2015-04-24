@@ -30,7 +30,7 @@ namespace CocktionMVC.Controllers.ApiControllers
         /// <param name="data">Данные для регистрации</param>
         /// <returns>Результат регистрации</returns>
         [HttpPost]
-        public async Task<StatusHolder> Registrate(RegisterUserData data)
+        public async Task<StatusHolder> Registrate(RegisterData data)
         {
             var user = new ApplicationUser
             {
@@ -57,7 +57,7 @@ namespace CocktionMVC.Controllers.ApiControllers
         /// <param name="model">Модель с логином и паролем</param>
         /// <returns>Токен для авторизации последующей</returns>
         [HttpPost]
-        public TokenResponse Authenticate(MobileUserLogin model)
+        public TokenResponse Authenticate(LoginCredentials model)
         {
             //полчуаем информацию о пользоватлее
             string user = model.Email, password = model.Password;

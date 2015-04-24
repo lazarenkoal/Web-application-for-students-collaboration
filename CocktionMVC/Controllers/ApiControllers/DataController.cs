@@ -9,11 +9,16 @@ using CocktionMVC.Functions;
 using CocktionMVC.Models.DAL;
 using CocktionMVC.Models.JsonModels;
 using CocktionMVC.Models.JsonModels.MobileClientModels;
-
+using Microsoft.AspNet.Identity;
 namespace CocktionMVC.Controllers.ApiControllers
 {
     public class DataController : ApiController
     {
+        /// <summary>
+        /// Посылает все дома на кокшне
+        /// человеку
+        /// </summary>
+        /// <returns></returns>
         [Authorize]
         [HttpPost]
         public List<HouseInfo> GetHouses()
@@ -38,11 +43,17 @@ namespace CocktionMVC.Controllers.ApiControllers
             public string name { get; set; }
         }
 
+        /// <summary>
+        /// Ищет аукционы по указанной строке
+        /// </summary>
+        /// <param name="searchString">че ищем</param>
+        /// <returns>Коллекцию с аукционами, удовлетворяющими критериям поиска</returns>
         [Authorize]
         [HttpPost]
         public List<AuctionInfo> FindAuctions(SearchString searchString)
         {
             CocktionContext db = new CocktionContext();
+            var user = db.AspNetUsers.Find(User.Identity.GetUserId());
             DateTime controlTime = DateTimeManager.GetCurrentTime();
             List<Auction> aciveAuctions;
             aciveAuctions = (from x in db.Auctions
@@ -59,7 +70,8 @@ namespace CocktionMVC.Controllers.ApiControllers
                                 (int)x.EndTime.Subtract(controlTime).TotalMinutes,
                                 @"http://cocktion.com/Images/Thumbnails/" + x.SellProduct.Photo.FileName,
                                 x.SellProduct.Name.Trim(), x.Id, x.LeadProduct == null ? -1 : x.LeadProduct.Id,
-                                x.SellProduct.Category.Trim(), new ownerInfo(x.Owner.Id, x.Owner.UserName, x.Owner.Selfie.FileName),
+                                x.SellProduct.Category.Trim(), new UserInfo(x.Owner.Id, x.Owner.UserName, x.Owner.Selfie.FileName,
+                                    user.Friends.Contains(x.Owner)),
                                 (x.IsActive && (controlTime < x.EndTime))));
                 }
             }
@@ -82,14 +94,6 @@ namespace CocktionMVC.Controllers.ApiControllers
             public string type { get; set; }
         }
 
-        [HttpPost]
-        public void DeleteAll()
-        {
-            CocktionContext db = new CocktionContext();
-            db.Auctions.RemoveRange(db.Auctions.ToList());
-            //db.Products.RemoveRange(db.Products.ToList());
-            db.SaveChanges();
-        }
 
         /// <summary>
         /// Добавляет фотографию на сервак

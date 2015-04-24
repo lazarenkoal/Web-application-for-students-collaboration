@@ -6,7 +6,6 @@ using CocktionMVC.Functions;
 using CocktionMVC.Models.DAL;
 using Microsoft.AspNet.Identity;
 
-// ReSharper disable once CheckNamespace
 namespace CocktionMVC.Controllers
 {
     /// <summary>
@@ -26,15 +25,9 @@ namespace CocktionMVC.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
-            /*TODO Сделать страничку с бесконечной прокруткой
-             * где будут отображаться все аукционы 
-             * 
-             * Подумать насчет фильтров (как их лучше прифигачить)
-             */
-
+            //TODO Сделать страничку с бесконечной прокруткой
             //Конвертим время
             var controlTime = DateTimeManager.GetCurrentTime();
-
             CocktionContext db = new CocktionContext();
 
             //Получаем все активные в данный момент аукционы
@@ -54,7 +47,6 @@ namespace CocktionMVC.Controllers
         [HttpGet]
         public ActionResult Create() //метод для создания находится в контроллере FileSaver
         {
-            //TODO сделать фильтр по универам
             return View();
         } //end of create
 

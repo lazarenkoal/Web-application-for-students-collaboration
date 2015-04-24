@@ -15,11 +15,19 @@ namespace CocktionMVC.Controllers.ApiControllers
 {
     public class ProfileController : ApiController
     {
+        /// <summary>
+        /// Контейнер для профайлайди поля
+        /// </summary>
         public class ProfileInfo
         {
             public string profileId { get; set; }
         }
 
+        /// <summary>
+        /// Посылает мобильному клиенту информацию о профиле пользователя
+        /// </summary>
+        /// <param name="profInf">Контейнер с айдишником</param>
+        /// <returns>Информацию о пользователе</returns>
         [HttpPost]
         [Authorize]
         public ProfileData GetInfo(ProfileInfo profInf)
@@ -47,6 +55,9 @@ namespace CocktionMVC.Controllers.ApiControllers
 
         }
 
+        /// <summary>
+        /// Контейнер для информации о доме.
+        /// </summary>
         public class ShortHouseData
         {
             public ShortHouseData(int id, string holderName, string houseName, string photoPath)
@@ -62,6 +73,10 @@ namespace CocktionMVC.Controllers.ApiControllers
 
             public string photoPath {get; set;}
         }
+
+        /// <summary>
+        /// Контейнер для информации о профиле пользователя.
+        /// </summary>
         public class ProfileData
         {
             public string name { get; set; }
@@ -90,7 +105,11 @@ namespace CocktionMVC.Controllers.ApiControllers
             }
         }
 
-
+        /// <summary>
+        /// Позволяет получить список всех домов,
+        /// на которые подписан пользователь
+        /// </summary>
+        /// <returns>Коллекцию с информацией о домах</returns>
         [HttpPost]
         [Authorize]
         public List<ShortHouseData> GetMyHouses()
@@ -103,6 +122,10 @@ namespace CocktionMVC.Controllers.ApiControllers
             return data;
         }
 
+        /// <summary>
+        /// Контейнер для информации об аукционах, которые пользователь хочет
+        /// получить
+        /// </summary>
         public class UsersAuctionsHouses
         {
             public List<AuctionInfo> active { get; set; }
@@ -151,7 +174,9 @@ namespace CocktionMVC.Controllers.ApiControllers
                                 (int)x.EndTime.Subtract(controlTime).TotalMinutes,
                                 @"http://cocktion.com/Images/Thumbnails/" + x.SellProduct.Photo.FileName,
                                 x.SellProduct.Name.Trim(), x.Id, x.LeadProduct == null ? -1 : x.LeadProduct.Id,
-                                x.SellProduct.Category.Trim(), new ownerInfo(x.Owner.Id, x.Owner.UserName, x.Owner.Selfie.FileName),
+                                x.SellProduct.Category.Trim(), 
+                                new UserInfo(x.Owner.Id, x.Owner.UserName, x.Owner.Selfie.FileName, 
+                                    user.Friends.Contains(x.Owner)),
                                 isActive: true)).ToList();
             }
             catch
@@ -169,7 +194,9 @@ namespace CocktionMVC.Controllers.ApiControllers
                                   (int)x.EndTime.Subtract(controlTime).TotalMinutes,
                                   @"http://cocktion.com/Images/Thumbnails/" + x.SellProduct.Photo.FileName,
                                   x.SellProduct.Name.Trim(), x.Id, x.LeadProduct == null ? -1 : x.LeadProduct.Id,
-                                  x.SellProduct.Category.Trim(), new ownerInfo(x.Owner.Id, x.Owner.UserName, x.Owner.Selfie.FileName),
+                                  x.SellProduct.Category.Trim(), 
+                                  new UserInfo(x.Owner.Id, x.Owner.UserName, x.Owner.Selfie.FileName,
+                                      user.Friends.Contains(x.Owner)),
                                   isActive: false)).ToList();
             }
             catch
@@ -197,7 +224,8 @@ namespace CocktionMVC.Controllers.ApiControllers
                                      @"http://cocktion.com/Images/Thumbnails/" + hI.SellProduct.Photo.FileName,
                                      hI.SellProduct.Name.Trim(), hI.Id, hI.LeadProduct == null ? -1 : hI.LeadProduct.Id,
                                      hI.SellProduct.Category.Trim(),
-                                    new ownerInfo(thisOwner.Id, thisOwner.UserName, thisOwner.Selfie.FileName),
+                                    new UserInfo(thisOwner.Id, thisOwner.UserName, thisOwner.Selfie.FileName,
+                                        user.Friends.Contains(thisOwner)),
                                     isActive: true);
                         if (auctInfo != null)
                         {
@@ -244,7 +272,8 @@ namespace CocktionMVC.Controllers.ApiControllers
                                  auction.SellProduct.Name.Trim(), auction.Id,
                                 auction.LeadProduct == null ? -1 : auction.LeadProduct.Id,
                                 auction.SellProduct.Category.Trim(),
-                                new ownerInfo(auction.Owner.Id, auction.Owner.UserName, auction.Owner.Selfie.FileName),
+                                new UserInfo(auction.Owner.Id, auction.Owner.UserName, auction.Owner.Selfie.FileName,
+                                    user.Friends.Contains(auction.Owner)),
                                 isActive);
                                 if (!myBetsAuctions.Any(x => x.auctionId == aI.auctionId))
                                     myBetsAuctions.Add(aI);
@@ -274,6 +303,11 @@ namespace CocktionMVC.Controllers.ApiControllers
             return new UsersAuctionsHouses(myActive, myFinished, inHisHouses, myBetsAuctions);
         }
 
+
+        /// <summary>
+        /// Меняет пользовательскую аватарку
+        /// </summary>
+        /// <returns>Стандартный ответ сервера</returns>
         [HttpPost]
         [Authorize]
         public async Task<StatusHolder> UploadProfilePhoto()
@@ -316,6 +350,10 @@ namespace CocktionMVC.Controllers.ApiControllers
 
         }
 
+        /// <summary>
+        /// Служит в качестве контейнера для полей, котоыре
+        /// пользователь хочет поменять из мобильного клиента
+        /// </summary>
         public class ShortProfile
         {
             public string name { get; set; }
@@ -324,6 +362,16 @@ namespace CocktionMVC.Controllers.ApiControllers
             public string city { get; set; }
         }
 
+        /// <summary>
+        /// Позволяет пользователю редактировать информацию о профиле
+        /// Можно менять:
+        /// 1) Имя
+        /// 2) Фамилию
+        /// 3) Город
+        /// 4) Общество
+        /// </summary>
+        /// <param name="editInfo">Параметры для изменения</param>
+        /// <returns>Стандартный ответ сервера</returns>
         [HttpPost]
         [Authorize]
         public async Task<StatusHolder> EditProfile(ShortProfile editInfo)
@@ -345,7 +393,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                 if (!String.IsNullOrEmpty(editInfo.city))
                     user.City = editInfo.city;
 
-                db.SaveChanges();
+                await DbItemsAdder.SaveDb(db);
                 return new StatusHolder(true);
             }
             catch
@@ -353,6 +401,32 @@ namespace CocktionMVC.Controllers.ApiControllers
                 return new StatusHolder(false);
             }
             
+        }
+
+        /// <summary>
+        /// Позволяет получить список всех людей, на которых подписался
+        /// данный пользователь
+        /// </summary>
+        /// <returns>Коллекцию информаторов</returns>
+        [HttpPost]
+        [Authorize]
+        public List<UserInfo> GetMyInformators()
+        {
+            CocktionContext db = new CocktionContext();
+            var user = db.AspNetUsers.Find(User.Identity.GetUserId());
+            List<UserInfo> informators = new List<UserInfo>();
+            foreach (var i in user.Friends)
+            {
+                try
+                {
+                    informators.Add(new UserInfo(i.Id, i.UserName, i.Selfie.FileName, true));
+                }
+                catch
+                {
+
+                }
+            }
+            return informators;
         }
     }
 }

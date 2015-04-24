@@ -3,7 +3,7 @@
     /// <summary>
     /// Контейнер для данных для регистрации с мобильного клиента
     /// </summary>
-    public class RegisterUserData : MobileUserLogin
+    public class RegisterData : LoginCredentials
     {
         //нужны поля Email и Password c телефона
 
