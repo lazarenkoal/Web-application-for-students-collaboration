@@ -562,3 +562,17 @@
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.AuctionAddedToProduct.resources
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.csprojResolveAssemblyReference.cache
 \\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.CityAddedToUser.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\obj\Debug\CocktionMVC.Migrations.DebiceAdded.resources
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\PushSharp.Amazon.Adm.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\PushSharp.Android.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\PushSharp.Apple.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\PushSharp.Blackberry.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\PushSharp.Core.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\PushSharp.FirefoxOS.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\PushSharp.Google.Chrome.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\PushSharp.Windows.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\PushSharp.WindowsPhone.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Net.Http.Extensions.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Net.Http.Primitives.dll
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Net.Http.Extensions.xml
+\\psf\Home\Documents\cocktion.source\CocktionWorking2\CocktionMVC\bin\System.Net.Http.Primitives.xml

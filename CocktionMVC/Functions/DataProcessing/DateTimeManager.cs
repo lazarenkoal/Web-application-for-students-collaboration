@@ -80,6 +80,9 @@ namespace CocktionMVC.Functions
                 case "1weekTime":
                     auctionsEndTime = auctionsEndTime.AddDays(7);
                     break;
+                case "3minutesTime":
+                    auctionsEndTime = auctionsEndTime.AddMinutes(3);
+                    break;
             }
 
             //устанавливаем время окончания и начала аукциона

@@ -31,6 +31,8 @@ namespace CocktionMVC.Models.DAL
 
         public virtual DbSet<PrivateMessage> Messages { get; set; }
 
+        public virtual DbSet<Device> Devices { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Interest>()

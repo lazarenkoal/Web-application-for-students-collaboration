@@ -1,6 +1,6 @@
 ﻿using Microsoft.Owin;
 using Owin;
-
+using CocktionMVC.Functions;
 [assembly: OwinStartupAttribute(typeof(CocktionMVC.Startup))]
 namespace CocktionMVC
 {

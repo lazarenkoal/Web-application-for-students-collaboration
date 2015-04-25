@@ -10,6 +10,8 @@ using CocktionMVC.Models.DAL;
 using CocktionMVC.Models.JsonModels;
 using CocktionMVC.Models.JsonModels.MobileClientModels;
 using Microsoft.AspNet.Identity;
+using PushSharp.Apple;
+using PushSharp;
 namespace CocktionMVC.Controllers.ApiControllers
 {
     public class DataController : ApiController
@@ -37,6 +39,31 @@ namespace CocktionMVC.Controllers.ApiControllers
             }
             return houses;
         }
+
+        [HttpPost]
+        public void Register()
+        {
+            Notificator.RegisterAppleService();
+        }
+
+        public class Cool
+        {
+            public string message { get; set; }
+            public int badge { get; set; }
+            public string category { get; set; }
+        }
+
+
+        [HttpPost]
+        public void Send(Cool cool)
+        {
+            Notificator.Pusher.QueueNotification(new AppleNotification()
+                    .ForDeviceToken("95cb3fede67eaf1465eb9a2450b654fa325765f98d6f3729eba3f9d2f70c5dd9")
+                    .WithAlert(cool.message)
+                    .WithBadge(cool.badge).WithCategory(cool.category));
+        }
+
+
 
         public class SearchString
         {

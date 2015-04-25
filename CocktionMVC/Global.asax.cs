@@ -6,6 +6,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using CocktionMVC.Models.DAL;
 using CocktionMVC.Models;
+using CocktionMVC.Functions;
 
 namespace CocktionMVC
 {
@@ -21,7 +22,9 @@ namespace CocktionMVC
             Database.SetInitializer<CocktionContext>(null);
            ///Database.SetInitializer<ApplicationDbContext>(new DropCreateDatabaseIfModelChanges<ApplicationDbContext>());
             Database.SetInitializer<ApplicationDbContext>(null);
-
+            Notificator.Pusher = new PushSharp.PushBroker();
+           // Notificator.RegisterAppleService();
+            AuctionChecker.StartChecking();
         }
     }
 }
