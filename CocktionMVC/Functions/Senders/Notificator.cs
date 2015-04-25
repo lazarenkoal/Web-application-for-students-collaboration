@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace CocktionMVC.Functions
 {
@@ -25,6 +26,7 @@ namespace CocktionMVC.Functions
         {
             try
             {
+                Pusher = new PushBroker();
                 WebClient client = new WebClient();
                 var appleCert = client.DownloadData(@"http://cocktion.com/Content/Cocktion.Push.Development.p12");
                 client.Dispose();
@@ -46,6 +48,9 @@ namespace CocktionMVC.Functions
         /// <param name="badge">Бэдж, который надо показать</param>
         public static void SendNotification(Device device, string message, int badge)
         {
+            if (Pusher == null)
+                RegisterAppleService();
+
             switch(device.Type)
             {
                 case "ios":

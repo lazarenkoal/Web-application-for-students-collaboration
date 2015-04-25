@@ -1,4 +1,5 @@
-﻿using CocktionMVC.Models.DAL;
+﻿using CocktionMVC.Functions.Managers;
+using CocktionMVC.Models.DAL;
 using CocktionMVC.Models.Hubs;
 using System;
 using System.Collections.Generic;
@@ -16,14 +17,13 @@ namespace CocktionMVC.Functions
         /// </summary>
         public static void StartChecking()
         {
-            Timer aTimer = new Timer(18000000);
+            Timer aTimer = new Timer(3600000);
             aTimer.Elapsed += CheckAuctions;
-            // Hook up the Elapsed event for the timer. 
             aTimer.AutoReset = true;
             aTimer.Enabled = true;
-            //1 час = 3 600 000 млсек
-            //3 min = 180 000 млск
-			
+            //1 сек = 1000 млс
+            //1 min = 60 000
+            //1 hour = 3 600 000
         }
 
         /// <summary>
@@ -44,14 +44,17 @@ namespace CocktionMVC.Functions
                     {
                         //MessageHub.Send("Ваш аукцион закончен! Необходимо выбрать лидера!", "Кокшн",
                           //  auction.Owner.UserName, null, auction.Owner.Id);
+                        PrivateMessage message = new PrivateMessage("Ваш аукцион закончен и необходимо выбрать лидера",
+                            "Коки", auction.Owner.UserName, DateTimeManager.GetCurrentTime());
+                        auction.Owner.ChatMessages.Add(message);
                     }
                     else
                     {
-                        DbItemsAdder.FalseAuctionStatus(db, auction);
+                        FinishAuctionManager.FalseAuctionStatus(db, auction);
                     }
                 }
             }
-            //EmailSender.SendEmail("xyi", "auctionInfo", "lazarenko.ale@gmail.com");
+            db.SaveChanges();
         }
     }
 }

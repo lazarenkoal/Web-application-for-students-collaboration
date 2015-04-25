@@ -31,6 +31,10 @@ namespace CocktionMVC.Models.Hubs
                 CocktionContext db = new CocktionContext();
                 var userA = db.AspNetUsers.Find(authorId);
                 var userB = db.AspNetUsers.Find(receiverId);
+
+                if (userB.MobileDevice != null)
+                    Notificator.SendNotification(userB.MobileDevice, message, 1);
+
                 PrivateMessage privateMessage = new PrivateMessage(message, userA.UserName, userB.UserName,
                     DateTime.Now);
                 userA.ChatMessages.Add(privateMessage);

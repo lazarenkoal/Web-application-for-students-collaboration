@@ -20,10 +20,7 @@ namespace CocktionMVC
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             Database.SetInitializer<CocktionContext>(null);
-           ///Database.SetInitializer<ApplicationDbContext>(new DropCreateDatabaseIfModelChanges<ApplicationDbContext>());
             Database.SetInitializer<ApplicationDbContext>(null);
-            Notificator.Pusher = new PushSharp.PushBroker();
-           // Notificator.RegisterAppleService();
             AuctionChecker.StartChecking();
         }
     }

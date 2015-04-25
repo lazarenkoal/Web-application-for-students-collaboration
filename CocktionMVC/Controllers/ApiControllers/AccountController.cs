@@ -9,7 +9,8 @@ using CocktionMVC.Models.JsonModels.MobileClientModels;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Infrastructure;
 using Microsoft.Owin.Security;
-
+using CocktionMVC.Models.DAL;
+using Microsoft.AspNet.Identity;
 namespace CocktionMVC.Controllers.ApiControllers
 {
     public class AccountController : ApiController
@@ -87,6 +88,41 @@ namespace CocktionMVC.Controllers.ApiControllers
 
             //если не нашелся - возвращаем ошибку
             return new TokenResponse { Token = "Failure" };
+        }
+
+        public class DeviceInfo
+        {
+            public string type { get; set; }
+            public string token { get; set; }
+        }
+
+        [HttpPost]
+        [Authorize]
+        public StatusHolder AddDevice(DeviceInfo device)
+        {
+            try
+            {
+                CocktionContext db = new CocktionContext();
+                var user = db.AspNetUsers.Find(User.Identity.GetUserId());
+                switch(device.type)
+                {
+                    case "ios":
+                        user.MobileDevice = new Device(device.type, device.token);
+                        break;
+                    case "android":
+                        //do smth here
+                        break;
+                    case "wp":
+                        //do smth here
+                        break;
+                }
+                db.SaveChanges();
+                return new StatusHolder(true);
+            }
+            catch
+            {
+                return new StatusHolder(false);
+            }
         }
     }
 }

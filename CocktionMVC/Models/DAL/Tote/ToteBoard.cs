@@ -180,15 +180,13 @@ namespace CocktionMVC.Models.DAL
         /// Метод, завершающий тотализатор
         /// </summary>
         /// <param name="winProductId">Айдишник продукта - победителя</param>
-        public async Task FinishTote(int winProductId, CocktionContext db)
+        public void FinishTote(int winProductId, CocktionContext db)
         {
             //Рассчитать для каждого из пользователей результат аукциона.
             foreach (var i in Bids)
             {
                 SetResult(winProductId, i, db);
             }
-
-            await DbItemsAdder.SaveDb(db);
         }
 
         /// <summary>

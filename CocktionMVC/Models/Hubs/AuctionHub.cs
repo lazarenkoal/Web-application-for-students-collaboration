@@ -4,6 +4,7 @@ using CocktionMVC.Functions;
 using CocktionMVC.Models.DAL;
 using Microsoft.AspNet.SignalR;
 using WebGrease.Extensions;
+using CocktionMVC.Functions.Managers;
 
 namespace CocktionMVC
 {
@@ -94,7 +95,7 @@ namespace CocktionMVC
         {
             //заканчивать здесь аукцион
             CocktionContext db = new CocktionContext();
-            await DbItemsAdder.FalseAuctionStatus(db, auctionId);
+            await FinishAuctionManager.FalseAuctionStatus(db, auctionId);
             Clients.Group(auctionId.ToString()).finishAuction();
         }
 
@@ -107,7 +108,7 @@ namespace CocktionMVC
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<AuctionHub>();
             //заканчивать здесь аукцион
             CocktionContext db = new CocktionContext();
-            await DbItemsAdder.FalseAuctionStatus(db, auctionId);
+            await FinishAuctionManager.FalseAuctionStatus(db, auctionId);
             context.Clients.Group(auctionId.ToString()).finishAuction();
         }
 

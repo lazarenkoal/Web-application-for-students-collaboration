@@ -38,54 +38,6 @@ namespace CocktionMVC.Functions
         }
 
         /// <summary>
-        /// Деактивирует аукцион и асинхронно
-        /// выполняет сохранение данных в базу
-        /// </summary>
-        /// <param name="db">База, в которую надо сохранить изменения</param>
-        /// <param name="auctionId">Айди аукциона</param>
-        /// <returns></returns>
-        public static async Task FalseAuctionStatus(CocktionContext db, int auctionId)
-        {
-            //заканчиваем аукцион
-            Auction auction = db.Auctions.Find(auctionId);
-            auction.IsActive = false;
-            
-            //вырубаем тотализатор
-            await auction.AuctionToteBoard.FinishTote(auction.LeadProduct.Id, db);
-
-            //сохраняем изменения в базу данных
-            await Task.Run(() => db.SaveChangesAsync());
-        }
-
-        /// <summary>
-        /// Деактивирует аукцион и асинхронно
-        /// выполняет сохранение данных в базу
-        /// </summary>
-        /// <param name="db">База, в которую надо сохранить изменения</param>
-        /// <param name="auctionId">Айди аукциона</param>
-        /// <returns></returns>
-        public static async Task FalseAuctionStatus(CocktionContext db, Auction auction)
-        {
-            //заканчиваем аукцион
-            auction.IsActive = false;
-
-            //вырубаем тотализатор
-            await auction.AuctionToteBoard.FinishTote(auction.LeadProduct.Id, db);
-
-            //сообщение владельцу
-            //MessageHub.Send("Привет, ты выбрал меня победителем!", auction.LeadProduct.Owner.UserName,
-              //  auction.Owner.UserName, auction.LeadProduct.Owner.Id, auction.Owner.Id);
-
-            //сообщение победителю
-            //MessageHub.Send("Привет, я - владелец! Давай договоримся об обмене)", auction.Owner.UserName,
-              //  auction.LeadProduct.Owner.UserName, auction.Owner.Id, auction.LeadProduct.Owner.Id);
-
-            //сохраняем изменения в базу данных
-            await Task.Run(() => db.SaveChangesAsync());
-        }
-
-
-        /// <summary>
         /// Асинхронно добавляет аукцион,
         /// товар, фотку в базу
         /// </summary>

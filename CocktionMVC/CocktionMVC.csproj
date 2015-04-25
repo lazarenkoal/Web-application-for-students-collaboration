@@ -240,6 +240,7 @@
     <Compile Include="Controllers\ApiControllers\DataController.cs" />
     <Compile Include="Controllers\ApiControllers\HouseController.cs" />
     <Compile Include="Controllers\ApiControllers\ProfileController.cs" />
+    <Compile Include="Controllers\ApiControllers\TestController.cs" />
     <Compile Include="Controllers\ApiControllers\UsersController.cs" />
     <Compile Include="Controllers\DataControllers\AuctionShowerController.cs" />
     <Compile Include="Controllers\DataControllers\SearchController.cs" />
@@ -260,6 +261,7 @@
     <Compile Include="Functions\DataProcessing\HouseSerializer.cs" />
     <Compile Include="Functions\DataProcessing\PhotoProcessor.cs" />
     <Compile Include="Functions\DataProcessing\RequestFormReader.cs" />
+    <Compile Include="Functions\Managers\FinishAuctionManager.cs" />
     <Compile Include="Functions\Senders\Notificator.cs" />
     <Compile Include="Functions\Senders\EmailSender.cs" />
     <Compile Include="Functions\Managers\RatingManager.cs" />
