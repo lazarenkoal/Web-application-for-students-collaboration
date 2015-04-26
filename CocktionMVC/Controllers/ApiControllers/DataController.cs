@@ -27,14 +27,16 @@ namespace CocktionMVC.Controllers.ApiControllers
         {
             CocktionContext db = new CocktionContext();
             List<HouseInfo> houses = new List<HouseInfo>();
+            var user = db.AspNetUsers.Find(User.Identity.GetUserId());
             foreach (var house in db.Houses)
             {
                 houses.Add(new HouseInfo()
                 {
                     adress = house.Adress,
-                    faculty = house.Faculty,
+                    title = house.Faculty,
                     likes = house.Likes,
                     rating = house.Rating,
+                    isSubscribed = user.SubHouses.Contains(house)
                 });
             }
             return houses;

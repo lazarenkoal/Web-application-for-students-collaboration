@@ -9,7 +9,7 @@
         /// <summary>
         /// Наименование продукта
         /// </summary>
-        public string name { get; set; }
+        public string title { get; set; }
 
         /// <summary>
         /// Описание продукта

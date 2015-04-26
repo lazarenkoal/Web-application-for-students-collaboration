@@ -450,9 +450,7 @@
     <Compile Include="Models\DAL\Houses\House.cs" />
     <Compile Include="Models\JsonModels\BidRelatedModels\BidChecker.cs" />
     <Compile Include="Models\JsonModels\HouseRelatedModels\ForumRespond.cs" />
-    <Compile Include="Models\JsonModels\HouseRelatedModels\HouseRespond.cs" />
     <Compile Include="Models\JsonModels\MobileModels\HouseInfo.cs" />
-    <Compile Include="Models\JsonModels\MobileModels\RegisterData.cs" />
     <Compile Include="Models\JsonModels\MobileModels\UserInfo.cs" />
     <Compile Include="Models\JsonModels\ProductMVCInfo.cs" />
     <Compile Include="Models\JsonModels\StatusHolder.cs" />
@@ -547,6 +545,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\Thumbnails\anonPhoto.jpg" />
     <Content Include="RecaptchaNet.ReadMe.txt" />
     <Content Include="Scripts\Bootstrap\bootstrap.js" />
     <Content Include="Scripts\Bootstrap\bootstrap.min.js" />

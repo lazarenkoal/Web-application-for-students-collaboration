@@ -82,7 +82,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                     {
                         description = bid.Description.Trim(),
                         photoPath = @"http://cocktion.com/Images/Thumbnails/" + bid.Photo.FileName,
-                        name = bid.Name.Trim(),
+                        title = bid.Name.Trim(),
                         category = bid.Category.Trim(),
                         productId = bid.Id,
                     });
@@ -91,7 +91,7 @@ namespace CocktionMVC.Controllers.ApiControllers
 
         public class CreateAuctionInfo
         {
-            public string name { get; set; }
+            public string title { get; set; }
 
             public string description { get; set; }
             public string category { get; set; }
@@ -119,7 +119,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                 var user = db.AspNetUsers.Find(userId);
 
                 //создаем продукт и сохраняем информацию о нем.
-                Product product = new Product(auctionInfo.name, auctionInfo.description,
+                Product product = new Product(auctionInfo.title, auctionInfo.description,
                     auctionInfo.category, true, user);
 
                 //инициализация аукциона
@@ -207,11 +207,10 @@ namespace CocktionMVC.Controllers.ApiControllers
             }
         }
 
-        public class AuctionId
+        public class IdCont
         {
-            public int auctionId { get; set; }
+            public int id { get; set; }
         }
-
 
         /// <summary>
         /// Завершает аукцион с мобильника
@@ -219,7 +218,7 @@ namespace CocktionMVC.Controllers.ApiControllers
         /// <returns>Стандартный статус</returns>
         [HttpPost]
         [Authorize]
-        public async Task<StatusHolder> EndAuction(AuctionId aId)
+        public async Task<StatusHolder> EndAuction(IdCont aId)
         {
             //TODO решить проблему взаимодействия с клиентами. Они не могут узнать, что аукцион завершен с мобильника
             CocktionContext db = new CocktionContext();
@@ -227,7 +226,7 @@ namespace CocktionMVC.Controllers.ApiControllers
             try
             {
                 //находим аукцион
-                var auction = db.Auctions.Find(aId.auctionId);
+                var auction = db.Auctions.Find(aId.id);
 
                 //Проверяем, можно ли его закончить
 
@@ -250,7 +249,7 @@ namespace CocktionMVC.Controllers.ApiControllers
 
         public class prI
         {
-            public string name { get; set; }
+            public string title { get; set; }
 
             public string description { get; set; }
 
@@ -276,7 +275,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                 var user = db.AspNetUsers.Find(userId);
 
                 //создаем продукт и сохраняем информацию о нем.
-                Product product = new Product(info.name, info.description, info.category, false, user);
+                Product product = new Product(info.title, info.description, info.category, false, user);
 
                 Picture photo;
                 //забиваем данные о фотке
@@ -320,7 +319,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                 await DbItemsAdder.AddProduct(db, product, photo, bidCluster);
 
                 //добавляем нодики на клиенты
-                AuctionHub.AddNodesToClients(info.name, photo.FileName, info.auctionId, product.Id);
+                AuctionHub.AddNodesToClients(info.title, photo.FileName, info.auctionId, product.Id);
 
                 return new StatusHolder(true);
             }

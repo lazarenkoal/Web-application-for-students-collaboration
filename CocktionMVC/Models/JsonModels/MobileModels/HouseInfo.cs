@@ -5,9 +5,10 @@
     /// </summary>
     public class HouseInfo
     {
-        public string faculty { get; set; }
+        public string title { get; set; }
         public string adress { get; set; }
         public int rating { get; set; }
         public int likes { get; set; }
+        public bool isSubscribed { get; set; }
     }
 }

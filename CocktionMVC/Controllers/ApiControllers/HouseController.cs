@@ -55,11 +55,13 @@ namespace CocktionMVC.Controllers.ApiControllers
         {
             List<GuildsHouse> houses = new List<GuildsHouse>();
             CocktionContext db = new CocktionContext();
+            var user = db.AspNetUsers.Find(User.Identity.GetUserId());
             var holders = db.HouseHolders.Find(gn.id).Houses.ToList();
             foreach (var holder in holders)
             {
                 houses.Add(new GuildsHouse(holder.Holder.Name, holder.Id, holder.Adress,
-                    "http://cocktion.com/Images/Thumbnails/" + holder.Portrait.FileName));
+                    "http://cocktion.com/Images/Thumbnails/" + holder.Portrait.FileName,
+                    user.SubHouses.Contains(holder)));
             }
             return houses;
         }
@@ -75,11 +77,13 @@ namespace CocktionMVC.Controllers.ApiControllers
         {
             //TODO добавить везде проверки
             CocktionContext db = new CocktionContext();
+            var user = db.AspNetUsers.Find(User.Identity.GetUserId());
 
             //обработка guildId из формы
             House house = db.Houses.Find(hsNum.id);
-            HouseMobile mobileHouse = new HouseMobile(@"http://cocktion.com/Images/Thumbnails" + house.Portrait.FileName, house.Likes,
-                0, house.Rating, house.Inhabitants.Count, house.Auctions.Count, house.Description);
+            HouseMobile mobileHouse = new HouseMobile(house.Faculty,@"http://cocktion.com/Images/Thumbnails" + house.Portrait.FileName, house.Likes,
+                0, house.Rating, house.Inhabitants.Count, house.Auctions.Count, house.Description,
+                user.SubHouses.Contains(house));
 
             return mobileHouse;
         }
@@ -103,8 +107,8 @@ namespace CocktionMVC.Controllers.ApiControllers
 
         public class Message
         {
-            public string message { get; set; }
-            public int houseId { get; set; }
+            public string message { get; set; } //cамо сообщение
+            public int id { get; set; } //айдишник дома
         }
 
         /// <summary>
@@ -178,7 +182,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                 string authorName = User.Identity.Name;
 
                 //Находим дом
-                var house = db.Houses.Find(msg.houseId);
+                var house = db.Houses.Find(msg.id);
 
                 //добавляем пост
                 house.Posts.Add(new ForumPost(msg.message, authorName));

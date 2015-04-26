@@ -12,7 +12,7 @@
 
         public Guild(string name, string photoPath, int id)
         {
-            this.name = name;
+            this.title = name;
             this.photoPath = photoPath;
             this.id = id;
         }
@@ -20,7 +20,7 @@
         /// <summary>
         /// Название дома
         /// </summary>
-        public string name { get; set; }
+        public string title { get; set; }
 
         /// <summary>
         /// Путь к фоточке

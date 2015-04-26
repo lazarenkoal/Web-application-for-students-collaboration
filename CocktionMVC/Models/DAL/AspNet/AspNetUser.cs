@@ -16,6 +16,7 @@ namespace CocktionMVC.Models.DAL
             SubHouses = new HashSet<House>();
             Friends = new HashSet<AspNetUser>();
             ChatMessages = new HashSet<PrivateMessage>();
+            //Selfie = new Picture("anonPhoto.jpg");
         }
 
         public string Id { get; set; }

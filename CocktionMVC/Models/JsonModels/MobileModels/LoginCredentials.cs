@@ -8,12 +8,12 @@
         /// <summary>
         /// Почтовый адрес, он же - логин
         /// </summary>
-        public string Email { get; set; }
+        public string email { get; set; }
 
         /// <summary>
         /// Пароль
         /// </summary>
-        public string Password { get; set; }
+        public string password { get; set; }
 
     }
 }

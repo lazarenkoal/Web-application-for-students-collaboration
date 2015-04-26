@@ -7,17 +7,19 @@
     {
         public GuildsHouse() { }
 
-        public GuildsHouse(string houseName, int houseId, string houseAdress, string housePhotoPath)
+        public GuildsHouse(string houseName, int houseId, string houseAdress, string housePhotoPath,
+            bool isSubscribed)
         {
-            name = houseName;
+            title = houseName;
             id = houseId;
             adress = houseAdress;
             photoPath = housePhotoPath;
+            this.isSubscribed = isSubscribed;
         }
         /// <summary>
         /// Имя дома (факультет/общага)
         /// </summary>
-        public string name { get; set; }
+        public string title { get; set; }
 
         /// <summary>
         /// Айдишник дома
@@ -33,5 +35,7 @@
         /// Путь к фотке дома
         /// </summary>
         public string photoPath { get; set; }
+
+        public bool isSubscribed { get; set; }
     }
 }

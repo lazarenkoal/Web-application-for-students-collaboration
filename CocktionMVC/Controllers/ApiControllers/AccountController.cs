@@ -25,30 +25,29 @@ namespace CocktionMVC.Controllers.ApiControllers
             }
         }
 
+
+
         /// <summary>
         /// Регистрирует пользователя с мобильного клиента
         /// </summary>
         /// <param name="data">Данные для регистрации</param>
         /// <returns>Результат регистрации</returns>
         [HttpPost]
-        public async Task<StatusHolder> Registrate(RegisterData data)
+        public async Task<StatusHolder> Registrate(LoginCredentials data)
         {
             var user = new ApplicationUser
             {
-                UserName = data.Email,
-                Email = data.Email,
-                UserRealName = data.UserRealName,
-                UserRealSurname = data.UserRealSurname,
-                PhoneNumber = data.PhoneNumber,
+                UserName = data.email,
+                Email = data.email,
                 Rating = 1000,
                 Eggs = 100
             };
-            var resultOfRegistration = await UserManager.CreateAsync(user, data.Password);
+            var resultOfRegistration = await UserManager.CreateAsync(user, data.password);
             if (resultOfRegistration.Succeeded)
             {
-                return new StatusHolder(true);
+                return new StatusHolderWithError(true, null);
             }
-            return new StatusHolder(false);
+            return new StatusHolderWithError(false, "Такой пользователь уже зарегистрирован");
         }
 
         /// <summary>
@@ -61,7 +60,7 @@ namespace CocktionMVC.Controllers.ApiControllers
         public TokenResponse Authenticate(LoginCredentials model)
         {
             //полчуаем информацию о пользоватлее
-            string user = model.Email, password = model.Password;
+            string user = model.email, password = model.password;
 
             //Если чего-то нет (логин или парль) авторизация невозможна
             if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))

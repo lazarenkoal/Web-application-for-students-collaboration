@@ -17,9 +17,10 @@
         /// <param name="peopleIn">Люди в доме</param>
         /// <param name="auctionsIn">Аукционов в доме</param>
         /// <param name="description">Описание дома</param>
-        public HouseMobile(string photoPath, int likes, int dislikes, int rating, int peopleIn,
-            int auctionsIn, string description)
+        public HouseMobile(string name ,string photoPath, int likes, int dislikes, int rating, int peopleIn,
+            int auctionsIn, string description, bool isSubscribed)
         {
+            this.title = name;
             this.photoPath = photoPath;
             this.likes = likes;
             this.dislikes = dislikes;
@@ -27,6 +28,7 @@
             peopleAmount = peopleIn;
             auctionsAmount = auctionsIn;
             this.description = description;
+            this.isSubscribed = isSubscribed;
         }
 
         /// <summary>
@@ -63,5 +65,9 @@
         /// Описание дома
         /// </summary>
         public string description { get; set; }
+
+        public bool isSubscribed { get; set; }
+
+        public string title { get; set; }
     }
 }

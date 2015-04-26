@@ -20,7 +20,7 @@ namespace CocktionMVC.Controllers.ApiControllers
         /// </summary>
         public class ProfileInfo
         {
-            public string profileId { get; set; }
+            public string id { get; set; }
         }
 
         /// <summary>
@@ -34,23 +34,33 @@ namespace CocktionMVC.Controllers.ApiControllers
         {
             CocktionContext db = new CocktionContext();
             AspNetUser user;
-            if (profInf.profileId == "self")
+            if (profInf.id == "self")
             {
                 string userId = User.Identity.GetUserId();
                 user = db.AspNetUsers.Find(userId);
             }
             else
             {
-                user = db.AspNetUsers.Find(profInf.profileId);
+                user = db.AspNetUsers.Find(profInf.id);
             }
             string name = user.UserRealName ?? "none";
             string surname = user.UserRealSurname ?? "none";
             string city = String.IsNullOrEmpty(user.City) ? "none" : user.City;
             string society = String.IsNullOrEmpty(user.SocietyName) ? "none" : user.SocietyName;
-
-            ProfileData data = new ProfileData(name, surname, user.UserName,
+            ProfileData data;
+            if (user.Selfie == null)
+            {
+                data = new ProfileData(name, surname, user.UserName,
                 user.Rating, user.Eggs, user.HisAuctions.Count, user.HisProducts.Count, city,
-                society, @"http://cocktion.com/Images/Thumbnails/"+user.Selfie.FileName);
+                society, @"http://cocktion.com/Content/SiteImages/" + "anonPhoto.jpg");
+            }
+            else
+            {
+                   data = new ProfileData(name, surname, user.UserName,
+                   user.Rating, user.Eggs, user.HisAuctions.Count, user.HisProducts.Count, city,
+                   society, @"http://cocktion.com/Images/Thumbnails/" + user.Selfie.FileName);
+            }
+            
             return data;
 
         }
@@ -168,23 +178,40 @@ namespace CocktionMVC.Controllers.ApiControllers
             List<AuctionInfo> myActive;
             try
             {
-                myActive = (from x in user.HisAuctions
-                            where (x.IsActive && x.EndTime > controlTime)
-                            select new AuctionInfo(x.SellProduct.Description,
-                                (int)x.EndTime.Subtract(controlTime).TotalMinutes,
-                                @"http://cocktion.com/Images/Thumbnails/" + x.SellProduct.Photo.FileName,
-                                x.SellProduct.Name.Trim(), x.Id, x.LeadProduct == null ? -1 : x.LeadProduct.Id,
-                                x.SellProduct.Category.Trim(), 
-                                new UserInfo(x.Owner.Id, x.Owner.UserName, x.Owner.Selfie.FileName, 
-                                    user.Friends.Contains(x.Owner)),
-                                isActive: true)).ToList();
+                if (user.Selfie == null)
+                {
+                    myActive = (from x in user.HisAuctions
+                                where (x.IsActive && x.EndTime > controlTime)
+                                select new AuctionInfo(x.SellProduct.Description,
+                                    (int)x.EndTime.Subtract(controlTime).TotalMinutes,
+                                    @"http://cocktion.com/Images/Thumbnails/" + x.SellProduct.Photo.FileName,
+                                    x.SellProduct.Name.Trim(), x.Id, x.LeadProduct == null ? -1 : x.LeadProduct.Id,
+                                    x.SellProduct.Category.Trim(),
+                                    new UserInfo(x.Owner.Id, x.Owner.UserName, "anonPhoto.jpg",
+                                        user.Friends.Contains(x.Owner)),
+                                    isActive: true)).ToList();
+                }
+                else
+                {
+                    myActive = (from x in user.HisAuctions
+                                where (x.IsActive && x.EndTime > controlTime)
+                                select new AuctionInfo(x.SellProduct.Description,
+                                    (int)x.EndTime.Subtract(controlTime).TotalMinutes,
+                                    @"http://cocktion.com/Images/Thumbnails/" + x.SellProduct.Photo.FileName,
+                                    x.SellProduct.Name.Trim(), x.Id, x.LeadProduct == null ? -1 : x.LeadProduct.Id,
+                                    x.SellProduct.Category.Trim(),
+                                    new UserInfo(x.Owner.Id, x.Owner.UserName, x.Owner.Selfie.FileName,
+                                        user.Friends.Contains(x.Owner)),
+                                    isActive: true)).ToList();
+                }
+                
             }
             catch
             {
                 myActive = null;
             }
 
-            ////Выборка всех оконченных аукционов пользователя
+            //Выборка всех оконченных аукционов пользователя
             List<AuctionInfo> myFinished;
             try
             {

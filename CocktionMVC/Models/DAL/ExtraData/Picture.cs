@@ -7,6 +7,11 @@ namespace CocktionMVC.Models.DAL
 {
     public class Picture
     {
+        public Picture() { }
+        public Picture(string fileName)
+        {
+            FileName = fileName;
+        }
         public int Id { get; set; }
 
         public string FilePath { get; set; }
