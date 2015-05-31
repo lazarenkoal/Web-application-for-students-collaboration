@@ -16,3 +16,11 @@
     white-space: normal;
 }
 
+footer .footer-col {
+    margin-bottom: 50px;
+}
+
+footer .footer-below {
+    padding: 25px 0;
+    background-color: #233140;
+}

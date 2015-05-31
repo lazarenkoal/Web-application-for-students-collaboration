@@ -265,11 +265,23 @@
     {
         foreach (var auction in Model.HisAuctions)
         {
-            <script>
-                addCellToTheGrid('usersAuctions', '@auction.SellProduct.Name.Replace("\n", " ")', '@auction.SellProduct.Description.Replace("\n", " ")',
-                    '@auction.EndTime', 'http://cocktion.com/Images/Thumbnails/@auction.SellProduct.Photo.FileName',
-                    'http://cocktion.com/Auction/CurrentAuction/@auction.Id');
-            </script>
+            if (auction.EndTime >= DateTime.Now && auction.IsActive)
+            {
+                <script>
+                    addCellToTheGrid('usersAuctions', '@auction.SellProduct.Name.Replace("\n", " ")', '@auction.SellProduct.Description.Replace("\n", " ")',
+                        '@auction.EndTime', 'http://cocktion.com/Images/Thumbnails/@auction.SellProduct.Photo.FileName',
+                        'http://cocktion.com/Auction/CurrentAuction/@auction.Id');
+                </script>
+            }
+            else
+            {
+                <script>
+                    addCellToTheGrid('usersAuctions', '@auction.SellProduct.Name.Replace("\n", " ")', '@auction.SellProduct.Description.Replace("\n", " ")',
+                        'уже', 'http://cocktion.com/Images/Thumbnails/@auction.SellProduct.Photo.FileName',
+                        'http://cocktion.com/Auction/CurrentAuction/@auction.Id');
+                </script>
+            }
+
         }
     }
     else

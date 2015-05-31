@@ -59,7 +59,7 @@ namespace CocktionMVC.Controllers.ApiControllers
             var holders = db.HouseHolders.Find(gn.id).Houses.ToList();
             foreach (var holder in holders)
             {
-                houses.Add(new GuildsHouse(holder.Holder.Name, holder.Id, holder.Adress,
+                houses.Add(new GuildsHouse(holder.Faculty, holder.Id, holder.Adress,
                     "http://cocktion.com/Images/Thumbnails/" + holder.Portrait.FileName,
                     user.SubHouses.Contains(holder)));
             }

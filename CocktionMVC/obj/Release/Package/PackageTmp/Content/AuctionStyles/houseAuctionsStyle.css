@@ -24,7 +24,7 @@
 }
 
 #auctionsControlPanel{
-    background-color: whitesmoke;
+    background-color: #48b8e5;
     text-align: center;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
@@ -32,4 +32,5 @@
     border-left: solid 1px lightgray;
     border-top: solid 1px lightgray;
     padding: 5px;
+    color: white;
 }

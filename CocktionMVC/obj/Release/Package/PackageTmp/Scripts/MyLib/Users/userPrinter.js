@@ -30,8 +30,8 @@ function displaySubscriptionStatus(id, isSubscribed) {
         return "<p>У вас в информаторах! <span class=\"glyphicon glyphicon-ok\"></span></p>";
     } else {
         //если не подписан - показываем кнопку
-        return "<p><button class=\"btn btn-default\" onclick=\"subscribeOnUser('" +
-            id+"')\" id=\""+id+"\">Добавить в информаторы</button></p>";
+        return "<br/><p><button class=\"btn btn-default\" onclick=\"subscribeOnUser('" +
+            id+"')\" id=\""+id+"\">Подписаться</button></p>";
     }
 }
 

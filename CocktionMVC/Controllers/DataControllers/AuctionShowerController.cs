@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using CocktionMVC.Models.DAL;
+using CocktionMVC.Functions;
 
 namespace CocktionMVC.Controllers
 {
@@ -17,7 +18,8 @@ namespace CocktionMVC.Controllers
             CocktionContext db = new CocktionContext();
 
             //получаем все закончившиеся аукционы в доме
-            var auctions = db.Houses.Find(id).Auctions.Where(x => x.IsActive == false).ToList();
+            var currentTime = DateTimeManager.GetCurrentTime();
+            var auctions = db.Houses.Find(id).Auctions.Where(x => (x.IsActive == false && x.EndTime < currentTime)).ToList();
             return View(auctions);
         }
 
@@ -32,7 +34,8 @@ namespace CocktionMVC.Controllers
             CocktionContext db = new CocktionContext();
 
             //получаем все активные аукционы в доме
-            var auctions = db.Houses.Find(id).Auctions.Where(x => x.IsActive).ToList();
+            var currentTime = DateTimeManager.GetCurrentTime();
+            var auctions = db.Houses.Find(id).Auctions.Where(x => (x.IsActive && x.EndTime >= currentTime)).ToList();
             return View(auctions);
         }
     }

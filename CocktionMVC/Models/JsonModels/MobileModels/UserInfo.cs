@@ -8,7 +8,7 @@ namespace CocktionMVC.Models.JsonModels.MobileClientModels
     public class UserInfo
     {
         public string id { get; set; }
-        public string name { get; set; }
+        public string title { get; set; }
 
         public string photoPath { get; set; }
 
@@ -17,7 +17,7 @@ namespace CocktionMVC.Models.JsonModels.MobileClientModels
         public UserInfo(string id, string name, string photoPath, bool isInformator)
         {
             this.id = id;
-            this.name = name;
+            this.title = name;
             this.photoPath = @"http://cocktion.com/Images/Thumbnails/" + photoPath;
             this.isInformator = isInformator;
         }

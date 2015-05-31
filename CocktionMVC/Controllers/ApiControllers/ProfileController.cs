@@ -89,7 +89,7 @@ namespace CocktionMVC.Controllers.ApiControllers
         /// </summary>
         public class ProfileData
         {
-            public string name { get; set; }
+            public string title { get; set; }
             public string surname { get; set; }
             public string login { get; set; }
             public int? rating { get; set; }
@@ -102,7 +102,7 @@ namespace CocktionMVC.Controllers.ApiControllers
             public ProfileData(string name, string surname, string login, int? rating,
                 int eggs, int auctionsAmount, int productsAmount, string city, string society, string photoPath)
             {
-                this.name = name;
+                this.title = name;
                 this.surname = surname;
                 this.login = login;
                 this.rating = rating;
@@ -383,7 +383,7 @@ namespace CocktionMVC.Controllers.ApiControllers
         /// </summary>
         public class ShortProfile
         {
-            public string name { get; set; }
+            public string title { get; set; }
             public string surname { get; set; }
             public string society { get; set; }
             public string city { get; set; }
@@ -408,8 +408,8 @@ namespace CocktionMVC.Controllers.ApiControllers
                 CocktionContext db = new CocktionContext();
                 var user = db.AspNetUsers.Find(User.Identity.GetUserId());
 
-                if (!String.IsNullOrEmpty(editInfo.name))
-                    user.UserRealName = editInfo.name;
+                if (!String.IsNullOrEmpty(editInfo.title))
+                    user.UserRealName = editInfo.title;
 
                 if (!String.IsNullOrEmpty(editInfo.surname))
                     user.UserRealSurname = editInfo.surname;
@@ -446,7 +446,10 @@ namespace CocktionMVC.Controllers.ApiControllers
             {
                 try
                 {
-                    informators.Add(new UserInfo(i.Id, i.UserName, i.Selfie.FileName, true));
+                    if (!String.IsNullOrEmpty(i.UserRealName))
+                        informators.Add(new UserInfo(i.Id, i.UserRealName, i.Selfie.FileName, true));
+                    else 
+                        informators.Add(new UserInfo(i.Id, i.UserName,  i.Selfie.FileName, true));
                 }
                 catch
                 {

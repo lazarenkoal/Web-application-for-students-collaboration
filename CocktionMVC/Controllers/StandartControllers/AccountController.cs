@@ -87,7 +87,7 @@ namespace CocktionMVC.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Пользователь с таким именем еще не зарегистрировался.");
+                    ModelState.AddModelError("", "Пара логин/пароль не подходит.");
                     return View(model);
             }
         }

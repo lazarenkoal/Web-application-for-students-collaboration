@@ -10,9 +10,9 @@
 <script src="~/Scripts/MyLib/Users/userPrinter.js"></script>
 <script src="~/Scripts/MyLib/Users/subscriptionProcessor.js"></script>
 <div class="row">
-    <div class="col-md-1"></div>
+    <div class="col-md-3"></div>
 
-    <div class="col-md-7" id="usersHere">
+    <div class="col-md-6" id="usersHere">
         <!--Контейнер для информации о пользователе -->
         @{
             int amountOfUsers = Model.Count;
@@ -23,6 +23,10 @@
             {
                 for (int i = 0; i < amountOfUsers; i++)
                 {
+                    if (String.IsNullOrEmpty(Model[i].UserRealSurname) & String.IsNullOrEmpty(Model[i].UserRealName))
+                    {
+                        continue;
+                    }
                     if (i == stopIndex)
                     {
                         if (Model[i].Selfie == null)
@@ -101,9 +105,10 @@
             }
 }
     </div>
+    <!--
     <div class="col-md-3" id="filterContainer">
         <p>Отфильтруйте :)</p>
-        <!--Контейнер для фильтра-->
+        <!--Контейнер для фильтра
         <div class="userFilters">
             <input type="text" id="city" class="form-control" placeholder="Город">
             <br/>
@@ -116,5 +121,6 @@
             </label>
         </div>
     </div>
-    <div class="col-md-1"></div>
+-->
+    <div class="col-md-3"></div>
 </div>

@@ -1,18 +1,19 @@
 ﻿#auctionPanel{
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
-    border: solid 1px lightgray;
+    border: solid 1px #1c94c4;
     padding: 5px;
 }
 
 #auctionsControlPanel{
-    background-color: whitesmoke;
+    background-color: #48b8e5;
     text-align: center;
+    color: white;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
-    border-right: solid 1px lightgray;
-    border-left: solid 1px lightgray;
-    border-top: solid 1px lightgray;
+    border-right: solid 1px #1c94c4;
+    border-left: solid 1px #1c94c4;
+    border-top: solid 1px #1c94c4;
     padding: 5px;
 }
 
@@ -26,7 +27,7 @@
 
 /*Это контейнер для аукциончика*/
 .auction{
-    border: dotted 1px lightgray;
+    border: dotted 1px #1c94c4;
     border-radius: 3px;
     padding: 3px;
 }

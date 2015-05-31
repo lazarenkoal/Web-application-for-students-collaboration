@@ -14,12 +14,22 @@
 
 <div class="row" id ="top">
     <!--Контейнер для первой части страницы-->
-    <div class="col-md-3">
+    <div class="col-md-3" id="houseDescriptionContainer">
         <!--Фотка и описание доам-->
         <!--Фотография-->
-        <img src="http://cocktion.com/Images/Thumbnails/@Model.Portrait.FileName" class="img-thumbnail" />
-        <br/>
-        <br/>
+        <img src="http://cocktion.com/Images/Thumbnails/@Model.Portrait.FileName" class="img-responsive" />
+        <br />
+        <div>
+            <p>
+                <b>Описание:</b> @Model.Description
+            </p>
+            <p>
+                <b>Адрес:</b> @Model.Adress
+            </p>
+            <script>houseId = @Model.Id</script>
+            <p><b>Факультет:</b> @Model.Faculty</p>
+        </div>
+        <br />
     </div>
     <div class="col-md-7">
         <div class="row" id="imageLinksContainer">
@@ -27,25 +37,21 @@
             <div class="col-md-6">
                 <!--Картинка с ссылкой на прошедшие аукционы-->
                 <a href="http://cocktion.com/AuctionShower/ShowOldAuctions/@Model.Id">
-                    <img src="~/Content/SiteImages/allProducts.jpg" class="img-thumbnail" />
+                    <img src="~/Content/SiteImages/deadSun.png" class="img-thumbnail" />
                 </a>
-                <p>Прошедшие аукционы</p>
+                <p style="text-align: center">Прошедшие аукционы</p>
             </div>
             <div class="col-md-6">
                 <!--Картинка с ссылкой на активные аукционы-->
                 <a href="http://cocktion.com/AuctionShower/ShowActiveAuctions/@Model.Id">
-                    <img src="~/Content/SiteImages/Roosters-Playing-Football-Funny-Animals.jpg" class="img-thumbnail" />
+                    <img src="~/Content/SiteImages/happySun.png" class="img-thumbnail" />
                 </a>
-                <p>Активные аукционы</p>
+                <p style="text-align: center">Активные аукционы</p>
             </div>
         </div>
     </div>
     <div class="col-md-2" id="secondInfoColumn">
         <!--Лайки, рейтинг и кнопка-->
-        <p><b>Лайки:</b> @Model.Likes</p>
-        <br />
-        <p><b>Дизлайки:</b> 0</p>
-        <br />
         <p><b>Рейтинг:</b> @Model.Rating</p>
         <br />
         <p><b>Жители:</b> @Model.Inhabitants.Count</p>
@@ -70,9 +76,10 @@
 
     </div>
 </div>
-<div class="row">
+<!--
+    <div class="row">
     <div class="col-md-2"></div>
-    <!--Контейнер для описания-->
+    <!--Контейнер для описания
     <div id="houseDescriptionContainer" class="col-md-8">
         <p>
             <b>Описание:</b> @Model.Description
@@ -83,7 +90,7 @@
         <p><b>Факультет:</b> @Model.Faculty</p>
     </div>
     <div class="col-md-2"></div>
-</div>
+</div>-->
 
 <div class="row">
     <!--Здесь начинается форум-->

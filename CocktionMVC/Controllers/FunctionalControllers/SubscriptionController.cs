@@ -74,6 +74,7 @@ namespace CocktionMVC.Controllers.FunctionalControllers
 
         /// <summary>
         /// Позволяет проверить, подписан ли пользователь
+        /// на дом
         /// </summary>
         /// <returns>Стандартный ответ</returns>
         [HttpPost]

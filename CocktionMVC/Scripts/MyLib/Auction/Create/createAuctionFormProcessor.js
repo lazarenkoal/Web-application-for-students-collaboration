@@ -67,7 +67,7 @@ function checkRadio() {
         canSend = false;
     } else {
         timeBoundIsEmpty = false;
-        $("#timeContainer").css('border-color', 'lightgrey');
+        $("#timeContainer").css('border-color', '#48b8e5');
     }
 
     //проверка productType
@@ -77,7 +77,7 @@ function checkRadio() {
         $("#typeOfAuctionContainer").css('border-color', 'red');
     } else {
         productTypeIsEmpty = false;
-        $("#typeOfAuctionContainer").css('border-color', 'lightgrey');
+        $("#typeOfAuctionContainer").css('border-color', '#48b8e5');
     }
 
     return canSend;

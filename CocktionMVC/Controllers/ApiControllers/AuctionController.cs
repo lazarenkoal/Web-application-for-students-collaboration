@@ -68,12 +68,12 @@ namespace CocktionMVC.Controllers.ApiControllers
         /// <returns>Лист с информацией о продуктах</returns>
         [Authorize]
         [HttpPost]
-        public List<ProductInfo> GetAuctionBids(int id)
+        public List<ProductInfo> GetAuctionBids(IdCont aId)
         {
             CocktionContext db = new CocktionContext();
 
             //находим аукцион по айди
-            Auction auction = db.Auctions.Find(id);
+            Auction auction = db.Auctions.Find(aId.id);
             List<ProductInfo> bidProducts = new List<ProductInfo>();
 
             //добавляем все в коллекцию
@@ -84,7 +84,7 @@ namespace CocktionMVC.Controllers.ApiControllers
                         photoPath = @"http://cocktion.com/Images/Thumbnails/" + bid.Photo.FileName,
                         title = bid.Name.Trim(),
                         category = bid.Category.Trim(),
-                        productId = bid.Id,
+                        id = bid.Id,
                     });
             return bidProducts;
         }

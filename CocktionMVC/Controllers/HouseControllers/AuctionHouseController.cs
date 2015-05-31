@@ -16,7 +16,7 @@ namespace CocktionMVC.Controllers
     public class AuctionHouseController : Controller
     {
         /// <summary>
-        /// Выводит пользователя на страницу со списком всех домов
+        /// Выводит пользователя на страницу со списком всех холдеров
         /// </summary>
         /// <returns>страницу со списком</returns>
         public ActionResult Index()
@@ -41,7 +41,7 @@ namespace CocktionMVC.Controllers
             //Выбираем все дома, относящиеся к данному ВУЗу
             var holder = db.HouseHolders.Find(id);
             var houses = holder.Houses.ToList();
-              
+
             return View(houses);
         }
 
@@ -79,7 +79,7 @@ namespace CocktionMVC.Controllers
 
                         //находим дом
                         var house = db.Houses.Find(houseId);
-                
+
                         //Создаем пост и добавляем в дом
                         ForumPost post = new ForumPost(message, User.Identity.Name) {HostHouse = house};
                         house.Posts.Add(post);

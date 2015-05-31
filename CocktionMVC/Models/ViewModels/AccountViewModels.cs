@@ -64,12 +64,12 @@ namespace CocktionMVC.Models
 
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Нельзя авторизоваться без данных о почте!")]
         [Display(Name = "Электро-почта")]
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage= "Пароль все-таки необходимо ввести! ")]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
         public string Password { get; set; }

@@ -31,7 +31,9 @@
 #interests {
     padding: 1px;
 }
-
+.house{
+    margin-left: 5px;
+}
 
 
 /*Это ссылка на аукцион в том, что добавляется в таблицу*/
@@ -44,6 +46,7 @@
     border: dotted 1px lightgray;
     border-radius: 3px;
     padding: 3px;
+    margin-left: 5px;
 }
 
 #auctionHeader, #housesHeader {
@@ -120,6 +123,6 @@ textarea{
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
     overflow-y: scroll;
-    height: 385px;
+    height: 398px;
 }
 

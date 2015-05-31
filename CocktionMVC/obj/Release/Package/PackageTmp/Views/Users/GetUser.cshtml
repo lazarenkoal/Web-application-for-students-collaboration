@@ -36,7 +36,7 @@
             checkSubscription("@Model.Id");
         </script>
     </div>
-    <div class="col-md-2" id="userInformation">
+    <div class="col-md-2" id="userInformation" >
         <!--Контейнер для информации-->
         <div id="userName">
             <!--Контейнер для имени пользователя-->
@@ -91,23 +91,36 @@
 
 <br />
 <br />
-<div class="row">
-    <div class="col-lg-2"></div>
-    <div class="col-lg-6">
+<div class="row" >
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6" id="gmsc">
+        <p>Здесь можно написать сообщение данному пользователю</p>
         <div id="chatMessagesContainer" style="min-height: 200px"></div>
-        <input type="text" class="form-group" id="inputMessage"/><br/>
-        <button id="sendMessageBtn">Отправить</button>
+        <input type="text" class="form-control" id="inputMessage" /><br />
+        <button class="btn btn-default" id="sendMessageBtn">Отправить</button>
+        <br />
     </div>
-    <div class="col-lg-4"></div>
+    <div class="col-lg-3"></div>
 </div>
+<br />
 
 <style>
     #chatMessagesContainer {
         border: solid 1px lightgray;
     }
+    #gmsc{
+        border: solid 1px lightblue;
+    }
 </style>
 
 <script>
+    $(document).ready(function () {
+        $('#gmsc').keypress(function (e) {
+            if (e.keyCode == 13)
+                $('#sendMessageBtn').click();
+        });
+    });
+
     var chat = $.connection.messageHub;
     chat.client.addNewMessageToPage = function (author, message) {
         var textToAppend = '<p><b>' + author + ': </b>' + message + '</p>';
@@ -168,11 +181,23 @@
     {
         foreach (var auction in Model.HisAuctions)
         {
-            <script>
-                addCellToTheGrid('usersAuctions', '@auction.SellProduct.Name.Replace("\n", " ")', '@auction.SellProduct.Description.Replace("\n", " ")',
-                    '@auction.EndTime', 'http://cocktion.com/Images/Thumbnails/@auction.SellProduct.Photo.FileName',
-                    'http://cocktion.com/Auction/CurrentAuction/@auction.Id');
-            </script>
+            if (auction.EndTime >= DateTime.Now && auction.IsActive)
+            {
+                <script>
+                    addCellToTheGrid('usersAuctions', '@auction.SellProduct.Name.Replace("\n", " ")', '@auction.SellProduct.Description.Replace("\n", " ")',
+                        '@auction.EndTime', 'http://cocktion.com/Images/Thumbnails/@auction.SellProduct.Photo.FileName',
+                        'http://cocktion.com/Auction/CurrentAuction/@auction.Id');
+                </script>
+            }
+            else
+            {
+                <script>
+                    addCellToTheGrid('usersAuctions', '@auction.SellProduct.Name.Replace("\n", " ")', '@auction.SellProduct.Description.Replace("\n", " ")',
+                        'уже', 'http://cocktion.com/Images/Thumbnails/@auction.SellProduct.Photo.FileName',
+                        'http://cocktion.com/Auction/CurrentAuction/@auction.Id');
+                </script>
+            }
+
         }
     }
     else

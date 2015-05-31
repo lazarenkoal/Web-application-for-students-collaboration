@@ -11,8 +11,7 @@ namespace CocktionMVC.Controllers
             {
                 return View();
             }
-            return View("Index2");
-            
+            return View();            
         }
           
         public ActionResult About()

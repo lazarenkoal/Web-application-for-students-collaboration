@@ -24,7 +24,7 @@
         /// <summary>
         /// Айди товара ставки
         /// </summary>
-        public int productId { get; set; }
+        public int id { get; set; }
 
         /// <summary>
         /// Категория товара

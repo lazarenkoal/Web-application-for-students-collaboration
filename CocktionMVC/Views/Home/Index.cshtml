@@ -1,179 +1,82 @@
 ﻿@{
-    ViewBag.Title = "Главная страничка";
-}
-<link rel="stylesheet" href="~/Content/MainPageStyles/indexAuthorizedStyle.css"/>
-<div class="row" id="topAuctions">
-    <div class="col-md-6" id="cocktionTop">
-        <h4>TOP-5 на cocktion.</h4>
+    Layout = null;
+ }
+<head>
+    <title>Главная страница</title>
+    <link rel="stylesheet" href="~/Content/BootstrapCss/bootstrap.min.css" />
 
-        <div class="row auctionInfoContainer">
-            <div class="col-md-4">
-                <div class="photoContainer">
-                    <img class="img-circle" src="~/Content/SiteImages/allSmallProducts.jpg">
-                </div>
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <link rel="stylesheet" href="~/Content/MainPageStyles/mainStyle.css" />
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top" style="height:60px">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Главная", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="col-md-8">
-                <div class="infoContainer">
-                    <p><b>Крестный отец.</b>
-                    </p>
-                    <p>(Книга)</p>
-                    <p><b>Можно достать</b> еще 4 часа.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="row auctionInfoContainer">
-            <div class="col-md-4">
-                <div class="photoContainer">
-                    <img class="img-circle" src="~/Content/SiteImages/allSmallProducts.jpg">
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="infoContainer">
-                    <p><b>Евгений Онегин.</b>
-                    </p>
-                    <p>(Книга)</p>
-                    <p><b>Можно достать</b> еще 2 часа.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="row auctionInfoContainer">
-            <div class="col-md-4">
-                <div class="photoContainer">
-                    <img class="img-circle" src="~/Content/SiteImages/allSmallProducts.jpg">
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="infoContainer">
-                    <p><b>Крестный отец.</b>
-                    </p>
-                    <p>(Книга)</p>
-                    <p><b>Можно достать</b> еще 4 часа.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="row auctionInfoContainer">
-            <div class="col-md-4">
-                <div class="photoContainer">
-                    <img class="img-circle" src="~/Content/SiteImages/allSmallProducts.jpg">
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="infoContainer">
-                    <p><b>Евгений Онегин.</b>
-                    </p>
-                    <p>(Книга)</p>
-                    <p><b>Можно достать</b> еще 2 часа.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="row auctionInfoContainer">
-            <div class="col-md-4">
-                <div class="photoContainer">
-                    <img class="img-circle" src="~/Content/SiteImages/allSmallProducts.jpg">
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="infoContainer">
-                    <p><b>Евгений Онегин.</b>
-                    </p>
-                    <p>(Книга)</p>
-                    <p><b>Можно достать</b> еще 2 часа.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="col-md-6" id="inMyHousesTop">
-        <h4>TOP-5 в вашем колхозе.</h4>
-        <div class="row auctionInfoContainer">
-            <div class="col-md-4">
-                <div class="photoContainer">
-                    <img class="img-circle" src="~/Content/SiteImages/allSmallProducts.jpg">
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="infoContainer">
-                    <p><b>Мышка.</b>
-                    </p>
-                    <p>(Вещь)</p>
-                    <p><b>Можно достать</b> еще 2 дня.
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="row auctionInfoContainer">
-            <div class="col-md-4">
-                <div class="photoContainer">
-                    <img class="img-circle" src="~/Content/SiteImages/allSmallProducts.jpg">
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="infoContainer">
-                    <p><b>Крестный отец.</b>
-                    </p>
-                    <p>(Книга)</p>
-                    <p><b>Можно достать</b> еще 4 часа.
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="row auctionInfoContainer">
-            <div class="col-md-4">
-                <div class="photoContainer">
-                    <img class="img-circle" src="~/Content/SiteImages/allSmallProducts.jpg">
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="infoContainer">
-                    <p><b>Мышка.</b>
-                    </p>
-                    <p>(Вещь)</p>
-                    <p><b>Можно достать</b> еще 2 дня.
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="row auctionInfoContainer">
-            <div class="col-md-4">
-                <div class="photoContainer">
-                    <img class="img-circle" src="~/Content/SiteImages/allSmallProducts.jpg">
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="infoContainer">
-                    <p><b>Крестный отец.</b>
-                    </p>
-                    <p>(Книга)</p>
-                    <p><b>Можно достать</b> еще 4 часа.
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="row auctionInfoContainer">
-            <div class="col-md-4">
-                <div class="photoContainer">
-                    <img class="img-circle" src="~/Content/SiteImages/allSmallProducts.jpg">
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="infoContainer">
-                    <p><b>Крестный отец.</b>
-                    </p>
-                    <p>(Книга)</p>
-                    <p><b>Можно достать</b> еще 4 часа.
-                    </p>
-                </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Аукционы", "Index", "Auction")</li>
+                    <li>@Html.ActionLink("Продать", "Create", "Auction")</li>
+                    <li>@Html.ActionLink("Дома", "Index", "AuctionHouse")</li>
+                    <li>@Html.ActionLink("Люди", "Index", "Users")</li>
+                    <li>@Html.ActionLink("Поиск", "Index", "Search")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
-</div>
-<!--Тут вставить его аукционы-->
+
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <img class="img-responsive" src="~/Content/SiteImages/collaboration.png" alt="">
+                    <div class="intro-text">
+                        <span class="name">Общайтесь, меняйтесь, радуйтесь!</span>
+                        <hr>
+                        <span class="skills">Web Application for Student's Collaboration</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container" id="generalInfo">
+        <div class="row">
+            <h1>Что здесь можно делать?</h1>
+            <hr style="columns: ;">
+            <div class="col-lg-4">
+                <img src="~/Content/SiteImages/talk.png" height="370px">
+                <h2>Общаться со студентами из своего университета</h2>
+            </div>
+            <div class="col-lg-4">
+                <img src="~/Content/SiteImages/exchange.png" height="370px">
+                <h2>Меняться с теми, кто оценил вашу вещь по достоинству</h2>
+            </div>
+            <div class="col-lg-4">
+                <img src="~/Content/SiteImages/neighbours.png" height="370px">
+                <h2>Смотреть, что есть на обмен в общежитии и на факультете</h2>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center">
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        Web Application for Student's Collaboration, 2015. Created by Alexander Lazarenko.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>

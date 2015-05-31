@@ -19,8 +19,7 @@ function generateMessageString(author, message, date) {
 function addUserToList(username, photoPath) {
     var textToAppend = "<div class=\"userToSpeak row\"" +"value=\""+username+"\""+" onclick=\"showHisMessages(this, '@Model.Id')\"" +
             "onmouseout=\"dehighlightUser(this)\" onmouseover=\"highlightUser(this)\">" +
-            "<div class=\"col-md-3\"><img class=\"img-circle\" src=\"" + photoPath + "\"></p></div>" +
-            "<div class=\"col-md-9\"><p>" + username + "</p></div></div>";
+            "<div class=\"col-md-6\"><p>" + username + "</p></div></div>";
     $("#usersList").append(textToAppend);
     return textToAppend;
 }
