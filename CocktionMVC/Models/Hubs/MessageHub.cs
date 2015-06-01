@@ -23,7 +23,7 @@ namespace CocktionMVC.Models.Hubs
         /// <param name="receiverId">Айдишник того, кому отправляют</param>
         /// <returns></returns>
         public async Task Send(string message, string author, string userName,
-            string authorId, string receiverId, string authorRealName)
+            string authorId, string receiverId)
         {
             try
             {
