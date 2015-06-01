@@ -139,6 +139,18 @@ function checkUniversity() {
     }
 }
 
+function checkPhoto() {
+    var ext = (/[.]/.exec(fileInput.files[0].name)) ? /[^.]+$/.exec(fileInput.files[0].name) : undefined;
+    if ((ext == "jpeg") || (ext == "jpg") || (ext == "png"))
+    {
+        return true;
+    }
+    else
+    {
+        alert("Формат является недопустимым при загрузке фотографий. Пожалуйста, попробуйте все-таки с фотографией");
+        return false;
+    }
+}
 
 /**
  * Отправляет данные на севрер. Проверяет все поля на корректность.
@@ -147,6 +159,12 @@ function sendData() {
     var canSend = checkRadio() & checkInput();
     createStringOfHouses();
     canSend = canSend & checkUniversity();
+    var fileInput = document.getElementById('fileInput');
+    if (fileInput.files.length > 0)
+    {
+        var q = checkPhoto();
+        canSend = canSend & q;
+    }
     if (canSend) {
         //TODO проверить дома, когда будут
         //отправить все на сервер
@@ -154,9 +172,7 @@ function sendData() {
         $("#createAuctionBtn").hide();
 
         var formData = new FormData();
-
         //добавляю файл
-        var fileInput = document.getElementById('fileInput');
         if (fileInput.files.length > 0) {
             formData.append(fileInput.files[0].name, fileInput.files[0]);
         }
@@ -200,12 +216,12 @@ function sendData() {
                 $("#facultyToChoose").empty();
                 $('#chooseFacultyRadio').prop('checked', false);
                 $('#allFacultyRadio').prop('checked', false);
-            };
+            } 
         }
 
         xhr.open('POST', '/BidAuctionCreator/CreateAuction');
         xhr.send(formData); //отправка данных
-    }
+    } 
 }
 
 var link;

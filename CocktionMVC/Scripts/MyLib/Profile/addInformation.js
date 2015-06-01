@@ -19,7 +19,7 @@ function sendInfo(){
             if (xhr.readyState == 4 && xhr.status == 200) {
                 var respond = JSON.parse(xhr.responseText);
                 if (respond.Status == "Success") {
-                    $("#userRates").append("<p>Информация обновлена</p>");
+                    alert("Информация обновлена. Для просмотра изменений необходимо перезагрузить страницу!");
                     $("#infoBarContainer").hide();
                 } else {
                     $("#infoBar").css('background-color', 'red');
@@ -58,7 +58,7 @@ function sendInt() {
         if (xhr.readyState == 4 && xhr.status == 200) {
             var respond = JSON.parse(xhr.responseText);
             if (respond.Status == "Success") {
-                $("#userRates").append("<p>Информация обновлена</p>");
+                alert("Информация обновлена. Для просмотра изменений необходимо перезагрузить страницу!");
                 $("#interestsBarContainer").hide();
             } else {
                 $("#interestsBar").css('background-color', 'red');
@@ -74,14 +74,14 @@ function sendInt() {
 
 function checkInputs() {
     var school = $("#school").val();
-    var name = $("name").val();
-    var surname = $("surname").val();
+    var name = $("#name").val();
+    var surname = $("#surname").val();
     if (school || name || surname) {
         return true;
     } else {
         $("#errorField").show();
         $("#errorField").empty();
-        $("#errorField").append("<p>Нужно добавить хотьк какую-нибудь информацию </p>");
+        $("#errorField").append("<p>Нужно добавить хоть какую-нибудь информацию </p>");
     }
 }
 

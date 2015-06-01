@@ -14,7 +14,7 @@
 <script src="~/signalr/hubs"></script>
 
 
-<div class="row" id="userFullInformation">
+<div class="row" id="userFullInformation" style="background-color: white;">
     <br />
     <!--Фотка и информация о пользователе-->
     <div class="col-md-3" style="align-items: flex-start">
@@ -55,7 +55,7 @@
         <div id="userRates">
             <!--Контейнер для информации о пользователе-->
             <p><b>Рейтинг:</b> @Model.Rating</p>
-            <p><b>Яиц: </b> @Model.Eggs</p>
+            <p><b>Монеток: </b> @Model.Eggs</p>
             <p><b>Аукционов сделал:</b> @Model.HisAuctions.Count</p>
             <p>
                 <b>Ставок сделал: </b> @Model.HisProducts.Count штук
@@ -69,7 +69,6 @@
         </div>
     </div>
     <div class="col-md-7" id="userLifePos">
-        <h4>Жизненная позиция пользователя</h4>
         <div class="row" id="interests">
             <h4>Интересы</h4>
             @{
@@ -79,13 +78,21 @@
                 }
                 else
                 {
-                    foreach (var interest in Model.Interests)
-                    {
-                        <p>@interest.Name</p>
-                    }
+                    <table align="center" style="text-align: center">
+                        <tr>
+                            @foreach (var interest in Model.Interests)
+                            {
+                                <td style="padding-left: 10px; padding-right: 10px">
+                                    <p>@interest.Name</p>
+                                    <img height="100" src="http://cocktion.com/Images/Thumbnails/@interest.Photocard.FileName" />
+                                </td>
+                            }
+                        </tr>
+                    </table>
                 }
-            }
+}
         </div>
+        <br />
     </div>
 </div>
 
@@ -254,12 +261,16 @@
                 </div>
             }
         </div>
-        <div id="writeFeedbackForm">
-            <!--Контейнер с формой для отправки своего мнения-->
-            <h5>Напиши своё</h5>
-            <textarea id="writeFeedbackTextarea"></textarea>
-            <button class="btn btn-success" onclick="addOpinion('@Model.Id')" id="sendFeedbackBtn">Отправить отзыв</button>
-        </div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div id="writeFeedbackForm">
+                <!--Контейнер с формой для отправки своего мнения-->
+                <h5>Напиши своё</h5>
+                <textarea id="writeFeedbackTextarea"></textarea>
+                <button class="btn btn-success" onclick="addOpinion('@Model.Id')" id="sendFeedbackBtn">Отправить отзыв</button>
+            </div>
+        }
+        
     </div>
     <div class="col-md-3">
     </div>

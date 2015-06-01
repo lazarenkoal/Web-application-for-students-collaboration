@@ -54,7 +54,7 @@
         <!--Лайки, рейтинг и кнопка-->
         <p><b>Рейтинг:</b> @Model.Rating</p>
         <br />
-        <p><b>Жители:</b> @Model.Inhabitants.Count</p>
+        <p><b>Подписчиков:</b> @Model.Inhabitants.Count</p>
         <br />
         <p><b>Количество аукционов:</b> @Model.Auctions.Count</p>
         <div id="subscribe">
@@ -68,7 +68,7 @@
                 else
                 {
                     <script>
-                        document.getElementById('subscribe').innerHTML = "<p>Чтобы добавлять дома в свой колхоз, нужно быть авторизованным!</p>";
+                        document.getElementById('subscribe').innerHTML = "<p>Чтобы добавлять дома в свои подписки, нужно быть авторизованным!</p>";
                     </script>
                 }
             }
@@ -91,17 +91,82 @@
     </div>
     <div class="col-md-2"></div>
 </div>-->
+<script>
+    /**
+* Created by aleksandrlazarenko on 10.04.15.
+*/
 
+    //Распределяет новую ячейку по сетки со столбцами
+    //nameOfRow - название строки, в которую надо вставить все
+    //nameOfFaculty - название факультета
+    //adress - адрес факультета
+    //link - ссылочка на факультет
+    //imgSrc - путь к фоточке
+    //containerName - название контейнера, в который надо вставить
+    function addSubscriberCell(containerName, nameOfFaculty, adress, link, imgSrc) {
+        if (housesColCounter < 4) {
+            if (housesColCounter == 0) {
+                addHouseRow(containerName, housesRowCounter);
+                appendHouseInfo(housesRowCounter, nameOfFaculty, adress, link, imgSrc);
+                housesColCounter++;
+            }
+            else {
+                appendHouseInfo(housesRowCounter, nameOfFaculty, adress, link, imgSrc);
+                housesColCounter++;
+            }
+        }
+        else {
+            housesColCounter = 0;
+            ++housesRowCounter;
+            addHouseRow(containerName, housesRowCounter);
+            appendHouseInfo(housesRowCounter, nameOfFaculty, adress, link, imgSrc);
+            housesColCounter++;
+        }
+    }
+
+    //Добавляет непосредственно саму информацию о доме в ячейку
+    //nameOfRow - название строки, в которую надо вставить все
+    //nameOfFaculty - название факультета
+    //adress - адрес факультета
+    //link - ссылочка на факультет
+    //imgSrc - путь к фоточке
+    function appendHouseInfo(nameOfRow, nameOfFaculty, adress, link, imgSrc) {
+        document.getElementById(nameOfRow).innerHTML += ("<div class=\"col-md-3\"><div class=\"house\"> " +
+        "<img src=\"" + imgSrc + "\" class= \"img-thumbnail\">" + //вставляем фотографию
+        "<p><b>Имя: </b>" + nameOfFaculty + "</p>" +    //название факультета
+        "<p><b>Университет: </b>" + adress + "</p>" + //адрес факультета
+        "<p><a href=\"" + link + "\">Посмотреть</a></p></div></div>"); //ссылочка
+    }
+
+    //Добавляет новый div (class=row) на страничку, для того, чтобы в нее потом запихивать колонки
+    //containerName - название контейнера, в который надо вставить
+    //nameOfRow - название строчки, в которую надо вставить что-то
+    function addHouseRow(containerName, nameOfRow) {
+        document.getElementById(containerName).innerHTML += "<div class=\"row\" id=\"" + nameOfRow + "\"></div></br>";
+    }
+
+    var housesRowCounter = 0;
+    var housesColCounter = 0;
+</script>
+
+<div class="row">
+    <h3>Подписчики</h3>
+    <div id="subscribersList">
+        @foreach (var sub in Model.Inhabitants)
+        {
+            if(sub.Selfie == null || (String.IsNullOrEmpty(sub.UserRealName) && String.IsNullOrEmpty(sub.UserRealSurname)))
+            {
+                continue;
+            }            
+             <script>addSubscriberCell('subscribersList', '@sub.UserRealName @sub.UserRealSurname',
+        '@sub.SocietyName', 'http://cocktion.com/Users/GetUser/@sub.Id' ,'http://cocktion.com/Images/Thumbnails/@sub.Selfie.FileName')</script>
+        }
+    </div>
+    
+</div>
 <div class="row">
     <!--Здесь начинается форум-->
     <div class="col-md-3">
-        <h3>Подписчики</h3>
-        <div id="subscribersList">
-            @foreach (var sub in Model.Inhabitants)
-            {
-                <p>@sub.UserName</p>
-            }
-        </div>
     </div>
     <div id="forumContainer" class="col-md-6">
         <h3 style="text-align: center">Дискуссия</h3>
@@ -128,15 +193,18 @@
                 <p>Нет сообщений никаких!</p>
             }
         </div>
-        <div id="messageEnterContainer">
-            <div id="messageEnter">
-                <p>
-                    <b>Написать коммент</b>
-                </p>
-                <textarea rows="3" id="message"> </textarea>
-                <button id="addCommentButton" onclick="сomment(@Model.Id)" title=" аррррр!!!!" class="btn btn-default">Царапнуть</button>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div id="messageEnterContainer">
+                <div id="messageEnter">
+                    <p>
+                        <b>Написать коммент</b>
+                    </p>
+                    <textarea rows="3" id="message"> </textarea>
+                    <button id="addCommentButton" onclick="сomment(@Model.Id)" title=" аррррр!!!!" class="btn btn-default">Царапнуть</button>
+                </div>
             </div>
-        </div>
+        }
     </div>
     <div class="col-md-3">
     </div>

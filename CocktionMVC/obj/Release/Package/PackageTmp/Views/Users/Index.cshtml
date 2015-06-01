@@ -33,14 +33,16 @@
                         {
                             <script>
                                 addUser('@Model[i].UserRealName', '@Model[i].UserRealSurname', '@Model[i].Id', 'Content/SiteImages/anonPhoto.jpg',
-                                    '@Model[i].Rating', '@Model[i].Eggs', '150', true, '@user.Friends.Contains(db.AspNetUsers.Find(Model[i].Id))');
+                                    '@Model[i].Rating', '@Model[i].Eggs', '@Model[i].HisAuctions.Count', true, '@user.Friends.Contains(db.AspNetUsers.Find(Model[i].Id))',
+                                    '@Model[i].SocietyName');
                             </script>
                         }
                         else
                         {
                             <script>
-                                addUser('@Model[i].UserRealName', '@Model[i].UserRealSurname', '@Model[i].Id', 'http://cocktion.com/Images/Thumbnails/@Model[i].Selfie.FileName',
-                                    '@Model[i].Rating', '@Model[i].Eggs', '150', true, '@user.Friends.Contains(db.AspNetUsers.Find(Model[i].Id))');
+    addUser('@Model[i].UserRealName', '@Model[i].UserRealSurname', '@Model[i].Id', 'http://cocktion.com/Images/Thumbnails/@Model[i].Selfie.FileName',
+        '@Model[i].Rating', '@Model[i].Eggs', '@Model[i].HisAuctions.Count', true, '@user.Friends.Contains(db.AspNetUsers.Find(Model[i].Id))',
+        '@Model[i].SocietyName');
                             </script>
                         }
                     }
@@ -49,15 +51,17 @@
                         if (Model[i].Selfie == null)
                         {
                             <script>
-                                addUser('@Model[i].UserRealName', '@Model[i].UserRealSurname', '@Model[i].Id', 'Content/SiteImages/anonPhoto.jpg',
-                                    '@Model[i].Rating', '@Model[i].Eggs', '150', false, '@user.Friends.Contains(db.AspNetUsers.Find(Model[i].Id))');
+    addUser('@Model[i].UserRealName', '@Model[i].UserRealSurname', '@Model[i].Id', 'Content/SiteImages/anonPhoto.jpg',
+        '@Model[i].Rating', '@Model[i].Eggs', '@Model[i].HisAuctions.Count', false, '@user.Friends.Contains(db.AspNetUsers.Find(Model[i].Id))',
+        '@Model[i].SocietyName');
                             </script>
                         }
                         else
                         {
                             <script>
-                                addUser('@Model[i].UserRealName', '@Model[i].UserRealSurname', '@Model[i].Id', 'http://cocktion.com/Images/Thumbnails/@Model[i].Selfie.FileName',
-                                    '@Model[i].Rating', '@Model[i].Eggs', '150', false, '@user.Friends.Contains(db.AspNetUsers.Find(Model[i].Id))');
+    addUser('@Model[i].UserRealName', '@Model[i].UserRealSurname', '@Model[i].Id', 'http://cocktion.com/Images/Thumbnails/@Model[i].Selfie.FileName',
+        '@Model[i].Rating', '@Model[i].Eggs', '@Model[i].HisAuctions.Count', false, '@user.Friends.Contains(db.AspNetUsers.Find(Model[i].Id))',
+        '@Model[i].SocietyName');
                             </script>
                         }
                     }
@@ -67,20 +71,24 @@
             {
                 for (int i = 0; i < amountOfUsers; i++)
                 {
+                    if (String.IsNullOrEmpty(Model[i].UserRealSurname) & String.IsNullOrEmpty(Model[i].UserRealName))
+                    {
+                        continue;
+                    }
                     if (i == stopIndex)
                     {
                         if (Model[i].Selfie == null)
                         {
                             <script>
-                                addUser('@Model[i].UserRealName', '@Model[i].UserRealSurname', '@Model[i].Id', 'Content/SiteImages/anonPhoto.jpg',
-                                    '@Model[i].Rating', '@Model[i].Eggs', '150', true, 'False');
+                                addUnauthUser('@Model[i].UserRealName', '@Model[i].UserRealSurname', '@Model[i].Id', 'Content/SiteImages/anonPhoto.jpg',
+                                      '@Model[i].Rating', '@Model[i].Eggs', '@Model[i].HisAuctions.Count', true, 'False', '@Model[i].SocietyName');
                             </script>
                         }
                         else
                         {
                             <script>
-                                addUser('@Model[i].UserRealName', '@Model[i].UserRealSurname', '@Model[i].Id', 'http://cocktion.com/Images/Thumbnails/@Model[i].Selfie.FileName',
-                                    '@Model[i].Rating', '@Model[i].Eggs', '150', true, 'False');
+                                addUnauthUser('@Model[i].UserRealName', '@Model[i].UserRealSurname', '@Model[i].Id', 'http://cocktion.com/Images/Thumbnails/@Model[i].Selfie.FileName',
+                                       '@Model[i].Rating', '@Model[i].Eggs', '@Model[i].HisAuctions.Count', true, 'False', '@Model[i].SocietyName');
                             </script>
                         }
                     }
@@ -89,15 +97,15 @@
                         if (Model[i].Selfie == null)
                         {
                             <script>
-                                addUser('@Model[i].UserRealName', '@Model[i].UserRealSurname', '@Model[i].Id', 'Content/SiteImages/anonPhoto.jpg',
-                                    '@Model[i].Rating', '@Model[i].Eggs', '150', false, 'False');
+                                addUnauthUser('@Model[i].UserRealName', '@Model[i].UserRealSurname', '@Model[i].Id', 'Content/SiteImages/anonPhoto.jpg',
+                                     '@Model[i].Rating', '@Model[i].Eggs', '@Model[i].HisAuctions.Count', false, 'False', '@Model[i].SocietyName');
                             </script>
                         }
                         else
                         {
                             <script>
-                                addUser('@Model[i].UserRealName', '@Model[i].UserRealSurname', '@Model[i].Id', 'http://cocktion.com/Images/Thumbnails/@Model[i].Selfie.FileName',
-                                    '@Model[i].Rating', '@Model[i].Eggs', '150', false, 'False');
+                                addUnauthUser('@Model[i].UserRealName', '@Model[i].UserRealSurname', '@Model[i].Id', 'http://cocktion.com/Images/Thumbnails/@Model[i].Selfie.FileName',
+                                    '@Model[i].Rating', '@Model[i].Eggs', '@Model[i].HisAuctions.Count', false, 'False', '@Model[i].SocietyName');
                             </script>
                         }
                     }

@@ -38,6 +38,63 @@ namespace CocktionMVC.Controllers
             return View(auctions);
         }
 
+        [Authorize]
+        public ActionResult GetFriendsAuctions()
+        {
+            var controlTime = DateTimeManager.GetCurrentTime();
+            CocktionContext db = new CocktionContext();
+            var user = db.AspNetUsers.Find(User.Identity.GetUserId());
+
+            List<Auction> auctions = new List<Auction>();
+            if (user.Friends.Count > 0)
+            {
+                foreach (var friend in user.Friends)
+                {
+                    foreach (var auction in friend.HisAuctions)
+                    {
+                        if (((auction.EndTime > controlTime) && (auction.IsActive)))
+                        {
+                            if (!auctions.Contains(auction))
+                                auctions.Add(auction);
+                        }
+                    }
+                }
+            }
+            
+                               
+            return View("Index", auctions);
+        }
+
+        [Authorize]
+        public ActionResult GetHouseAuctions()
+        {
+            var controlTime = DateTimeManager.GetCurrentTime();
+            CocktionContext db = new CocktionContext();
+            var user = db.AspNetUsers.Find(User.Identity.GetUserId());
+
+            List<Auction> auctions = new List<Auction>();
+            if (user.SubHouses.Count == 0)
+                return View("Index", auctions);
+            else
+            {
+                foreach (var house in user.SubHouses)
+                {
+                    foreach (var auction in house.Auctions)
+                    {
+                        if (((auction.EndTime > controlTime) && (auction.IsActive)))
+                        {
+                            if (!auctions.Contains(auction))
+                            {
+                                auctions.Add(auction);
+                            }
+                        }
+                    }
+                }
+            }
+            
+            return View("Index", auctions);
+        }
+
         /// <summary>
         /// Выводит страничку, где нужно создать
         /// аукцион

@@ -24,6 +24,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Аукционы", "Index", "Auction")</li>
+                    <li>@Html.ActionLink("Аукционы в моих домах", "GetHouseAuctions", "Auction")</li>
+                    <li>@Html.ActionLink("Аукционы у друзей", "GetFriendsAuctions", "Auction")</li>
                     <li>@Html.ActionLink("Продать", "Create", "Auction")</li>
                     <li>@Html.ActionLink("Дома", "Index", "AuctionHouse")</li>
                     <li>@Html.ActionLink("Люди", "Index", "Users")</li>

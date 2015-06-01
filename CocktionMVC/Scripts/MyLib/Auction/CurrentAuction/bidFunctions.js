@@ -39,10 +39,28 @@ function radioProcessor(btn) {
         break;
     }
 }
-
+var fileInput;
+function checkPhoto() {
+    fileInput = document.getElementById('fileInput');
+    if (fileInput.files.length > 0)
+    {
+        var ext = (/[.]/.exec(fileInput.files[0].name)) ? /[^.]+$/.exec(fileInput.files[0].name) : undefined;
+        if ((ext == "jpeg") || (ext == "jpg") || (ext == "png")) {
+            return true;
+        }
+        else {
+            alert("Формат является недопустимым при загрузке фотографий. Пожалуйста, попробуйте все-таки с фотографией");
+            return false;
+        }
+    }
+    else
+    {
+        return true;
+    }
+}
 //Скрипт, добавляющий ставку к аукциону.
 function addBid(auctionId) {
-    if (checkBidForm() & checkCategory()) {
+    if ((checkBidForm() & checkCategory()) & checkPhoto()) {
         var formData = new FormData();
         $("#progressBar").show();
 

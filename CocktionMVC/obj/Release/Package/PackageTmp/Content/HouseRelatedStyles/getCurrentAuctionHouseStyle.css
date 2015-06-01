@@ -1,21 +1,15 @@
-﻿p {
-    font-family: monospace;
-}
+﻿
 
 h3 {
     text-align: center;
-    font-family: monospace;
 }
 
 #houseDescriptionContainer {
-    border: 1px solid black;
     padding: 10px;
-    font-family: monospace;
     border-radius: 3px;
 }
 
 #secondInfoColumn {
-    border: 1px solid black;
     padding: 10px;
     border-radius: 3px;
 }
@@ -37,7 +31,7 @@ h3 {
 
 
 #messageEnterContainer {
-    border-top: 2px dotted black;
+
     padding-top: 30px;
 }
 
@@ -49,3 +43,9 @@ textarea {
 #addCommentButton {
     float: right;
 }
+
+#top, #subscribersList{
+    border-bottom: solid 1px lightgray;
+    padding-bottom: 10px;
+}
+

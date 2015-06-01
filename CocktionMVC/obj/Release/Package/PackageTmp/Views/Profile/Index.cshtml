@@ -95,31 +95,8 @@
         $("#messages").animate({ scrollTop: $("#messages")[0].scrollHeight }, 100);
     }
     </script>
-<div id="chatFormContainer">
-    <div class="row">
-        <div class="col-md-5" id="usersList">
-            <!--Тут будет список людей, с которыми ты можешь общаться-->
-            <!--Сделать запрос на сервер, чтобы получить список всех пользователей, с которыми он в диалоге-->
-        </div>
-        <div class="col-md-7" id="messagesWindow">
-            <!--Здесь будет непосредственно контейнер для сообщений-->
-            <h4 id="userHeader">Диалог с </h4>
-            <div id="messages">
-            </div>
-            <div id="inputMessageForm">
-                <!--Группа для ввода сообщения-->
-                <div class="input-group">
-                    <input type="text" class="form-control" id="messageContainer">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" id="sendMessageBtn" type="button">Отправить</button>
-                    </span>
-                </div><!-- /input-group -->
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="row"> <!--Верхняя часть страницы, имя, рейтинг, фотка и интересы-->
+<div class="row" id="informationContainer"> <!--Верхняя часть страницы, имя, рейтинг, фотка и интересы-->
     <br/>
     <!--Фотка и информация о пользователе-->
     <div class="col-md-3" style="align-items:flex-start">
@@ -134,9 +111,9 @@
                 <img id="avatar" src="~/Images/Thumbnails/@Model.Selfie.FileName" class="img-thumbnail" />
             }
         }
-        <p><button class="btn btn-default" onclick="showPhotoForm() ">Добавить аватарку</button>
+        <p><button class="btn btn-sm btn-default" onclick="showPhotoForm() ">Добавить аватарку</button>
         </p>
-        <p><button class="btn btn-default" onclick="showEditInfoForm()">Добавить информацию о себе</button>
+        <p><button class="btn btn-sm btn-default" onclick="showEditInfoForm()">Добавить информацию о себе</button>
         </p>
         <div id="editInformationContainer" hidden="">
             <input type="text" oninput="handleInfoChange()" id="name" class="form-control" placeholder="Имя">
@@ -152,7 +129,7 @@
             </div>
         </div>
         <div id="addPhotoContainer" hidden="">
-            <input type="file" onchange="showAddPhotoButton()" id="usersPhoto"/>
+            <input type="file" onchange="showAddPhotoButton()" id="usersPhoto" accept="image/*" />
             <button class="btn btn-default" id="addPhotoBtn" onclick="addPhoto() " disabled="">Сменить фотку</button>
             <div class="progress" id="progressBarContainer" hidden="">
                 <div class="progress-bar" id="bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
@@ -179,7 +156,7 @@
         <div id="userRates">
             <!--Контейнер для информации о пользователе-->
             <p><b>Рейтинг:</b> @Model.Rating</p>
-            <p><b>Яиц: </b> @Model.Eggs</p>
+            <p><b>Монеток: </b> @Model.Eggs</p>
             <p><b>Аукционов сделал:</b> @Model.HisAuctions.Count</p>
             @{
                 if (!string.IsNullOrEmpty(Model.SocietyName))
@@ -191,39 +168,76 @@
         </div>
     </div>
     <div class="col-md-7" id="userLifePos">
-        <h4>Жизненная позиция пользователя</h4>
+        <h4>Ваши интересы</h4>
         <div class="row" id="interests">
             @{
                 if (Model.Interests.Count != 0)
                 {
-                    <h3>Ваши интересы</h3>
-                    foreach (var i in Model.Interests.ToList())
-                    {
-                        <p>@i.Name</p>
-                    }
+    <table align="center" style="text-align: center">
+        <tr>
+            @foreach (var i in Model.Interests.ToList())
+            {
+                <td style="padding-left: 10px; padding-right: 10px">
+                    <p>@i.Name</p>
+                    <img height="100" src="http://cocktion.com/Images/Thumbnails/@i.Photocard.FileName" />
+                </td>
+            }
+        </tr>
+    </table>
                 }
 }
-            <p><button id="showInterestsFormBtn" onclick="showInterestsForm()">Добавить интересы</button></p>
-            <div id="interestsToChoose" hidden="">
-                @if (Model.Interests.Count != db.Interests.Count())
-                {
-                    foreach (var i in db.Interests.ToList())
-                    {
-                        if (!Model.Interests.Contains(i))
-                        {
-                            <p><input type="checkbox" id="int_@i.Id" onclick=" addId(this) "/>@i.Name</p>
-                        }
-                    }
-                }
-                else
-                {
-                    <p>Больше нечего добавлять!</p>
-                }
-                <div class="progress" id="interestsBarContainer" hidden="">
-                    <div class="progress-bar" id="interestsBar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-                    </div>
-                </div>
-                <button id="sendInterestsBtn" onclick=" sendInt() " hidden="">Добавить еще интересов</button>
+            <br />
+            <p><button id="showInterestsFormBtn" style="text-align: center" class="btn btn-sm btn-success" onclick="showInterestsForm()">Добавить интересы</button></p>
+            
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<div id="interestsToChoose" hidden="">
+    @if (Model.Interests.Count != db.Interests.Count())
+    {
+        foreach (var i in db.Interests.ToList())
+        {
+            if (!Model.Interests.Contains(i))
+            {
+                <p><input type="checkbox" id="int_@i.Id" onclick=" addId(this) " />@i.Name</p>
+            }
+        }
+    }
+    else
+    {
+        <p>Больше нечего добавлять!</p>
+    }
+    <div class="progress" id="interestsBarContainer" hidden="">
+        <div class="progress-bar" id="interestsBar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+        </div>
+    </div>
+    <button id="sendInterestsBtn" onclick=" sendInt() " hidden="">Добавить еще интересов</button>
+</div>
+
+
+
+<div id="chatFormContainer">
+    <div class="row">
+        <div class="col-md-5" id="usersList">
+            <h4>Ваши диалоги</h4>
+            <!--Тут будет список людей, с которыми ты можешь общаться-->
+            <!--Сделать запрос на сервер, чтобы получить список всех пользователей, с которыми он в диалоге-->
+        </div>
+        <div class="col-md-7" id="messagesWindow">
+            <!--Здесь будет непосредственно контейнер для сообщений-->
+            <h4 id="userHeader">Диалог с </h4>
+            <div id="messages">
+            </div>
+            <div id="inputMessageForm">
+                <!--Группа для ввода сообщения-->
+                <div class="input-group">
+                    <input type="text" class="form-control" id="messageContainer">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" id="sendMessageBtn" type="button">Отправить</button>
+                    </span>
+                </div><!-- /input-group -->
             </div>
         </div>
     </div>
@@ -233,7 +247,7 @@
 
 <div class="row" id="subscribedHouses"> <!--Информация о домах, на которые подписан пользователь-->
     <!--Дома, на которые подписан пользователь-->
-    <h3 id="housesHeader">Житель следующих домов</h3>
+    <h3 id="housesHeader">Ваши дома</h3>
 
 
     @{
@@ -259,7 +273,7 @@
 
 <div class="row" id="usersAuctions"> <!--Информация об аукционах, которые намутил пользователь-->
     <!--Аукционы пользователя-->
-    <h3 id="auctionHeader">Владелец прекрасных аукционов</h3>
+    <h3 id="auctionHeader">Ваши аукционы</h3>
 @{
     if (Model.HisAuctions.Count != 0)
     {
@@ -319,15 +333,32 @@
 </script>
 
 <div class="row" id="usersSubs"> <!--Подписки пользователя на людей-->
-    <h4 style="text-align: center">Ваши подписки</h4>
+    <h4 style="text-align: center">Пользователи, на которых вы подписались</h4>
     <div class="col-md-4"></div>
     <div class="col-md-4">
-        @{
-            foreach (var user in Model.Friends)
-            {
-                <p id="id_@user.Id">@user.UserName <button onclick="unsubscribeFromUser('@user.Id')">Удалить</button></p>
+        <table>
+            @{
+                foreach (var user in Model.Friends)
+                {
+                    if (String.IsNullOrEmpty(user.UserRealName) && String.IsNullOrEmpty(user.UserRealSurname))
+                    {
+                        continue;
+                    }
+                    <tr>
+                        <td>
+                            <p id="id_@user.Id">@user.UserRealName @user.UserRealSurname </p>
+                            <br />
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-danger" onclick="unsubscribeFromUser('@user.Id')">Удалить</button>
+                            <br />
+                        </td>
+                    </tr>
+                }
             }
-        }
+        </table>
+        <br />
+        <br />
     </div>
     <div id="col-md-4"></div>
 </div>
@@ -375,7 +406,5 @@
         </div>
     </div>
     <div class="col-md-3">
-        <p>Не надо стесняяяться!</p>
-        <button>Наверх</button>
     </div>
 </div>

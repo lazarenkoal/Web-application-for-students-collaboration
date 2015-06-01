@@ -5,19 +5,19 @@
 //rating - рэйтинг пользователя
 //eggs - яйца, которые пользователь заработал
 //auctionsAmount - количество аукционов
-function addUser(name, surname, id ,photoPath, rating, eggs, auctionsAmount, isFirst, isSubscribed) {
+function addUser(name, surname, id ,photoPath, rating, eggs, auctionsAmount, isFirst, isSubscribed, university) {
     if (!isFirst) {
         $("#usersHere").append(
             "<div class=\"userInfo\"><div class=\"row\"><div class=\"col-md-4\"> <img src=\"" + photoPath + "\"class=\"img-thumbnail\">" +
             "</div><div class=\"col-md-8\"> <p><b><a href=\"http://cocktion.com/Users/GetUser/"+id+"\">" + name + ' ' + surname + "</a></b></p><p><b>Рейтинг:</b>" + rating +
-            "</p> <p><b>Яйца:</b>" + eggs + "</p>" + "<p><b>Аукционов: </b>" + auctionsAmount + "</p>" +
+            "</p> <p><b>Монетки:</b>" + eggs + "</p>" + "<p><b>Аукционов: </b>" + auctionsAmount + "</p>" + "<p><b>Университет: </b>" + university + 
             "</div> </div>"+displaySubscriptionStatus(id, isSubscribed)+" </div><br/>" //добавить кнопку дисплея кнопки
         );
     } else {
         $("#usersHere").append(
             "<div class=\"userInfo\"><div class=\"row\"><div class=\"col-md-4\"> <img src=\"" + photoPath + "\"class=\"img-thumbnail\">" +
             "</div><div class=\"col-md-8\"> <p><b><a href=\"http://cocktion.com/Users/GetUser/" + id + "\">" + name + ' ' + surname + "</a></b></p><p><b>Рейтинг:</b>" + rating +
-            "</p> <p><b>Яйца:</b>" + eggs + "</p>" + "<p><b>Аукционов: </b>" + auctionsAmount + "</p>" +
+            "</p> <p><b>Монетки:</b>" + eggs + "</p>" + "<p><b>Аукционов: </b>" + auctionsAmount + "</p>" + "<p><b>Университет: </b>" + university +
             "</div> </div>" + displaySubscriptionStatus(id, isSubscribed) + " </div>"
         );
     }
@@ -32,6 +32,24 @@ function displaySubscriptionStatus(id, isSubscribed) {
         //если не подписан - показываем кнопку
         return "<br/><p><button class=\"btn btn-default\" onclick=\"subscribeOnUser('" +
             id+"')\" id=\""+id+"\">Подписаться</button></p>";
+    }
+}
+
+function addUnauthUser(name, surname, id, photoPath, rating, eggs, auctionsAmount, isFirst, isSubscribed, university) {
+    if (!isFirst) {
+        $("#usersHere").append(
+            "<div class=\"userInfo\"><div class=\"row\"><div class=\"col-md-4\"> <img src=\"" + photoPath + "\"class=\"img-thumbnail\">" +
+            "</div><div class=\"col-md-8\"> <p><b><a href=\"http://cocktion.com/Users/GetUser/" + id + "\">" + name + ' ' + surname + "</a></b></p><p><b>Рейтинг:</b>" + rating +
+            "</p> <p><b>Монетки:</b>" + eggs + "</p>" + "<p><b>Аукционов: </b>" + auctionsAmount + "</p>" + "<p><b>Университет: </b>" + university +
+            "</div> </div></div><br/>" //добавить кнопку дисплея кнопки
+        );
+    } else {
+        $("#usersHere").append(
+            "<div class=\"userInfo\"><div class=\"row\"><div class=\"col-md-4\"> <img src=\"" + photoPath + "\"class=\"img-thumbnail\">" +
+            "</div><div class=\"col-md-8\"> <p><b><a href=\"http://cocktion.com/Users/GetUser/" + id + "\">" + name + ' ' + surname + "</a></b></p><p><b>Рейтинг:</b>" + rating +
+            "</p> <p><b>Монетки:</b>" + eggs + "</p>" + "<p><b>Аукционов: </b>" + auctionsAmount + "</p>" + "<p><b>Университет: </b>" + university +
+            "</div> </div></div>"
+        );
     }
 }
 
